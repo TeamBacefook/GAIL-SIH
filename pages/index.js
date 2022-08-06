@@ -78,7 +78,7 @@ const Home = () => {
         </Grid>
         <Grid spacing={8} item container xs={12} md={8}>
           {[1, 2, 4, 5].map((obj) => {
-            return <Card />;
+            return <Card key={obj} />;
           })}
         </Grid>
       </Grid>

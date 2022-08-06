@@ -24,7 +24,7 @@ const Header = () => {
     >
       <Grid container item xs={6} md={6}>
         <Grid item xs={12} md={5}>
-          <Image src={logo} layout="responsive" objectFit="cover" />{" "}
+          <Image src={logo} layout="responsive" objectFit="cover" alt="logo" />{" "}
         </Grid>{" "}
       </Grid>
       <Grid
