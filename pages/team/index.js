@@ -1,5 +1,5 @@
 import { Typography, Box, Grid } from "@mui/material";
-
+import Head from "next/head";
 import React from "react";
 import withLayout from "../../layout";
 
@@ -10,6 +10,11 @@ const Card = () => {
 const Team = () => {
   return (
     <Box sx={{ my: 16, px: { sx: 2, md: 16 } }}>
+      <Head>
+        <title>GAIL SIH | Team</title>
+        <meta name="description" content="Analytics page for GAIL-SIH" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <Box>
         <Typography color="#00116A" fontSize={30} fontWeight="600">
           Sed ut perspiciatis unde omnis iste natus error sit voluptatem
