@@ -2,6 +2,7 @@ import "../styles/globals.css";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { StyledEngineProvider } from "@mui/material/styles";
 import "../styles/globals.css";
+import AOS from "aos";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -62,6 +63,9 @@ function MyApp({ Component, pageProps, router }) {
       fontFamily: "Reem Kufi",
     },
   });
+  useEffect(() => {
+    AOS.init();
+  }, []);
   return (
     <>
       <AnimatePresence>

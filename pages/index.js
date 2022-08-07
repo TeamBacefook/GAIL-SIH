@@ -112,6 +112,7 @@ const Home = () => {
         container
         xs={12}
         sx={{ pt: 8 }}
+        data-aos="fade-left"
         justifyContent="space-between"
         spacing={{ xs: 3, md: 1 }}
         alignItems="center"
