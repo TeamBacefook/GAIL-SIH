@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import logo from "../../public/logo.svg";
-// import MenuIcon from "@mui/icons-material/Menu";
+import MenuIcon from "@mui/icons-material/Menu";
 const Header = () => {
   const router = useRouter();
 
@@ -16,10 +16,8 @@ const Header = () => {
       justifyContent="space-between"
       alignItems="center"
       sx={{
-        px: { xs: 2, md: 16 },
-        py: { xs: 2, md: 2 },
-        boxShadow: "0px 3px 4px 0px #00000040",
-        position: "sticky",
+        px: { xs: 2, md: 10 },
+        py: { xs: 2, md: 4 },
       }}
     >
       <Grid container item xs={6} md={6}>
@@ -41,9 +39,8 @@ const Header = () => {
             <Typography
               fontWeight={500}
               fontSize={18}
-              color={router.asPath === "/" ? "#003973" : " #0080FF"}
+              color={router.asPath === "/" ? "#003973" : " #9CA4B8"}
               style={{
-                borderBottom: router.asPath === "/" ? "2px solid #003973" : "",
                 cursor: "pointer",
               }}
             >
@@ -56,10 +53,8 @@ const Header = () => {
             <Typography
               fontWeight={500}
               fontSize={18}
-              color={router.asPath === "/predictions" ? "#003973" : " #0080FF"}
+              color={router.asPath === "/predictions" ? "#003973" : " #9CA4B8"}
               style={{
-                borderBottom:
-                  router.asPath === "/predictions" ? "2px solid #003973" : "",
                 cursor: "pointer",
               }}
             >
@@ -72,10 +67,8 @@ const Header = () => {
             <Typography
               fontWeight={500}
               fontSize={18}
-              color={router.asPath === "/analytics" ? "#003973" : " #0080FF"}
+              color={router.asPath === "/analytics" ? "#003973" : " #9CA4B8"}
               style={{
-                borderBottom:
-                  router.asPath === "/analytics" ? "2px solid #003973" : "",
                 cursor: "pointer",
               }}
             >
@@ -88,10 +81,8 @@ const Header = () => {
             <Typography
               fontWeight={500}
               fontSize={18}
-              color={router.asPath === "/news" ? "#003973" : " #0080FF"}
+              color={router.asPath === "/news" ? "#003973" : " #9CA4B8"}
               style={{
-                borderBottom:
-                  router.asPath === "/news" ? "2px solid #003973" : "",
                 cursor: "pointer",
               }}
             >
@@ -104,10 +95,8 @@ const Header = () => {
             <Typography
               fontWeight={500}
               fontSize={18}
-              color={router.asPath === "/team" ? "#003973" : " #0080FF"}
+              color={router.asPath === "/team" ? "#003973" : " #9CA4B8"}
               style={{
-                borderBottom:
-                  router.asPath === "/team" ? "2px solid #003973" : "",
                 cursor: "pointer",
               }}
             >
@@ -116,8 +105,18 @@ const Header = () => {
           </Link>
         </Grid>
       </Grid>
-      <Grid item xs={4} display={{ xs: "flex", md: "hidden" }}>
-        {/* <MenuIcon /> */}
+      <Grid
+        item
+        xs={4}
+        container
+        alignItems="center"
+        justifyContent="flex-end"
+        display={{ xs: "flex", md: "none" }}
+      >
+        <MenuIcon
+          style={{ color: "rgba(10, 37, 64, 1)" }}
+          color="rgba(10, 37, 64, 1)"
+        />
       </Grid>
     </Grid>
   );
