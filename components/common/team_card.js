@@ -28,11 +28,11 @@ const variants = {
 const Card = () => {
   return (
     <AnimateSharedLayout>
-      <Paper style={{ borderRadius: 15, height: "25rem" }}>
+      <Paper style={{ borderRadius: 15, minWidth: "22vw" }}>
         {/* Photo Top */}
         <motion.div
           style={{
-            minHeight: "18rem",
+            minHeight: "35vh",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
@@ -41,21 +41,19 @@ const Card = () => {
           {/* Top Bar */}
           <motion.div
             style={{
-              width: "15rem",
+              width: "50%",
               backgroundColor: "#FF5C00",
-              minHeight: "1.5rem",
-              borderRadius: '0 0 10px 10px'
+              minHeight: "1.5em",
+              borderRadius: "0 0 10px 10px",
             }}
           />
           {/* Image Circle */}
-          <motion.div style={{
-
-          }} />
+          <motion.div style={{}} />
           {/* Name */}
           <motion.div></motion.div>
         </motion.div>
         {/* Socials Bottom */}
-        <motion.div style={{ minHeight: "20%" }}>
+        <motion.div style={{ minHeight: "7em" }}>
           <Grid container>
             {/* Github */}
             <Grid item></Grid>
