@@ -112,10 +112,10 @@ const Home = () => {
         container
         xs={12}
         sx={{ pt: 8 }}
-        data-aos="fade-left"
         justifyContent="space-between"
         spacing={{ xs: 3, md: 1 }}
         alignItems="center"
+        data-aos="fade-left"
       >
         <Grid item xs={12} md={2}>
           <Typography fontSize={{ xs: 25, md: 40 }}>Commodities</Typography>
