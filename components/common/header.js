@@ -1,10 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Grid, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import logo from "../../public/logo.svg";
-import MenuIcon from "@mui/icons-material/Menu";
 import { AnimateSharedLayout, motion } from "framer-motion";
 
 const links = [
@@ -39,7 +38,11 @@ const isActiveLink = (href, currentPathname) => {
 };
 
 const Header = () => {
+  const [mounted, setMounted] = useState(false);
   const router = useRouter();
+
+  useEffect(() => setMounted(true), []);
+  if (!mounted) return null;
 
   return (
     <AnimateSharedLayout>
@@ -100,13 +103,13 @@ const Header = () => {
                   }}
                 >
                   {name}
-                  {/* {isActiveLink(href, router.pathname) && (
+                  {isActiveLink(href, router.pathname) && (
                     <motion.div
                       layoutId="navigation-underline"
                       className="navigation-underline"
                       animate
                     />
-                  )} */}
+                  )}
                 </Typography>
               </Link>
             </Grid>
