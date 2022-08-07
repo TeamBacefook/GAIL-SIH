@@ -28,7 +28,7 @@ const Card = ({ data }) => {
             width: "30%",
             p: 1,
             zIndex: 100,
-            backgroundColor: "rgba(10, 37, 64, 1)",
+
             borderRadius: "5px",
           }}
         >
