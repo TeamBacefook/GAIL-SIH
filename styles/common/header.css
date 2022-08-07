@@ -20,29 +20,3 @@
 
 
 
-.loader {
-    position: absolute;
-    left: 30%;
-    margin-left: -1.9em;
-    color: #02224d;
-    font: 900 800% Reem Kufi, sans-serif;
-}
-
-
-@keyframes loading {
-    from {
-        max-height: 0;
-    }
-}
-
-.loader:before {
-    content: attr(data-content);
-    position: absolute;
-    overflow: hidden;
-    max-height: 1.4em;
-    color: white;
-    -webkit-text-stroke: 1px #02224d;
-    text-stroke: 1px #02224d;   
-    animation: loading 4s linear;
-    animation-direction: reverse;
-}

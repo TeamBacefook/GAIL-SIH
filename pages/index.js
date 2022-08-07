@@ -1,7 +1,13 @@
 import { Typography, Box, Grid } from "@mui/material";
+import Image from "next/image";
 import Head from "next/head";
 import withLayout from "../layout";
-const Card = () => {
+import petrol from "../images/petrol.svg";
+import dng from "../images/dng.svg";
+import coal from "../images/coal.svg";
+import renewable from "../images/renewable.svg";
+
+const Card = ({ data }) => {
   return (
     <Grid
       item
@@ -9,7 +15,7 @@ const Card = () => {
       md={6}
       justifyContent={{ md: "start", xs: "center" }}
       container
-      spacing={1}
+      spacing={1.5}
     >
       <Grid
         item
@@ -19,28 +25,55 @@ const Card = () => {
       >
         <Box
           sx={{
-            p: 8,
             width: "30%",
+            p: 1,
+            zIndex: 100,
             backgroundColor: "rgba(10, 37, 64, 1)",
             borderRadius: "5px",
           }}
-        ></Box>
+        >
+          <Image layout="responsive" src={data.image} alt="" />
+        </Box>
       </Grid>
       <Grid item xs={12}>
         <Typography textAlign={{ xs: "center", md: "start" }}>
-          There are many variations of passages
+          {data.name}
         </Typography>
       </Grid>
       <Grid item xs={12}>
-        <Typography textAlign={{ xs: "center", md: "start" }}>
-          There are many variations of passages of Lorem Ipsum available, but
-          the majority have suffered alteration in some form, by{" "}
+        <Typography
+          dangerouslySetInnerHTML={{ __html: data.desc }}
+          textAlign={{ xs: "center", md: "start" }}
+        >
+          {/* {data.desc}{" "} */}
         </Typography>
       </Grid>
     </Grid>
   );
 };
 const Home = () => {
+  const data = [
+    {
+      name: "Petroleum",
+      desc: "Production: 1.619  <br/> BTuConsumption: 9.813 BTu",
+      image: petrol,
+    },
+    {
+      name: "Dry Natural Gas",
+      desc: "Production: 1.619  <br/> BTuConsumption: 9.813 BTu",
+      image: dng,
+    },
+    {
+      name: "Coal",
+      desc: "Production: 1.619 <br/>  BTuConsumption: 9.813 BTu",
+      image: coal,
+    },
+    {
+      name: "Other Energy Sources",
+      desc: "Production: 1.619 <br/> BTuConsumption: 9.813 BTu",
+      image: renewable,
+    },
+  ];
   return (
     <Box sx={{ py: 14, px: { xs: 2, md: 16 } }}>
       <Head>
@@ -72,13 +105,11 @@ const Home = () => {
         alignItems="center"
       >
         <Grid item xs={12} md={4}>
-          <Typography fontSize={{ xs: 25, md: 40 }}>
-            Information Of Commodities
-          </Typography>
+          <Typography fontSize={{ xs: 25, md: 40 }}>Commodities</Typography>
         </Grid>
         <Grid spacing={8} item container xs={12} md={8}>
-          {[1, 2, 4, 5].map((obj) => {
-            return <Card key={obj} />;
+          {data.map((obj, index) => {
+            return <Card key={index} data={obj} />;
           })}
         </Grid>
       </Grid>

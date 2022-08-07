@@ -22,6 +22,7 @@ const Header = () => {
       }}
       style={{
         position: "fixed",
+        zIndex: 1000,
         top: 0,
         backdropFilter: "blur(25px)",
         backgroundColor: "rgba(247, 248, 242, 0.7)",
@@ -29,8 +30,15 @@ const Header = () => {
       }}
     >
       <Grid container item xs={6} md={6}>
-        <Grid item xs={12} md={5}>
-          <Image src={logo} layout="responsive" objectFit="cover" alt="logo" />{" "}
+        <Grid item xs={12} style={{ cursor: "pointer" }} md={5}>
+          <Link href="/">
+            <Image
+              src={logo}
+              layout="responsive"
+              objectFit="cover"
+              alt="logo"
+            />
+          </Link>
         </Grid>{" "}
       </Grid>
       <Grid
@@ -116,7 +124,7 @@ const Header = () => {
           </Link>
         </Grid>{" "}
         <Grid item>
-          <Link href="/">
+          <Link href="/team">
             <Typography
               fontWeight={500}
               fontSize={18}

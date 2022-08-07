@@ -1,4 +1,6 @@
 @import './common/header.css';
+@import './pages/team.css';
+
 html,
 body {
   padding: 0;
@@ -16,3 +18,56 @@ a {
   box-sizing: border-box;
 }
 
+
+
+
+.loader {
+  position: absolute;
+  color: #02224d;
+  font: 900 500% Reem Kufi, sans-serif;
+}
+
+
+@keyframes loading {
+  from {
+    max-height: 0;
+  }
+}
+
+
+
+
+
+
+::-webkit-scrollbar {
+  width: 10px;
+
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  border-radius: 1em;
+  background: #02224d ;
+}
+
+
+
+
+
+
+.loader:before {
+  content: attr(data-content);
+    position: absolute;
+    overflow: hidden;
+    max-height: 1.4em;
+    color: white;
+    -webkit-text-stroke: 1px #02224d;
+    -moz-text-stroke: 1px #02224d;
+    animation: loading 4s linear;
+    animation-direction: reverse;
+}
