@@ -88,10 +88,10 @@ const Header = () => {
           xs={6}
         >
           {links.map(({ name, href }) => (
-            <Grid item>
+            <Grid item key={href}>
               <Link href={href}>
                 <Typography
-                  fontWeight={500}
+                  fontFamily="Reem Kufi"
                   fontSize={18}
                   color={
                     router.asPath === href

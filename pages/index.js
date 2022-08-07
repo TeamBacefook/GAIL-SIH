@@ -1,4 +1,4 @@
-import { Typography, Box, Grid } from "@mui/material";
+import { Typography, Box, Grid, Divider } from "@mui/material";
 import Image from "next/image";
 import Head from "next/head";
 import withLayout from "../layout";
@@ -103,12 +103,10 @@ const Home = () => {
           </Typography>
         </Grid>
         <Grid item xs={12} md={5} sx={{ mt: { md: -10 } }}>
-          <object type="image/svg+xml" data="/animated.svg">
-            svg-animation
-          </object>
+          <object type="image/svg+xml" data="/animated.svg"></object>
         </Grid>{" "}
       </Grid>
-
+      <Divider />
       <Grid
         item
         container
@@ -118,8 +116,11 @@ const Home = () => {
         spacing={{ xs: 3, md: 1 }}
         alignItems="center"
       >
-        <Grid item xs={12} md={3}>
+        <Grid item xs={12} md={2}>
           <Typography fontSize={{ xs: 25, md: 40 }}>Commodities</Typography>
+        </Grid>
+        <Grid item xs={1}>
+          <Divider orientation="vertical" />
         </Grid>
         <Grid spacing={8} item container xs={12} md={7}>
           {data.map((obj, index) => {
