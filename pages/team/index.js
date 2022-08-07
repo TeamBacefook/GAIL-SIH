@@ -1,11 +1,7 @@
 import { Typography, Box, Grid } from "@mui/material";
 import Head from "next/head";
 import React from "react";
-import withLayout from "../../layout";
-
-const Card = () => {
-  return <Box></Box>;
-};
+import Card from '../../components/common/team_card'
 
 const Team = () => {
   return (
@@ -38,11 +34,11 @@ const Team = () => {
             <span style={{ borderBottom: "5px solid #00116a" }}> Mentors </span>
           </Typography>
         </Grid>
-        <Grid item container xs={12}>
-          <Grid item xs={6}>
+        <Grid item container spacing={1} xs={12} justifyContent="center">
+          <Grid item xs={5}>
             <Card />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={5}>
             <Card />
           </Grid>
         </Grid>
