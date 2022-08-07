@@ -15,4 +15,4 @@ const Analytics = () => {
   );
 };
 
-export default withLayout(Analytics);
+export default Analytics;

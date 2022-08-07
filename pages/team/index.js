@@ -46,4 +46,4 @@ const Team = () => {
   );
 };
 
-export default withLayout(Team);
+export default Team;
