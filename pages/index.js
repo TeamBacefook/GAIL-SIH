@@ -42,7 +42,7 @@ const Card = () => {
 };
 const Home = () => {
   return (
-    <Box sx={{ py: 8, px: { xs: 2, md: 8 } }}>
+    <Box sx={{ py: 14, px: { xs: 2, md: 16 } }}>
       <Head>
         <title>GAIL SIH</title>
         <meta name="description" content="Home page for GAIL-SIH" />
