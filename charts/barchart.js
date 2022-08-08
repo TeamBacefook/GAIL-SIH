@@ -23,19 +23,11 @@ export default function useBarChart() {
     var svg = d3
       .select(ref.current)
       .append("svg")
+
       .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom)
+      .attr("height", 470 + margin.top + margin.bottom)
       .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-    svg
-      .append("text")
-      .attr("x", 30)
-      .attr("y", 10)
-      .attr("text-anchor", "left")
-      .style("font-size", "16px")
-      .style("font-weight", "100")
-      .text("Energy Consumption");
 
     var x = d3
       .scaleBand()

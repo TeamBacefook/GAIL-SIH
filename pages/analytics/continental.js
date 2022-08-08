@@ -4,10 +4,12 @@ import { Box, Divider, Grid } from "@mui/material";
 import withSubheader from "../../layout/sub-header";
 import * as d3 from "d3";
 import useBarchart from "../../charts/barchart";
+import useDonut from "../../charts/donut";
+import useGroupedBarChart from "../../charts/groupedbarchart";
 
 const Analytics = () => {
   const bar1 = useBarchart();
-
+  const donut = useGroupedBarChart();
   return (
     <Box sx={{ my: 2, px: 8 }}>
       {" "}
@@ -20,8 +22,7 @@ const Analytics = () => {
       <Grid item xs={12} container spacing={2}>
         <Grid item xs={12}></Grid>
         <Grid item>
-          {" "}
-          <svg width="450" height="500" ref={bar1} />
+          <p>Energy Consumption</p> <svg viewBox="0 0 460 450" ref={donut} />
         </Grid>{" "}
       </Grid>
     </Box>
