@@ -5,13 +5,21 @@ import Card from "../../components/common/team_card";
 
 const Team = () => {
   return (
-    <Box sx={{ my: 16, px: { sx: 2, md: 16 } }}>
+    <Box
+      sx={{
+        my: 14,
+        px: { sx: 2, md: 9 },
+        position: "absolute",
+        top: 0,
+        left: 0,
+      }}
+    >
       <Head>
         <title>GAIL SIH | Team</title>
         <meta name="description" content="Analytics page for GAIL-SIH" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Box>
+      <Box sx={{ my: 4 }}>
         <Typography color="#00116A" fontSize={30} fontWeight="600">
           Sed ut perspiciatis unde omnis iste natus error sit voluptatem
           accusantium doloremque laudantium

@@ -88,30 +88,33 @@ const Header = () => {
           xs={6}
         >
           {links.map(({ name, href }) => (
-            <Grid item key={href}>
-              <Link href={href}>
-                <Typography
-                  fontFamily="Reem Kufi"
-                  fontSize={18}
-                  color={
-                    router.asPath === href
-                      ? "#003973"
-                      : " rgba(10, 37, 64, 0.4)"
-                  }
-                  style={{
-                    cursor: "pointer",
-                  }}
-                >
-                  {name}
-                  {isActiveLink(href, router.pathname) && (
-                    <motion.div
-                      layoutId="navigation-underline"
-                      className="navigation-underline"
-                      animate
-                    />
-                  )}
-                </Typography>
-              </Link>
+            <Grid
+              item
+              key={href}
+              onClick={() => {
+                document.getElementById("__next").scrollIntoView();
+                router.push(href);
+              }}
+            >
+              <Typography
+                fontFamily="Reem Kufi"
+                fontSize={18}
+                color={
+                  router.asPath === href ? "#003973" : " rgba(10, 37, 64, 0.4)"
+                }
+                style={{
+                  cursor: "pointer",
+                }}
+              >
+                {name}
+                {isActiveLink(href, router.pathname) && (
+                  <motion.div
+                    layoutId="navigation-underline"
+                    className="navigation-underline"
+                    animate
+                  />
+                )}
+              </Typography>
             </Grid>
           ))}
         </Grid>
