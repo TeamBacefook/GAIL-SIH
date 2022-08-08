@@ -1,10 +1,9 @@
 import "../styles/globals.css";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { StyledEngineProvider } from "@mui/material/styles";
-import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import withLayout from "../layout";
-import Aos from "aos";
+
 import "aos/dist/aos.css";
 function MyApp({ Component, pageProps, router }) {
   const theme = createTheme({
@@ -12,14 +11,6 @@ function MyApp({ Component, pageProps, router }) {
       fontFamily: "Reem Kufi",
     },
   });
-
-  useEffect(() => {
-    Aos.init();
-  }, []);
-
-  useEffect(() => {
-    Aos.refresh();
-  }, [router.pathname]);
 
   return (
     <>
