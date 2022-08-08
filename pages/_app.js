@@ -15,7 +15,7 @@ function MyApp({ Component, pageProps, router }) {
     <>
       <div id="top" style={{ position: "absolute", top: 0, left: 0 }} />
       {!router.route.includes("/analytics") ? (
-        <AnimatePresence>
+        <AnimatePresence exitBeforeEnter>
           <motion.div
             key={router.route}
             initial="initial"
