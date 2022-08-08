@@ -53,6 +53,8 @@ const Card = ({ data }) => {
     </Grid>
   );
 };
+
+
 const Home = () => {
   const data = [
     {

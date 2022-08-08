@@ -3,12 +3,12 @@ import Header from "../components/common/header";
 
 const Layout = ({ children }) => {
   return (
-    <div>
+    <>
       <nav>
         <Header />
       </nav>
       {children}
-    </div>
+    </>
   );
 };
 
