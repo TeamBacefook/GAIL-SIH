@@ -13,33 +13,43 @@ function MyApp({ Component, pageProps, router }) {
 
   return (
     <>
-      <AnimatePresence>
-        <motion.div
-          key={router.route}
-          initial="initial"
-          animate="animate"
-          exit="exit"
-          variants={{
-            initial: {
-              opacity: 0,
-            },
-            animate: {
-              opacity: 1,
-              duration: 10,
-            },
-            exit: {
-              opacity: 0,
-              duration: 3,
-            },
-          }}
-        >
-          <StyledEngineProvider injectFirst>
-            <ThemeProvider theme={theme}>
-              <Component {...pageProps} />
-            </ThemeProvider>
-          </StyledEngineProvider>
-        </motion.div>
-      </AnimatePresence>
+      <div id="top" style={{ position: "absolute", top: 0, left: 0 }} />
+      {!router.route.includes("/analytics") ? (
+        <AnimatePresence>
+          <motion.div
+            key={router.route}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            variants={{
+              initial: {
+                opacity: 0,
+                duration: 5,
+              },
+              animate: {
+                opacity: 1,
+                duration: 15,
+              },
+              exit: {
+                opacity: 0,
+                duration: 3,
+              },
+            }}
+          >
+            <StyledEngineProvider injectFirst>
+              <ThemeProvider theme={theme}>
+                <Component {...pageProps} />
+              </ThemeProvider>
+            </StyledEngineProvider>
+          </motion.div>
+        </AnimatePresence>
+      ) : (
+        <StyledEngineProvider injectFirst>
+          <ThemeProvider theme={theme}>
+            <Component {...pageProps} />
+          </ThemeProvider>
+        </StyledEngineProvider>
+      )}
     </>
   );
 }

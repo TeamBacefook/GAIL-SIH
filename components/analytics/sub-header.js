@@ -1,5 +1,5 @@
 import { Box, Grid, Typography } from "@mui/material";
-import { AnimateSharedLayout, motion } from "framer-motion";
+import { LayoutGroup, motion } from "framer-motion";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -33,22 +33,30 @@ const SubHeader = () => {
   if (!mounted) return null;
 
   return (
-    <Box
-      sx={{ my: 16, px: 4, py: 2 }}
-      style={{ boxShadow: "inset 0px -1px 1px #e7ebf0" }}
-    >
-      <AnimateSharedLayout>
-        <Grid
-          item
-          spacing={8}
-          justifyContent={{ sx: "space-evenly" }}
-          container
-          xs={12}
+    <>
+      {/* <div id="top" style={{ position: "absolute", top: 0, left: 0 }} /> */}
+      <LayoutGroup id="B">
+        <Box
+          sx={{ marginTop: 16, px: 4, py: 2 }}
+          style={{ boxShadow: "inset 0px -1px 1px #e7ebf0" }}
         >
-          {" "}
-          {links.map(({ name, href }) => (
-            <Grid item key={href}>
-              <Link href={"/analytics/" + href}>
+          <Grid
+            item
+            spacing={8}
+            justifyContent={{ sx: "space-evenly" }}
+            container
+            xs={12}
+          >
+            {" "}
+            {links.map(({ name, href }) => (
+              <Grid
+                item
+                key={href}
+                onClick={() => {
+                  document.getElementById("top").scrollIntoView();
+                  router.push("/analytics" + href);
+                }}
+              >
                 <Typography
                   fontFamily="Reem Kufi"
                   fontSize={18}
@@ -70,12 +78,12 @@ const SubHeader = () => {
                     />
                   )}
                 </Typography>
-              </Link>
-            </Grid>
-          ))}
-        </Grid>
-      </AnimateSharedLayout>
-    </Box>
+              </Grid>
+            ))}
+          </Grid>
+        </Box>
+      </LayoutGroup>
+    </>
   );
 };
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { AnimateSharedLayout, motion } from "framer-motion";
+import { LayoutGroup, motion } from "framer-motion";
 import { Grid, Paper } from "@mui/material";
 
 const variants = {
@@ -27,8 +27,15 @@ const variants = {
 
 const Card = () => {
   return (
-    <AnimateSharedLayout>
-      <Paper style={{ borderRadius: 15, minWidth: "22vw" }}>
+    <LayoutGroup>
+      <motion.div
+        style={{
+          borderRadius: 15,
+          minWidth: "22vw",
+          boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+          borderRadius: "15px",
+        }}
+      >
         {/* Photo Top */}
         <motion.div
           style={{
@@ -37,6 +44,7 @@ const Card = () => {
             flexDirection: "column",
             alignItems: "center",
           }}
+          onHoverStart={() => console.log("PT")}
         >
           {/* Top Bar */}
           <motion.div
@@ -46,14 +54,18 @@ const Card = () => {
               minHeight: "1.5em",
               borderRadius: "0 0 10px 10px",
             }}
+            onHoverStart={() => console.log("TB")}
           />
           {/* Image Circle */}
-          <motion.div style={{}} />
+          <motion.div style={{}} onHoverStart={() => console.log("I")} />
           {/* Name */}
-          <motion.div></motion.div>
+          <motion.div onHoverStart={() => console.log("N")}></motion.div>
         </motion.div>
         {/* Socials Bottom */}
-        <motion.div style={{ minHeight: "7em" }}>
+        <motion.div
+          style={{ minHeight: "7em" }}
+          onHoverStart={() => console.log("S")}
+        >
           <Grid container>
             {/* Github */}
             <Grid item></Grid>
@@ -63,8 +75,8 @@ const Card = () => {
             <Grid item></Grid>
           </Grid>
         </motion.div>
-      </Paper>
-    </AnimateSharedLayout>
+      </motion.div>
+    </LayoutGroup>
   );
 };
 

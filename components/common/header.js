@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import logo from "../../public/logo.svg";
-import { AnimateSharedLayout, motion } from "framer-motion";
+import { LayoutGroup, motion } from "framer-motion";
 
 const links = [
   {
@@ -33,11 +33,11 @@ const isActiveLink = (href, currentPathname) => {
   if (href === "/") {
     return href === currentPathname;
   }
-  if (href.includes("analytics")) {
-    if (currentPathname.includes("analytics")) {
-      return true;
-    }
-    return false;
+  if (
+    href.startsWith("/analytics") &&
+    currentPathname.startsWith("/analytics")
+  ) {
+    return true;
   }
 
   return currentPathname.startsWith(href);
@@ -51,7 +51,7 @@ const Header = () => {
   if (!mounted) return null;
 
   return (
-    <AnimateSharedLayout>
+    <LayoutGroup id="A">
       <Grid
         item
         container
@@ -98,7 +98,7 @@ const Header = () => {
               item
               key={href}
               onClick={() => {
-                document.getElementById("__next").scrollIntoView();
+                document.getElementById("top").scrollIntoView();
                 router.push(href);
               }}
             >
@@ -115,7 +115,7 @@ const Header = () => {
                 }}
               >
                 {name}
-                {isActiveLink(href, router.pathname) && (
+                {mounted && isActiveLink(href, router.pathname) && (
                   <motion.div
                     layoutId="navigation-underline"
                     className="navigation-underline"
@@ -127,7 +127,7 @@ const Header = () => {
           ))}
         </Grid>
       </Grid>
-    </AnimateSharedLayout>
+    </LayoutGroup>
   );
 };
 
