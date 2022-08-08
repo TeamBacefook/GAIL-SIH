@@ -16,16 +16,16 @@ export default function useBarChart() {
   const ref = useRef();
 
   const renderChart = () => {
-    var margin = { top: 10, right: 30, bottom: 90, left: 40 },
-      width = 460 - margin.left - margin.right,
-      height = 450 - margin.top - margin.bottom;
+    var margin = { top: 10, right: 10, bottom: 10, left: 40 },
+      width = 350 - margin.left - margin.right,
+      height = 400 - margin.top - margin.bottom;
 
     var svg = d3
       .select(ref.current)
       .append("svg")
 
-      .attr("width", width + margin.left + margin.right)
-      .attr("height", 470 + margin.top + margin.bottom)
+      .attr("width", 450 + margin.left + margin.right)
+      .attr("height", 500 + margin.top + margin.bottom)
       .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
@@ -41,7 +41,7 @@ export default function useBarChart() {
     svg
       .append("g")
       .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(x))
+      .call(d3.axisBottom(x).tickSize(0))
       .selectAll("text")
       .attr("transform", "translate(-11,10)rotate(-90)")
       .style("text-anchor", "end");
@@ -79,7 +79,7 @@ export default function useBarChart() {
         return i * 200;
       });
   };
-  console.log(ref);
+
   useEffect(() => {
     if (ref) renderChart();
   }, [ref]);
