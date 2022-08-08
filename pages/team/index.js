@@ -1,7 +1,7 @@
 import { Typography, Box, Grid } from "@mui/material";
 import Head from "next/head";
 import React from "react";
-import Card from '../../components/common/team_card'
+import Card from "../../components/common/team_card";
 
 const Team = () => {
   return (
@@ -28,17 +28,25 @@ const Team = () => {
       </Box>
 
       <Grid item sx={{ my: 8 }} container xs={12}>
-        <Grid item xs={12}>
+        <Grid item xs={12} style={{ minHeight: "15vh" }}>
           <Typography color="#00116A" fontWeight={600} fontSize={30}>
             Our{" "}
             <span style={{ borderBottom: "5px solid #00116a" }}> Mentors </span>
           </Typography>
         </Grid>
-        <Grid item container spacing={1} xs={12} justifyContent="center">
-          <Grid item xs={5}>
+        <Grid item container xs={12} justifyContent="space-evenly">
+          <Grid
+            item
+            xs={4}
+            style={{ display: "flex", justifyContent: "center" }}
+          >
             <Card />
           </Grid>
-          <Grid item xs={5}>
+          <Grid
+            item
+            xs={4}
+            style={{ display: "flex", justifyContent: "center" }}
+          >
             <Card />
           </Grid>
         </Grid>

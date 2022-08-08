@@ -1,13 +1,11 @@
 import "../styles/globals.css";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { StyledEngineProvider } from "@mui/material/styles";
-import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import withLayout from "../layout";
 import Aos from "aos";
 import "aos/dist/aos.css";
-
 function MyApp({ Component, pageProps, router }) {
   const theme = createTheme({
     typography: {
@@ -18,6 +16,10 @@ function MyApp({ Component, pageProps, router }) {
   useEffect(() => {
     Aos.init();
   }, []);
+
+  useEffect(() => {
+    Aos.refresh();
+  }, [router.pathname]);
 
   return (
     <>
@@ -41,7 +43,6 @@ function MyApp({ Component, pageProps, router }) {
             },
           }}
         >
-          {/* <Loading /> */}
           <StyledEngineProvider injectFirst>
             <ThemeProvider theme={theme}>
               <Component {...pageProps} />

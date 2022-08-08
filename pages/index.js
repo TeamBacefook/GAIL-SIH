@@ -6,6 +6,7 @@ import petrol from "../images/petrol.svg";
 import dng from "../images/dng.svg";
 import coal from "../images/coal.svg";
 import renewable from "../images/renewable.svg";
+
 const Card = ({ data }) => {
   return (
     <Grid
@@ -74,14 +75,22 @@ const Home = () => {
     },
   ];
   return (
-    <Box sx={{ py: 14, px: { xs: 2, md: 4 } }}>
+    <Box style={{ overflowX: "hidden" }} sx={{ py: 14, px: { xs: 2, md: 9 } }}>
       <Head>
         <title>GAIL SIH</title>
         <meta name="description" content="Home page for GAIL-SIH" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Grid item sx={{ my: 4 }} spacing={5} container xs={12}>
-        <Grid item sx={12} md={7}>
+        <Grid
+          data-aos="zoom-in-up"
+          // data-aos-once={"true"}
+          data-aos-duration="5000"
+          data-aos-anchor-placement="bottom-bottom"
+          item
+          sx={12}
+          md={7}
+        >
           {" "}
           <Typography color="rgba(10, 37, 64, 1)" fontSize={{ xs: 25, md: 30 }}>
             With evergrowing demand for Energy and Power, analysis of underlying
@@ -115,15 +124,32 @@ const Home = () => {
         justifyContent="space-between"
         spacing={{ xs: 3, md: 1 }}
         alignItems="center"
-        data-aos="fade-left"
       >
-        <Grid item xs={12} md={2}>
+        <Grid
+          item
+          xs={12}
+          md={2}
+          data-aos="fade-right"
+          // data-aos-once={"true"}
+          data-aos-duration="10000"
+          data-aos-anchor-placement="bottom-bottom"
+        >
           <Typography fontSize={{ xs: 25, md: 40 }}>Commodities</Typography>
         </Grid>
         <Grid item xs={1}>
           <Divider orientation="vertical" />
         </Grid>
-        <Grid spacing={8} item container xs={12} md={7}>
+        <Grid
+          spacing={8}
+          item
+          container
+          data-aos="fade-left"
+          // data-aos-once={"true"}
+          data-aos-duration="5000"
+          data-aos-anchor-placement="bottom-bottom"
+          xs={12}
+          md={7}
+        >
           {data.map((obj, index) => {
             return <Card key={index} data={obj} />;
           })}
