@@ -53,7 +53,7 @@ const SubHeader = () => {
                   fontFamily="Reem Kufi"
                   fontSize={18}
                   color={
-                    router.asPath === href
+                    isActiveLink(href, router.pathname)
                       ? "#003973"
                       : " rgba(10, 37, 64, 0.4)"
                   }

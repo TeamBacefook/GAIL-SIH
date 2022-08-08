@@ -106,7 +106,9 @@ const Header = () => {
                 fontFamily="Reem Kufi"
                 fontSize={18}
                 color={
-                  router.asPath === href ? "#003973" : " rgba(10, 37, 64, 0.4)"
+                  isActiveLink(href, router.pathname)
+                    ? "#003973"
+                    : " rgba(10, 37, 64, 0.4)"
                 }
                 style={{
                   cursor: "pointer",

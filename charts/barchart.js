@@ -14,12 +14,12 @@ const data = [
 ];
 export default function useBarChart() {
   const ref = useRef();
-  useEffect(() => {
+
+  const renderChart = () => {
     var margin = { top: 10, right: 30, bottom: 90, left: 40 },
       width = 460 - margin.left - margin.right,
       height = 450 - margin.top - margin.bottom;
 
-    // append the svg object to the body of the page
     var svg = d3
       .select(ref.current)
       .append("svg")
@@ -28,9 +28,15 @@ export default function useBarChart() {
       .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    // Parse the Data
-    console.log(data);
-    // X axis
+    svg
+      .append("text")
+      .attr("x", 30)
+      .attr("y", 10)
+      .attr("text-anchor", "left")
+      .style("font-size", "16px")
+      .style("font-weight", "100")
+      .text("Energy Consumption");
+
     var x = d3
       .scaleBand()
       .range([0, width])
@@ -45,14 +51,11 @@ export default function useBarChart() {
       .attr("transform", "translate(0," + height + ")")
       .call(d3.axisBottom(x))
       .selectAll("text")
-      .attr("transform", "translate(-10,0)rotate(-45)")
+      .attr("transform", "translate(-11,10)rotate(-90)")
       .style("text-anchor", "end");
-
-    // Add Y axis
     var y = d3.scaleLinear().domain([0, 13000]).range([height, 0]);
     svg.append("g").call(d3.axisLeft(y));
 
-    // Bars
     svg
       .selectAll("mybar")
       .data(data)
@@ -63,19 +66,17 @@ export default function useBarChart() {
       })
       .attr("width", x.bandwidth())
       .attr("fill", "#FF0000")
-      // no bar at the beginning thus:
       .attr("height", function (d) {
         return height - y(0);
-      }) // always equal to 0
+      })
       .attr("y", function (d) {
         return y(0);
       });
 
-    // Animation
     svg
       .selectAll("rect")
       .transition()
-      .duration(800)
+      .duration(1000)
       .attr("y", function (d) {
         return y(d.Value);
       })
@@ -83,10 +84,12 @@ export default function useBarChart() {
         return height - y(d.Value);
       })
       .delay(function (d, i) {
-        console.log(i);
         return i * 200;
       });
+  };
+  console.log(ref);
+  useEffect(() => {
+    if (ref) renderChart();
   }, [ref]);
   return ref;
-  // set the dimensions and margins of the graph
 }
