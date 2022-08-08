@@ -1,13 +1,13 @@
 import { Typography, Box, Grid, Divider } from "@mui/material";
 import Image from "next/image";
 import Head from "next/head";
-import React, { useEffect } from "react";
+import React from "react";
 import petrol from "../images/petrol.svg";
+import gail from "../images/gail.svg";
+import sih from "../images/sih.svg";
 import dng from "../images/dng.svg";
 import coal from "../images/coal.svg";
 import renewable from "../images/renewable.svg";
-import Aos from "aos";
-import { useRouter } from "next/router";
 
 const Card = ({ data }) => {
   return (
@@ -54,12 +54,6 @@ const Card = ({ data }) => {
   );
 };
 const Home = () => {
-  const router = useRouter();
-
-  useEffect(() => {
-    Aos.init();
-  }, [Aos]);
-
   const data = [
     {
       name: "Petroleum",
@@ -116,6 +110,29 @@ const Home = () => {
         </Grid>{" "}
       </Grid>
       <Divider />
+      <Grid
+        item
+        spacing={4}
+        container
+        sx={{ my: 8, px: 8 }}
+        justifyContent="space-between"
+        xs={12}
+      >
+        <Grid item xs={12}>
+          {" "}
+          <Typography color="rgba(10, 37, 64, 1)" fontSize={{ xs: 25, md: 30 }}>
+            A Project for:
+          </Typography>
+        </Grid>
+        <Grid item xs={12} md={5}>
+          <Image src={gail} layout="responsive" />
+        </Grid>
+        <Grid item xs={12} md={5}>
+          <Image src={sih} layout="responsive" />
+        </Grid>
+      </Grid>
+      <Divider />
+
       <Grid
         item
         container

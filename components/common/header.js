@@ -17,7 +17,7 @@ const links = [
   },
   {
     name: "Analytics",
-    href: "/analytics",
+    href: "/analytics/global",
   },
   {
     name: "News",
@@ -32,6 +32,12 @@ const links = [
 const isActiveLink = (href, currentPathname) => {
   if (href === "/") {
     return href === currentPathname;
+  }
+  if (href.includes("analytics")) {
+    if (currentPathname.includes("analytics")) {
+      return true;
+    }
+    return false;
   }
 
   return currentPathname.startsWith(href);

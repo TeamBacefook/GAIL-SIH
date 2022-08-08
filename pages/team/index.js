@@ -1,7 +1,7 @@
 import { Typography, Box, Grid } from "@mui/material";
 import Head from "next/head";
 import React from "react";
-import Card from "../../components/common/team_card";
+import Card from "../../components/teams/team_card";
 
 const Team = () => {
   return (

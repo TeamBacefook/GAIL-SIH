@@ -4,7 +4,6 @@ import { StyledEngineProvider } from "@mui/material/styles";
 import { motion, AnimatePresence } from "framer-motion";
 import withLayout from "../layout";
 
-import "aos/dist/aos.css";
 function MyApp({ Component, pageProps, router }) {
   const theme = createTheme({
     typography: {
