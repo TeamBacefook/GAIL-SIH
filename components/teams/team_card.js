@@ -70,6 +70,7 @@ const Card = ({ image, f_name, l_name, insta, github, atlas }) => {
               borderRadius: "0 0 20px 20px",
             }}
             animate={barControls}
+            transition={{ type: "spring", duration: 1, bounce: 0 }}
           />
           {/* Image Circle */}
           <motion.div
@@ -77,7 +78,6 @@ const Card = ({ image, f_name, l_name, insta, github, atlas }) => {
               backgroundColor: "#FF5C00",
               backgroundImage: `url(${image})`,
               backgroundRepeat: "no-repeat",
-              backgroundPosition: "center",
               backgroundSize: "cover",
               height: "18vh",
               width: "18vh",
@@ -86,12 +86,13 @@ const Card = ({ image, f_name, l_name, insta, github, atlas }) => {
               top: "17%",
             }}
             animate={imgControls}
-            transition={{ type: "spring", duration: 0.5, bounce: 0 }}
+            transition={{ type: "spring", duration: 1, bounce: 0 }}
           />
           {/* Name */}
           <motion.div
             style={{ paddingTop: "25vh", position: "absolute", top: "15%" }}
             animate={nameControls}
+            transition={{ type: "spring", duration: 0.8, bounce: 0 }}
           >
             <Grid container flexDirection="column">
               <Grid item style={{ display: "flex", justifyContent: "center" }}>
@@ -111,6 +112,7 @@ const Card = ({ image, f_name, l_name, insta, github, atlas }) => {
             borderRadius: "0 0 15px 15px",
           }}
           animate={socialsControls}
+          transition={{ type: "spring", duration: 1, bounce: 0 }}
         >
           <Grid container>
             {/* Github */}
