@@ -1,17 +1,19 @@
 import React from "react";
 import { LayoutGroup, motion, useAnimationControls } from "framer-motion";
 import { Grid, Typography } from "@mui/material";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import InstagramIcon from "@mui/icons-material/Instagram";
 
-const Card = ({ image, f_name, l_name, insta, github, atlas }) => {
+const Card = ({ image, f_name, l_name, lnkIn, github, insta }) => {
   const barControls = useAnimationControls();
   const imgControls = useAnimationControls();
   const nameControls = useAnimationControls();
   const socialsControls = useAnimationControls();
 
   const onCardHover = () => {
-    console.log("card hovered");
     barControls.start({ height: 0 });
-    socialsControls.start({ backgroundColor: "#FF5C00" });
+    socialsControls.start({ opacity: 1 });
     imgControls.start({
       top: 0,
       height: "37vh",
@@ -24,9 +26,8 @@ const Card = ({ image, f_name, l_name, insta, github, atlas }) => {
   };
 
   const endCardHover = () => {
-    console.log("card hover stopped");
     barControls.start({ height: "1.5em" });
-    socialsControls.start({ backgroundColor: "#FFF" });
+    socialsControls.start({ opacity: 0 });
     imgControls.start({
       top: "17%",
       height: "18vh",
@@ -86,7 +87,7 @@ const Card = ({ image, f_name, l_name, insta, github, atlas }) => {
               top: "17%",
             }}
             animate={imgControls}
-            transition={{ type: "spring", duration: 1, bounce: 0 }}
+            transition={{ type: "tween", duration: 0.75, bounce: 0 }}
           />
           {/* Name */}
           <motion.div
@@ -107,20 +108,47 @@ const Card = ({ image, f_name, l_name, insta, github, atlas }) => {
         {/* Socials Bottom */}
         <motion.div
           style={{
-            minHeight: "7em",
-            backgroundColor: "#FFF",
+            height: "7em",
+            backgroundColor: "#FF5C00",
             borderRadius: "0 0 15px 15px",
+            opacity: 0,
           }}
           animate={socialsControls}
           transition={{ type: "spring", duration: 1, bounce: 0 }}
         >
-          <Grid container>
+          <Grid
+            container
+            justifyContent="space-evenly"
+            alignItems="center"
+            style={{ height: "100%" }}
+          >
             {/* Github */}
-            <Grid item></Grid>
+            <Grid item style={{ height: 40, width: 40 }}>
+              <GitHubIcon
+                style={{ color: "white", fontSize: 35 , cursor: "pointer" }}
+                onClick={() => {
+                  window.open(github, "_blank");
+                }}
+              />
+            </Grid>
+            {/* LinkedIn */}
+            <Grid item style={{ height: 40, width: 40 }}>
+              <LinkedInIcon
+                style={{ color: "white", fontSize: 35, cursor: "pointer" }}
+                onClick={() => {
+                  window.open(lnkIn, "_blank");
+                }}
+              />
+            </Grid>
             {/* Instagram */}
-            <Grid item></Grid>
-            {/* Atlassian */}
-            <Grid item></Grid>
+            <Grid item style={{ height: 40, width: 40 }}>
+              <InstagramIcon
+                style={{ color: "white", fontSize: 35, cursor: "pointer" }}
+                onClick={() => {
+                  window.open(insta, "_blank");
+                }}
+              />
+            </Grid>
           </Grid>
         </motion.div>
       </motion.div>
