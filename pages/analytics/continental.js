@@ -78,7 +78,7 @@ const Analytics = () => {
         />
       </Grid>
       <Divider sx={{ my: 4 }} />
-      <Grid sx={{ py: 4, my: 40 }} item container xs={12}>
+      <Grid sx={{ py: 4 }} item container xs={12}>
         <Grid item xs={12} md={6}>
           <Typography color="#00116A" fontSize={35}>
             Energy Balance Sheet

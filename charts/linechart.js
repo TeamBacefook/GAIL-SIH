@@ -1,4 +1,4 @@
-import { useRef, useLayoutEffect } from "react";
+import { useRef, useLayoutEffect, useState } from "react";
 import * as d3 from "d3";
 import { useInView } from "framer-motion";
 
@@ -2062,21 +2062,25 @@ const data = [
 
 export function useLineChart() {
   const ref = useRef();
+  const [loaded, setLoaded] = useState(false);
   const isInView = useInView(ref);
   const renderChart = () => {
     var margin = { top: 10, right: 10, bottom: 50, left: 40 },
-      width = 1000 - margin.left - margin.right,
+      width = 1200 - margin.left - margin.right,
       height = 400 - margin.top - margin.bottom;
 
     var svg = d3
       .select(ref.current)
       .append("svg")
-
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
       .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
+    svg
+      .append("rect")
+      .attr("width", width)
+      .attr("height", height + 5)
+      .attr("fill", "#EDEDED");
     const x = d3
       .scaleLinear()
       .domain(
@@ -2085,10 +2089,12 @@ export function useLineChart() {
         })
       )
       .range([0, width]);
-    svg
+    const xAxis = svg
       .append("g")
       .attr("transform", `translate(0, ${height})`)
-      .call(d3.axisBottom(x).ticks(5));
+      .call(d3.axisBottom(x).tickSize(-height).tickSizeOuter(15).ticks(10))
+      .style("color", "white");
+    xAxis.selectAll("text").attr("color", "black").attr("y", 5);
 
     // Add Y axis
     const y = d3
@@ -2100,7 +2106,13 @@ export function useLineChart() {
         }),
       ])
       .range([height, 0]);
-    svg.append("g").call(d3.axisLeft(y));
+    const yAxis = svg
+      .append("g")
+      .attr("color", "red")
+      .call(d3.axisLeft(y).tickSize(-width))
+      .style("color", "white")
+      .style("paddingRight", "5px");
+    yAxis.selectAll("text").attr("color", "black").attr("x", -5);
     const color = d3
       .scaleOrdinal()
       .range([
@@ -2150,10 +2162,11 @@ export function useLineChart() {
   };
 
   useLayoutEffect(() => {
-    if (isInView) {
+    if (isInView && !loaded) {
       renderChart();
+      setLoaded(true);
     }
-  }, [isInView]);
+  });
   console.log(ref);
   return ref;
 }

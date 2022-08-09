@@ -1,12 +1,31 @@
-import { Box, Button, Grid, Typography, Divider } from "@mui/material";
+import {
+  Box,
+  Button,
+  Grid,
+  Typography,
+  Divider,
+  TextField,
+} from "@mui/material";
 import React from "react";
 import Head from "next/head";
 import { useLineChart } from "../../charts/linechart";
-import useGroupedBarChart from "../../charts/groupedbarchart";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import IOSSlider from "../../components/common/slider";
+import useBarChart from "../../charts/barchart";
+const marks = [
+  { label: "", value: 0 },
+  { label: "", value: 0.2 },
+  { label: "", value: 0.4 },
+  { label: "", value: 0.4 },
+  { label: "", value: 0.6 },
+  { label: "", value: 0.8 },
+  { label: "", value: 1 },
+];
 
 const Predictions = () => {
-  const lineChart = useGroupedBarChart();
-
+  const lineChart = useLineChart();
+  const bar = useBarChart();
   return (
     <Box sx={{ my: 12, px: { xs: 1, md: 4 } }}>
       {" "}
@@ -70,13 +89,144 @@ const Predictions = () => {
       >
         <svg width="100%" height={"500"} ref={lineChart}></svg>
       </Box>
-      <Grid item container xs={12}>
-        <Grid item xs={12}>
+      {/* <Grid item container xs={12}>
+        <Grid item sx={{ mb: 3 }} xs={12}>
           <Typography color="#00116A" fontSize={40}>
             {" "}
             Global Parameters
-          </Typography>{" "}
+          </Typography>
           <Divider />
+          <Grid
+            item
+            xs={12}
+            justifyContent="space-evenly"
+            sx={{ pt: 1, pb: 2 }}
+            alignItems="center"
+            container
+          >
+            <Grid item xs={3}>
+              <Box sx={{ display: "flex" }}>
+                <Checkbox />{" "}
+                <Typography color="#00116A" fontSize={30}>
+                  {" "}
+                  War
+                </Typography>{" "}
+              </Box>
+            </Grid>
+            <Grid item xs={3}>
+              <TextField variant="outlined" label="Estimate Start" />
+            </Grid>
+            <Grid item xs={3}>
+              <TextField variant="outlined" label="Estimate End" />
+            </Grid>
+            <Grid item xs={2} container justifyContent="center">
+              <Typography fontSize={20} sx={{ opacity: "0.5" }}>
+                Intensity
+              </Typography>
+              <IOSSlider
+                min={0}
+                track={false}
+                step={0.2}
+                max={1}
+                marks={marks}
+              />
+            </Grid>
+          </Grid>
+          <Divider />
+          <Grid
+            item
+            xs={12}
+            justifyContent="space-evenly"
+            sx={{ pt: 1, pb: 2 }}
+            alignItems="center"
+            container
+          >
+            <Grid item xs={3}>
+              <Box sx={{ display: "flex" }}>
+                <Checkbox />{" "}
+                <Typography color="#00116A" fontSize={30}>
+                  {" "}
+                  Pandemic
+                </Typography>{" "}
+              </Box>
+            </Grid>
+            <Grid item xs={3}>
+              <TextField variant="outlined" label="Estimate Start" />
+            </Grid>
+            <Grid item xs={3}>
+              <TextField variant="outlined" label="Estimate End" />
+            </Grid>
+            <Grid item xs={2} container justifyContent="center">
+              <Typography fontSize={20} sx={{ opacity: "0.5" }}>
+                Intensity
+              </Typography>
+              <IOSSlider
+                min={0}
+                track={false}
+                step={0.2}
+                max={1}
+                marks={marks}
+              />
+            </Grid>
+          </Grid>
+          <Divider />
+          <Grid
+            item
+            xs={12}
+            justifyContent="space-evenly"
+            sx={{ pt: 1, pb: 2 }}
+            alignItems="center"
+            container
+          >
+            <Grid item xs={3}>
+              <Box sx={{ display: "flex" }}>
+                <Checkbox />{" "}
+                <Typography color="#00116A" fontSize={30}>
+                  {" "}
+                  Recession
+                </Typography>{" "}
+              </Box>
+            </Grid>
+            <Grid item xs={3}>
+              <TextField variant="outlined" label="Estimate Start" />
+            </Grid>
+            <Grid item xs={3}>
+              <TextField variant="outlined" label="Estimate End" />
+            </Grid>
+            <Grid item xs={2} container justifyContent="center">
+              <Typography fontSize={20} sx={{ opacity: "0.5" }}>
+                Intensity
+              </Typography>
+              <IOSSlider
+                min={0}
+                track={false}
+                step={0.2}
+                max={1}
+                marks={marks}
+              />
+            </Grid>
+          </Grid>
+          <Divider />
+        </Grid>
+      </Grid>{" "} */}
+      <Grid item sx={{ mt: 3, pr: 4 }} container xs={12}>
+        <Grid item xs={12} md={6}>
+          <Typography color="#00116A" fontSize={40}>
+            Model Comparison
+          </Typography>
+        </Grid>
+        <Grid item xs={12} container justifyContent={"flex-end"} md={6}>
+          <TextField
+            sx={{ width: "80%" }}
+            variant="outlined"
+            value="RMSE"
+            select
+          />
+        </Grid>
+        <Grid sx={{ mt: 8 }} item container justifyContent="center" xs={12}>
+          <Grid item xs={6}>
+            <svg ref={bar} height={500} width="100%" />
+          </Grid>{" "}
         </Grid>
       </Grid>
     </Box>
