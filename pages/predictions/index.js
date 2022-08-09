@@ -2,10 +2,11 @@ import { Box, Button, Grid, Typography, Divider } from "@mui/material";
 import React from "react";
 import Head from "next/head";
 import { useLineChart } from "../../charts/linechart";
+import useGroupedBarChart from "../../charts/groupedbarchart";
 
 const Predictions = () => {
-  const lineChart = useLineChart();
-  console.log(lineChart);
+  const lineChart = useGroupedBarChart();
+
   return (
     <Box sx={{ my: 12, px: { xs: 1, md: 4 } }}>
       {" "}

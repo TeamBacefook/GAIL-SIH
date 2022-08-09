@@ -27,7 +27,7 @@ const useDonut = (props) => {
     // set the color scale
     const color = d3
       .scaleOrdinal()
-      .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56"]);
+      .range(["#B3E0EE", "#48B5D6", "#0196C1", "#046C95", "#083346"]);
 
     // Compute the position of each group on the pie:
     const pie = d3
@@ -40,18 +40,27 @@ const useDonut = (props) => {
       .arc()
       .innerRadius(100) // This is the size of the donut hole
       .outerRadius(radius);
+
+    const arcOver = d3
+      .arc()
+      .innerRadius(100) // This is the size of the donut hole
+      .outerRadius(radius + 20);
     // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
     svg
       .selectAll("#chart")
       .data(data_ready)
       .join("path")
       .attr("d", arc)
+      .on("mouseover", function (d) {
+        d3.select(this).transition().duration(200).attr("d", arcOver);
+      })
+      .on("mouseout", function (d) {
+        d3.select(this).transition().duration(200).attr("d", arc);
+      })
       .attr("fill", (d) => color(d.data[0]))
       .transition()
-      .delay(function (d, i) {
-        return 1500;
-      })
-      .duration(500)
+
+      .duration(750)
       .attrTween("d", function (d) {
         var i = d3.interpolate(d.startAngle, d.endAngle);
         return function (t) {
