@@ -50,7 +50,7 @@ export default function MediaCard() {
           </Typography>
           <Typography fontSize={20} color="#003973">
             But I must explain to you how all this mistaken idea of denouncing
-            But I must explain to youLorem Ipsum has been the industry's
+            But I must explain to youLorem Ipsum has been the industry&apos;s
             standard More...
           </Typography>
         </CardContent>

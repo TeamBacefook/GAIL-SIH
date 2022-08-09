@@ -54,7 +54,6 @@ const Card = ({ data }) => {
   );
 };
 
-
 const Home = () => {
   const data = [
     {
@@ -130,7 +129,7 @@ const Home = () => {
           <Image src={gail} layout="responsive" />
         </Grid>
         <Grid item xs={12} md={5}>
-          <Image src={sih} layout="responsive" />
+          <Image src={sih} layout="responsive" alt="" />
         </Grid>
       </Grid>
       <Divider />
