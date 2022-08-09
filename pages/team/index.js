@@ -49,7 +49,7 @@ const Team = () => {
             style={{ display: "flex", justifyContent: "center" }}
           >
             <Card
-              image="https://media.discordapp.net/attachments/1005520464405340272/1006414571055095828/Dr._Radhika_Kotecha_-_Picture.jpg?width=389&height=423"
+              image="https://images-ext-1.discordapp.net/external/aSI0NRyeyJLv6XeMLAQm4PuKwxu48r9D8t9LaTMTYxU/%3Fe%3D2147483647%26v%3Dbeta%26t%3DTdkc1-tVHlXsT2yXQhBsWuw5vr7HeQ-Xx8VKZ-nGAwc/https/media-exp1.licdn.com/dms/image/C4D03AQGPYtTgy_h5zg/profile-displayphoto-shrink_200_200/0/1655836786626"
               f_name="Dr. Radhika"
               l_name="Kotecha"
             />
@@ -59,10 +59,10 @@ const Team = () => {
             xs={4}
             style={{ display: "flex", justifyContent: "center" }}
           >
-            <Card
-              image="https://images-ext-1.discordapp.net/external/aSI0NRyeyJLv6XeMLAQm4PuKwxu48r9D8t9LaTMTYxU/%3Fe%3D2147483647%26v%3Dbeta%26t%3DTdkc1-tVHlXsT2yXQhBsWuw5vr7HeQ-Xx8VKZ-nGAwc/https/media-exp1.licdn.com/dms/image/C4D03AQGPYtTgy_h5zg/profile-displayphoto-shrink_200_200/0/1655836786626"
-              f_name="Mr. Ankur"
-              l_name="Singh"
+            <Card 
+            image="https://images-ext-1.discordapp.net/external/aSI0NRyeyJLv6XeMLAQm4PuKwxu48r9D8t9LaTMTYxU/%3Fe%3D2147483647%26v%3Dbeta%26t%3DTdkc1-tVHlXsT2yXQhBsWuw5vr7HeQ-Xx8VKZ-nGAwc/https/media-exp1.licdn.com/dms/image/C4D03AQGPYtTgy_h5zg/profile-displayphoto-shrink_200_200/0/1655836786626"
+            f_name="Mr. Ankur"
+            l_name="Singh"
             />
           </Grid>
         </Grid>
@@ -102,7 +102,7 @@ const Team = () => {
               margin: "3% 0",
             }}
           >
-            <Card
+            <Card 
               image="https://images-ext-1.discordapp.net/external/aSI0NRyeyJLv6XeMLAQm4PuKwxu48r9D8t9LaTMTYxU/%3Fe%3D2147483647%26v%3Dbeta%26t%3DTdkc1-tVHlXsT2yXQhBsWuw5vr7HeQ-Xx8VKZ-nGAwc/https/media-exp1.licdn.com/dms/image/C4D03AQGPYtTgy_h5zg/profile-displayphoto-shrink_200_200/0/1655836786626"
               f_name="Ehlaam"
               l_name="Hanwari"
@@ -135,7 +135,7 @@ const Team = () => {
             }}
           >
             <Card
-              image="https://media.discordapp.net/attachments/1005520464405340272/1006412135473090640/IMG_20220418_113403_Bokeh-02-02.jpeg?width=423&height=423"
+              image="https://images-ext-1.discordapp.net/external/aSI0NRyeyJLv6XeMLAQm4PuKwxu48r9D8t9LaTMTYxU/%3Fe%3D2147483647%26v%3Dbeta%26t%3DTdkc1-tVHlXsT2yXQhBsWuw5vr7HeQ-Xx8VKZ-nGAwc/https/media-exp1.licdn.com/dms/image/C4D03AQGPYtTgy_h5zg/profile-displayphoto-shrink_200_200/0/1655836786626"
               f_name="Sharvil"
               l_name="Dandekar"
             />
@@ -151,7 +151,7 @@ const Team = () => {
             }}
           >
             <Card
-              image="https://media.discordapp.net/attachments/724216775776141372/1001352798954340362/unknown-2.png"
+              image="https://images-ext-1.discordapp.net/external/aSI0NRyeyJLv6XeMLAQm4PuKwxu48r9D8t9LaTMTYxU/%3Fe%3D2147483647%26v%3Dbeta%26t%3DTdkc1-tVHlXsT2yXQhBsWuw5vr7HeQ-Xx8VKZ-nGAwc/https/media-exp1.licdn.com/dms/image/C4D03AQGPYtTgy_h5zg/profile-displayphoto-shrink_200_200/0/1655836786626"
               f_name="Taksha"
               l_name="Limbashia"
             />
@@ -166,7 +166,7 @@ const Team = () => {
               margin: "3% 0",
             }}
           >
-            <Card
+            <Card 
               image="https://images-ext-1.discordapp.net/external/aSI0NRyeyJLv6XeMLAQm4PuKwxu48r9D8t9LaTMTYxU/%3Fe%3D2147483647%26v%3Dbeta%26t%3DTdkc1-tVHlXsT2yXQhBsWuw5vr7HeQ-Xx8VKZ-nGAwc/https/media-exp1.licdn.com/dms/image/C4D03AQGPYtTgy_h5zg/profile-displayphoto-shrink_200_200/0/1655836786626"
               f_name="Vedant"
               l_name="Tamgadge"
