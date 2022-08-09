@@ -1,56 +1,74 @@
-import React from "react";
-import { Box, Grid, Typography, Button } from "@mui/material";
+import * as React from "react";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
 import Image from "next/image";
 import placeholder from "../../images/placeholder.svg";
-const Card = () => {
+import { Box } from "@mui/system";
+export default function MediaCard() {
   return (
-    <Box>
-      <Grid
-        sx={{
-          border: "1px solid #FF5C00",
-          px: 1,
-          py: 1,
-          borderRadius: "1em",
-        }}
-        item
-        container
-        xs={12}
-        spacing={4}
-        alignItems={"center"}
-      >
-        <Grid item justifyContent={'center'} xs={12}>
-          <Grid item xs={5}>
-            <Image src={placeholder} layout="responsive" />
-          </Grid>{" "}
-        </Grid>
-        <Grid container item xs={12}>
-          <Typography color="00116A" fontSize={25}>
-            "Sedutperspiciatis unde omnis
-          </Typography>
-          <Typography sx={{ mt: 2 }} fontSize={20} color="00116A">
-            "But I must explain to you how all this mistaken idea of denouncing
-            "But I must explain to youLorem Ipsum has been the industry's
-            standard dummy text ever since the 1500s More...
-          </Typography>
-        </Grid>
-        <Grid item xs={12} container justifyContent={"center"}>
-          <Button
-            variant="contained"
-            sx={{
-              width: "70%",
-              background:
-                "linear-gradient(169.84deg, #FFE53B -30.77%, #FF2525 119.39%)",
-              color: "white",
-              borderRadius: "11px",
-              textTransform: "none",
-            }}
-          >
-            Explore More
-          </Button>
-        </Grid>
-      </Grid>
-    </Box>
-  );
-};
+    <Card
+      sx={{
+        px: 2,
+        py: 3,
 
-export default Card;
+        background: "transparent",
+        boxShadow: "none",
+        border: "1px solid #FF5C00",
+        borderRadius: "10px",
+      }}
+    >
+      <Box sx={{ display: "flex", justifyContent: "center" }}>
+        <Box
+          sx={{
+            width: {
+              xs: "100%",
+              md: "50%",
+            },
+          }}
+        >
+          <Image src={placeholder} layout="responsive" alt="" />
+        </Box>{" "}
+      </Box>
+      <CardContent>
+        <Typography
+          fontSize={25}
+          color="#003973"
+          gutterBottom
+          variant="h5"
+          component="div"
+        >
+          "Sedutperspiciatisunde
+        </Typography>
+        <Typography fontSize={20} color="#003973">
+          "But I must explain to you how all this mistaken idea of denouncing
+          "But I must explain to youLorem Ipsum has been the industry's standard
+          More...
+        </Typography>
+      </CardContent>
+      <CardActions
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <Button
+          variant="contained"
+          sx={{
+            width: "60%",
+            background:
+              "linear-gradient(169.84deg, #FFE53B -30.77%, #FF2525 119.39%)",
+            color: "white",
+            borderRadius: "11px",
+            textTransform: "none",
+          }}
+        >
+          Explore More
+        </Button>
+      </CardActions>
+    </Card>
+  );
+}

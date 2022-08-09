@@ -16,8 +16,14 @@ const News = () => {
         Trending
       </Typography>
 
-      <Grid spacing={6} sx={{ mt: 2 }} item container xs={12}>
-        <Grid container item xs={12} spacing={6} md={8}>
+      <Grid
+        spacing={6}
+        sx={{ mt: 2, px: { md: 0, xs: 2 } }}
+        item
+        container
+        xs={12}
+      >
+        <Grid container spacing={2} item xs={12} md={8}>
           <Grid item xs={12}>
             <Card />
           </Grid>
