@@ -1,113 +1,159 @@
 import { useRef, useEffect } from "react";
 import * as d3 from "d3";
-const data = [
-  { group: "banana", Nitrogen: 12, normal: 1, stress: 13 },
-  { group: "poacee", Nitrogen: 6, normal: 6, stress: 33 },
-  { group: "sorgho", Nitrogen: 11, normal: 28, stress: 12 },
-  { group: "triticum", Nitrogen: 19, normal: 6, stress: 1 },
-];
+
 const useGroupedBarChart = () => {
   const ref = useRef();
   const renderChart = () => {
-    const margin = { top: 10, right: 30, bottom: 20, left: 50 },
-      width = 460 - margin.left - margin.right,
+    var svg = d3.select("svg"),
+      margin = {
+        top: 50,
+        right: 20,
+        bottom: 30,
+        left: 40,
+      },
+      width = 1000 - margin.right - margin.left,
       height = 400 - margin.top - margin.bottom;
 
-    // append the svg object to the body of the page
-    const svg = d3
-      .select(ref.current)
-      .append("svg")
-      .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom)
+    var g = svg
       .append("g")
-      .attr("transform", `translate(${margin.left},${margin.top})`);
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    // Parse the Data
-    // d3.csv(
-    //   "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/data_stacked.csv"
-    // ).then(function (data) {
-    // List of subgroups = header of the csv files = soil condition here
-    const subgroups = ["Nitrogen", "normal", "stress"];
-    console.log(subgroups);
-    // List of groups = species here = value of the first column called group -> I show them on the X axis
-    const groups = data.map((d) => d.group);
+    // because the plot is grouped by months and then by weekdays it has two scales for the x axis
+    // creating x0 scale which is grouped by months
+    var x0 = d3.scaleBand().rangeRound([0, width]).paddingInner(0.1);
 
-    // Add X axis
-    const x = d3.scaleBand().domain(groups).range([0, width]).padding([0.2]);
-    svg
-      .append("g")
-      .attr("transform", `translate(0, ${height})`)
-      .call(d3.axisBottom(x).tickSize(0));
+    // creating x1 scale which is grouped by days of week
+    var x1 = d3.scaleBand().padding(0.08);
 
-    // Add Y axis
-    const y = d3.scaleLinear().domain([0, 40]).range([height, 0]);
-    svg.append("g").call(d3.axisLeft(y));
+    // creating a linear scale for y axis
+    var y = d3.scaleLinear().rangeRound([height, 0]);
 
-    // Another scale for subgroup position?
-    const xSubgroup = d3
-      .scaleBand()
-      .domain(subgroups)
-      .range([0, x.bandwidth()])
-      .padding([0.05]);
-
-    // color palette = one color per subgroup
-    const color = d3
+    // creating an ordinal scale for color that is going to represent different days of week
+    var z = d3
       .scaleOrdinal()
-      .domain(subgroups)
-      .range(["#e41a1c", "#377eb8", "#4daf4a"]);
+      .range([
+        "#66c2a5",
+        "#fc8d62",
+        "#8da0cb",
+        "#e78ac3",
+        "#a6d854",
+        "#ffd92f",
+        "#e5c494",
+      ]);
 
-    // Show the bars
+    // reading csv data
+    d3.csv("/data.csv").then(function (data, error) {
+      console.log(data);
+      if (error) return console.log(error);
+      // creating var keys containing array of names of days
+      var keys = data.columns.slice(1);
+      // setting up domain for x0 as a list of all the names of months
+      x0.domain(
+        data.map(function (d) {
+          //console.log(d.Month);
+          return d.Month;
+        })
+      );
+      // setting up domain for x1 as a list of all the names of days
+      x1.domain(keys).rangeRound([0, x0.bandwidth()]);
+      // setting up domain for y which will be from 0 to max day of week for any month
+      y.domain([0, 5000]).nice();
+      // binding data to svg group elements
+      g.append("g")
+        .selectAll("g")
+        .data(data)
+        .enter()
+        .append("g")
+        .attr("transform", function (d) {
+          //console.log(x0(d.Month));
+          return "translate(" + x0(d.Month) + ",0)";
+        })
+        .attr("class", "days")
+        // binding days of week data to rectangles
+        .selectAll("rect")
+        .data(function (d) {
+          return keys.map(function (key) {
+            //console.log({ key: key, value: d[key] });
+            return {
+              key: key,
+              value: d[key],
+            };
+          });
+        })
+        .enter()
+        .append("rect")
+        .attr("class", "bar")
+        .attr("x", function (d) {
+          //console.log(x1(d.key));
+          return x1(d.key);
+        })
+        .attr("width", x1.bandwidth())
+        .attr("fill", function (d) {
+          //console.log(z(d.key));
+          return z(d.key);
+        })
+        // setting up y coordinates and height position to 0 for transition
+        .attr("y", function (d, i) {
+          return y(i);
+        })
+        .attr("height", function (d, i) {
+          console.log(y(i));
+          return height - y(0);
+        })
+        // setting up tooltip and interactivity
 
-    svg
-      .selectAll("bars")
-      .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(x).tickSize(0));
-    svg
-      .append("g")
-      .selectAll("g")
-      // Enter in data = loop group per group
-      .data(data)
-      .enter()
-      .append("g")
-      .attr("transform", function (d) {
-        return "translate(" + x(d.group) + ",0)";
-      })
-      .selectAll("rect")
-      .data(function (d) {
-        return subgroups.map(function (key) {
-          return { key: key, value: d[key] };
+        // setting up transition, delay and duration
+        .transition()
+        .delay(function (d, i) {
+          return i * 250;
+        })
+        .duration(1500)
+        // setting up normal values for y and height
+        .attr("y", function (d) {
+          return y(Number(d.value));
+        })
+        .attr("height", function (d) {
+          console.log(d);
+          return height - y(Number(d.value));
         });
-      })
-      .enter()
-      .append("rect")
-      .attr("x", function (d) {
-        return xSubgroup(d.key);
-      })
-      .attr("y", function (d) {
-        return y(d.value);
-      })
-      .attr("width", xSubgroup.bandwidth())
-      .attr("height", function (d) {
-        return height - y(d.value);
-      })
-      .attr("fill", function (d) {
-        return color(d.key);
-      });
-
-   svg.append("g")
-    .selectAll("g")
-    // Enter in data = loop group per group
-    .data(data)
-    .join("g")
-      .attr("transform", d => `translate(${x(d.group)}, 0)`)
-    .selectAll("rect")
-    .data(function(d) { return subgroups.map(function(key) { return {key: key, value: d[key]}; }); })
-    .join("rect")
-      .attr("x", d => xSubgroup(d.key))
-      .attr("y", d => y(d.value))
-      .attr("width", xSubgroup.bandwidth())
-      .attr("height", d => height - y(d.value))
-      .attr("fill", d => color(d.key));
+      // setting up x axis
+      g.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + height + ")")
+        // setting up x axis opacity to 0 before transition
+        .style("opacity", "0")
+        .call(d3.axisBottom(x0));
+      // setting up transiton for x axis
+      g.select(".x")
+        .transition()
+        .duration(500)
+        .delay(800)
+        // setting up full opacity after transition
+        .style("opacity", "1");
+      // setting up y axis
+      g.append("g")
+        .attr("class", "y axis")
+        // setting up y axis opacity to 0 before transition
+        .style("opacity", "0")
+        .call(d3.axisLeft(y).ticks(null, "s"))
+        .append("text")
+        .attr("x", 2)
+        .attr("y", y(y.ticks().pop()) + 0.5)
+        .attr("dy", "0.90em")
+        .attr("fill", "#000")
+        .attr("font-weight", "bold")
+        .attr("text-anchor", "end")
+        .attr("transform", "rotate(-90)")
+        .text("Cancellations");
+      // setting up y axis transition
+      g.select(".y")
+        .transition()
+        .duration(500)
+        .delay(1300)
+        // setting up full opacity after transition
+        .style("opacity", "1");
+      // setting a legend and binding legend data to group
+    });
   };
   useEffect(() => {
     renderChart();

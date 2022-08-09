@@ -68,7 +68,7 @@ const Predictions = () => {
       <Box
         sx={{ mt: 8, display: "flex", justifyContent: "center", width: "100%" }}
       >
-        <svg width="100%" height={"400"} ref={lineChart}></svg>
+        <svg width="100%" height={"500"} ref={lineChart}></svg>
       </Box>
       <Grid item container xs={12}>
         <Grid item xs={12}>
