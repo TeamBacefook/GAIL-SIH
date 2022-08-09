@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Typography } from "@mui/material";
+import { Box, Button, Grid, Typography, Divider } from "@mui/material";
 import React from "react";
 import Head from "next/head";
 import { useLineChart } from "../../charts/linechart";
@@ -41,6 +41,9 @@ const Predictions = () => {
               background:
                 "linear-gradient(169.84deg, #FFE53B -30.77%, #FF2525 119.39%)",
               color: "white",
+              borderRadius: "11px",
+              textTransform: "none",
+              width: "70%",
             }}
           >
             Download Graph
@@ -52,6 +55,9 @@ const Predictions = () => {
             sx={{
               background: "linear-gradient(180deg, #005CB9 0%, #270097 100%)",
               color: "white",
+              borderRadius: "11px",
+              textTransform: "none",
+              width: "70%",
             }}
           >
             Download Graph
@@ -61,8 +67,17 @@ const Predictions = () => {
       <Box
         sx={{ mt: 8, display: "flex", justifyContent: "center", width: "100%" }}
       >
-        <svg height={170} width={"500"} ref={lineChart} />
+        <svg width="100%" height={"400"} ref={lineChart}></svg>
       </Box>
+      <Grid item container xs={12}>
+        <Grid item xs={12}>
+          <Typography color="#00116A" fontSize={40}>
+            {" "}
+            Global Parameters
+          </Typography>{" "}
+          <Divider />
+        </Grid>
+      </Grid>
     </Box>
   );
 };

@@ -1,6 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import { Box, Divider, Grid, Typography } from "@mui/material";
+
 import withSubheader from "../../layout/sub-header";
 import useBarchart from "../../charts/barchart";
 import IOSSlider from "../../components/common/slider";
@@ -77,7 +78,7 @@ const Analytics = () => {
         />
       </Grid>
       <Divider sx={{ my: 4 }} />
-      <Grid sx={{ py: 4 }} item container xs={12}>
+      <Grid sx={{ py: 4, my: 40 }} item container xs={12}>
         <Grid item xs={12} md={6}>
           <Typography color="#00116A" fontSize={35}>
             Energy Balance Sheet
@@ -97,15 +98,15 @@ const Analytics = () => {
       <Grid item xs={12} container justifyContent={"space-evenly"} spacing={2}>
         <Grid item>
           <p>Energy Consumption</p>{" "}
-          <svg width={"380"} height={"500"} ref={bar3} />
+          <svg width={"100%"} height={"500"} ref={bar3} />
         </Grid>
         <Grid item>
           <p>Energy Transformation</p>{" "}
-          <svg width={"380"} height={"500"} ref={bar2} />
+          <svg width={"100%"} height={"500"} ref={bar2} />
         </Grid>
         <Grid item>
           <p>Energy Production</p>{" "}
-          <svg width={"380"} height={"500"} ref={bar1} />
+          <svg width={"100%"} height={"500"} ref={bar1} />
         </Grid>
       </Grid>
     </Box>

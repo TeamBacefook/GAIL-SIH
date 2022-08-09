@@ -1,5 +1,6 @@
-import { useRef, useEffect } from "react";
+import { useRef, useLayoutEffect } from "react";
 import * as d3 from "d3";
+import { useInView } from "framer-motion";
 
 const data = [
   { year: 1880, sex: "F", name: "Helen", n: 636, prop: 0.00651612638826278 },
@@ -2061,6 +2062,7 @@ const data = [
 
 export function useLineChart() {
   const ref = useRef();
+  const isInView = useInView(ref);
   const renderChart = () => {
     var margin = { top: 10, right: 10, bottom: 50, left: 40 },
       width = 1000 - margin.left - margin.right,
@@ -2147,8 +2149,11 @@ export function useLineChart() {
     });
   };
 
-  useEffect(() => {
-    renderChart();
-  });
+  useLayoutEffect(() => {
+    if (isInView) {
+      renderChart();
+    }
+  }, [isInView]);
+  console.log(ref);
   return ref;
 }

@@ -1,5 +1,6 @@
 import { useRef, useEffect } from "react";
 import * as d3 from "d3";
+import { useInView } from "framer-motion";
 const data = [
   { Country: "United States", Value: 12394 },
   { Country: "Russia", Value: 6148 },
@@ -12,9 +13,10 @@ const data = [
   { Country: "Italy", Value: 660 },
   { Country: "Israel", Value: 1263 },
 ];
+
 export default function useBarChart() {
   const ref = useRef();
-
+  const isInView = useInView(ref);
   const renderChart = () => {
     var margin = { top: 10, right: 10, bottom: 10, left: 40 },
       width = 350 - margin.left - margin.right,
@@ -81,7 +83,9 @@ export default function useBarChart() {
   };
 
   useEffect(() => {
-    if (ref) renderChart();
-  }, [ref]);
+    if (isInView) {
+      if (ref) renderChart();
+    }
+  }, [ref, isInView]);
   return ref;
 }
