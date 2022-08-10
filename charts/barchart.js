@@ -14,13 +14,13 @@ const data = [
   { Country: "Israel", Value: 1263 },
 ];
 
-export default function useBarChart(data=data,height,width) {
+export default function useBarChart(data = data, h, w) {
   const ref = useRef();
   const isInView = useInView(ref);
   const renderChart = () => {
     var margin = { top: 10, right: 10, bottom: 10, left: 40 },
-      width = 350 - margin.left - margin.right,
-      height = 400 - margin.top - margin.bottom;
+      width = h - margin.left - margin.right,
+      height = w - margin.top - margin.bottom;
 
     var svg = d3
       .select(ref.current)

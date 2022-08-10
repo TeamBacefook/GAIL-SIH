@@ -2,12 +2,10 @@ import React, { useEffect, useRef } from "react";
 import * as d3 from "d3";
 var data = { a: 9, b: 20, c: 30, d: 8, e: 12 };
 
-const useDonut = (data=data,height,width) => {
+const useDonut = (data = data, height, width) => {
   const ref = useRef(null);
   const renderChart = () => {
-    const width = 450,
-      height = 450,
-      margin = 40;
+    const margin = 40;
 
     // The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
     const radius = Math.min(width, height) / 2 - margin;

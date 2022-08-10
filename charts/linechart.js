@@ -2060,14 +2060,14 @@ const data = [
   { year: 2015, sex: "F", name: "Betty", n: 186, prop: 0.0000961186165740535 },
 ];
 
-export function useLineChart(data = data, height, width) {
+export function useLineChart(data = data, h, w) {
   const ref = useRef();
   const [loaded, setLoaded] = useState(false);
   const isInView = useInView(ref);
   const renderChart = () => {
     var margin = { top: 10, right: 10, bottom: 50, left: 40 },
-      width = 1200 - margin.left - margin.right,
-      height = 400 - margin.top - margin.bottom;
+      width = w - margin.left - margin.right,
+      height = h - margin.top - margin.bottom;
 
     var svg = d3
       .select(ref.current)

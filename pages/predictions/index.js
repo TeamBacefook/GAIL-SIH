@@ -24,8 +24,8 @@ const marks = [
 ];
 
 const Predictions = () => {
-  const lineChart = useLineChart();
-  const bar = useBarChart();
+  // const lineChart = useLineChart();
+  // const bar = useBarChart();
   return (
     <Box sx={{ my: 12, px: { xs: 1, md: 4 } }}>
       {" "}
@@ -87,7 +87,7 @@ const Predictions = () => {
       <Box
         sx={{ mt: 8, display: "flex", justifyContent: "center", width: "100%" }}
       >
-        <svg width="100%" height={"500"} ref={lineChart}></svg>
+        {/* <svg width="100%" height={"500"} ref={lineChart}></svg> */}
       </Box>
       <Grid item container xs={12}>
         <Grid item sx={{ mb: 3 }} xs={12}>
@@ -225,7 +225,7 @@ const Predictions = () => {
         </Grid>
         <Grid sx={{ mt: 8 }} item container justifyContent="center" xs={12}>
           <Grid item xs={6}>
-            <svg ref={bar} height={500} width="100%" />
+            {/* <svg ref={bar} height={500} width="100%" /> */}
           </Grid>{" "}
         </Grid>
       </Grid>

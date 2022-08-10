@@ -1,9 +1,9 @@
 import { useRef, useEffect } from "react";
 import * as d3 from "d3";
 
-const useGroupedBarChart = () => {
+const useGroupedBarChart = (h, w) => {
   const ref = useRef();
-  const renderChart = (height,width) => {
+  const renderChart = () => {
     var svg = d3.select("svg"),
       margin = {
         top: 50,
@@ -11,8 +11,8 @@ const useGroupedBarChart = () => {
         bottom: 30,
         left: 40,
       },
-      width = 1000 - margin.right - margin.left,
-      height = 400 - margin.top - margin.bottom;
+      width = h - margin.right - margin.left,
+      height = w - margin.top - margin.bottom;
 
     var g = svg
       .append("g")

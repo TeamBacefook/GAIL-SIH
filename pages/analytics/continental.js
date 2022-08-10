@@ -26,9 +26,9 @@ const marks = [
 ];
 
 const Analytics = () => {
-  const bar1 = useBarchart();
-  const bar2 = useBarchart();
-  const bar3 = useBarchart();
+  // const bar1 = useBarchart();
+  // const bar2 = useBarchart();
+  // const bar3 = useBarchart();
 
   return (
     <Box sx={{ px: { xs: 1, md: 8 } }}>
@@ -98,15 +98,15 @@ const Analytics = () => {
       <Grid item xs={12} container justifyContent={"space-evenly"} spacing={2}>
         <Grid item>
           <p>Energy Consumption</p>{" "}
-          <svg width={"100%"} height={"500"} ref={bar3} />
+          {/* <svg width={"100%"} height={"500"} ref={bar3} /> */}
         </Grid>
         <Grid item>
           <p>Energy Transformation</p>{" "}
-          <svg width={"100%"} height={"500"} ref={bar2} />
+          {/* <svg width={"100%"} height={"500"} ref={bar2} /> */}
         </Grid>
         <Grid item>
           <p>Energy Production</p>{" "}
-          <svg width={"100%"} height={"500"} ref={bar1} />
+          {/* <svg width={"100%"} height={"500"} ref={bar1} /> */}
         </Grid>
       </Grid>
     </Box>
