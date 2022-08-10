@@ -2060,7 +2060,7 @@ const data = [
   { year: 2015, sex: "F", name: "Betty", n: 186, prop: 0.0000961186165740535 },
 ];
 
-export function useLineChart() {
+export function useLineChart(data = data, height, width) {
   const ref = useRef();
   const [loaded, setLoaded] = useState(false);
   const isInView = useInView(ref);

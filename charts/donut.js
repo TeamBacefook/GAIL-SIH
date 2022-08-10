@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import * as d3 from "d3";
 var data = { a: 9, b: 20, c: 30, d: 8, e: 12 };
 
-const useDonut = (props) => {
+const useDonut = (data=data,height,width) => {
   const ref = useRef(null);
   const renderChart = () => {
     const width = 450,

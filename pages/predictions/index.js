@@ -89,7 +89,7 @@ const Predictions = () => {
       >
         <svg width="100%" height={"500"} ref={lineChart}></svg>
       </Box>
-      {/* <Grid item container xs={12}>
+      <Grid item container xs={12}>
         <Grid item sx={{ mb: 3 }} xs={12}>
           <Typography color="#00116A" fontSize={40}>
             {" "}
@@ -208,7 +208,7 @@ const Predictions = () => {
           </Grid>
           <Divider />
         </Grid>
-      </Grid>{" "} */}
+      </Grid>{" "}
       <Grid item sx={{ mt: 3, pr: 4 }} container xs={12}>
         <Grid item xs={12} md={6}>
           <Typography color="#00116A" fontSize={40}>

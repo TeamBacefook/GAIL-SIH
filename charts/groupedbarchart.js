@@ -3,7 +3,7 @@ import * as d3 from "d3";
 
 const useGroupedBarChart = () => {
   const ref = useRef();
-  const renderChart = () => {
+  const renderChart = (height,width) => {
     var svg = d3.select("svg"),
       margin = {
         top: 50,
