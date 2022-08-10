@@ -5,6 +5,7 @@ import {
   Typography,
   Divider,
   TextField,
+  useMediaQuery,
 } from "@mui/material";
 import React from "react";
 import Head from "next/head";
@@ -24,7 +25,8 @@ const marks = [
 ];
 
 const Predictions = () => {
-  // const lineChart = useLineChart();
+  const small = useMediaQuery("(max-width:756px)");
+  const lineChart = useLineChart(500, 1300);
   // const bar = useBarChart();
   return (
     <Box sx={{ my: 12, px: { xs: 1, md: 4 } }}>
@@ -87,7 +89,7 @@ const Predictions = () => {
       <Box
         sx={{ mt: 8, display: "flex", justifyContent: "center", width: "100%" }}
       >
-        {/* <svg width="100%" height={"500"} ref={lineChart}></svg> */}
+        <svg width="100%" height={"500"} ref={lineChart}></svg>
       </Box>
       <Grid item container xs={12}>
         <Grid item sx={{ mb: 3 }} xs={12}>

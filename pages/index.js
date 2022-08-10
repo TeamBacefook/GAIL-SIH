@@ -84,7 +84,14 @@ const Home = () => {
         <meta name="description" content="Home page for GAIL-SIH" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Grid item sx={{ my: 4 }} spacing={5} container xs={12}>
+      <Grid
+        item
+        sx={{ my: { sx: 0, md: 4 } }}
+        spacing={5}
+        direction={{ xs: "column-reverse", md: "row" }}
+        container
+        xs={12}
+      >
         <Grid item sx={12} md={7}>
           {" "}
           <Typography color="rgba(10, 37, 64, 1)" fontSize={{ xs: 25, md: 30 }}>
@@ -106,8 +113,18 @@ const Home = () => {
             resources, such as solar, wind, and hydroelectricity.{" "}
           </Typography>
         </Grid>
-        <Grid item xs={12} md={5} sx={{ mt: { md: -10 } }}>
-          <object type="image/svg+xml" data="/animated.svg"></object>
+        <Grid
+          item
+          xs={5}
+          container
+          justifyContent="center"
+          sx={{ mt: { md: -10 } }}
+        >
+          <object
+            style={{ width: "70%" }}
+            type="image/svg+xml"
+            data="/animated.svg"
+          ></object>
         </Grid>{" "}
       </Grid>
       <Divider />

@@ -14,7 +14,7 @@ const data = [
   { Country: "Israel", Value: 1263 },
 ];
 
-export default function useBarChart(data = data, h, w) {
+export default function useBarChart(h, w) {
   const ref = useRef();
   const isInView = useInView(ref);
   const renderChart = () => {
