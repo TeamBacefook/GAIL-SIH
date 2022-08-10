@@ -1,4 +1,4 @@
-import { Typography, Box, Grid, Divider } from "@mui/material";
+import { Typography, Box, Grid, Divider, useMediaQuery } from "@mui/material";
 import Image from "next/image";
 import Head from "next/head";
 import React from "react";
@@ -55,6 +55,7 @@ const Card = ({ data }) => {
 };
 
 const Home = () => {
+  const small = useMediaQuery("(max-width:1200px)");
   const data = [
     {
       name: "Petroleum",
@@ -121,7 +122,7 @@ const Home = () => {
           sx={{ mt: { md: -10 } }}
         >
           <object
-            style={{ width: "70%" }}
+            style={{ width: small ? "70%" : "100%" }}
             type="image/svg+xml"
             data="/animated.svg"
           ></object>

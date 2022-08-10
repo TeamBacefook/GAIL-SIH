@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Grid, Typography } from "@mui/material";
+import { Grid, Typography, useMediaQuery } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import logo from "../../public/logo.svg";
 import { LayoutGroup, motion } from "framer-motion";
-
+import Hamburger from "hamburger-react";
+import { Nav, Link as Link2 } from "./nav-overlay";
 const links = [
   {
     name: "Home",
@@ -44,12 +45,41 @@ const isActiveLink = (href, currentPathname) => {
 };
 
 const Header = () => {
+  const [open, setOpen] = useState(false);
+  const small = useMediaQuery("(max-width:1200px)");
   const [mounted, setMounted] = useState(false);
   const router = useRouter();
-
+  useEffect(() => {
+    if (!small) {
+      setOpen(false);
+    }
+  }, [small, setOpen]);
   useEffect(() => setMounted(true), []);
   if (!mounted) return null;
+  const menuVariants = {
+    opened: {
+      top: 0,
+      transition: {
+        when: "beforeChildren",
+        // staggerChildren: 0.5,
+      },
+    },
+    closed: {
+      top: "-100vh",
+    },
+  };
 
+  const linkVariants = {
+    opened: {
+      opacity: 1,
+
+      y: 25,
+    },
+    closed: {
+      opacity: 0,
+      y: 0,
+    },
+  };
   return (
     <LayoutGroup id="A">
       <Grid
@@ -68,7 +98,7 @@ const Header = () => {
           zIndex: 1000,
           top: 0,
           backdropFilter: "blur(25px)",
-          backgroundColor: "rgba(247, 248, 242, 0.7)",
+          backgroundColor: `rgba(247, 248, 242,${small ? 1 : 0.7})`,
           boxShadow: "inset 0px -1px 1px #e7ebf0",
         }}
       >
@@ -126,7 +156,42 @@ const Header = () => {
             </Grid>
           ))}
         </Grid>
+        <Grid
+          item
+          container
+          justifyContent={"flex-end"}
+          display={{ xs: "flex", md: "none" }}
+          xs={6}
+        >
+          <Hamburger toggled={open} toggle={setOpen} />
+        </Grid>
       </Grid>
+      <Nav
+        style={{ height: "100vh" }}
+        initial={false}
+        variants={menuVariants}
+        animate={open ? "opened" : "closed"}
+      >
+        <Grid sx={{ py: 8, pb: 12 }} item container xs={12}>
+          {links.map((obj, index) => {
+            return (
+              <Grid container item xs={12}>
+                <Link2
+                  style={{
+                    width: "90%",
+                    textAlign: "center",
+                  }}
+                  onClick={() => setOpen(false)}
+                  key={index}
+                  variants={linkVariants}
+                >
+                  <Link href={obj.href}>{obj.name}</Link>
+                </Link2>
+              </Grid>
+            );
+          })}
+        </Grid>
+      </Nav>
     </LayoutGroup>
   );
 };
