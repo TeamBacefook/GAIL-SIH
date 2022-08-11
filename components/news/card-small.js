@@ -26,7 +26,7 @@ export default function MediaCard() {
           sx={{
             width: {
               xs: "100%",
-              md: "50%",
+              md: "60%",
             },
           }}
         >

@@ -18,19 +18,19 @@ const News = () => {
 
       <Grid
         spacing={6}
-        sx={{ mt: 2, px: { md: 0, xs: 2 } }}
+        sx={{ mt: 0, px: { md: 0, xs: 2 } }}
         item
         container
         xs={12}
       >
-        <Grid container spacing={2} item xs={12} md={8}>
-          <Grid item xs={12}>
+        <Grid spacing={2} alignItems="flex-start" item xs={12} md={8}>
+          <Grid sx={{ mt: 2 }} item xs={12}>
             <Card />
           </Grid>
-          <Grid item xs={12}>
+          <Grid sx={{ mt: 2 }} item xs={12}>
             <Card />
           </Grid>
-          <Grid item xs={12}>
+          <Grid sx={{ mt: 2 }} item xs={12}>
             <Card />
           </Grid>
         </Grid>

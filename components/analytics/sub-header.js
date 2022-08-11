@@ -37,7 +37,7 @@ const SubHeader = () => {
       {/* <div id="top" style={{ position: "absolute", top: 0, left: 0 }} /> */}
       <LayoutGroup id="B">
         <Box
-          sx={{ marginTop: 16, px: 4, py: 2 }}
+          sx={{ marginTop: 16, px: 4, py: 1 }}
           style={{ boxShadow: "inset 0px -1px 1px #e7ebf0" }}
         >
           <Grid

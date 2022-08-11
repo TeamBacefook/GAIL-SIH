@@ -163,10 +163,10 @@ const Header = () => {
           display={{ xs: "flex", md: "none" }}
           xs={6}
         >
-          <Hamburger toggled={open} toggle={setOpen} />
+          <Hamburger size={25} toggled={open} toggle={setOpen} />
         </Grid>
       </Grid>
-      <Nav
+      <Nav  
         style={{ height: "100vh" }}
         initial={false}
         variants={menuVariants}

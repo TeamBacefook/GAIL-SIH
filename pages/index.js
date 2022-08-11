@@ -34,7 +34,12 @@ const Card = ({ data }) => {
             borderRadius: "5px",
           }}
         >
-          <Image layout="responsive" src={data.image} alt="" />
+          <Image
+            style={{ zIndex: 1 }}
+            layout="responsive"
+            src={data.image}
+            alt=""
+          />
         </Box>
       </Grid>
       <Grid item xs={12}>
@@ -167,7 +172,7 @@ const Home = () => {
         <Grid item xs={1}>
           <Divider orientation="vertical" />
         </Grid>
-        <Grid spacing={8} item container xs={12} md={7}>
+        <Grid spacing={8} sx={{ zIndex: 0 }} item container xs={12} md={7}>
           {data.map((obj, index) => {
             return <Card key={index} data={obj} />;
           })}

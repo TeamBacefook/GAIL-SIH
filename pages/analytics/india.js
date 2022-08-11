@@ -29,10 +29,10 @@ const marks = [
   { label: 2021, value: 2021 },
 ];
 const Analytics = () => {
-  const donut = useDonut(450, 450);
+  const donut = useDonut(450, 400);
   const line = useLineChart(400, 500);
   return (
-    <Box sx={{ my: 10, px: { xs: 2, md: 8 } }}>
+    <Box sx={{ my: { xs: 1, md: 10 }, px: { xs: 2, md: 8 } }}>
       {" "}
       <Head>
         <title>GAIL SIH | Analytics-India</title>
@@ -70,7 +70,7 @@ const Analytics = () => {
           <Grid item xs={12}>
             <IOSSlider
               step={1}
-              sx={{ xs: "100%", md: "90%" }}
+              sx={{ width: { xs: "95%", md: "90%", m: "auto" } }}
               marks={marks}
               defaultValue={[2016, 2020]}
               min={2011}
@@ -116,9 +116,15 @@ const Analytics = () => {
           </Typography>
         </Grid>
         <Grid container alignItems="flex-start" item xs={12} md={6}>
-          <Grid sx={{ py: 8 }} item xs={12}>
+          <Grid
+            sx={{ py: { md: 8 } }}
+            justifyContent="center"
+            container
+            item
+            xs={12}
+          >
             <TextField
-              sx={{ width: "80%" }}
+              sx={{ m: "auto", mb: 2, width: { xs: "100%", md: "80%" } }}
               variant="outlined"
               inputProps={{ style: { color: "#0A2540" } }}
               select
@@ -128,7 +134,7 @@ const Analytics = () => {
             </TextField>
             <IOSSlider
               step={1}
-              sx={{ xs: "100%", md: "90%" }}
+              sx={{ width: { xs: "95%", md: "90%", m: "auto" } }}
               marks={marks}
               defaultValue={[2016, 2020]}
               min={2011}
@@ -136,8 +142,8 @@ const Analytics = () => {
             />
           </Grid>
         </Grid>
-        <Grid container justifyContent="flex-end" item xs={12} md={5}>
-          <svg height="430" ref={donut} />
+        <Grid item xs={12} md={5}>
+          <svg height="450" ref={donut} />
         </Grid>
       </Grid>
       <Divider />
@@ -148,20 +154,20 @@ const Analytics = () => {
         sx={{ py: 8 }}
         container
       >
-        <Grid item xs={6}>
+        <Grid item xs={12} md={6}>
           <Typography fontSize={30} color="#0A2540">
             Monthwise Consumption Trend
           </Typography>
           <Grid sx={{ my: 2 }} item container spacing={2} xs={12}>
             <Grid item xs={12} md={6}>
-              <TextField fullWidth variant="outlined" />
+              <TextField fullWidth variant="outlined" type="date" />
             </Grid>
             <Grid item xs={12} md={6}>
-              <TextField fullWidth variant="outlined" />
+              <TextField fullWidth variant="outlined" type="date" />
             </Grid>
           </Grid>
           <TextField
-            sx={{ width: "80%" }}
+            sx={{ width: { xs: "100%", md: "80%" } }}
             variant="outlined"
             inputProps={{ style: { color: "#0A2540" } }}
             select
@@ -170,7 +176,7 @@ const Analytics = () => {
             <MenuItem value="natural gas">Natural Gas</MenuItem>
           </TextField>
         </Grid>
-        <Grid item xs={5}>
+        <Grid item xs={12} md={5}>
           <svg height={400} ref={line} />
         </Grid>
       </Grid>

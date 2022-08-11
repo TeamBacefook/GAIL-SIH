@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { styled } from "@mui/system";
 
 export const Nav = styled(motion.nav)({
-  backgroundColor: "rgba(255,255,255,0.8)",
+  backgroundColor: "rgba(255,255,255,0.95)",
   height: "100vh",
   position: "fixed",
   zIndex: 4,

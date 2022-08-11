@@ -64,7 +64,7 @@ export default function MediaCard() {
         <Button
           variant="contained"
           sx={{
-            width: "60%",
+            width: "40%",
             background:
               "linear-gradient(169.84deg, #FFE53B -30.77%, #FF2525 119.39%)",
             color: "white",
