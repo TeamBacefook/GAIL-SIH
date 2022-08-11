@@ -175,7 +175,7 @@ const Header = () => {
         <Grid sx={{ py: 8, pb: 12 }} item container xs={12}>
           {links.map((obj, index) => {
             return (
-              <Grid container item xs={12}>
+              <Grid key={index} container item xs={12}>
                 <Link2
                   style={{
                     width: "90%",

@@ -144,7 +144,7 @@ const Home = () => {
           </Typography>
         </Grid>
         <Grid item xs={12} md={5}>
-          <Image src={gail} layout="responsive" />
+          <Image src={gail} layout="responsive" alt="" />
         </Grid>
         <Grid item xs={12} md={5}>
           <Image src={sih} layout="responsive" alt="" />
