@@ -67,7 +67,7 @@ const Analytics = () => {
               )}
             />
           </Grid>
-          <Grid item xs={12}>
+          <Grid item container justifyContent={"center"} xs={12}>
             <IOSSlider
               step={1}
               sx={{ width: { xs: "95%", md: "90%", m: "auto" } }}
