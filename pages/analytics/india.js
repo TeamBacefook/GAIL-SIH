@@ -14,6 +14,7 @@ import { State } from "country-state-city";
 import useDonut from "../../charts/donut";
 import IOSSlider from "../../components/common/slider";
 import { useLineChart } from "../../charts/linechart";
+import IndiaMap from "../../components/analytics/indiamap";
 
 const marks = [
   { label: 2011, value: 2011 },
@@ -47,7 +48,7 @@ const Analytics = () => {
           sx={{ px: 4, py: 4 }}
           style={{ border: "1px solid A3A3A3" }}
         >
-          Insert India&apos;s Map Here
+          <IndiaMap />
         </Grid>
         <Grid container spacing={2} justifyContent="center" item xs={12} md={6}>
           <Grid container justifyContent="center" item xs={12}>
