@@ -47,7 +47,7 @@ const Analytics = () => {
           sx={{ px: 4, py: 4 }}
           style={{ border: "1px solid A3A3A3" }}
         >
-          Insert India's Map Here
+          Insert India&apos;s Map Here
         </Grid>
         <Grid container spacing={2} justifyContent="center" item xs={12} md={6}>
           <Grid container justifyContent="center" item xs={12}>
