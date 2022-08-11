@@ -30,7 +30,7 @@ const marks = [
 ];
 
 const Analytics = () => {
-  const WorldMap = dynamic(() => import("../../components/analytics/globe"));
+  // const WorldMap = dynamic(() => import("../../components/analytics/globe"));
   // const barchart = useBarChart();
   return (
     <Box sx={{ marginBottom: 5, marginRight: 5, marginLeft: 5 }}>
@@ -53,7 +53,7 @@ const Analytics = () => {
           id="worldmap"
           style={{ padding: "0%", height: "60vh", border: "solid 1px" }}
         >
-          <WorldMap />
+          {/* <WorldMap /> */}
         </Grid>
         <Grid item xs={12} md={6} lg={6}>
           <Grid
