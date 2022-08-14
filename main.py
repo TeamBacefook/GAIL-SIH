@@ -7,16 +7,24 @@ import datetime
 import pandas as pd
 from flask import Flask, request ,jsonify
 import json
+from gnews import GNews
+
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}} , support_credentials=True)
+# googlenews = GoogleNews(lang='en')
 
-@app.route('/data/countries/all', methods=['GET'])
-def getdata():
+@app.route('/data/countries', methods=['GET'])
+def getcountriesdata():
     data = request.args
     countrydata = pd.read_csv("country.csv")
     countrydata = countrydata[(int(data["endyear"]) > countrydata['Year']) & (countrydata['Year'] > int(data["startyear"])) & (countrydata["Country"] == data["country"])]
     return countrydata.to_json(orient="records")
+
+@app.route('/data/continents/energy', methods=['GET'])
+def getcontinentdata():
+    continentdata = pd.read_csv("EnergyBalanceSheet.csv")
+    return continentdata.to_json(orient="records")
 
 @app.route('/news', methods=['GET'])
 def webCrawl():
@@ -63,13 +71,36 @@ def webCrawl():
             news_df = news_df.append({"Headline": headl, "Date_time" : date_time, "URL": newslink}, ignore_index=True)
     return news_df.to_json(orient='records')
 
-@app.route('/data/local', methods=['GET'])
-def getdata():
+@app.route('/new', methods=['GET'])
+def webCrawl1():
+    print(request.args)
+    try:
+        search = request.args["search"]
+    except KeyError:
+        search = "Natural gas"     
+    google_news = GNews()
+    news = google_news.get_news(search)
+    news = pd.DataFrame(news)
+    return news.to_json(orient="records")
+
+@app.route('/data/naturalgas/local', methods=['GET'])
+def getnaturalgasdata():
     data = request.args
-    statedata = pd.read_csv("statedata.csv")
-    statedata.set_index("date")
-    statedata = statedata.loc[f"{data['startyear']}-{data['startmonth']}": f"{data['endyear']}-{data['endmonth']}"]
-    return statedata.to_json(orient="records")
+    natgasdata = pd.read_csv("natgasdata.csv")
+    natgasdata.set_index("date")
+    natgasdata = natgasdata.loc[f"{data['startyear']}-{data['startmonth']}": f"{data['endyear']}-{data['endmonth']}"]
+    return natgasdata.to_json(orient="records")
+
+
+
+@app.route('/data/petroleum/local', methods=['GET'])
+def getlocalpetroleumdata():
+    data = request.args
+    petroleum = pd.read_csv("yearlypetroleum.csv")
+    # petroleum = petroleum.loc[f"{data['startyear']}-{data['startmonth']}": f"{data['endyear']}-{data['endmonth']}"]
+    return petroleum.to_json(orient="records")
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)

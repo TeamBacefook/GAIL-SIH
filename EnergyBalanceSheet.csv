@@ -1,0 +1,451 @@
+Year,Commodity,Type,ValueTj
+1990,Biofuels and waste,Final consumption,26940818.1919868
+1990,Biofuels and waste,Primary production,30744418.032945
+1990,Biofuels and waste,Transformation,-3733370.1729393
+1990,Coal,Final consumption,33298720.2099599
+1990,Coal,Primary production,94815269.9418695
+1990,Coal,Transformation,-57460985.8701595
+1990,Electricity and heat,Final consumption,43088625.0943596
+1990,Electricity and heat,Primary production,9262954.26532
+1990,Electricity and heat,Transformation,47306579.93412
+1990,Natural Gas,Final consumption,40682777.1183
+1990,Natural Gas,Primary production,68756749.74
+1990,Natural Gas,Transformation,-18724350.1716
+1990,Oil,Final consumption,100023494.021392
+1990,Oil,Primary production,136127991.462935
+1990,Oil,Transformation,-16351624.0896421
+1991,Biofuels and waste,Final consumption,27403404.7400335
+1991,Biofuels and waste,Primary production,31547602.9583582
+1991,Biofuels and waste,Transformation,-3954261.68987155
+1991,Coal,Final consumption,32833476.5908388
+1991,Coal,Primary production,91836179.3039753
+1991,Coal,Transformation,-57012910.5756931
+1991,Electricity and heat,Final consumption,43802720.5284392
+1991,Electricity and heat,Primary production,9495259.34888
+1991,Electricity and heat,Transformation,46859520.4386396
+1991,Natural Gas,Final consumption,41762484.2907
+1991,Natural Gas,Primary production,70478434.5174
+1991,Natural Gas,Transformation,-19332346.9176
+1991,Oil,Final consumption,101041719.100617
+1991,Oil,Primary production,135538558.840349
+1991,Oil,Transformation,-16653094.5282527
+1992,Biofuels and waste,Final consumption,27743316.9227724
+1992,Biofuels and waste,Primary production,32294524.8152769
+1992,Biofuels and waste,Transformation,-4298465.24077301
+1992,Coal,Final consumption,29925091.2111316
+1992,Coal,Primary production,92068782.5560448
+1992,Coal,Transformation,-60190443.5124517
+1992,Electricity and heat,Final consumption,49695469.8579604
+1992,Electricity and heat,Primary production,9568971.02416
+1992,Electricity and heat,Transformation,50089238.841162
+1992,Natural Gas,Final consumption,39555245.7477
+1992,Natural Gas,Primary production,72742573.314
+1992,Natural Gas,Transformation,-24690289.6053
+1992,Oil,Final consumption,103302235.671535
+1992,Oil,Primary production,136652784.402534
+1992,Oil,Transformation,-17212483.0701847
+1993,Biofuels and waste,Final consumption,27782258.9190748
+1993,Biofuels and waste,Primary production,32155315.6495661
+1993,Biofuels and waste,Transformation,-4160491.46835031
+1993,Coal,Final consumption,29594827.5991132
+1993,Coal,Primary production,89442733.3596508
+1993,Coal,Transformation,-60588934.8814599
+1993,Electricity and heat,Final consumption,50671009.8354416
+1993,Electricity and heat,Primary production,10112859.03988
+1993,Electricity and heat,Transformation,50573110.22116
+1993,Natural Gas,Final consumption,41219583.1074
+1993,Natural Gas,Primary production,74902052.9727
+1993,Natural Gas,Transformation,-24384317.3055
+1993,Oil,Final consumption,103847474.795838
+1993,Oil,Primary production,137660895.780551
+1993,Oil,Transformation,-16664781.9193096
+1994,Biofuels and waste,Final consumption,28295255.91401
+1994,Biofuels and waste,Primary production,32973942.0549377
+1994,Biofuels and waste,Transformation,-4243473.97080077
+1994,Coal,Final consumption,28235242.1633775
+1994,Coal,Primary production,91584025.5324818
+1994,Coal,Transformation,-61959743.6181228
+1994,Electricity and heat,Final consumption,50635097.3003192
+1994,Electricity and heat,Primary production,10211381.409
+1994,Electricity and heat,Transformation,50491951.4778
+1994,Natural Gas,Final consumption,41198639.1363
+1994,Natural Gas,Primary production,75943342.1133
+1994,Natural Gas,Transformation,-24779117.7891
+1994,Oil,Final consumption,105273250.19606
+1994,Oil,Primary production,138966975.806837
+1994,Oil,Transformation,-16385833.9828699
+1995,Biofuels and waste,Final consumption,28648967.0710288
+1995,Biofuels and waste,Primary production,33562232.5309302
+1995,Biofuels and waste,Transformation,-4421086.78282524
+1995,Coal,Final consumption,29338766.435674
+1995,Coal,Primary production,94913716.358996
+1995,Coal,Transformation,-64141486.1672204
+1995,Electricity and heat,Final consumption,51026483.576078
+1995,Electricity and heat,Primary production,10625576.37128
+1995,Electricity and heat,Transformation,50753237.1100796
+1995,Natural Gas,Final consumption,42944321.8377
+1995,Natural Gas,Primary production,77148845.1828
+1995,Natural Gas,Transformation,-25230768.6015
+1995,Oil,Final consumption,107785369.639523
+1995,Oil,Primary production,140217958.565517
+1995,Oil,Transformation,-15423787.3770598
+1996,Biofuels and waste,Final consumption,29042486.2920823
+1996,Biofuels and waste,Primary production,34191819.9972338
+1996,Biofuels and waste,Transformation,-4512872.68378371
+1996,Coal,Final consumption,28607876.6831618
+1996,Coal,Primary production,95791435.722554
+1996,Coal,Transformation,-66926607.6738034
+1996,Electricity and heat,Final consumption,51232882.874202
+1996,Electricity and heat,Primary production,10841691.99816
+1996,Electricity and heat,Transformation,50901347.5278792
+1996,Natural Gas,Final consumption,44951351.4837
+1996,Natural Gas,Primary production,80323898.42484
+1996,Natural Gas,Transformation,-26546638.30794
+1996,Oil,Final consumption,111109133.379418
+1996,Oil,Primary production,143702922.890056
+1996,Oil,Transformation,-14911326.6480723
+1997,Biofuels and waste,Final consumption,29121248.8960441
+1997,Biofuels and waste,Primary production,34534816.0303272
+1997,Biofuels and waste,Transformation,-4621907.6281596
+1997,Coal,Final consumption,26842379.2134818
+1997,Coal,Primary production,96851111.4877997
+1997,Coal,Transformation,-66877034.3618585
+1997,Electricity and heat,Final consumption,51662181.2597204
+1997,Electricity and heat,Primary production,10976410.28348
+1997,Electricity and heat,Transformation,51282081.5502824
+1997,Natural Gas,Final consumption,44937191.5452
+1997,Natural Gas,Primary production,80228250.80028
+1997,Natural Gas,Transformation,-27452976.58881
+1997,Oil,Final consumption,113340843.083773
+1997,Oil,Primary production,147885268.981463
+1997,Oil,Transformation,-16647504.4286794
+1998,Biofuels and waste,Final consumption,29496038.0170222
+1998,Biofuels and waste,Primary production,34566034.6700521
+1998,Biofuels and waste,Transformation,-4787758.4079713
+1998,Coal,Final consumption,25966198.6985255
+1998,Coal,Primary production,94148242.9847193
+1998,Coal,Transformation,-68446848.2298662
+1998,Electricity and heat,Final consumption,52737621.2622235
+1998,Electricity and heat,Primary production,11124711.17108
+1998,Electricity and heat,Transformation,52317639.89584
+1998,Natural Gas,Final consumption,44852501.51289
+1998,Natural Gas,Primary production,82058000.962266
+1998,Natural Gas,Transformation,-28657971.3427866
+1998,Oil,Final consumption,114256630.877338
+1998,Oil,Primary production,151027998.42574
+1998,Oil,Transformation,-16915471.1110494
+1999,Biofuels and waste,Final consumption,29992355.8072967
+1999,Biofuels and waste,Primary production,35012653.2659078
+1999,Biofuels and waste,Transformation,-4779561.51264033
+1999,Coal,Final consumption,23484451.2041801
+1999,Coal,Primary production,95029672.8444103
+1999,Coal,Transformation,-69881063.4790195
+1999,Electricity and heat,Final consumption,54045739.68872
+1999,Electricity and heat,Primary production,11379353.4484
+1999,Electricity and heat,Transformation,53675098.4018396
+1999,Natural Gas,Final consumption,45913064.1406263
+1999,Natural Gas,Primary production,84339477.185508
+1999,Natural Gas,Transformation,-30317297.8843314
+1999,Oil,Final consumption,117227779.825458
+1999,Oil,Primary production,150061077.463244
+1999,Oil,Transformation,-16155747.8066136
+2000,Biofuels and waste,Final consumption,30345637.0167479
+2000,Biofuels and waste,Primary production,35404577.2970302
+2000,Biofuels and waste,Transformation,-4879474.9427397
+2000,Coal,Final consumption,24424265.7612218
+2000,Coal,Primary production,95786800.5778572
+2000,Coal,Transformation,-72945436.0303061
+2000,Electricity and heat,Final consumption,56336872.1552396
+2000,Electricity and heat,Primary production,11670092.24208
+2000,Electricity and heat,Transformation,56101976.6599208
+2000,Natural Gas,Final consumption,47859371.176959
+2000,Natural Gas,Primary production,86337642.727044
+2000,Natural Gas,Transformation,-30611575.7846442
+2000,Oil,Final consumption,119990246.430547
+2000,Oil,Primary production,155111072.146039
+2000,Oil,Transformation,-16190322.3403222
+2001,Biofuels and waste,Final consumption,30209797.3994324
+2001,Biofuels and waste,Primary production,35394653.5180398
+2001,Biofuels and waste,Transformation,-4989236.06404219
+2001,Coal,Final consumption,23920035.8967327
+2001,Coal,Primary production,100661231.676141
+2001,Coal,Transformation,-73848800.0557114
+2001,Electricity and heat,Final consumption,57456001.99044
+2001,Electricity and heat,Primary production,11515979.39628
+2001,Electricity and heat,Transformation,57002323.9753212
+2001,Natural Gas,Final consumption,46467939.9934989
+2001,Natural Gas,Primary production,88054902.5865939
+2001,Natural Gas,Transformation,-32661380.5835157
+2001,Oil,Final consumption,121708923.076988
+2001,Oil,Primary production,155668770.342647
+2001,Oil,Transformation,-15659972.2593649
+2002,Biofuels and waste,Final consumption,31382091.4303016
+2002,Biofuels and waste,Primary production,36941184.4425046
+2002,Biofuels and waste,Transformation,-5313621.12415553
+2002,Coal,Final consumption,25095505.236647
+2002,Coal,Primary production,104011980.123213
+2002,Coal,Transformation,-77534579.7074816
+2002,Electricity and heat,Final consumption,58331809.5046392
+2002,Electricity and heat,Primary production,11858198.67936
+2002,Electricity and heat,Transformation,58938047.0568812
+2002,Natural Gas,Final consumption,47023459.5400326
+2002,Natural Gas,Primary production,89880865.4551689
+2002,Natural Gas,Transformation,-33769251.6788898
+2002,Oil,Final consumption,123180039.263894
+2002,Oil,Primary production,154952324.318362
+2002,Oil,Transformation,-14086250.2214282
+2003,Biofuels and waste,Final consumption,32132790.1917615
+2003,Biofuels and waste,Primary production,38082126.2979329
+2003,Biofuels and waste,Transformation,-5610112.41792003
+2003,Coal,Final consumption,27488048.7219181
+2003,Coal,Primary production,111656444.218296
+2003,Coal,Transformation,-83891266.119939
+2003,Electricity and heat,Final consumption,61873676.4759556
+2003,Electricity and heat,Primary production,12017429.54464
+2003,Electricity and heat,Transformation,61323793.6732424
+2003,Natural Gas,Final consumption,48500500.1430771
+2003,Natural Gas,Primary production,93511219.370058
+2003,Natural Gas,Transformation,-34849150.5777579
+2003,Oil,Final consumption,126126519.702522
+2003,Oil,Primary production,161871882.171912
+2003,Oil,Transformation,-14115870.1667997
+2004,Biofuels and waste,Final consumption,32808523.5127635
+2004,Biofuels and waste,Primary production,39177622.4636295
+2004,Biofuels and waste,Transformation,-6026401.00166231
+2004,Coal,Final consumption,30560904.1263873
+2004,Coal,Primary production,117212294.805343
+2004,Coal,Transformation,-85505805.3600478
+2004,Electricity and heat,Final consumption,63175270.7782796
+2004,Electricity and heat,Primary production,12795928.30808
+2004,Electricity and heat,Transformation,63522086.5588788
+2004,Natural Gas,Final consumption,49096137.3896637
+2004,Natural Gas,Primary production,96712992.8254827
+2004,Natural Gas,Transformation,-36678054.9388833
+2004,Oil,Final consumption,131080619.103715
+2004,Oil,Primary production,167013086.431854
+2004,Oil,Transformation,-13806357.9364883
+2005,Biofuels and waste,Final consumption,33583240.3318784
+2005,Biofuels and waste,Primary production,40269176.8732165
+2005,Biofuels and waste,Transformation,-6349297.77540638
+2005,Coal,Final consumption,33322735.6525281
+2005,Coal,Primary production,125355465.76501
+2005,Coal,Transformation,-89823298.7537108
+2005,Electricity and heat,Final consumption,65605392.701398
+2005,Electricity and heat,Primary production,13394813.4518688
+2005,Electricity and heat,Transformation,66087242.496888
+2005,Natural Gas,Final consumption,49423696.0385049
+2005,Natural Gas,Primary production,99572854.2263208
+2005,Natural Gas,Transformation,-38056189.5854586
+2005,Oil,Final consumption,131484691.373335
+2005,Oil,Primary production,168186024.462874
+2005,Oil,Transformation,-13989084.0364147
+2006,Biofuels and waste,Final consumption,34429517.4534888
+2006,Biofuels and waste,Primary production,41361389.500416
+2006,Biofuels and waste,Transformation,-6562503.98569607
+2006,Coal,Final consumption,35696476.6147926
+2006,Coal,Primary production,132740974.689028
+2006,Coal,Transformation,-95016728.8148621
+2006,Electricity and heat,Final consumption,68350581.4931976
+2006,Electricity and heat,Primary production,13951324.2432824
+2006,Electricity and heat,Transformation,68703087.808714
+2006,Natural Gas,Final consumption,50637524.0302746
+2006,Natural Gas,Primary production,102785125.5491
+2006,Natural Gas,Transformation,-39484190.0731014
+2006,Oil,Final consumption,132996909.063172
+2006,Oil,Primary production,169725260.831654
+2006,Oil,Transformation,-12993330.6574069
+2007,Biofuels and waste,Final consumption,35326468.1636121
+2007,Biofuels and waste,Primary production,42831021.9570963
+2007,Biofuels and waste,Transformation,-7011183.54384209
+2007,Coal,Final consumption,38256019.8047553
+2007,Coal,Primary production,138267184.809754
+2007,Coal,Transformation,-98959738.7601504
+2007,Electricity and heat,Final consumption,70968985.7716784
+2007,Electricity and heat,Primary production,14338174.5058628
+2007,Electricity and heat,Transformation,71021154.0077784
+2007,Natural Gas,Final consumption,52058955.352374
+2007,Natural Gas,Primary production,104750797.505738
+2007,Natural Gas,Transformation,-41656259.063412
+2007,Oil,Final consumption,135166223.656545
+2007,Oil,Primary production,168260607.117557
+2007,Oil,Transformation,-12501257.8093475
+2008,Biofuels and waste,Final consumption,36164498.2743695
+2008,Biofuels and waste,Primary production,43514522.0235179
+2008,Biofuels and waste,Transformation,-6769431.44310319
+2008,Coal,Final consumption,40961792.7413896
+2008,Coal,Primary production,144911155.344046
+2008,Coal,Transformation,-100171603.768984
+2008,Electricity and heat,Final consumption,72055318.80852
+2008,Electricity and heat,Primary production,15075027.2122048
+2008,Electricity and heat,Transformation,71314441.2797952
+2008,Natural Gas,Final consumption,54005574.6491463
+2008,Natural Gas,Primary production,109256224.985305
+2008,Natural Gas,Transformation,-42863048.7302736
+2008,Oil,Final consumption,133746217.572577
+2008,Oil,Primary production,169860423.076207
+2008,Oil,Transformation,-12497238.4954102
+2009,Biofuels and waste,Final consumption,36520298.1281216
+2009,Biofuels and waste,Primary production,43912216.890693
+2009,Biofuels and waste,Transformation,-6921057.79035089
+2009,Coal,Final consumption,40863722.3835835
+2009,Coal,Primary production,144914338.99949
+2009,Coal,Transformation,-97737237.1386057
+2009,Electricity and heat,Final consumption,71343805.4799184
+2009,Electricity and heat,Primary production,15643442.401602
+2009,Electricity and heat,Transformation,70467913.3439928
+2009,Natural Gas,Final consumption,51752572.4632122
+2009,Natural Gas,Primary production,106056173.840129
+2009,Natural Gas,Transformation,-42771136.6398321
+2009,Oil,Final consumption,132288931.598925
+2009,Oil,Primary production,166680331.189341
+2009,Oil,Transformation,-12779948.25448
+2010,Biofuels and waste,Final consumption,37457322.0729153
+2010,Biofuels and waste,Primary production,45687372.9367419
+2010,Biofuels and waste,Transformation,-7643223.14587382
+2010,Coal,Final consumption,41524846.0518182
+2010,Coal,Primary production,153851218.910499
+2010,Coal,Transformation,-101219752.311237
+2010,Electricity and heat,Final consumption,76253589.2239352
+2010,Electricity and heat,Primary production,16718750.0440972
+2010,Electricity and heat,Transformation,75258396.600384
+2010,Natural Gas,Final consumption,55623975.5746359
+2010,Natural Gas,Primary production,113449697.657005
+2010,Natural Gas,Transformation,-46546543.8285732
+2010,Oil,Final consumption,136878105.584554
+2010,Oil,Primary production,170511689.473647
+2010,Oil,Transformation,-13083946.5203641
+2011,Biofuels and waste,Final consumption,37878885.2295647
+2011,Biofuels and waste,Primary production,46218907.2787539
+2011,Biofuels and waste,Transformation,-7825465.19483769
+2011,Coal,Final consumption,43171121.6093358
+2011,Coal,Primary production,162643547.506568
+2011,Coal,Transformation,-107726452.926876
+2011,Electricity and heat,Final consumption,78664065.2090072
+2011,Electricity and heat,Primary production,17333750.2995224
+2011,Electricity and heat,Transformation,77220454.4713912
+2011,Natural Gas,Final consumption,57137431.6727548
+2011,Natural Gas,Primary production,117570252.437178
+2011,Natural Gas,Transformation,-47299225.4982117
+2011,Oil,Final consumption,135818656.150244
+2011,Oil,Primary production,172447239.008102
+2011,Oil,Transformation,-15730008.6343027
+2012,Biofuels and waste,Final consumption,38425556.9372897
+2012,Biofuels and waste,Primary production,47573055.894793
+2012,Biofuels and waste,Transformation,-8668565.60653792
+2012,Coal,Final consumption,41961746.3599925
+2012,Coal,Primary production,164406944.590483
+2012,Coal,Transformation,-107738926.050682
+2012,Electricity and heat,Final consumption,80437797.39498
+2012,Electricity and heat,Primary production,18484731.1236968
+2012,Electricity and heat,Transformation,78243642.7006432
+2012,Natural Gas,Final consumption,57447221.8494184
+2012,Natural Gas,Primary production,119430880.688292
+2012,Natural Gas,Transformation,-49814822.235591
+2012,Oil,Final consumption,138180501.527301
+2012,Oil,Primary production,176094769.1272
+2012,Oil,Transformation,-16888653.3056907
+2013,Biofuels and waste,Final consumption,39601605.5675
+2013,Biofuels and waste,Primary production,49036820.884593
+2013,Biofuels and waste,Transformation,-8929645.17051557
+2013,Coal,Final consumption,43789068.8101196
+2013,Coal,Primary production,165812972.213597
+2013,Coal,Transformation,-110368158.406555
+2013,Electricity and heat,Final consumption,82239501.8991336
+2013,Electricity and heat,Primary production,19834970.6929756
+2013,Electricity and heat,Transformation,79112200.7178808
+2013,Natural Gas,Final consumption,59146007.9898274
+2013,Natural Gas,Primary production,120963911.298407
+2013,Natural Gas,Transformation,-49385218.538232
+2013,Oil,Final consumption,140641954.62791
+2013,Oil,Primary production,176969715.564536
+2013,Oil,Transformation,-15901219.2586013
+2014,Biofuels and waste,Final consumption,39658438.120649
+2014,Biofuels and waste,Primary production,49478287.6649108
+2014,Biofuels and waste,Transformation,-9301654.18892617
+2014,Coal,Final consumption,44717498.3337671
+2014,Coal,Primary production,165184814.224459
+2014,Coal,Transformation,-110644850.711405
+2014,Electricity and heat,Final consumption,83885401.4207472
+2014,Electricity and heat,Primary production,20894140.0069556
+2014,Electricity and heat,Transformation,79835711.2419724
+2014,Natural Gas,Final consumption,59028319.0460664
+2014,Natural Gas,Primary production,124260183.529002
+2014,Natural Gas,Transformation,-49393026.876438
+2014,Oil,Final consumption,142039447.022953
+2014,Oil,Primary production,180201678.945577
+2014,Oil,Transformation,-16961355.2970277
+2015,Biofuels and waste,Final consumption,39860551.4351157
+2015,Biofuels and waste,Primary production,49793891.9890675
+2015,Biofuels and waste,Transformation,-9525806.51066323
+2015,Coal,Final consumption,44719350.4263307
+2015,Coal,Primary production,161016370.208293
+2015,Coal,Transformation,-108371083.217935
+2015,Electricity and heat,Final consumption,84636229.246793
+2015,Electricity and heat,Primary production,21393244.055896
+2015,Electricity and heat,Transformation,80122520.8236
+2015,Natural Gas,Final consumption,59918458.4825904
+2015,Natural Gas,Primary production,125975048.735483
+2015,Natural Gas,Transformation,-52003104.4304253
+2015,Oil,Final consumption,146562659.664703
+2015,Oil,Primary production,184251004.922334
+2015,Oil,Transformation,-15848505.2916211
+2016,Biofuels and waste,Final consumption,39875376.5695452
+2016,Biofuels and waste,Primary production,50489285.2489903
+2016,Biofuels and waste,Transformation,-10249143.3807372
+2016,Coal,Final consumption,42961726.750297
+2016,Coal,Primary production,153248754.10352
+2016,Coal,Transformation,-108713225.821451
+2016,Electricity and heat,Final consumption,87078769.7888364
+2016,Electricity and heat,Primary production,22729910.6415864
+2016,Electricity and heat,Transformation,81630910.3764212
+2016,Natural Gas,Final consumption,61814943.6160572
+2016,Natural Gas,Primary production,128733857.526392
+2016,Natural Gas,Transformation,-53224852.7302182
+2016,Oil,Final consumption,148320109.295589
+2016,Oil,Primary production,186486106.600165
+2016,Oil,Transformation,-14632095.7258272
+2017,Biofuels and waste,Final consumption,40627289.2593946
+2017,Biofuels and waste,Primary production,51406195.4948088
+2017,Biofuels and waste,Transformation,-10398976.6055053
+2017,Coal,Final consumption,41568898.5150349
+2017,Coal,Primary production,157502508.056303
+2017,Coal,Transformation,-112204421.914105
+2017,Electricity and heat,Final consumption,89533261.9446356
+2017,Electricity and heat,Primary production,23978170.3812808
+2017,Electricity and heat,Transformation,83082335.435012
+2017,Natural Gas,Final consumption,63722381.5695802
+2017,Natural Gas,Primary production,133610885.104147
+2017,Natural Gas,Transformation,-54080324.141427
+2017,Oil,Final consumption,152035346.728115
+2017,Oil,Primary production,186915993.717814
+2017,Oil,Transformation,-14453681.218345
+2018,Biofuels and waste,Final consumption,41347171.7201577
+2018,Biofuels and waste,Primary production,52621949.5546048
+2018,Biofuels and waste,Transformation,-10946409.1425897
+2018,Coal,Final consumption,40994429.2211383
+2018,Coal,Primary production,165020628.01376
+2018,Coal,Transformation,-113747444.829779
+2018,Electricity and heat,Final consumption,93216112.91587
+2018,Electricity and heat,Primary production,25620858.95246
+2018,Electricity and heat,Transformation,86143045.0182956
+2018,Natural Gas,Final consumption,67869436.1992637
+2018,Natural Gas,Primary production,138494268.363898
+2018,Natural Gas,Transformation,-56741198.9436081
+2018,Oil,Final consumption,153590616.863353
+2018,Oil,Primary production,190207719.418602
+2018,Oil,Transformation,-13043950.7339951
+2019,Biofuels and waste,Final consumption,41856038.9225712
+2019,Biofuels and waste,Primary production,53161349.7656991
+2019,Biofuels and waste,Transformation,-11016503.1650748
+2019,Coal,Final consumption,40087923.0368369
+2019,Coal,Primary production,167821492.742643
+2019,Coal,Transformation,-113197598.351046
+2019,Electricity and heat,Final consumption,94527707.295174
+2019,Electricity and heat,Primary production,26861650.4844648
+2019,Electricity and heat,Transformation,85746642.1143982
+2019,Natural Gas,Final consumption,69402626.3365706
+2019,Natural Gas,Primary production,145661026.111821
+2019,Natural Gas,Transformation,-57670159.9956012
+2019,Oil,Final consumption,153141933.025968
+2019,Oil,Primary production,189326612.736042
+2019,Oil,Transformation,-12172786.8065381
