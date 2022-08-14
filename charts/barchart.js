@@ -18,14 +18,13 @@ export default function useBarChart(h, w) {
   const ref = useRef();
   const isInView = useInView(ref);
   const renderChart = () => {
-    var margin = { top: 10, right: 10, bottom: 10, left: 40 },
+    var margin = { top: 10, right: 10, bottom: 50, left: 40 },
       width = h - margin.left - margin.right,
       height = w - margin.top - margin.bottom;
 
     var svg = d3
       .select(ref.current)
       .append("svg")
-
       .attr("width", 450 + margin.left + margin.right)
       .attr("height", 500 + margin.top + margin.bottom)
       .append("g")

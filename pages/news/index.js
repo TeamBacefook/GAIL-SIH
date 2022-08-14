@@ -1,9 +1,19 @@
 import { Box, Typography, Grid } from "@mui/material";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Card from "../../components/news/card";
 import CardSmall from "../../components/news/card-small";
 import Head from "next/head";
+import { getNews } from "../../actions/news";
+
 const News = () => {
+  const [news, setNews] = useState([]);
+  useEffect(() => {
+    const getData = async () => {
+      const data = await getNews("natural gas");
+      setNews(data);
+    };
+    getData();
+  }, []);
   return (
     <Box sx={{ mt: 10, py: 4, px: { sx: 1, md: 8 } }}>
       <Head>
@@ -24,6 +34,9 @@ const News = () => {
         xs={12}
       >
         <Grid spacing={2} alignItems="flex-start" item xs={12} md={8}>
+          <Grid sx={{ mt: 2 }} item xs={12}>
+            <Card />
+          </Grid>
           <Grid sx={{ mt: 2 }} item xs={12}>
             <Card />
           </Grid>

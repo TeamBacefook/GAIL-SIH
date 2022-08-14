@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Head from "next/head";
 import {
   Autocomplete,
@@ -8,13 +8,18 @@ import {
   MenuItem,
   TextField,
   Typography,
+  AdapterDateFns,
+  MuiPickersUtilsProvider,
+  DatePicker,
 } from "@mui/material";
+// import { DatePicker } from "@mui/x-date-pickers";
 import withSubheader from "../../layout/sub-header";
 import { State } from "country-state-city";
 import useDonut from "../../charts/donut";
 import IOSSlider from "../../components/common/slider";
 import { useLineChart } from "../../charts/linechart";
 import IndiaMap from "../../components/analytics/indiamap";
+import { getPetroleumData } from "../../actions/analystics.india";
 
 const marks = [
   { label: 2011, value: 2011 },
@@ -32,9 +37,17 @@ const marks = [
 const Analytics = () => {
   const donut = useDonut(450, 400);
   const line = useLineChart(400, 500);
+
+  useEffect(() => {
+    const getData = async () => {
+      const data = await getPetroleumData();
+      console.log(data);
+    };
+    getData();
+  }, []);
+
   return (
     <Box sx={{ my: { xs: 1, md: 10 }, px: { xs: 2, md: 8 } }}>
-      {" "}
       <Head>
         <title>GAIL SIH | Analytics-India</title>
         <meta name="description" content="Analytics page for GAIL-SIH" />
@@ -161,10 +174,22 @@ const Analytics = () => {
           </Typography>
           <Grid sx={{ my: 2 }} item container spacing={2} xs={12}>
             <Grid item xs={12} md={6}>
-              <TextField fullWidth variant="outlined" type="date" />
+              <MuiPickersUtilsProvider utils={AdapterDateFns}>
+                <DatePicker
+                  variant="inline"
+                  openTo="year"
+                  views={["year", "month"]}
+                  label="Year and Month"
+                />
+              </MuiPickersUtilsProvider>
             </Grid>
             <Grid item xs={12} md={6}>
-              <TextField fullWidth variant="outlined" type="date" />
+              <TextField
+                inputFormat="yyyy-MM"
+                fullWidth
+                variant="outlined"
+                type="date"
+              />
             </Grid>
           </Grid>
           <TextField

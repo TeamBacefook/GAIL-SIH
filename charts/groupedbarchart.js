@@ -43,7 +43,6 @@ const useGroupedBarChart = (h, w) => {
 
     // reading csv data
     d3.csv("/data.csv").then(function (data, error) {
-      console.log(data);
       if (error) return console.log(error);
       // creating var keys containing array of names of days
       var keys = data.columns.slice(1);
@@ -97,7 +96,6 @@ const useGroupedBarChart = (h, w) => {
           return y(i);
         })
         .attr("height", function (d, i) {
-          console.log(y(i));
           return height - y(0);
         })
         // setting up tooltip and interactivity
@@ -113,7 +111,6 @@ const useGroupedBarChart = (h, w) => {
           return y(Number(d.value));
         })
         .attr("height", function (d) {
-          console.log(d);
           return height - y(Number(d.value));
         });
       // setting up x axis
