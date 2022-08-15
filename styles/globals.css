@@ -54,7 +54,7 @@ svg {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  border-radius: 1em;
+  border-radius: 2px;
   background: #02224d ;
 }
 

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import {
   Autocomplete,
@@ -34,18 +34,86 @@ const marks = [
   { label: 2020, value: 2020 },
   { label: 2021, value: 2021 },
 ];
+const comodity = ["Natural Gas", "Petroleum"];
+
+const states = [
+  "CHANDIGARH",
+  "DELHI",
+  "HARYANA",
+  "HIMACHAL PRADESH",
+  "JAMMU & KASHMIR",
+  "LADAKH",
+  "PUNJAB",
+  "RAJASTHAN",
+  "UTTAR PRADESH",
+  "UTTARAKHAND",
+  "ARUNACHAL PRADESH",
+  "ASSAM",
+  "MANIPUR",
+  "MEGHALAYA",
+  "MIZORAM",
+  "NAGALAND",
+  "SIKKIM",
+  "TRIPURA",
+  "ANDAMAN & NICOBAR",
+  "BIHAR",
+  "JHARKHAND",
+  "ODISHA",
+  "WEST BENGAL",
+  "CHHATTISGARH",
+  "DADRA & NAGAR HAVELI AND DAMAN & DIU",
+  "GOA",
+  "GUJARAT",
+  "MADHYA PRADESH",
+  "MAHARASHTRA",
+  "ANDHRA PRADESH",
+  "KARNATAKA",
+  "KERALA",
+  "LAKSHADWEEP",
+  "PUDUCHERRY",
+  "TAMIL NADU",
+  "TELANGANA",
+];
+
+const months = [
+  { month: "January", index: 1 },
+  { month: "February", index: 2 },
+  { month: "March", index: 3 },
+  { month: "April", index: 4 },
+  { month: "May", index: 5 },
+  { month: "June", index: 6 },
+  { month: "July", index: 7 },
+  { month: "August", index: 8 },
+  { month: "September", index: 9 },
+  { month: "October", index: 10 },
+  { month: " November", index: 11 },
+  { month: "December", index: 12 },
+];
+
+const years = [
+  { str: "2011", val: 2011 },
+  { str: "2012", val: 2012 },
+  { str: "2013", val: 2013 },
+  { str: "2014", val: 2014 },
+  { str: "2015", val: 2015 },
+  { str: "2016", val: 2016 },
+  { str: "2017", val: 2017 },
+  { str: "2018", val: 2018 },
+  { str: "2019", val: 2019 },
+  { str: "2020", val: 2020 },
+  { str: "2021", val: 2021 },
+  { str: "2022", val: 2022 },
+];
+
 const Analytics = () => {
   const donut = useDonut(450, 400);
   const line = useLineChart(400, 500);
-
-  useEffect(() => {
-    const getData = async () => {
-      const data = await getPetroleumData();
-      console.log(data);
-    };
-    getData();
-  }, []);
-
+  const [monthlyFilter, setMonthly] = useState({
+    commodity: "",
+    month: "",
+    year: "",
+  });
+  console.log(monthlyFilter);
   return (
     <Box sx={{ my: { xs: 1, md: 10 }, px: { xs: 2, md: 8 } }}>
       <Head>
@@ -68,8 +136,8 @@ const Analytics = () => {
             <Autocomplete
               style={{ width: "80%", borderRadius: "3em" }}
               id="combo-box-demo"
-              options={State.getStatesOfCountry("IN")}
-              getOptionLabel={(option) => option.name}
+              options={states}
+              getOptionLabel={(option) => option}
               renderInput={(params) => (
                 <TextField
                   {...params}
@@ -168,41 +236,81 @@ const Analytics = () => {
         sx={{ py: 8 }}
         container
       >
-        <Grid item xs={12} md={6}>
-          <Typography fontSize={30} color="#0A2540">
-            Monthwise Consumption Trend
-          </Typography>
+        <Grid item xs={12} md={5}>
+          <Grid sx={{ my: 2 }} item container spacing={2} xs={12}>
+            <Typography fontSize={30} color="#0A2540">
+              Monthwise Consumption Trend Natural Gas
+            </Typography>
+          </Grid>
           <Grid sx={{ my: 2 }} item container spacing={2} xs={12}>
             <Grid item xs={12} md={6}>
-              <MuiPickersUtilsProvider utils={AdapterDateFns}>
-                <DatePicker
-                  variant="inline"
-                  openTo="year"
-                  views={["year", "month"]}
-                  label="Year and Month"
-                />
-              </MuiPickersUtilsProvider>
+              <Autocomplete
+                style={{ width: "100%", borderRadius: "3em" }}
+                id="combo-box-demo"
+                options={months}
+                getOptionLabel={(option) => option.month}
+                onChange={(e, values) => {
+                  setMonthly((prev) => {
+                    return { ...prev, month: values.index };
+                  });
+                }}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    variant="outlined"
+                    label="month"
+                    placeholder="Month"
+                    type="text"
+                  />
+                )}
+              />
             </Grid>
             <Grid item xs={12} md={6}>
-              <TextField
-                inputFormat="yyyy-MM"
-                fullWidth
-                variant="outlined"
-                type="date"
+              <Autocomplete
+                style={{ width: "100%", borderRadius: "3em" }}
+                id="combo-box-demo"
+                options={years}
+                getOptionLabel={(option) => option.str}
+                onChange={(e, value) => {
+                  setMonthly((prev) => {
+                    return { ...prev, year: value.val };
+                  });
+                }}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    variant="outlined"
+                    label="year"
+                    placeholder="Year"
+                    type="text"
+                  />
+                )}
               />
             </Grid>
           </Grid>
-          <TextField
-            sx={{ width: { xs: "100%", md: "80%" } }}
-            variant="outlined"
-            inputProps={{ style: { color: "#0A2540" } }}
-            select
-            defaultValue="natural gas"
-          >
-            <MenuItem value="natural gas">Natural Gas</MenuItem>
-          </TextField>
+
+          <Autocomplete
+            style={{ width: "100%", borderRadius: "3em" }}
+            id="combo-box-demo"
+            options={years}
+            getOptionLabel={(option) => option.str}
+            onChange={(e, value) => {
+              setMonthly((prev) => {
+                return { ...prev, commodity: value };
+              });
+            }}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                variant="outlined"
+                label="Commodity"
+                placeholder="Commodity"
+                type="text"
+              />
+            )}
+          />
         </Grid>
-        <Grid item xs={12} md={5}>
+        <Grid item xs={12} md={6}>
           <svg height={400} ref={line} />
         </Grid>
       </Grid>

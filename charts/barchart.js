@@ -1,41 +1,45 @@
 import { useRef, useEffect } from "react";
 import * as d3 from "d3";
 import { useInView } from "framer-motion";
-const data = [
-  { Country: "United States", Value: 12394 },
-  { Country: "Russia", Value: 6148 },
-  { Country: "Germany (FRG)", Value: 1653 },
-  { Country: "France", Value: 2162 },
-  { Country: "United Kingdom", Value: 1214 },
-  { Country: "China", Value: 1131 },
-  { Country: "Spain", Value: 814 },
-  { Country: "Netherlands", Value: 1167 },
-  { Country: "Italy", Value: 660 },
-  { Country: "Israel", Value: 1263 },
-];
+// const data = [
+//   { Country: "United States", Value: 12394 },
+//   { Country: "Russia", Value: 6148 },
+//   { Country: "Germany (FRG)", Value: 1653 },
+//   { Country: "France", Value: 2162 },
+//   { Country: "United Kingdom", Value: 1214 },
+//   { Country: "China", Value: 1131 },
+//   { Country: "Spain", Value: 814 },
+//   { Country: "Netherlands", Value: 1167 },
+//   { Country: "Italy", Value: 660 },
+//   { Country: "Israel", Value: 1263 },
+// ];
 
-export default function useBarChart(h, w) {
-  const ref = useRef();
+export default function useBarChart(h, w, data, max_val, bg) {
+  const ref = useRef(null);
   const isInView = useInView(ref);
   const renderChart = () => {
-    var margin = { top: 10, right: 10, bottom: 50, left: 40 },
+    var margin = { top: 10, right: 0, bottom: 100, left: 60 },
       width = h - margin.left - margin.right,
       height = w - margin.top - margin.bottom;
-
-    var svg = d3
+    let svg;
+    // if (d3.select(ref.current).empty()) {
+    svg = d3
       .select(ref.current)
       .append("svg")
-      .attr("width", 450 + margin.left + margin.right)
-      .attr("height", 500 + margin.top + margin.bottom)
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
       .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    // } else {
+    //   svg = d3.select(ref.current);
+    // }
 
     var x = d3
       .scaleBand()
       .range([0, width])
       .domain(
         data.map(function (d) {
-          return d.Country;
+          return d.label;
         })
       )
       .padding(0.2);
@@ -46,19 +50,19 @@ export default function useBarChart(h, w) {
       .selectAll("text")
       .attr("transform", "translate(-11,10)rotate(-90)")
       .style("text-anchor", "end");
-    var y = d3.scaleLinear().domain([0, 13000]).range([height, 0]);
+    var y = d3.scaleLinear().domain([0, max_val]).range([height, 0]);
     svg.append("g").call(d3.axisLeft(y));
 
-    svg
+    const bars = svg
       .selectAll("mybar")
       .data(data)
       .enter()
       .append("rect")
       .attr("x", function (d) {
-        return x(d.Country);
+        return x(d.label);
       })
       .attr("width", x.bandwidth())
-      .attr("fill", "#FF0000")
+      .attr("fill", bg)
       .attr("height", function (d) {
         return height - y(0);
       })
@@ -71,10 +75,10 @@ export default function useBarChart(h, w) {
       .transition()
       .duration(1000)
       .attr("y", function (d) {
-        return y(d.Value);
+        return y(d.value);
       })
       .attr("height", function (d) {
-        return height - y(d.Value);
+        return height - y(d.value);
       })
       .delay(function (d, i) {
         return i * 200;
@@ -82,9 +86,13 @@ export default function useBarChart(h, w) {
   };
 
   useEffect(() => {
-    if (isInView) {
-      if (ref) renderChart();
+    if (ref) {
+      // console.log(r);
+
+      if (isInView && Array.isArray(data)) {
+        renderChart();
+      }
     }
-  }, [ref, isInView]);
+  }, [ref, isInView, data]);
   return ref;
 }

@@ -3,6 +3,7 @@ import {
   Button,
   Grid,
   Typography,
+  Autocomplete,
   TextField,
   MenuItem,
 } from "@mui/material";
@@ -12,8 +13,7 @@ import IOSSlider from "../../components/common/slider";
 import useBarChart from "../../charts/barchart";
 import withSubheader from "../../layout/sub-header";
 import dynamic from "next/dynamic";
-import { getCountriesData } from "../../actions/analystics.global";
-import useGroupedBarChart from "../../charts/groupedbarchart";
+import { getGlobalData } from "../../actions/analystics.global";
 
 const marks = [
   { label: 1990, value: 1990 },
@@ -177,25 +177,82 @@ const countries = [
 ];
 const Analytics = () => {
   const WorldMap = dynamic(() => import("../../components/analytics/globe"));
-  const [data, setdata] = useState({
-    start_year: "",
-    end_year: "",
-    country: "",
+  const { BarChart, Bar, CartesianGrid, XAxis, YAxis, Tooltip, Legend } =
+    dynamic(() => import("recharts"));
+
+  const [data, setData] = useState({
+    start_year: "2000",
+    end_year: "2010",
+    country: "India",
+    data: [],
   });
-  const lineChart = useBarChart(500, 400);
-  const groupedbarchart = useGroupedBarChart(500, 500);
+  const [compare, setCompare] = useState({
+    country1: "India",
+    country2: "Austria",
+    start_year: "2000",
+    end_year: "2010",
+    data1: [],
+    data2: [],
+  });
+  const lineChart = useBarChart(500, 400, data);
+  // const groupedbarchart = useGroupedBarChart(500, 500);
   useEffect(() => {
     const getData = async () => {
-      const data12 = await getCountriesData({
-        start_year: "Dwa",
-        end_year: "wasd",
-        country: "Alabania",
+      const data = await getGlobalData({
+        start_year: "2000",
+        end_year: "2010",
+        country: "India",
       });
-      setdata(data12);
+      const data2 = await getGlobalData({
+        start_year: "2000",
+        end_year: "2010",
+        country: "Austria",
+      });
+      setData((prev) => {
+        return { ...prev, data: data };
+      });
+      setCompare((prev) => {
+        return {
+          ...prev,
+          data1: data,
+          data2: data2,
+        };
+      });
     };
     getData();
   }, []);
 
+  const getData = async () => {
+    const Globe = await getGlobalData({
+      start_year: data.start_year,
+      end_year: data.end_year,
+      country: data.country,
+    });
+    setData((prev) => {
+      return { ...prev, data: Globe };
+    });
+  };
+
+  const getCompare = async () => {
+    const globe = await getGlobalData({
+      start_year: compare.start_year,
+      end_year: compare.end_year,
+      country: compare.country1,
+    });
+    const globe2 = await getGlobalData({
+      start_year: compare.start_year,
+      end_year: compare.end_year,
+      country: compare.country2,
+    });
+    setCompare((prev) => {
+      return {
+        ...prev,
+        data1: globe,
+        data2: globe2,
+      };
+    });
+  };
+  console.log(compare);
   return (
     <>
       <Head>
@@ -203,30 +260,38 @@ const Analytics = () => {
         <meta name="description" content="Analytics page for GAIL-SIH" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Grid container padding={"2%"}>
+      <Grid container padding={"2%"} sx={{ minHeight: "max-content" }}>
         <Grid id="worldmap" item xs={0} md={6} lg={6}>
           <WorldMap />
         </Grid>
-        <Grid item xs={12} md={6} lg={6}>
+        <Grid
+          item
+          xs={12}
+          container
+          spacing={1}
+          md={6}
+          lg={6}
+          justifyContent="center"
+        >
           <Grid item xs={12} md={12} lg={12}>
-            <TextField
-              id="standard-select-currency"
-              select
-              label="Country"
-              value={"currency"}
-              onChange={(value) => setdata({ ...data, country: value })}
-              style={{
-                width: "90%",
+            <Autocomplete
+              style={{ width: "100%", borderRadius: "3em" }}
+              id="combo-box-demo"
+              options={countries}
+              getOptionLabel={(option) => option}
+              onChange={(e, value) => {
+                setData({ ...data, country: value });
               }}
-              helperText="Please select country"
-              variant="standard"
-            >
-              {countries.map((option) => (
-                <MenuItem key={option.value} value={option}>
-                  {option}
-                </MenuItem>
-              ))}
-            </TextField>
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  variant="outlined"
+                  label="Commodity"
+                  placeholder="Commodity"
+                  type="text"
+                />
+              )}
+            />
           </Grid>
           <Grid item xs={12} md={12} lg={12}>
             <TextField
@@ -237,10 +302,10 @@ const Analytics = () => {
                 console.log(value);
               }}
               style={{
-                width: "90%",
+                width: "100%",
               }}
               helperText="Please select your parameter"
-              variant="standard"
+              variant="outlined"
             >
               {[
                 { value: "Natural gas", id: "NG" },
@@ -254,16 +319,41 @@ const Analytics = () => {
               ))}
             </TextField>
           </Grid>
-          <Grid item xs={12} md={12} lg={12}>
-            <IOSSlider
-              step={1}
-              sx={{ width: { xs: "90%", md: "50%" } }}
-              marks={marks}
-              defaultValue={[2010, 2022]}
-              min={1990}
-              max={2025}
-            />
-            <Button> Get data</Button>
+          <Grid container item xs={12} md={12} lg={12}>
+            <Grid item xs={10} md={10} lg={10}>
+              <IOSSlider
+                step={1}
+                sx={{ width: { xs: "90%", md: "80%" } }}
+                marks={marks}
+                value={[data.start_year, data.end_year]}
+                min={1990}
+                max={2025}
+                onChange={(e) => {
+                  setData((prev) => {
+                    return {
+                      ...prev,
+                      start_year: e.target.value[0],
+                      end_year: e.target.value[1],
+                    };
+                  });
+                }}
+              />
+            </Grid>
+            <Grid item xs={2} md={2} lg={2} style={{ textAlign: "right" }}>
+              <Button
+                onClick={getData}
+                sx={{
+                  background:
+                    "linear-gradient(169.84deg, #FFE53B -30.77%, #FF2525 119.39%)",
+                  color: "white",
+                  borderRadius: "11px",
+                  textTransform: "none",
+                  width: "100%",
+                }}
+              >
+                Get data
+              </Button>
+            </Grid>
           </Grid>
           <Grid
             item
@@ -276,9 +366,28 @@ const Analytics = () => {
               padding: "5%",
             }}
           >
-            <Typography variant="h4">Russia:</Typography>
-            <Typography>dwa</Typography>
-            <svg width="100%" height={"500"} ref={lineChart}></svg>
+            <Typography variant="h4">{data.country}:</Typography>
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            md={12}
+            lg={12}
+            style={{
+              border: "2px solid #404D8F",
+              borderRadius: "50px",
+              padding: "5%",
+            }}
+          >
+            <BarChart width={730} height={250} data={data}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="name" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Bar dataKey="pv" fill="#8884d8" />
+              <Bar dataKey="uv" fill="#82ca9d" />
+            </BarChart>
           </Grid>
         </Grid>
       </Grid>
@@ -292,16 +401,19 @@ const Analytics = () => {
             id="standard-select-currency"
             select
             label="Country"
-            value={"currency"}
-            onChange={(value) => {
-              console.log(value);
+            value={compare.country1}
+            onChange={(e) => {
+              setCompare((prev) => {
+                return { ...prev, country1: e.target.value };
+              });
             }}
             style={{
               width: "90%",
               margin: "2%",
+              marginBottom: "4%",
             }}
             helperText="Please select country"
-            variant="standard"
+            variant="outlined"
           >
             {countries.map((option) => (
               <MenuItem key={option.value} value={option}>
@@ -315,16 +427,18 @@ const Analytics = () => {
             id="standard-select-currency"
             select
             label="Country"
-            value={"currency"}
-            onChange={(value) => {
-              console.log(value);
+            value={compare.country2}
+            onChange={(e) => {
+              setCompare((prev) => {
+                return { ...prev, country2: e.target.value };
+              });
             }}
             style={{
               width: "90%",
               margin: "2%",
             }}
             helperText="Please select country"
-            variant="standard"
+            variant="outlined"
           >
             {countries.map((option) => (
               <MenuItem key={option.value} value={option}>
@@ -333,19 +447,44 @@ const Analytics = () => {
             ))}
           </TextField>
         </Grid>
-        <Grid item xs={12} md={6} lg={4} alignContent="bottom">
-          <IOSSlider
-            step={1}
-            sx={{ width: { xs: "90%", md: "50%" } }}
-            marks={marks}
-            defaultValue={[2010, 2022]}
-            min={1990}
-            max={2025}
-          />
+        <Grid container item xs={12}>
+          <Grid item xs={10} md={10} lg={10}>
+            <IOSSlider
+              step={1}
+              sx={{ width: { xs: "90%", md: "50%" } }}
+              marks={marks}
+              value={[compare.start_year, compare.end_year]}
+              min={1990}
+              max={2025}
+              onChange={(e) => {
+                setCompare((prev) => {
+                  return {
+                    ...prev,
+                    start_year: e.target.value[0],
+                    end_year: e.target.value[1],
+                  };
+                });
+              }}
+            />
+          </Grid>
+          <Grid item xs={2} md={2} lg={2}>
+            <Button
+              onClick={getCompare}
+              sx={{
+                background:
+                  "linear-gradient(169.84deg, #FFE53B -30.77%, #FF2525 119.39%)",
+                color: "white",
+                borderRadius: "11px",
+                textTransform: "none",
+                width: "70%",
+              }}
+            >
+              Compare
+            </Button>
+          </Grid>
         </Grid>
-        <Grid item xs={12} md={12} lg={12}>
-          <svg width="100%" height={"500"} ref={groupedbarchart}></svg>
-        </Grid>
+
+        {/* <svg width="100%" height={"500"} ref={groupedbarchart}></svg> */}
       </Grid>
     </>
   );

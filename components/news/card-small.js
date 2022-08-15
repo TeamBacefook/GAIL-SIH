@@ -8,7 +8,7 @@ import Typography from "@mui/material/Typography";
 import Image from "next/image";
 import placeholder from "../../images/placeholder.svg";
 import { Box } from "@mui/system";
-export default function MediaCard() {
+export default function MediaCard({ data }) {
   return (
     <Card
       sx={{
@@ -21,18 +21,7 @@ export default function MediaCard() {
         borderRadius: "10px",
       }}
     >
-      <Box sx={{ display: "flex", justifyContent: "center" }}>
-        <Box
-          sx={{
-            width: {
-              xs: "100%",
-              md: "60%",
-            },
-          }}
-        >
-          <Image src={placeholder} layout="responsive" alt="" />
-        </Box>{" "}
-      </Box>
+      <Box sx={{ display: "flex", justifyContent: "center" }}></Box>
       <CardContent>
         <Typography
           fontSize={25}
@@ -41,12 +30,7 @@ export default function MediaCard() {
           variant="h5"
           component="div"
         >
-          Sedutperspiciatisunde
-        </Typography>
-        <Typography fontSize={20} color="#003973">
-          But I must explain to you how all this mistaken idea of denouncing But
-          I must explain to youLorem Ipsum has been the industry&apos;s standard
-          More...
+          {data.Headline}
         </Typography>
       </CardContent>
       <CardActions
@@ -56,6 +40,7 @@ export default function MediaCard() {
         }}
       >
         <Button
+          onClick={() => window.open(data.URL)}
           variant="contained"
           sx={{
             width: "60%",

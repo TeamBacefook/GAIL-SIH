@@ -14,6 +14,8 @@ const News = () => {
     };
     getData();
   }, []);
+
+  console.log(news);
   return (
     <Box sx={{ mt: 10, py: 4, px: { sx: 1, md: 8 } }}>
       <Head>
@@ -34,27 +36,24 @@ const News = () => {
         xs={12}
       >
         <Grid spacing={2} alignItems="flex-start" item xs={12} md={8}>
-          <Grid sx={{ mt: 2 }} item xs={12}>
-            <Card />
-          </Grid>
-          <Grid sx={{ mt: 2 }} item xs={12}>
-            <Card />
-          </Grid>
-          <Grid sx={{ mt: 2 }} item xs={12}>
-            <Card />
-          </Grid>
-          <Grid sx={{ mt: 2 }} item xs={12}>
-            <Card />
-          </Grid>
+          {news?.map((obj, index) => {
+            if (index > 3 && index < 9)
+              return (
+                <Grid sx={{ mt: 2 }} key={index} item xs={12}>
+                  <Card data={obj} />
+                </Grid>
+              );
+          })}
         </Grid>
-        <Grid item container xs={12} spacing={6} md={4}>
-          <Grid item xs={12}>
-            <CardSmall />
-          </Grid>
-
-          <Grid item xs={12}>
-            <CardSmall />
-          </Grid>
+        <Grid item xs={12} md={4}>
+          {news?.map((obj, index) => {
+            if (index < 3)
+              return (
+                <Grid sx={{ mt: 2 }} item xs={12}>
+                  <CardSmall data={obj} />
+                </Grid>
+              );
+          })}
         </Grid>
       </Grid>
     </Box>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
-import { Box, Divider, Grid, Typography } from "@mui/material";
+import { Box, Divider, Grid, TextField, Typography } from "@mui/material";
 
 import withSubheader from "../../layout/sub-header";
 import useBarchart from "../../charts/barchart";
@@ -28,29 +28,73 @@ const marks = [
 ];
 
 const Analytics = () => {
-  const bar1 = useBarchart(500, 500);
-  const bar2 = useBarchart(500, 500);
-  const bar3 = useBarchart(500, 500);
-  const datafilter = async (year, data) => {
-    consumptiondataforcharts = data.filter(
-      (x) => x.Year == year && x.Type == "Final consumption"
-    );
-    return consumptiondataforcharts;
-  };
-  const [alldata, setdata] = useState(null);
-  const [consumption, setconsumptiondata] = useState(null);
-  const [productiondata, setproductiondata] = useState(null);
-  const [transformationdata, settransformationdata] = useState(null);
-  useEffect(() => {
-    const getData = async () => {
-      const { data } = await getcontinentaldata();
-      setdata(data);
-    };
-    if (!alldata) {
-      getData();
-    }
-  }, [alldata]);
+  const [selected, setSelected] = useState([]);
+  const [consumption, setconsumptiondata] = useState({ data: [], max: 0 }); //parameter = "Final consumption"
+  const [productiondata, setproductiondata] = useState(null); //parameter = 'Primary production'
+  const [transformationdata, settransformationdata] = useState(null); //parameter = "Transformation"
+  const [energyYear, setEnergyYear] = useState(2008);
+  const bar1 = useBarchart(
+    370,
+    400,
+    productiondata,
+    productiondata?.[0]?.max,
+    "#FF0000"
+  );
 
+  const bar2 = useBarchart(
+    370,
+    400,
+    transformationdata,
+    transformationdata?.[0].max,
+    "#69AAA5"
+  );
+  const bar3 = useBarchart(
+    370,
+    400,
+    consumption,
+    consumption?.[0]?.max,
+    "#59A14F"
+  );
+
+  const handleChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setSelected(
+      // On autofill we get a stringified value.
+      typeof value === "string" ? value.split(",") : value
+    );
+  };
+
+  useEffect(() => {
+    const getConsumption = async () => {
+      const { data } = await getcontinentaldata(
+        `?year=${energyYear}&type=Final%20consumption`
+      );
+      setconsumptiondata(data);
+    };
+    const getTransformation = async () => {
+      const { data } = await getcontinentaldata(
+        `?year=${energyYear}&type=Transformation`
+      );
+      settransformationdata(data);
+    };
+
+    const getProduction = async () => {
+      const { data } = await getcontinentaldata(
+        `?year=${energyYear}&type=Primary%20production`
+      );
+      setproductiondata(data);
+    };
+    getConsumption();
+    getTransformation();
+    getProduction();
+  }, [
+    energyYear,
+    setconsumptiondata,
+    settransformationdata,
+    setproductiondata,
+  ]);
   return (
     <Box sx={{ px: { xs: 1, md: 8 } }}>
       {" "}
@@ -66,7 +110,8 @@ const Analytics = () => {
             labelId="demo-multiple-chip-label"
             id="demo-multiple-chip"
             multiple
-            value={[]}
+            value={selected}
+            onChange={handleChange}
             input={
               <OutlinedInput
                 id="select-multiple-chip"
@@ -74,13 +119,15 @@ const Analytics = () => {
                 label="Chip"
               />
             }
-            renderValue={(selected) => (
-              <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
-                {selected.map((value) => (
-                  <Chip key={value} label={value} />
-                ))}
-              </Box>
-            )}
+            renderValue={(x) => {
+              return (
+                <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+                  {x.map((value) => (
+                    <Chip key={value} label={value} />
+                  ))}
+                </Box>
+              );
+            }}
           >
             <MenuItem value={"Coal"}>Coal</MenuItem>
             <MenuItem value={"Petroleum"}>Petroleum</MenuItem>
@@ -100,7 +147,7 @@ const Analytics = () => {
       </Grid>
       <Divider sx={{ my: 4 }} />
       <Grid sx={{ py: 4 }} item container xs={12}>
-        <Grid item xs={12} md={3} style={{ marginBottom: "2%" }}>
+        <Grid item xs={12} style={{ marginBottom: "2%" }}>
           <Typography color="#00116A" fontSize={35}>
             Energy Balance Sheet
           </Typography>
@@ -111,8 +158,9 @@ const Analytics = () => {
             track={false}
             step={1}
             onChange={(e) => {
-              console.log(e.target.value);
+              setEnergyYear(e.target.value);
             }}
+            value={energyYear}
             marks={[
               { label: 1990, value: 1990 },
               { label: 1991, value: 1991 },
@@ -144,25 +192,24 @@ const Analytics = () => {
               { label: 2017, value: 2017 },
               { label: 2018, value: 2018 },
               { label: 2019, value: 2019 },
-              { label: 2020, value: 2020 },
             ]}
             min={1990}
-            max={2020}
+            max={2019}
           />
         </Grid>
       </Grid>
       <Grid item xs={12} container justifyContent={"space-evenly"} spacing={2}>
-        <Grid item>
+        <Grid item sx={12} md={4}>
           <p>Energy Consumption</p>{" "}
-          <svg width={"100%"} height={"500"} ref={bar3} />
+          <svg width={"100%"} height={"400"} ref={bar3} />
         </Grid>
-        <Grid item>
+        <Grid item sx={12} md={4}>
           <p>Energy Transformation</p>{" "}
-          <svg width={"100%"} height={"500"} ref={bar2} />
+          <svg width={"100%"} height={"400"} ref={bar2} />
         </Grid>
-        <Grid item>
+        <Grid item sx={12} md={4}>
           <p>Energy Production</p>{" "}
-          <svg width={"100%"} height={"500"} ref={bar1} />
+          <svg width={"100%"} height={"400"} ref={bar1} />
         </Grid>
       </Grid>
     </Box>

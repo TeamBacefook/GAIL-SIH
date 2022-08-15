@@ -100,7 +100,7 @@ function IndiaMap() {
 
   return (
     <div className="full-width-height container">
-      <ReactTooltip>{tooltipContent}</ReactTooltip>
+      <ReactTooltip textColor="white">{tooltipContent}</ReactTooltip>
       <ComposableMap
         projectionConfig={PROJECTION_CONFIG}
         projection="geoMercator"

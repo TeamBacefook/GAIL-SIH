@@ -1,5 +1,6 @@
 import axios from "axios";
 import { baseurl } from "./url";
-const API = axios.create({ baseURL: `${baseurl}/data` });
+const API = axios.create({ baseURL: `${baseurl}/data/continents` });
 
-export const getcontinentaldata = () => API.get(`/continents/energy`);
+export const getcontinentaldata = (query) =>
+  API.get(`/energy${query}`);

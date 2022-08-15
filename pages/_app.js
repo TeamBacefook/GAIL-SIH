@@ -1,4 +1,5 @@
 import "../styles/globals.css";
+import { useEffect } from "react";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { StyledEngineProvider } from "@mui/material/styles";
 import { motion, AnimatePresence } from "framer-motion";
@@ -10,6 +11,12 @@ function MyApp({ Component, pageProps, router }) {
       fontFamily: "Reem Kufi",
     },
   });
+  useEffect(() => {
+    const jssStyles = document.querySelector("#jss-server-side");
+    if (jssStyles) {
+      jssStyles.parentElement.removeChild(jssStyles);
+    }
+  }, []);
 
   return (
     <>
