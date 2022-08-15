@@ -23,8 +23,28 @@ def getcountriesdata():
 
 @app.route('/data/continents/energy', methods=['GET'])
 def getcontinentdata():
+    data = request.args
     continentdata = pd.read_csv("EnergyBalanceSheet.csv")
+    continentdata = continentdata[(int(data["year"]) == continentdata['Year']) & (data["type"] == continentdata["Type"])]
+    continentdata["label"] = continentdata["Commodity"]
+    continentdata.drop(columns=["Type", "Year", "Commodity"], inplace=True)
+    continentdata["max"] = continentdata["value"].max()
+    continentdata["value"] = -continentdata["value"]
     return continentdata.to_json(orient="records")
+
+# @app.route('/data/continents/energywda', methods=['GET'])
+# def getcontinentdata12():
+#     #?year&type
+#     data = request.args
+#     continentdata = pd.read_csv("EnergyBalanceSheet.csv")
+#     continentdata = continentdata[(int(data["year"]) == continentdata['Year']) & (data["type"] == continentdata["Commodity"])]
+#     return continentdata.to_json(orient="records")
+
+
+
+
+
+
 
 @app.route('/news', methods=['GET'])
 def webCrawl():
