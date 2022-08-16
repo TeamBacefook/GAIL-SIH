@@ -9,7 +9,6 @@ import json
 from gnews import GNews
 import tensorflow as tf
 from tensorflow import keras as k
-import os
 
 from modelfuncs import get_models, blended_models, data_fetch_lstm
 
@@ -125,8 +124,9 @@ def webCrawl1():
 def getnaturalgasdata():
     data = request.args
     natgasdata = pd.read_csv("natgasdata.csv")
-    natgasdata.set_index("date")
+    natgasdata = pd.DataFrame(natgasdata.set_index("date"))
     natgasdata = natgasdata.loc[f"{data['startyear']}-{data['startmonth']}": f"{data['endyear']}-{data['endmonth']}"]
+    natgasdata["time"] =  natgasdata["Month"]  + "-" + natgasdata["Year"].astype(str)
     return natgasdata.to_json(orient="records")
 
 @app.route('/data/petroleum/local', methods=['GET'])
@@ -160,7 +160,7 @@ def csv_func():
 
 @app.route('/predictions/csv/download', methods=["GET"])
 def download():
-     
+    
     pass
 
 @app.route('/predictions', methods=['POST'])
