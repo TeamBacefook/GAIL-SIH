@@ -1,0 +1,17 @@
+name: GAIL Backend
+
+on:
+  push:
+    branches: [SGGP-3-Backend]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Build & Push Image
+        run: |
+          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+          docker build . --file Dockerfile --tag SGGP-BACKEND:$(date +%s)
+          docker push om03/SGGP-Backend
