@@ -13,5 +13,5 @@ jobs:
       - name: Build & Push Image
         run: |
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-          docker build . --file Dockerfile --tag SGGP-BACKEND:$(date +%s)
-          docker push om03/SGGP-Backend
+          docker build . --file Dockerfile --tag gail-backend:$(date +%s)
+          docker push om03/gail-backend
