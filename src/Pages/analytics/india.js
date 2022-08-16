@@ -4,7 +4,7 @@ import {
   Box,
   Divider,
   Grid,
-  MenuItem,
+  Button,
   TextField,
   Typography,
 } from "@mui/material";
@@ -21,7 +21,7 @@ import { Helmet } from "react-helmet";
 import { baseurl } from "../../api/url";
 import Donut from "../../charts/donut";
 import LineChart from "../../charts/linechart";
-
+import { getNaturalGas } from "../../actions/analystics.india.js";
 const marks = [
   { label: 2011, value: 2011 },
   { label: 2012, value: 2012 },
@@ -152,12 +152,12 @@ const lineData = [
 ];
 
 const Analytics = () => {
-  // const donut = useDonut(450, 400);
-  // const line = useLineChart(400, 500);
   const [monthlyFilter, setMonthly] = useState({
     parameter: "Consumption",
-    month: new Date().getMonth() + 1,
-    year: 2018,
+    start_month: new Date().getMonth() + 1,
+    start_year: 2011,
+    end_month: new Date().getMonth() + 2,
+    end_year: 2018,
   });
   const [coropleth, setCoropleth] = useState({
     state: "DELHI",
@@ -166,6 +166,15 @@ const Analytics = () => {
   });
   const [petroleumRange, setPetroleumRange] = useState([2015, 2019]);
   const [petroleum, setPetroleum] = useState([]);
+  const [lineChart, setLineChart] = useState([]);
+  const getData = async () => {
+    const data = await getNaturalGas(monthlyFilter);
+    console.log(data);
+    setLineChart(data);
+  };
+  useEffect(() => {
+    getData();
+  }, []);
   useEffect(() => {
     axios
       .get(
@@ -192,7 +201,11 @@ const Analytics = () => {
           sx={{ px: 4, py: 4 }}
           style={{ border: "1px solid A3A3A3" }}
         >
-          <IndiaMap />
+          <IndiaMap
+            onChange={(state) =>
+              setCoropleth((prev) => ({ ...prev, state: state }))
+            }
+          />
         </Grid>
         <Grid container spacing={2} justifyContent="center" item xs={12} md={6}>
           <Grid container justifyContent="center" item xs={12}>
@@ -319,19 +332,19 @@ const Analytics = () => {
                 id="combo-box-demo"
                 options={months}
                 value={months.find(
-                  (item) => item.index === monthlyFilter.month
+                  (item) => item.index === monthlyFilter.start_month
                 )}
                 getOptionLabel={(option) => option.month}
                 onChange={(e, values) => {
                   setMonthly((prev) => {
-                    return { ...prev, month: values.index };
+                    return { ...prev, start_month: values.index };
                   });
                 }}
                 renderInput={(params) => (
                   <TextField
                     {...params}
                     variant="outlined"
-                    label="month"
+                    label="Start month"
                     placeholder="Month"
                     type="text"
                   />
@@ -343,18 +356,20 @@ const Analytics = () => {
                 style={{ width: "100%", borderRadius: "3em" }}
                 id="combo-box-demo"
                 options={years}
-                value={years.find((item) => item.val === monthlyFilter.year)}
+                value={years.find(
+                  (item) => item.val === monthlyFilter.start_year
+                )}
                 getOptionLabel={(option) => option.str}
                 onChange={(e, value) => {
                   setMonthly((prev) => {
-                    return { ...prev, year: value.val };
+                    return { ...prev, start_year: value.val };
                   });
                 }}
                 renderInput={(params) => (
                   <TextField
                     {...params}
                     variant="outlined"
-                    label="year"
+                    label="Start year"
                     placeholder="Year"
                     type="text"
                   />
@@ -363,7 +378,7 @@ const Analytics = () => {
             </Grid>
           </Grid>
 
-          <Autocomplete
+          {/* <Autocomplete
             style={{ width: "100%", borderRadius: "3em" }}
             id="combo-box-demo"
             value={monthlyFilter.parameter}
@@ -383,16 +398,90 @@ const Analytics = () => {
                 type="text"
               />
             )}
-          />
+          /> */}
+          <Grid sx={{ my: 2 }} item container spacing={2} xs={12}>
+            <Grid item xs={12} md={6}>
+              <Autocomplete
+                style={{ width: "100%", borderRadius: "3em" }}
+                id="combo-box-demo"
+                options={months}
+                value={months.find(
+                  (item) => item.index === monthlyFilter.end_month
+                )}
+                getOptionLabel={(option) => option.month}
+                onChange={(e, values) => {
+                  setMonthly((prev) => {
+                    return { ...prev, end_month: values.index };
+                  });
+                }}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    variant="outlined"
+                    label="End month"
+                    placeholder="Month"
+                    type="text"
+                  />
+                )}
+              />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Autocomplete
+                style={{ width: "100%", borderRadius: "3em" }}
+                id="combo-box-demo"
+                options={years}
+                value={years.find(
+                  (item) => item.val === monthlyFilter.end_year
+                )}
+                getOptionLabel={(option) => option.str}
+                onChange={(e, value) => {
+                  setMonthly((prev) => {
+                    return { ...prev, end_year: value.val };
+                  });
+                }}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    variant="outlined"
+                    label="End year"
+                    placeholder="Year"
+                    type="text"
+                  />
+                )}
+              />
+            </Grid>
+          </Grid>
+          <Grid sx={{ my: 2 }} item container spacing={2} xs={12}>
+            <Grid item xs={12} md={6}></Grid>
+            <Grid item xs={12} md={6}>
+              <Button
+                variant="contained"
+                sx={{
+                  background:
+                    "linear-gradient(169.84deg, #FFE53B -30.77%, #FF2525 119.39%)",
+                  color: "white",
+                  borderRadius: "11px",
+                  textTransform: "none",
+                  width: "70%",
+                }}
+                onClick={getData}
+              >
+                Get Data
+              </Button>
+            </Grid>
+          </Grid>
         </Grid>
-        <Grid
-          item
-          xs={12}
-          md={6}
-          style={{ display: "flex", alignItems: "center", height: "40vh" }}
-        >
-          <LineChart width="100%" height="100%" data={lineData} />
-        </Grid>
+
+        {lineChart.length !== 0 && (
+          <Grid
+            item
+            xs={12}
+            md={6}
+            style={{ display: "flex", alignItems: "center", height: "40vh" }}
+          >
+            <LineChart width="100%" height="100%" data={lineChart} />
+          </Grid>
+        )}
       </Grid>
     </Box>
   );

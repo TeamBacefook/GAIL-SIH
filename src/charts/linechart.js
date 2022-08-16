@@ -2209,14 +2209,14 @@ export default function DataLineChart({ width, height, data }) {
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
+        <XAxis dataKey="time" />
         <YAxis />
         <Tooltip />
         <Legend />
         {Object.keys(data[0]).map((key, index) => {
           return (
             <>
-              {key !== "name" && key !== "amt" && (
+              {key !== "time" && key !== "Month" && key !== "Year" && (
                 <Line
                   type="monotone"
                   dataKey={key}

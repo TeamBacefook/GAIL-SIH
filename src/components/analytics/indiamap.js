@@ -84,13 +84,14 @@ const getHeatMapData = () => {
   ];
 };
 
-function IndiaMap() {
+function IndiaMap({ onChange }) {
   const [tooltipContent, setTooltipContent] = useState("");
   const [data, setData] = useState(getHeatMapData());
 
   const onMouseEnter = (geo, current = { value: "NA" }) => {
     return () => {
       setTooltipContent(`${geo.properties.name}`);
+      onChange(`${geo.properties.name}`);//this function chages state 
     };
   };
 
