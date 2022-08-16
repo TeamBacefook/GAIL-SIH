@@ -1,0 +1,11 @@
+flask_cors
+flask
+datetime
+bs4
+pandas
+gnews
+tensorflow
+keras
+sklearn
+yahoo_fin
+numpy
