@@ -7,15 +7,20 @@ import {
   TextField,
   useMediaQuery,
 } from "@mui/material";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Helmet from "react-helmet";
-// import { useLineChart } from "../../charts/linechart";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import Chip from "@mui/material/Chip";
 import Checkbox from "@mui/material/Checkbox";
 import IOSSlider from "../../components/common/slider";
 import CSVReader from "react-csv-reader";
 import withLayout from "../../layout";
 import { getPredictions } from "../../actions/predictions";
-
+import LineChart from "../../charts/predchart";
 const marks = [
   { label: "", value: 0 },
   { label: "", value: 0.2 },
@@ -27,11 +32,28 @@ const marks = [
 ];
 
 const Predictions = () => {
-  const handleForce = async (data) => {
-    const pred = await getPredictions(data);
-    console.log(pred);
+  const [data, setData] = useState([]);
+  const handleForce = async (item) => {
+    const pred = await getPredictions(item);
+    setData(pred.data);
+    console.log(pred.data);
+    document.querySelector(".csv-input").value = "";
   };
-
+  const [commo, setCommo] = useState([]);
+  const [all, setAll] = useState([]);
+  useEffect(() => {
+    const arr = [];
+    for (var key in data[0]) {
+      if (data[0].hasOwnProperty(key)) {
+        var val = data[0][key];
+        if (key !== "index") {
+          arr.push(key);
+        }
+      }
+    }
+    setAll(arr);
+    setCommo(arr);
+  }, [data]);
   const papaparseOptions = {
     header: true,
     dynamicTyping: true,
@@ -40,8 +62,16 @@ const Predictions = () => {
   };
 
   const small = useMediaQuery("(max-width:756px)");
-  // const lineChart = useLineChart(500, 1300);
-  // const bar = useBarChart();
+
+  const handleChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setCommo(
+      // On autofill we get a stringified value.
+      typeof value === "string" ? value.split(",") : value
+    );
+  };
   return (
     <Box sx={{ my: 12, px: { xs: 1, md: 4 } }}>
       <Helmet>
@@ -98,11 +128,55 @@ const Predictions = () => {
           </Button>
         </Grid>
       </Grid>
-      <Box
-        sx={{ mt: 8, display: "flex", justifyContent: "center", width: "100%" }}
-      >
-        {/* <svg width="100%" height={"500"} ref={lineChart}></svg> */}
-      </Box>
+      {data.length !== 0 && (
+        <>
+          <Grid item justifyContent="center" xs={12} md={12} lg={12}>
+            <FormControl sx={{ m: 1, width: "40%" }}>
+              <InputLabel id="demo-multiple-chip-label">Chip</InputLabel>
+              <Select
+                labelId="demo-multiple-chip-label"
+                id="demo-multiple-chip"
+                multiple
+                value={commo}
+                onChange={handleChange}
+                input={
+                  <OutlinedInput
+                    id="select-multiple-chip"
+                    inputProps={{ style: { borderRadius: "1em" } }}
+                    label="Chip"
+                  />
+                }
+                renderValue={(x) => {
+                  return (
+                    <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+                      {x.map((value) => (
+                        <Chip key={value} label={value} />
+                      ))}
+                    </Box>
+                  );
+                }}
+              >
+                {all.map((obj) => {
+                  return (
+                    <MenuItem value={obj} key={obj}>
+                      {obj}
+                    </MenuItem>
+                  );
+                })}
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid
+            container
+            item
+            xs={12}
+            md={12}
+            style={{ display: "flex", alignItems: "center", height: "40vh" }}
+          >
+            <LineChart width="100%" height="100%" data={data} display={commo} />
+          </Grid>
+        </>
+      )}
       <Grid item container xs={12}>
         <Grid item sx={{ mb: 3 }} xs={12}>
           <Typography color="#00116A" fontSize={40}>
