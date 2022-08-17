@@ -10,7 +10,7 @@ from gnews import GNews
 import tensorflow as tf
 from tensorflow import keras as k
 
-from modelfuncs import get_models, blended_models, data_fetch_lstm
+from modelfuncs import get_model_evals, get_models, blended_models, data_fetch
 
 
 app = Flask(__name__)
@@ -155,7 +155,7 @@ def getlocalpetroleumdata12():
 @app.route('/predictions/csv/upload', methods=["POST"])
 def csv_func():
     dataframe = pd.DataFrame.from_records(request.data)
-    current_app.dataframe = data_fetch_lstm(dataframe.close)
+    current_app.dataframe = data_fetch(dataframe.close)
     return dataframe.to_json()
 
 @app.route('/predictions/csv/download', methods=["GET"])
@@ -165,22 +165,31 @@ def download():
 
 @app.route('/predictions', methods=['POST'])
 def predictions():
-    start_date, end_date, csv = request.data
-    dataframe = pd.DataFrame.from_records(csv)
-    current_app.dataframe = data_fetch_lstm(dataframe.close)
-    return blended_models(start_date, end_date, dataframe, models=current_app.models)
+    data = json.loads(request.data)
+    dataframe = pd.DataFrame.from_records(data['csv']).set_index('date')
+    dataframe.index = pd.DatetimeIndex(dataframe.index)
+    dataframe = data_fetch(dataframe.close)
+    return json.loads(blended_models(dataframe, models=current_app.models).to_json(orient='table'))
+    
+@app.route('/modelEvals', methods=['GET'])
+def getEvals():
+    return get_model_evals(current_app.models).to_json(orient='table')
 
 if __name__ == "__main__":
     with app.app_context():
-    #     current_app.model_boole = get_models(f'D:/project/SIH-FALSJ/Model_V20_Boole.h5', 0.0027)
-    #     current_app.model_babbage = get_models(f'D:/project/SIH-FALSJ/babbage.pkl', 0.0027)
-    #     current_app.model_bell_1 = get_models(f'D:/project/SIH-FALSJ/bell.pkl', 0.009)
-    #     current_app.model_bell_2 = get_models(f'D:/project/SIH-FALSJ/bell2.pkl', 0.009)
-        current_app.models = []
-    #         ('boole', current_app.model_boole, ['close', '30ma', '60ma', '180ma', 'close_min', 'close_max'], 0.0),
-    #         ('babbage', current_app.model_babbage, ['close', '180ma', '60ma', '30ma', 'close_min', 'close_max', 'gradient'], 0.4),
-    #         ('bell 1', current_app.model_bell_1, ['close', '180ma', '60ma', '30ma', 'close_min', 'close_max', 'gradient', 'd_gradient'], 0.0),
-    #         ('bell 2', current_app.model_bell_2, ['close', '180ma', '60ma', '30ma', 'close_min', 'close_max', 'gradient', 'd_gradient'], 0.5),
-    #     ]
+        current_app.dataframe = data_fetch()
+        
+        current_app.model_boole = get_models(f'D:\Downloads\GAIL-SIH-SGGP-3-Backend\Model_V20_Boole.h5', 0.0012)
+        current_app.model_babbage = get_models(f'D:\Downloads\GAIL-SIH-SGGP-3-Backend\Model[Babbage]_v3.h5', 0.0027)
+        current_app.model_bell_1 = get_models(f'D:\Downloads\GAIL-SIH-SGGP-3-Backend\Model_V22_Bell.h5', 0.009)
+        current_app.model_bell_2 = get_models(f'D:\Downloads\GAIL-SIH-SGGP-3-Backend\Model_V23_Bell.h5', 0.009)
+        
+        current_app.models = [
+            ('LSTM - Boole', current_app.model_boole, ['close', '30ma', '60ma', '180ma', 'close_min', 'close_max'], 0.225),
+            ('LSTM - Babbage', current_app.model_babbage, ['close', '180ma', '60ma', '30ma', 'close_min', 'close_max', 'gradient'], 0.225),
+            ('LSTM - Bell v1', current_app.model_bell_1, ['close', '180ma', '60ma', '30ma', 'close_min', 'close_max', 'gradient', 'd_gradient'], 0.225),
+            ('LSTM - Bell v2', current_app.model_bell_2, ['close', '180ma', '60ma', '30ma', 'close_min', 'close_max', 'gradient', 'd_gradient'], 0.225),
+            ('ARIMA', None, [], 0.1)
+        ]
 
-    app.run(debug=True)
+    app.run(host='0.0.0.0')

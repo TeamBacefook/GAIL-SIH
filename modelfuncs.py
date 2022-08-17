@@ -5,10 +5,10 @@ from sklearn.preprocessing import StandardScaler
 from yahoo_fin import stock_info as si
 import pandas as pd
 import numpy as np
-import datetime
 from dateutil.relativedelta import *
 from yahoo_fin import stock_info as si
-
+from statsmodels.tsa.arima.model import ARIMA
+from sklearn.metrics import mean_squared_error
 
 def rmse(y_pred, y_true):
     return k_be.sqrt(k_be.mean(k_be.square(y_pred - y_true))) 
@@ -20,14 +20,15 @@ def get_models(model_loc, learning_rate):
     return model
 
 
-def data_fetch_lstm(df=None):
+def data_fetch(df=None):
   data = df
-  if not type(df) == pd.DataFrame:
+  if not (type(df) == pd.DataFrame or type(df) == pd.Series):
     data = si.get_data('NG=F')
     data = data[['close']]
     data = data.resample('1D').mean()
-    data.interpolate(method='linear', axis = 0, inplace=True, limit_direction='forward')
-    data = data.resample('1M').mean()
+  data = pd.DataFrame(data)
+  data.interpolate(method='linear', axis = 0, inplace=True, limit_direction='forward')
+  data = data.resample('1M').mean()
   data['30ma'] = data['close']
   data['60ma'] = data['close'].rolling(2).mean()
   data['180ma'] = data['close'].rolling(6).mean()
@@ -65,10 +66,10 @@ def batch_gen(df, x_size=24, y_size=24, output=True):
 
 def data_pred_lstm(
     data,
+    start,
+    end,
     columns,
-    model, 
-    start=get_month_wise_date(datetime.datetime.now()), 
-    end=get_month_wise_date(datetime.datetime.now() + relativedelta(years = +2)),
+    model,
     fhw=3
     ):
   def roll(data, columns, model, start, end, fhw):
@@ -85,7 +86,7 @@ def data_pred_lstm(
       temp_arr = [ x for x in df.close.copy().values ]
       temp_arr.extend(pred[0])
       preds = roll(
-          data=data_fetch_lstm(
+          data=data_fetch(
               pd.DataFrame(temp_arr, index=dates, columns=['close']),
             ).loc[:, columns],
           columns=columns,
@@ -106,14 +107,38 @@ def data_pred_lstm(
   return rescaled_df
 
 
-def blended_models(start_date, end_date, dataset, models=[]):
+def blended_models(dataset, start=None, end=None, models=[]):
   merged_out = None
+  weighted_df = pd.DataFrame()
+  if not start: start = dataset.index[-24]
+  if not end: end = dataset.index[-1]
   for name, model, attrs, weight in models:
-    pred = data_pred_lstm(dataset, attrs, model, start_date, end_date)
-    pred.columns = pd.Index([name])
+    pred=''
+    if name == 'ARIMA':
+      pred = pd.DataFrame(ARIMA(dataset.close[:end], order=(10, 1, 8)).fit().forecast(steps=72))
+    else: 
+      pred = data_pred_lstm(dataset, start, end, attrs, model)
+    pred.columns = pd.Index([name + ' Predictions'])
+    pred.index = pred.index.strftime('%m/%Y')
     if not type(merged_out) == pd.DataFrame:
-      merged_out = pred * weight
+      merged_out = pred
+      weighted_df = pred * weight
     else:
-      merged_out = pd.concat([merged_out, pred * weight], axis=1)
-  return merged_out.sum(axis=1)
+      merged_out = pd.concat([merged_out, pred], axis=1)
+      weighted_df = pd.concat([weighted_df, pred * weight], axis=1)
+  merged_out['Ensemble Predictions'] = weighted_df.sum(axis=1)
+  return merged_out
 
+def get_model_evals(models):
+  data = data_fetch()
+  evals = pd.DataFrame()
+  for name, model, attrs, weight in models:
+    if name == 'ARIMA':
+      model = ARIMA(data.close[:-72], order=(10, 1, 8)).fit()
+      pred = model.forecast(steps=72)
+    else:
+      pred = data_pred_lstm(data, data.index[-24], data.index[-1], attrs, model)
+    evals[name+' RMSE'] = pd.DataFrame([mean_squared_error(data.close[-72:], pred, squared=False)])
+  return evals
+  
+  
