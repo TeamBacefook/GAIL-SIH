@@ -22,10 +22,18 @@ const World = () => {
   useEffect(() => {
     axios
       .get(
-        "http://localhost:5000/data/countries?param=naturalgas&&startyear=2019&&endyear=2022&&country=Albania"
+        "https://github.com/vasturiano/globe.gl/blob/master/example/datasets/ne_110m_admin_0_countries.geojson"
       )
-      .then(setdata);
+      .then(setCountries);
   }, []);
+  // useEffect(() => {
+  //   // load data
+  //   fetch(
+  //     "https://github.com/vasturiano/globe.gl/blob/master/example/datasets/ne_110m_admin_0_countries.geojson"
+  //   )
+  //     .then((res) => res.json())
+  //     .then(setCountries);
+  // }, []);
   const colorScale = d3.scaleSequentialSqrt(d3.interpolateYlOrRd);
   const getVal = (feat) =>
     feat.properties.GDP_MD_EST / Math.max(1e5, feat.properties.POP_EST);
