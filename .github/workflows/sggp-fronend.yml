@@ -20,11 +20,10 @@ jobs:
       - name: Install dependencies
         run: |
           npm install
-
+          
       - name: build
         run: |
           npm run build
-          npm test
   push_to_Docker_Hub:
     runs-on: ubuntu-latest
     needs: [build_test]
