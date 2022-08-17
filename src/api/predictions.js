@@ -6,3 +6,5 @@ export const getpredictions = (data) =>
   API.post(`/predictions`, {
     csv: data,
   });
+
+export const getmodeleval = () => API.get(`/modelEvals`);

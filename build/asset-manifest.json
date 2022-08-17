@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/static/css/main.10cc5b71.chunk.css",
+    "main.js": "/static/js/main.399871ae.chunk.js",
+    "main.js.map": "/static/js/main.399871ae.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.48044ebe.js",
+    "runtime-main.js.map": "/static/js/runtime-main.48044ebe.js.map",
+    "static/js/2.49e9dbd7.chunk.js": "/static/js/2.49e9dbd7.chunk.js",
+    "static/js/2.49e9dbd7.chunk.js.map": "/static/js/2.49e9dbd7.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.10cc5b71.chunk.css.map": "/static/css/main.10cc5b71.chunk.css.map",
+    "static/js/2.49e9dbd7.chunk.js.LICENSE.txt": "/static/js/2.49e9dbd7.chunk.js.LICENSE.txt",
+    "static/media/animated.10f19f46.svg": "/static/media/animated.10f19f46.svg",
+    "static/media/coal.5f29cec8.svg": "/static/media/coal.5f29cec8.svg",
+    "static/media/dng.c1594134.svg": "/static/media/dng.c1594134.svg",
+    "static/media/gail.fae962a9.svg": "/static/media/gail.fae962a9.svg",
+    "static/media/logo.3512d792.svg": "/static/media/logo.3512d792.svg",
+    "static/media/petrol.3929de6e.svg": "/static/media/petrol.3929de6e.svg",
+    "static/media/placeholder.b8c89f59.svg": "/static/media/placeholder.b8c89f59.svg",
+    "static/media/renewable.f3f8f227.svg": "/static/media/renewable.f3f8f227.svg",
+    "static/media/sih.6c822eba.svg": "/static/media/sih.6c822eba.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.48044ebe.js",
+    "static/js/2.49e9dbd7.chunk.js",
+    "static/css/main.10cc5b71.chunk.css",
+    "static/js/main.399871ae.chunk.js"
+  ]
+}

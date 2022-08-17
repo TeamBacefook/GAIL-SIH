@@ -7,6 +7,7 @@ import {
   TextField,
   useMediaQuery,
 } from "@mui/material";
+import BarCharts from "../../charts/barchart";
 import React, { useState, useEffect } from "react";
 import Helmet from "react-helmet";
 import OutlinedInput from "@mui/material/OutlinedInput";
@@ -19,7 +20,7 @@ import Checkbox from "@mui/material/Checkbox";
 import IOSSlider from "../../components/common/slider";
 import CSVReader from "react-csv-reader";
 import withLayout from "../../layout";
-import { getPredictions } from "../../actions/predictions";
+import { getPredictions, getModelEval } from "../../actions/predictions";
 import LineChart from "../../charts/predchart";
 const marks = [
   { label: "", value: 0 },
@@ -36,7 +37,6 @@ const Predictions = () => {
   const handleForce = async (item) => {
     const pred = await getPredictions(item);
     setData(pred.data);
-    console.log(pred.data);
     document.querySelector(".csv-input").value = "";
   };
   const [commo, setCommo] = useState([]);
@@ -54,6 +54,25 @@ const Predictions = () => {
     setAll(arr);
     setCommo(arr);
   }, [data]);
+  const [barData, setBarData] = useState([]);
+  const getData2 = async () => {
+    const data2 = await getModelEval();
+    const arr = [];
+    for (var key in data2.data[0]) {
+      if (data2.data[0].hasOwnProperty(key)) {
+        var val = data2.data[0][key];
+        if (key !== "index") {
+          console.log({ label: key, value: val });
+          arr.push({ label: key, value: val });
+        }
+      }
+    }
+    setBarData(arr);
+    console.log(arr);
+  };
+  useEffect(() => {
+    getData2();
+  }, []);
   const papaparseOptions = {
     header: true,
     dynamicTyping: true,
@@ -75,7 +94,7 @@ const Predictions = () => {
   return (
     <Box sx={{ my: 12, px: { xs: 1, md: 4 } }}>
       <Helmet>
-        <title>GAIL SIH | Predictions</title>
+        <title>GAIL SIH | Dashboard</title>
         <meta name="description" content="Analytics page for GAIL-SIH" />
         <link rel="icon" href="/favicon.ico" />
       </Helmet>
@@ -171,7 +190,7 @@ const Predictions = () => {
             item
             xs={12}
             md={12}
-            style={{ display: "flex", alignItems: "center", height: "40vh" }}
+            style={{ display: "flex", alignItems: "center", height: "60vh" }}
           >
             <LineChart width="100%" height="100%" data={data} display={commo} />
           </Grid>
@@ -312,9 +331,22 @@ const Predictions = () => {
           />
         </Grid>
         <Grid sx={{ mt: 8 }} item container justifyContent="center" xs={12}>
-          <Grid item xs={6}>
-            {/* <svg ref={bar} height={500} width="100%" /> */}
-          </Grid>{" "}
+          <Grid item sx={12} md={12}>
+            {barData.length !== 0 && (
+              <>
+                <p>RMSE</p>
+                <BarCharts
+                  data={barData}
+                  bg1="#ACB6E5"
+                  orientation={0}
+                  bg2="#74ebd5"
+                  g_width={window.innerWidth * 0.9}
+                  g_height={window.innerHeight * 0.3}
+                  c_id={2}
+                />
+              </>
+            )}
+          </Grid>
         </Grid>
       </Grid>
     </Box>

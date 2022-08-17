@@ -2,7 +2,6 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid } from "recharts";
 import ReactDOM from "react-dom";
 import React from "react";
 
-
 const BarCharts = ({ data, bg1, bg2, label }) => {
   return (
     <BarChart width={500} height={500} data={data}>
@@ -18,7 +17,7 @@ const BarCharts = ({ data, bg1, bg2, label }) => {
           spreadMethod="reflect"
         >
           <stop offset="0" stopColor="#FFE53B" />
-          <stop offset="1" stopColor=bg1 />
+          <stop offset="1" stopColor={bg1} />
         </linearGradient>
       </defs>
       <CartesianGrid strokeDasharray="3 3" />
