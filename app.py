@@ -177,19 +177,19 @@ def getEvals():
 
 if __name__ == "__main__":
     with app.app_context():
-        current_app.dataframe = data_fetch()
+        # current_app.dataframe = data_fetch()
         
-        current_app.model_boole = get_models(f'./Model_V20_Boole.h5', 0.0012)
-        current_app.model_babbage = get_models(f'./Model[Babbage]_v3.h5', 0.0027)
-        current_app.model_bell_1 = get_models(f'./Model_V22_Bell.h5', 0.009)
-        current_app.model_bell_2 = get_models(f'./Model_V23_Bell.h5', 0.009)
+        # current_app.model_boole = get_models(f'./Model_V20_Boole.h5', 0.0012)
+        # current_app.model_babbage = get_models(f'./Model[Babbage]_v3.h5', 0.0027)
+        # current_app.model_bell_1 = get_models(f'./Model_V22_Bell.h5', 0.009)
+        # current_app.model_bell_2 = get_models(f'./Model_V23_Bell.h5', 0.009)
         
-        current_app.models = [
-            ('LSTM - Boole', current_app.model_boole, ['close', '30ma', '60ma', '180ma', 'close_min', 'close_max'], 0.225),
-            ('LSTM - Babbage', current_app.model_babbage, ['close', '180ma', '60ma', '30ma', 'close_min', 'close_max', 'gradient'], 0.225),
-            ('LSTM - Bell v1', current_app.model_bell_1, ['close', '180ma', '60ma', '30ma', 'close_min', 'close_max', 'gradient', 'd_gradient'], 0.225),
-            ('LSTM - Bell v2', current_app.model_bell_2, ['close', '180ma', '60ma', '30ma', 'close_min', 'close_max', 'gradient', 'd_gradient'], 0.225),
-            ('ARIMA', None, [], 0.1)
-        ]
+        current_app.models = []
+        #     ('LSTM - Boole', current_app.model_boole, ['close', '30ma', '60ma', '180ma', 'close_min', 'close_max'], 0.225),
+        #     ('LSTM - Babbage', current_app.model_babbage, ['close', '180ma', '60ma', '30ma', 'close_min', 'close_max', 'gradient'], 0.225),
+        #     ('LSTM - Bell v1', current_app.model_bell_1, ['close', '180ma', '60ma', '30ma', 'close_min', 'close_max', 'gradient', 'd_gradient'], 0.225),
+        #     ('LSTM - Bell v2', current_app.model_bell_2, ['close', '180ma', '60ma', '30ma', 'close_min', 'close_max', 'gradient', 'd_gradient'], 0.225),
+        #     ('ARIMA', None, [], 0.1)
+        # ]
 
     app.run(host='0.0.0.0')
