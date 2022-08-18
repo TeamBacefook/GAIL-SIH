@@ -185,7 +185,6 @@ const Analytics = () => {
         setPetroleum(res.data);
       });
   }, [petroleumRange, setPetroleum]);
-  console.log(petroleum);
   return (
     <Box sx={{ my: { xs: 1, md: 10 }, px: { xs: 2, md: 8 } }}>
       <Helmet>
@@ -337,7 +336,7 @@ const Analytics = () => {
                 getOptionLabel={(option) => option.month}
                 onChange={(e, values) => {
                   setMonthly((prev) => {
-                    return { ...prev, start_month: values.index };
+                    return { ...prev, start_month: values?.index };
                   });
                 }}
                 renderInput={(params) => (
@@ -411,7 +410,7 @@ const Analytics = () => {
                 getOptionLabel={(option) => option.month}
                 onChange={(e, values) => {
                   setMonthly((prev) => {
-                    return { ...prev, end_month: values.index };
+                    return { ...prev, end_month: values?.index };
                   });
                 }}
                 renderInput={(params) => (
@@ -436,7 +435,7 @@ const Analytics = () => {
                 getOptionLabel={(option) => option.str}
                 onChange={(e, value) => {
                   setMonthly((prev) => {
-                    return { ...prev, end_year: value.val };
+                    return { ...prev, end_year: value?.val };
                   });
                 }}
                 renderInput={(params) => (
