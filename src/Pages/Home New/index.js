@@ -7,6 +7,7 @@ import {
   Divider,
   Autocomplete,
   TextField,
+  MenuItem,
 } from "@mui/material";
 import withLayout from "../../layout";
 import { styled } from "@mui/system";
@@ -79,6 +80,16 @@ const type = [
   { str: "Consumption", val: "Consumption" },
 ];
 const marqueedata = [
+  {
+    commodity: "Methanol\n\nCNY/T",
+    price: "2431.00",
+    "24hrchange": "12.00",
+    "24hrpercentchange": "-0.49%",
+    weeklychange: "-3.53%",
+    monthlychange: "1.38%",
+    "YoY change": "-9.09%",
+    date: "Aug/18",
+  },
   {
     commodity: "Crude Oil\n\nUSD/Bbl",
     price: "89.236",
@@ -200,16 +211,6 @@ const marqueedata = [
     date: "Aug/17",
   },
   {
-    commodity: "Methanol\n\nCNY/T",
-    price: "2431.00",
-    "24hrchange": "12.00",
-    "24hrpercentchange": "-0.49%",
-    weeklychange: "-3.53%",
-    monthlychange: "1.38%",
-    "YoY change": "-9.09%",
-    date: "Aug/18",
-  },
-  {
     commodity: "Urals Oil\n\nUSD/Bbl",
     price: "77.92",
     "24hrchange": "10.84",
@@ -253,9 +254,158 @@ const NewsCard = ({ data }) => {
     </Box>
   );
 };
+const countries = [
+  "Albania",
+  "Armenia",
+  "Australia",
+  "Austria",
+  "Belgium",
+  "Bolivia",
+  "Bulgaria",
+  "Canada",
+  "Chile",
+  "Colombia",
+  "Costa Rica",
+  "Croatia",
+  "Cuba",
+  "Czechia",
+  "Finland",
+  "France",
+  "Georgia",
+  "Germany",
+  "Guyana",
+  "Hungary",
+  "Iceland",
+  "Ireland",
+  "Italy",
+  "Japan",
+  "North Korea",
+  "South Korea",
+  "Kosovo",
+  "Kyrgyzstan",
+  "Latvia",
+  "Lithuania",
+  "Luxembourg",
+  "Mexico",
+  "Netherlands",
+  "Macedonia",
+  "Peru",
+  "Poland",
+  "Portugal",
+  "Republic of Moldova",
+  "Romania",
+  "Russia",
+  "Serbia",
+  "Slovakia",
+  "South Africa",
+  "Spain",
+  "Switzerland",
+  "Tajikistan",
+  "Thailand",
+  "Ukraine",
+  "United Arab Emirates",
+  "United States of America",
+  "Uruguay",
+  "Uzbekistan",
+  "Zimbabwe",
+  "Bangladesh",
+  "Brunei Darussalam",
+  "Cyprus",
+  "Fiji",
+  "Greece",
+  "Jordan",
+  "Kazakhstan",
+  "Laos",
+  "Montenegro",
+  "New Zealand",
+  "Slovenia",
+  "Sweden",
+  "Turkey",
+  "Afghanistan",
+  "Algeria",
+  "Angola",
+  "Argentina",
+  "Azerbaijan",
+  "Belarus",
+  "Belize",
+  "Benin",
+  "Bosnia and Herzegovina",
+  "Brazil",
+  "Cameroon",
+  "Chad",
+  "China",
+  "Congo",
+  "Ivory Coast",
+  "Democratic Republic of the Congo",
+  "Denmark",
+  "Dominican Republic",
+  "Ecuador",
+  "Egypt",
+  "El Salvador",
+  "Equatorial Guinea",
+  "Eritrea",
+  "Ethiopia",
+  "Gabon",
+  "Ghana",
+  "Guatemala",
+  "Honduras",
+  "India",
+  "Indonesia",
+  "Iran",
+  "Iraq",
+  "Israel",
+  "Jamaica",
+  "Kenya",
+  "Kuwait",
+  "Lebanon",
+  "Libya",
+  "Madagascar",
+  "Malaysia",
+  "Mauritania",
+  "Mongolia",
+  "Morocco",
+  "Mozambique",
+  "Myanmar",
+  "Nicaragua",
+  "Niger",
+  "Nigeria",
+  "Norway",
+  "Oman",
+  "Pakistan",
+  "Panama",
+  "Papua New Guinea",
+  "Paraguay",
+  "Philippines",
+  "Qatar",
+  "Saudi Arabia",
+  "Senegal",
+  "Sierra Leone",
+  "Somalia",
+  "South Sudan",
+  "Sri Lanka",
+  "Sudan",
+  "Suriname",
+  "Syrian Arab Republic",
+  "Timor-Leste",
+  "Trinidad and Tobago",
+  "Tunisia",
+  "Turkmenistan",
+  "United Kingdom",
+  "Tanzania",
+  "Venezuela",
+  "Vietnam",
+  "Yemen",
+  "Zambia",
+  "Botswana",
+  "Estonia",
+  "Falkland Islands",
+  "Guinea",
+  "Puerto Rico",
+  "Rwanda",
+  "Togo",
+];
 
 const Home = () => {
-  const label = { inputProps: { "aria-label": "Checkbox demo" } };
   const [news, setNews] = useState([]);
   const [filters, setFilter] = useState({
     year: 2020,
@@ -270,15 +420,6 @@ const Home = () => {
     };
     getData();
   }, []);
-
-  const settings = {
-    dots: false,
-    arrows: false,
-    infinite: true,
-    autoplay: true,
-    autoplaySpeed: 3500,
-    slidesToShow: 3,
-  };
 
   return (
     <Box sx={{ py: 12, px: { xs: 2, md: 8 } }}>
@@ -406,122 +547,42 @@ const Home = () => {
           </Grid>
         </Grid>
       </Grid>
-      <div
-        style={{
-          width: "100%",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          height: "50vh",
-        }}
-        id="worldmap"
-      >
-        <World
-          year={filters.year}
-          commodity={filters.commodity}
-          type={filters.type}
-        />
-      </div>
+      <Grid container style={{ width: "100%", height: "70vh" }}>
+        <Grid item xs={12} md={6} lg={6} id="worldmap">
+          <World
+            year={filters.year}
+            commodity={filters.commodity}
+            type={filters.type}
+          />
+        </Grid>
+        <Grid item xs={12} md={6} lg={6}>
+          <TextField
+            id="standard-select-currency"
+            select
+            label="Country"
+            // value={compare.country1}
+            onChange={(e) => {}}
+            style={{
+              width: "90%",
+              margin: "2%",
+              marginBottom: "4%",
+            }}
+            helperText="Please select country"
+            variant="outlined"
+          >
+            {countries.map((option) => (
+              <MenuItem key={option.value} value={option}>
+                {option}
+              </MenuItem>
+            ))}
+          </TextField>
+        </Grid>
+      </Grid>
       <Box sx={{ py: 4 }}>
         <Typography color="#00116A" fontSize="35px">
           Energy Prices
         </Typography>
       </Box>
-      {/* {marqueedata.map((item) => {
-            return (
-              <>
-                {item["24hrpercentchange"][0] === "-" ? (
-                  <Grid
-                    item
-                    xs={4}
-                    sx={{
-                      border: "1px solid #EC82B5 ",
-                      px: 1,
-                      py: 1,
-                      width: "80%",
-                      borderRadius: "2em",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "flex-start",
-                      margin: "1vh",
-                    }}
-                  >
-                    <object
-                      type="image/svg+xml"
-                      data={down}
-                      style={{
-                        height: "1.5em",
-                        width: "1.5em",
-                      }}
-                    >
-                      <img src={down} alt="Fall Symbol" />
-                    </object>
-                    <Typography fontSize={20} sx={{ ml: 2, mr: 1 }}>
-                      {item.commodity}
-                    </Typography>
-                    <Typography fontSize={20}>₹{item.price}</Typography>
-                  </Grid>
-                ) : (
-                  <Grid
-                    item
-                    xs={4}
-                    sx={{
-                      border: "1px solid #1FA724 ",
-                      px: 1,
-                      py: 1,
-                      width: "80%",
-                      borderRadius: "2em",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "flex-start",
-                    }}
-                  >
-                    <object
-                      type="image/svg+xml"
-                      data={up}
-                      style={{
-                        height: "1.5em",
-                        width: "1.5em",
-                      }}
-                    >
-                      <img src={up} alt="Fall Symbol" />
-                    </object>
-                    <Typography fontSize={20} sx={{ ml: 2, mr: 1 }}>
-                      {item.commodity}
-                    </Typography>
-                    <Typography fontSize={20}>₹{item.price}</Typography>
-                  </Grid>
-                )}
-              </>
-            );
-          })} */}
-      {/* <Grid
-            sx={{
-              border: "1px solid #EC82B5 ",
-              px: 1,
-              py: 1,
-              width: "12em",
-              borderRadius: "2em",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "flex-start",
-            }}
-          >
-            <object
-              type="image/svg+xml"
-              data={down}
-              style={{
-                height: "1.5em",
-                width: "1.5em",
-              }}
-            >
-              <img src={down} alt="Fall Symbol" />
-            </object>
-            <Typography fontSize={20} sx={{ ml: 2, mr: 1 }}>
-              Coal
-            </Typography>
-            <Typography fontSize={20}>₹150</Typography>
-          </Grid> */}
       <Marquee>
         {marqueedata.map((item) => {
           return (
@@ -561,9 +622,6 @@ const Home = () => {
                   >
                     {item.commodity} {item.price}
                   </Typography>
-                  {/* <Typography variant="h1" fontSize={20}>
-                    {item.price}
-                  </Typography> */}
                 </Box>
               ) : (
                 <Box
@@ -594,54 +652,17 @@ const Home = () => {
                   <Typography variant="h1" fontSize={20} sx={{ ml: 2, mr: 1 }}>
                     {item.commodity} {item.price}
                   </Typography>
-                  {/* <Typography variant="h1" fontSize={20}>
-                    {item.price}
-                  </Typography> */}
                 </Box>
               )}
             </>
           );
         })}
       </Marquee>
-      {/* <Ticker direction="toLeft" offset="100%" speed={10}>
-        {(index) => (
-          <Grid
-            item
-            xs={4}
-            sx={{
-              border: "1px solid #1FA724 ",
-              px: 1,
-              py: 1,
-              width: "80%",
-              borderRadius: "2em",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "flex-start",
-            }}
-          >
-            <object
-              type="image/svg+xml"
-              data={up}
-              style={{
-                height: "1.5em",
-                width: "1.5em",
-              }}
-            >
-              <img src={up} alt="Fall Symbol" />
-            </object>
-            <Typography variant="h1" fontSize={20} sx={{ ml: 2, mr: 1 }}>
-              {marqueedata[0].commodity} {marqueedata[0].price}
-            </Typography>
-          </Grid>
-        )}
-      </Ticker> */}
-
       <Divider style={{ marginTop: "3em" }} />
       <Grid item xs={12} sx={{ mt: 2 }} container>
         <Typography color="#00116A" fontSize="35px">
           Energy Gas Predictions
         </Typography>
-
         <Grid
           item
           container
