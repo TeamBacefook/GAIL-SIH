@@ -179,10 +179,10 @@ if __name__ == "__main__":
     with app.app_context():
         current_app.dataframe = data_fetch()
         
-        current_app.model_boole = get_models(f'D:\Downloads\GAIL-SIH-SGGP-3-Backend\Model_V20_Boole.h5', 0.0012)
-        current_app.model_babbage = get_models(f'D:\Downloads\GAIL-SIH-SGGP-3-Backend\Model[Babbage]_v3.h5', 0.0027)
-        current_app.model_bell_1 = get_models(f'D:\Downloads\GAIL-SIH-SGGP-3-Backend\Model_V22_Bell.h5', 0.009)
-        current_app.model_bell_2 = get_models(f'D:\Downloads\GAIL-SIH-SGGP-3-Backend\Model_V23_Bell.h5', 0.009)
+        current_app.model_boole = get_models(f'./Model_V20_Boole.h5', 0.0012)
+        current_app.model_babbage = get_models(f'./Model[Babbage]_v3.h5', 0.0027)
+        current_app.model_bell_1 = get_models(f'./Model_V22_Bell.h5', 0.009)
+        current_app.model_bell_2 = get_models(f'./Model_V23_Bell.h5', 0.009)
         
         current_app.models = [
             ('LSTM - Boole', current_app.model_boole, ['close', '30ma', '60ma', '180ma', 'close_min', 'close_max'], 0.225),
