@@ -1,11 +1,12 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Home from "./Pages/Home";
+import Home from "./Pages/Home New";
+import About from "./Pages/About";
 import Global from "./Pages/analytics/global";
 import { createTheme, ThemeProvider } from "@mui/material";
 import Continental from "./Pages/analytics/continental";
 import India from "./Pages/analytics/india";
-import Dashboard from "./Pages/Dashboard";
+
 import Predictions from "./Pages/predictions";
 // import { ToastContainer } from "react-toastify";
 // import "react-toastify/dist/ReactToastify.css";
@@ -37,7 +38,7 @@ function App() {
         <Router>
           <Routes>
             <Route exact path="/" element={<Home />} />
-            <Route exact path="/dashboard" element={<Dashboard />} />
+            <Route exact path="/about" element={<About />} />
             <Route exact path="/analytics/global" element={<Global />} />
             <Route exact path="/analytics/india" element={<India />} />
             <Route exact path="/predictions" element={<Predictions />} />

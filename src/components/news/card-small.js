@@ -14,7 +14,7 @@ export default function MediaCard({ data }) {
       sx={{
         px: 2,
         py: 3,
-
+        height: "30vh",
         background: "transparent",
         boxShadow: "none",
         border: "1px solid #FF5C00",

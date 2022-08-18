@@ -25,6 +25,10 @@ const links = [
     href: "/news",
   },
   {
+    name: "About",
+    href: "/about",
+  },
+  {
     name: "Team",
     href: "/team",
   },
