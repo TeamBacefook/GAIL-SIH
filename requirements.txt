@@ -9,3 +9,4 @@ keras
 sklearn
 yahoo_fin
 numpy
+statsmodels
