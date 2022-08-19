@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   Box,
   Grid,
@@ -18,6 +18,8 @@ import logo from "../../images/dashboard/logo.svg";
 import down from "../../images/dashboard/fall.svg";
 import World from "../../components/analytics/globe";
 import Marquee from "react-fast-marquee";
+import { data } from "../../components/analytics/withdata";
+import LineChart from "../../charts/homelinechart";
 
 const OutlinedButton = styled(Button)({
   border: "1px solid #FF5C00",
@@ -65,6 +67,7 @@ const years = [
   { str: "2019", val: 2019 },
   { str: "2020", val: 2020 },
 ];
+const countryarr = [];
 
 const commodity = [
   { str: "Natural gas", val: "Natural gas" },
@@ -412,7 +415,9 @@ const Home = () => {
     commodity: "Natural gas",
     type: "Production",
   });
-
+  const globeElement = useRef();
+  const [tabledata, settabledata] = useState(null);
+  const [selectedCountryonGlobe, setSelectedCountryonGlobe] = useState(null);
   useEffect(() => {
     const getData = async () => {
       const data = await getNews("natural gas");
@@ -474,7 +479,6 @@ const Home = () => {
               value={years.find((item) => item.val === filters.year)}
               getOptionLabel={(option) => option.str}
               onChange={(e, value) => {
-                console.log(value);
                 setFilter((prev) => {
                   return {
                     ...prev,
@@ -548,20 +552,107 @@ const Home = () => {
         </Grid>
       </Grid>
       <Grid container style={{ width: "100%", height: "70vh" }}>
-        <Grid item xs={12} md={6} lg={6} id="worldmap">
+        <Grid sx={{ mt: 2 }} item xs={12} md={6} lg={6} id="worldmap">
           <World
             year={filters.year}
             commodity={filters.commodity}
             type={filters.type}
+            settabledata={settabledata}
+            globeElement={globeElement}
+            selectedCountryonGlobe={selectedCountryonGlobe}
           />
         </Grid>
-        <Grid item xs={12} md={6} lg={6}>
+        <Grid item style={{ maxHeight: "50vh" }} xs={12} md={6} lg={6}>
           <TextField
             id="standard-select-currency"
             select
             label="Country"
             // value={compare.country1}
-            onChange={(e) => {}}
+            onChange={(e) => {
+              var countrydata = data.features.find(
+                (x) => x.properties.SOVEREIGNT === e.target.value
+              );
+              var tabledata = [];
+              for (var year of [
+                "1990",
+                "1991",
+                "1992",
+                "1993",
+                "1994",
+                "1995",
+                "1996",
+                "1997",
+                "1998",
+                "1999",
+                "2000",
+                "2001",
+                "2002",
+                "2003",
+                "2004",
+                "2005",
+                "2006",
+                "2007",
+                "2008",
+                "2009",
+                "2010",
+                "2011",
+                "2012",
+                "2013",
+                "2014",
+                "2015",
+                "2016",
+                "2017",
+                "2018",
+                "2019",
+                "2020",
+              ]) {
+                if (countrydata.properties[year] !== undefined) {
+                  tabledata.push({
+                    commodity: filters.commodity,
+                    year: year,
+                    imports:
+                      countrydata.properties[year][filters.commodity][
+                        "Imports"
+                      ],
+                    exports:
+                      countrydata.properties[year][filters.commodity][
+                        "Exports"
+                      ],
+                    consumption:
+                      countrydata.properties[year][filters.commodity][
+                        "Consumption"
+                      ],
+                    production:
+                      countrydata.properties[year][filters.commodity][
+                        "Production"
+                      ],
+                    metric:
+                      countrydata.properties[year][filters.commodity]["Metric"],
+                  });
+                }
+              }
+              settabledata(tabledata);
+              globeElement.current.pointOfView(
+                {
+                  lat: countrydata.properties.lat,
+                  lng: countrydata.properties.lon,
+                  altitude: 1.45,
+                },
+                1500
+              );
+              globeElement.current.controls().autoRotate = false;
+              globeElement.current.controls().autoRotateSpeed = 0;
+              setTimeout(() => {
+                setSelectedCountryonGlobe(countrydata);
+              }, 1500);
+
+              setTimeout(() => {
+                globeElement.current.controls().autoRotate = true;
+                globeElement.current.controls().autoRotateSpeed = -1;
+
+                setSelectedCountryonGlobe(null);
+              }, 5000);
+            }}
             style={{
               width: "90%",
               margin: "2%",
@@ -576,6 +667,13 @@ const Home = () => {
               </MenuItem>
             ))}
           </TextField>
+          {tabledata && (
+            <LineChart
+              width={window.innerWidth / 2}
+              height={window.innerHeight / 2}
+              data={tabledata}
+            />
+          )}
         </Grid>
       </Grid>
       <Box sx={{ py: 4 }}>
@@ -599,8 +697,7 @@ const Home = () => {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "flex-start",
-                    marginLeft: "2em",
-                    marginRight: "2em",
+                    margin: "0 0.5em",
                     minHeight: "7vh",
                   }}
                 >

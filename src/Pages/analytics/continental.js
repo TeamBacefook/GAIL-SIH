@@ -42,9 +42,11 @@ const Analytics = () => {
     const {
       target: { value },
     } = event;
+
+    console.log(value);
     setCommo(
       // On autofill we get a stringified value.
-      typeof value === "string" ? value.split(",") : value
+      typeof value === "string" ? [value.split] : value
     );
   };
 
@@ -61,6 +63,9 @@ const Analytics = () => {
             return { ...obj, data: JSON.parse(obj.data) };
           }),
         ]);
+      })
+      .catch((error) => {
+        console.log(error);
       });
   }, [filters, commo, setTree]);
   console.log(tree);
@@ -107,7 +112,7 @@ const Analytics = () => {
       </Helmet>
       <Grid item container justifyContent="center" xs={12}>
         <FormControl sx={{ m: 1, width: "40%" }}>
-          <InputLabel id="demo-multiple-chip-label">Chip</InputLabel>
+          <InputLabel id="demo-multiple-chip-label">Commodities</InputLabel>
           <Select
             labelId="demo-multiple-chip-label"
             id="demo-multiple-chip"
@@ -122,6 +127,7 @@ const Analytics = () => {
               />
             }
             renderValue={(x) => {
+              console.log(x);
               return (
                 <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
                   {x.map((value) => (
@@ -159,53 +165,64 @@ const Analytics = () => {
         />
       </Grid>
       <Grid container item xs={12}>
-        {commo.map((value, index) => {
-          const x = tree.find((obj) => {
-            return obj.commodity === value && obj.type === "Imports";
-          });
-          console.log(x, "x");
-          return (
-            <Grid
-              container
-              justifyContent="center"
-              alignItems="center"
-              item
-              spacing={3}
-              xs={12}
-            >
-              <Grid item xs={12}>
-                <Typography
-                  variant="h5"
-                  sx={{ textAlign: "center", color: "rgb(2,36,96)" }}
-                >
-                  {value}
-                </Typography>
+        {tree?.length !== 0 &&
+          commo.map((value, index) => {
+            const exportsData = tree?.find((obj) => {
+              return obj.commodity === value && obj.type === "Exports";
+            })?.data;
+            const importsData = tree?.find((obj) => {
+              return obj.commodity === value && obj.type === "Imports";
+            })?.data;
+            return (
+              <Grid
+                container
+                justifyContent="center"
+                alignItems="center"
+                item
+                spacing={3}
+                xs={12}
+              >
+                <Grid item xs={12}>
+                  <Typography
+                    variant="h3"
+                    sx={{ textAlign: "center", color: "rgb(2,36,96)" }}
+                  >
+                    {value}
+                  </Typography>
+                </Grid>
+                {exportsData && (
+                  <Grid item xs={12} md={5} sx={{ margin: "2%" }}>
+                    <Typography
+                      variant="h5"
+                      sx={{ textAlign: "center", color: "rgb(2,36,96)" }}
+                    >
+                      Exports
+                    </Typography>
+                    <TreeMap
+                      g_width={0.4 * window.innerWidth}
+                      g_height={0.4 * window.innerHeight}
+                      data={exportsData}
+                    />
+                  </Grid>
+                )}
+                {importsData && (
+                  <Grid item xs={12} md={5} sx={{ margin: "2%" }}>
+                    <Typography
+                      variant="h5"
+                      sx={{ textAlign: "center", color: "rgb(2,36,96)" }}
+                    >
+                      Imports
+                    </Typography>
+                    <TreeMap
+                      g_width={0.4 * window.innerWidth}
+                      g_height={0.4 * window.innerHeight}
+                      data={importsData}
+                    />
+                  </Grid>
+                )}{" "}
               </Grid>
-              <Grid item xs={12} md={5} sx={{ margin: "2%" }}>
-                <TreeMap
-                  g_width={0.4 * window.innerWidth}
-                  g_height={0.4 * window.innerHeight}
-                  data={
-                    tree.find((obj) => {
-                      return obj.commodity === value && obj.type === "Exports";
-                    })?.data
-                  }
-                />
-              </Grid>
-              <Grid item xs={12} md={5} sx={{ margin: "2%" }}>
-                <TreeMap
-                  g_width={0.4 * window.innerWidth}
-                  g_height={0.4 * window.innerHeight}
-                  data={
-                    tree.find((obj) => {
-                      return obj.commodity === value && obj.type === "Imports";
-                    })?.data
-                  }
-                />
-              </Grid>
-            </Grid>
-          );
-        })}
+            );
+          })}
       </Grid>
       <Divider sx={{ my: 4 }} />
       <Grid sx={{ py: 4 }} item container xs={12}>

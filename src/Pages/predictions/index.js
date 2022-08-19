@@ -7,8 +7,9 @@ import {
   TextField,
   useMediaQuery,
 } from "@mui/material";
+import { styled } from "@mui/material/styles";
 import BarCharts from "../../charts/barchart";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Helmet from "react-helmet";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
@@ -22,6 +23,7 @@ import CSVReader from "react-csv-reader";
 import withLayout from "../../layout";
 import { getPredictions, getModelEval } from "../../actions/predictions";
 import LineChart from "../../charts/predchart";
+
 const marks = [
   { label: "", value: 0 },
   { label: "", value: 0.2 },
@@ -31,16 +33,44 @@ const marks = [
   { label: "", value: 0.8 },
   { label: "", value: 1 },
 ];
-
+const CssTextField = styled(TextField)({
+  "& .MuiOutlinedInput-root": {
+    backgroundColor: "rgba(255,255,255,0.6)",
+    height: "3em",
+    borderRadius: "10px",
+  },
+});
 const Predictions = () => {
+  const csvRef = useRef(null);
   const [data, setData] = useState([]);
   const handleForce = async (item) => {
     const pred = await getPredictions(item);
     setData(pred.data);
-    document.querySelector(".csv-input").value = "";
+    csvRef.current.value = null;
   };
   const [commo, setCommo] = useState([]);
   const [all, setAll] = useState([]);
+  function csvJSON(csv) {
+    var lines = csv.split("\n");
+
+    var result = [];
+
+    var headers = lines[0].split(",");
+
+    for (var i = 1; i < lines.length; i++) {
+      var obj = {};
+      var currentline = lines[i].split(",");
+
+      for (var j = 0; j < headers.length; j++) {
+        obj[headers[j]] = currentline[j];
+      }
+
+      result.push(obj);
+    }
+
+    //return result; //JavaScript object
+    return JSON.stringify(result); //JSON
+  }
   useEffect(() => {
     const arr = [];
     for (var key in data[0]) {
@@ -55,22 +85,23 @@ const Predictions = () => {
     setCommo(arr);
   }, [data]);
   const [barData, setBarData] = useState([]);
-  const getData2 = async () => {
-    const data2 = await getModelEval();
-    const arr = [];
-    for (var key in data2.data[0]) {
-      if (data2.data[0].hasOwnProperty(key)) {
-        var val = data2.data[0][key];
-        if (key !== "index") {
-          console.log({ label: key, value: val });
-          arr.push({ label: key, value: val });
+
+  useEffect(() => {
+    const getData2 = async () => {
+      const data2 = await getModelEval();
+      const arr = [];
+      for (var key in data2.data[0]) {
+        if (data2.data[0].hasOwnProperty(key)) {
+          var val = data2.data[0][key];
+          if (key !== "index") {
+            console.log({ label: key, value: val });
+            arr.push({ label: key, value: val });
+          }
         }
       }
-    }
-    setBarData(arr);
-    console.log(arr);
-  };
-  useEffect(() => {
+      setBarData(arr);
+      console.log(arr);
+    };
     getData2();
   }, []);
   const papaparseOptions = {
@@ -111,11 +142,34 @@ const Predictions = () => {
           </Typography>
         </Grid>
         <Grid item xs={3}>
+          {/* <label
+            className="d-flex justify-content-center align-items-center btn"
+            style={{ height: "fit-content" }}
+          > */}
+          {/* <Typography contentKey="dataFile.home.createLabel">
+              Import data from file
+            </Typography> */}
+          {/* <Button
+              variant="contained"
+              contentKey="dataFile.home.createLabel"
+              sx={{
+                background:
+                  "linear-gradient(169.84deg, #FFE53B -30.77%, #FF2525 119.39%)",
+                color: "white",
+                borderRadius: "11px",
+                textTransform: "none",
+                width: "70%",
+              }}
+            >
+              Import Data
+            </Button> */}
           <CSVReader
+            inputRef={csvRef}
             cssClass="react-csv-input"
             onFileLoaded={handleForce}
             parserOptions={papaparseOptions}
           />
+          {/* </label> */}
         </Grid>
         <Grid item xs={2}>
           <Button

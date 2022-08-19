@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { Treemap, Tooltip } from "recharts";
+import * as d3 from "d3";
 
 const COLORS = {
   natural_gas: [
@@ -105,9 +106,20 @@ const COLORS = {
 };
 
 const CustomizedContent = (props) => {
-  const { root, depth, x, y, width, height, index, colors, name, sub_region } =
-    props;
-  console.log(root);
+  const {
+    root,
+    depth,
+    x,
+    y,
+    width,
+    height,
+    index,
+    colors,
+    name,
+    sub_region,
+    size,
+    // myScale,
+  } = props;
   return (
     <g>
       <rect
@@ -131,7 +143,7 @@ const CustomizedContent = (props) => {
           y={y + height / 2 + 7}
           textAnchor="middle"
           fill="#000000"
-          fontSize={10}
+          fontSize={props.fontSize(size)}
         >
           {sub_region}
         </text>
@@ -140,7 +152,23 @@ const CustomizedContent = (props) => {
   );
 };
 
+const CustomTooltip = ({ active, payload, label }) => {
+  if (active && payload && payload.length) {
+    return (
+      <p>
+        {payload[0].payload.sub_region} : {payload[0].value}
+      </p>
+    );
+  }
+  return null;
+};
+
 export default function App({ data, g_width, g_height, comm }) {
+  let myScale = d3.scaleLinear();
+  const getVal = (feat) => feat.size;
+  const maxVal = useMemo(() => Math.max(...data?.map(getVal)), [data]);
+  myScale.domain([0, maxVal]).range([0, 20]);
+
   return (
     <Treemap
       width={g_width}
@@ -150,7 +178,11 @@ export default function App({ data, g_width, g_height, comm }) {
       stroke="#000000"
       strokeWidth={0}
       fill="#ffffff"
-      content={<CustomizedContent colors={COLORS.natural_gas} />}
-    ></Treemap>
+      content={
+        <CustomizedContent colors={COLORS.natural_gas} fontSize={myScale} />
+      }
+    >
+      <Tooltip content={<CustomTooltip />} />
+    </Treemap>
   );
 }
