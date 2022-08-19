@@ -43,6 +43,27 @@ def getcontinentdata():
         continentdata["value"] = -continentdata["value"]
     return continentdata.to_json(orient="records")
 
+@app.route("/data/getTrend", methods=["GET"])
+def gettrend():
+    continentsubregions = pd.read_csv("EnergyBalanceSheet.csv")
+    continentsubregions =  continentsubregions.groupby(["Commodity", "Type"], as_index=False)
+    data = []
+    for eachgroup in continentsubregions.__iter__():
+        tempdf = pd.DataFrame(eachgroup[1])
+        yr1change = ((int(tempdf.iloc[-1]["value"]) - int(tempdf.iloc[-2]["value"]) )/ int(tempdf.iloc[-5]["value"]))*100
+        yr3change = ((int(tempdf.iloc[-1]["value"]) - int(tempdf.iloc[-4]["value"]) )/ int(tempdf.iloc[-5]["value"]))*100
+        yr5change =((int(tempdf.iloc[-1]["value"]) - int(tempdf.iloc[-6]["value"]) )/ int(tempdf.iloc[-5]["value"]))*100
+        data.append({
+            "commodity": tempdf.iloc[-1]["Commodity"],
+            "Type": tempdf.iloc[-1]["Type"],
+            "yrchange": yr1change,
+            "yr3change": yr3change,
+            "yr5change": yr5change,
+            "data": tempdf.to_json(orient="records")
+        })
+    data = pd.DataFrame(data)
+    return data.to_json(orient="records")
+
 @app.route('/data/continents/treemap', methods=['POST'])
 def getcontinentdata1():
     data = json.loads(request.data)
@@ -175,21 +196,23 @@ def predictions():
 def getEvals():
     return get_model_evals(current_app.models).to_json(orient='table')
 
+
+
 if __name__ == "__main__":
     with app.app_context():
-        # current_app.dataframe = data_fetch()
+        current_app.dataframe = data_fetch()
         
-        # current_app.model_boole = get_models(f'./Model_V20_Boole.h5', 0.0012)
-        # current_app.model_babbage = get_models(f'./Model[Babbage]_v3.h5', 0.0027)
-        # current_app.model_bell_1 = get_models(f'./Model_V22_Bell.h5', 0.009)
-        # current_app.model_bell_2 = get_models(f'./Model_V23_Bell.h5', 0.009)
+        current_app.model_boole = get_models(f'./Model[Babbage]_v4.h5', 0.0027)
+        current_app.model_babbage = get_models(f'./Model[Babbage]_v3.h5', 0.0027)
+        current_app.model_bell_1 = get_models(f'./Model_V22_Bell.h5', 0.02)
+        current_app.model_bell_2 = get_models(f'./Model_V23_Bell.h5', 0.009)
         
-        current_app.models = []
-        #     ('LSTM - Boole', current_app.model_boole, ['close', '30ma', '60ma', '180ma', 'close_min', 'close_max'], 0.225),
-        #     ('LSTM - Babbage', current_app.model_babbage, ['close', '180ma', '60ma', '30ma', 'close_min', 'close_max', 'gradient'], 0.225),
-        #     ('LSTM - Bell v1', current_app.model_bell_1, ['close', '180ma', '60ma', '30ma', 'close_min', 'close_max', 'gradient', 'd_gradient'], 0.225),
-        #     ('LSTM - Bell v2', current_app.model_bell_2, ['close', '180ma', '60ma', '30ma', 'close_min', 'close_max', 'gradient', 'd_gradient'], 0.225),
-        #     ('ARIMA', None, [], 0.1)
-        # ]
+        current_app.models = [
+            ('LSTM - Boole', current_app.model_boole, ['close', '30ma', '60ma', '180ma', 'close_min', 'close_max',  'gradient'], 0.5),
+            ('LSTM - Babbage', current_app.model_babbage, ['close', '180ma', '60ma', '30ma', 'close_min', 'close_max', 'gradient'], 0.5),
+            ('LSTM - Bell v1', current_app.model_bell_1, ['close', '180ma', '60ma', '30ma', 'close_min', 'close_max', 'gradient', 'd_gradient'], -0.12),
+            ('LSTM - Bell v2', current_app.model_bell_2, ['close', '180ma', '60ma', '30ma', 'close_min', 'close_max', 'gradient', 'd_gradient'], 1.0),
+            ('ARIMA', None, [], 0.1)
+        ]
 
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0', port=5000)
