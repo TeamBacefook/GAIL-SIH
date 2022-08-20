@@ -5,18 +5,29 @@ from sklearn.preprocessing import StandardScaler
 from yahoo_fin import stock_info as si
 import pandas as pd
 import numpy as np
+from math import log
 from dateutil.relativedelta import *
 from yahoo_fin import stock_info as si
 from statsmodels.tsa.arima.model import ARIMA
 from sklearn.metrics import mean_squared_error, mean_absolute_percentage_error
+from xgboost import XGBRegressor
 
 def rmse(y_pred, y_true):
     return k_be.sqrt(k_be.mean(k_be.square(y_pred - y_true))) 
 
+def calculate_aic(n, y_pred, y_true, num_params):
+  mse = mean_squared_error(y_true, y_pred)
+  aic = n * log(mse) + 2 * num_params
+  return aic
+
 def get_models(model_loc, learning_rate):
+  if '.ubj' in model_loc:
+    model = XGBRegressor()
+    model.load_model(model_loc)
+  else:
     model = load_model(model_loc, custom_objects={'loss': rmse},compile=False)
     model.compile(loss = rmse, optimizer= tf.keras.optimizers.Adam(learning_rate=learning_rate))
-    return model
+  return model
 
 
 def data_fetch(df=None):
@@ -135,13 +146,17 @@ def get_model_evals(models):
     if name == 'ARIMA':
       model = ARIMA(data.close[:-72], order=(10, 1, 8)).fit()
       pred = model.forecast(steps=72)
+      aic = model.aic
     else:
       pred = data_pred_lstm(data, data.index[-24], data.index[-1], attrs, model)
+      num_params = 24 * (6 if "Boole" in name else 7 if "Babbage" in name else 8)
+      aic = calculate_aic(72, data.close[-72:], pred, num_params + 1)
     evals[name] = pd.DataFrame([
       mean_squared_error(data.close[-72:], pred, squared=False),
-      mean_absolute_percentage_error(data.close[-72:], pred)
+      mean_absolute_percentage_error(data.close[-72:], pred),
+      aic,
       ])
-  evals.index = pd.Index(['RMSE', 'MAPE'])
+  evals.index = pd.Index(['RMSE', 'MAPE', 'AIC'])
   return evals
   
   

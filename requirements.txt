@@ -10,3 +10,4 @@ sklearn
 yahoo_fin
 numpy
 statsmodels
+xgboost
