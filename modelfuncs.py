@@ -8,11 +8,10 @@ import numpy as np
 from dateutil.relativedelta import *
 from yahoo_fin import stock_info as si
 from statsmodels.tsa.arima.model import ARIMA
-from sklearn.metrics import mean_squared_error
+from sklearn.metrics import mean_squared_error, mean_absolute_percentage_error
 
 def rmse(y_pred, y_true):
     return k_be.sqrt(k_be.mean(k_be.square(y_pred - y_true))) 
-
 
 def get_models(model_loc, learning_rate):
     model = load_model(model_loc, custom_objects={'loss': rmse},compile=False)
@@ -23,7 +22,7 @@ def get_models(model_loc, learning_rate):
 def data_fetch(df=None):
   data = df
   if not (type(df) == pd.DataFrame or type(df) == pd.Series):
-    data = si.get_data('NG=F')
+    data = si.get_data('NG=F', end_date='2020-12-31')
     data = data[['close']]
     data = data.resample('1D').mean()
   data = pd.DataFrame(data)
@@ -131,14 +130,18 @@ def blended_models(dataset, start=None, end=None, models=[]):
 
 def get_model_evals(models):
   data = data_fetch()
-  evals = pd.DataFrame()
-  for name, model, attrs, weight in models:
+  evals = pd.DataFrame(columns=np.array(models)[:, 0])
+  for name, model, attrs, _ in models:
     if name == 'ARIMA':
       model = ARIMA(data.close[:-72], order=(10, 1, 8)).fit()
       pred = model.forecast(steps=72)
     else:
       pred = data_pred_lstm(data, data.index[-24], data.index[-1], attrs, model)
-    evals[name+' RMSE'] = pd.DataFrame([mean_squared_error(data.close[-72:], pred, squared=False)])
+    evals[name] = pd.DataFrame([
+      mean_squared_error(data.close[-72:], pred, squared=False),
+      mean_absolute_percentage_error(data.close[-72:], pred)
+      ])
+  evals.index = pd.Index(['RMSE', 'MAPE'])
   return evals
   
   

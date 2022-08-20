@@ -7,9 +7,8 @@ import pandas as pd
 from flask import Flask, request ,jsonify, current_app, Response
 import json
 from gnews import GNews
-import tensorflow as tf
 from tensorflow import keras as k
-
+import requests
 from modelfuncs import get_model_evals, get_models, blended_models, data_fetch
 
 
@@ -43,6 +42,11 @@ def getcontinentdata():
         continentdata["value"] = -continentdata["value"]
     return continentdata.to_json(orient="records")
 
+@app.route("/price/naturalgas", methods=["GET"])
+def getprices():
+    data = pd.DataFrame(requests.get("https://markets.tradingeconomics.com/chart?s=ng1:com&span=max&securify=new&url=/commodity/natural-gas&AUTH=mg%2BA7q8RtkF0IlLRsyMZ2p2BBbIa9CDGSNqxsIgEydUS1HU8YyMsQGkKCCWBhVUq&ohlc=1").json()["series"][0]['data'])
+    return data.to_json(orient="records")
+
 @app.route("/data/getTrend", methods=["GET"])
 def gettrend():
     continentsubregions = pd.read_csv("EnergyBalanceSheet.csv")
@@ -50,12 +54,16 @@ def gettrend():
     data = []
     for eachgroup in continentsubregions.__iter__():
         tempdf = pd.DataFrame(eachgroup[1])
+        commodity = tempdf.iloc[-1]["Commodity"]
+        type12 = tempdf.iloc[-1]["Type"]
+        tempdf = tempdf.drop(columns=["Commodity", "Type"])
         yr1change = ((int(tempdf.iloc[-1]["value"]) - int(tempdf.iloc[-2]["value"]) )/ int(tempdf.iloc[-5]["value"]))*100
         yr3change = ((int(tempdf.iloc[-1]["value"]) - int(tempdf.iloc[-4]["value"]) )/ int(tempdf.iloc[-5]["value"]))*100
         yr5change =((int(tempdf.iloc[-1]["value"]) - int(tempdf.iloc[-6]["value"]) )/ int(tempdf.iloc[-5]["value"]))*100
+        tempdf = tempdf.abs()
         data.append({
-            "commodity": tempdf.iloc[-1]["Commodity"],
-            "Type": tempdf.iloc[-1]["Type"],
+            "commodity": commodity,
+            "Type": type12,
             "yrchange": yr1change,
             "yr3change": yr3change,
             "yr5change": yr5change,
@@ -153,9 +161,10 @@ def getnaturalgasdata():
 @app.route('/data/petroleum/local', methods=['GET'])
 def getlocalpetroleumdata():
     data = request.args
-    petroleum = pd.read_csv("yearlypetroleum.csv")
-    petroleum = petroleum.loc[f"{data['startyear']}-{data['startmonth']}": f"{data['endyear']}-{data['endmonth']}"]
-    return petroleum.to_json(orient="records")
+    ya = pd.read_csv("yearlypetroleum.csv")
+    ya = ya[(ya["Year"] > int(data["startyear"])) & (ya["Year"] < int(data["endyear"]))]
+    ya = ya.groupby(["State"], as_index=False).sum()
+    return ya.to_json(orient="records")
 
 @app.route('/data/petroleum/sector', methods=['GET'])
 def getlocalpetroleumdata12():
@@ -187,9 +196,12 @@ def download():
 @app.route('/predictions', methods=['POST'])
 def predictions():
     data = json.loads(request.data)
-    dataframe = pd.DataFrame.from_records(data['csv']).set_index('date')
-    dataframe.index = pd.DatetimeIndex(dataframe.index)
-    dataframe = data_fetch(dataframe.close)
+    if not len(data['csv']): return current_app.saved_data
+    else: 
+        dataframe = pd.DataFrame.from_records(data['csv']).set_index('date')
+        dataframe["close"] = pd.to_numeric(dataframe["close"]) 
+        dataframe.index = pd.DatetimeIndex(dataframe.index)
+        dataframe = data_fetch(dataframe.close)
     return json.loads(blended_models(dataframe, models=current_app.models).to_json(orient='table'))
     
 @app.route('/modelEvals', methods=['GET'])
@@ -215,4 +227,7 @@ if __name__ == "__main__":
             ('ARIMA', None, [], 0.1)
         ]
 
-    app.run(host='0.0.0.0', port=5000)
+        current_app.saved_data = blended_models(current_app.dataframe, models=current_app.models).to_json(orient='table')
+
+    # app.run(host='0.0.0.0', port=5005)
+    app.run(debug=True)
