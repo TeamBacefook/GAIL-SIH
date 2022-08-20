@@ -428,6 +428,7 @@ const Home = () => {
     };
     getData();
   }, []);
+
   useEffect(() => {
     var countrydata = data.features.find(
       (x) => x.properties.SOVEREIGNT === filters.country
@@ -872,7 +873,7 @@ const Home = () => {
         {news?.map((obj, index) => {
           if (index < 2) {
             return (
-              <Grid item key={index*12} xs={6}>
+              <Grid item key={index * 12} xs={6}>
                 <NewsCard data={obj} />
               </Grid>
             );

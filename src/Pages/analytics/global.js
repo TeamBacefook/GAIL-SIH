@@ -7,6 +7,7 @@ import {
   MenuItem,
 } from "@mui/material";
 import React, { useState, useEffect } from "react";
+import LineChart from "../../charts/globalChart";
 import IOSSlider from "../../components/common/slider";
 import BarCharts from "../../charts/barchart";
 import withSubheader from "../../layout/sub-header";
@@ -19,6 +20,17 @@ import {
 } from "../../actions/analystics.global";
 import Divider from "@mui/material/Divider";
 
+const COLORS = [
+  "#e41a1c",
+  "#377eb8",
+  "#4daf4a",
+  "#984ea3",
+  "#ff7f00",
+  "#ffff33",
+  "#a65628",
+  "#f781bf",
+  "#999999",
+];
 const marks = [
   { label: 1990, value: 1990 },
   { label: 1995, value: 1995 },
@@ -271,7 +283,6 @@ const Analytics = () => {
       };
     });
   };
-  console.log([...trends.filter((item) => item.Type === parameter)]);
   const getCompare = async () => {
     const globe = await getGlobalData({
       start_year: compare.start_year,
@@ -474,14 +485,23 @@ const Analytics = () => {
             <MenuItem value="Transformation">Transformation</MenuItem>
           </TextField>
         </Grid>
-        {[...trends.filter((item) => item.Type === parameter)].map((obj) => {
-          console.log(JSON.parse(obj.data));
-          return (
-            <Grid item xs={12} md={6}>
-              {/* <Linec */}
-            </Grid>
-          );
-        })}
+        {[...trends.filter((item) => item.Type === parameter)].map(
+          (obj, index) => {
+            const newData = JSON.parse(obj.data);
+            console.log(newData);
+            return (
+              <Grid item key={index} xs={12} md={12}>
+                <LineChart
+                  width={window.innerWidth / 2}
+                  height={"100%"}
+                  data={newData}
+                  COLOR={COLORS[index]}
+                />
+                {/* test */}
+              </Grid>
+            );
+          }
+        )}
       </Grid>
 
       <Grid container padding={"2%"}>

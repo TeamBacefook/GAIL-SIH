@@ -22,11 +22,12 @@ const COLORS = [
   "#999999",
 ];
 
-export default function DataLineChart({ width, height, data, display }) {
+export default function DataLineChart({ width, height, data, display, refi }) {
   return (
     <>
       <ResponsiveContainer width="100%" height="100%">
         <LineChart
+          ref={refi}
           width={width}
           height={height}
           data={data}

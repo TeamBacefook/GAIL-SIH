@@ -12,6 +12,7 @@
     "@mui/material": "^5.10.0",
     "axios": "^0.27.2",
     "d3": "^7.6.1",
+    "file-saver": "^2.0.5",
     "framer-motion": "^4.1.17",
     "hamburger-react": "^2.5.0",
     "papaparse": "^5.3.2",
@@ -25,7 +26,8 @@
     "react-simple-maps": "^3.0.0",
     "react-toastify": "^8.1.0",
     "react-tooltip": "^4.2.21",
-    "recharts": "^2.1.13"
+    "recharts": "^2.1.13",
+    "recharts-to-png": "^2.2.0"
   },
   "scripts": {
     "start": "react-scripts start",

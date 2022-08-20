@@ -7,7 +7,7 @@ import {
   TextField,
 } from "@mui/material";
 import BarCharts from "../../charts/barchart";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import Helmet from "react-helmet";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
@@ -23,6 +23,8 @@ import { getPredictions, getModelEval } from "../../actions/predictions";
 import LineChart from "../../charts/predchart";
 import "./style.css";
 import Papa from "papaparse";
+import FileSaver from "file-saver";
+import { useCurrentPng } from "recharts-to-png";
 
 const marks = [
   { label: "", value: 0 },
@@ -79,6 +81,13 @@ const Predictions = () => {
     setCommo(arr);
   }, [data]);
   const [barData, setBarData] = useState([]);
+  const [getPng, { ref }] = useCurrentPng();
+  const handleDownload = useCallback(async () => {
+    const png = await getPng();
+    if (png) {
+      FileSaver.saveAs(png, "Prediction.png");
+    }
+  }, [getPng]);
 
   useEffect(() => {
     const getData2 = async () => {
@@ -141,6 +150,7 @@ const Predictions = () => {
               textTransform: "none",
               width: "70%",
             }}
+            onClick={handleDownload}
             disabled={data.length !== 0 ? false : true}
           >
             Download Graph
@@ -210,7 +220,13 @@ const Predictions = () => {
             md={12}
             style={{ display: "flex", alignItems: "center", height: "60vh" }}
           >
-            <LineChart width="100%" height="100%" data={data} display={commo} />
+            <LineChart
+              width="100%"
+              height="100%"
+              data={data}
+              display={commo}
+              refi={ref}
+            />
           </Grid>
         </>
       )}

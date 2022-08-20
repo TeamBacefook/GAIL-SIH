@@ -30,15 +30,19 @@
       ></iframe
     ></noscript>
     <script>
-      function createCSV(array, arr) {
+      function createCSV(array, filter) {
+        var keys = Object.keys(array[0]);
+
         var result = "";
-        arr.push("index");
-        result += arr.join(",");
+        var f1 = [...filter, "index"];
+        result += f1.join(",");
         result += "\n";
 
         array.forEach(function (item) {
-          arr.forEach(function (key) {
-            result += item[key] + ",";
+          keys.forEach(function (key) {
+            if (f1.includes(key)) {
+              result += item[key] + ",";
+            }
           });
           result += "\n";
         });
