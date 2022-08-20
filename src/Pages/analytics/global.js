@@ -5,6 +5,7 @@ import {
   Autocomplete,
   TextField,
   MenuItem,
+  Paper,
 } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import LineChart from "../../charts/globalChart";
@@ -462,7 +463,7 @@ const Analytics = () => {
       <Divider />
       <Grid
         item
-        padding={"2%"}
+        sx={{ px: 4, py: 2 }}
         alignItems="center"
         container
         spacing={3}
@@ -488,16 +489,82 @@ const Analytics = () => {
         {[...trends.filter((item) => item.Type === parameter)].map(
           (obj, index) => {
             const newData = JSON.parse(obj.data);
-            console.log(newData);
+
             return (
-              <Grid item key={index} xs={12} md={12}>
+              <Grid item key={index} xs={12} md={5.8} sx={{ m: 1 }}>
+                <Typography sx={{ my: 1 }}>{obj.commodity}</Typography>
                 <LineChart
-                  width={window.innerWidth / 2}
-                  height={"100%"}
+                  width={window.innerWidth / 2.6}
+                  height={window.innerHeight / 2}
                   data={newData}
-                  COLOR={COLORS[index]}
+                  COLOR={"#e41a1c"}
                 />
-                {/* test */}
+                <Typography sx={{ my: 1 }}>
+                  {parameter === "Primary production"
+                    ? "Production"
+                    : parameter === "Final consumption"
+                    ? "Consumption"
+                    : "Transformation"}
+                  :
+                </Typography>
+                <Grid item container xs={12} alignItems="center">
+                  <Grid
+                    item
+                    sx={{
+                      backgroundColor: obj.yrchange > 0 ? "#D5FFCD" : "#FFC1C1",
+                      textAlign: "center",
+                      p: 1,
+                      borderRadius: 10,
+                      m: 0.5,
+                    }}
+                    xs={12}
+                    md={5.5}
+                  >
+                    <Typography>
+                      {`${obj.yrchange > 0 ? "Increased" : "Decreased"}`} by{" "}
+                      {Math.abs(Number(obj.yrchange).toPrecision(3))}% since
+                      last year
+                    </Typography>
+                  </Grid>
+                  <Grid
+                    item
+                    xs={12}
+                    md={5.5}
+                    sx={{
+                      backgroundColor:
+                        obj.yr3change > 0 ? "#D5FFCD" : "#FFC1C1",
+                      textAlign: "center",
+                      p: 1,
+                      borderRadius: 10,
+                      m: 0.5,
+                    }}
+                  >
+                    <Typography>
+                      {`${obj.yr3change > 0 ? "Increased" : "Decreased"}`} by{" "}
+                      {Math.abs(Number(obj.yr3change).toPrecision(3))}% since
+                      last 3 years
+                    </Typography>
+                  </Grid>
+                  <Grid
+                    sx={{
+                      backgroundColor:
+                        obj.yr5change > 0 ? "#D5FFCD" : "#FFC1C1",
+                      textAlign: "center",
+                      p: 1,
+                      borderRadius: 10,
+                      m: 0.5,
+                    }}
+                    item
+                    xs={12}
+                    md={5.5}
+                  >
+                    <Typography>
+                      {`${obj.yr5change > 0 ? "Increased" : "Decreased"}`} by{" "}
+                      {Math.abs(Number(obj.yr5change).toPrecision(3))}% since
+                      last 5 years
+                    </Typography>
+                  </Grid>
+                </Grid>
               </Grid>
             );
           }

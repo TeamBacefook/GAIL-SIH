@@ -143,7 +143,14 @@ const Analytics = () => {
       });
   }, [petroleumRange, setPetroleum]);
   return (
-    <Box sx={{ my: { xs: 1, md: 10 }, px: { xs: 2, md: 8 } }}>
+    <Box
+      sx={{
+        my: { xs: 1, md: 10 },
+        px: { xs: 2, md: 8 },
+        maxWidth: "100vw",
+        overflowX: "hidden",
+      }}
+    >
       <Helmet>
         <title>GAIL SIH | Analytics-India</title>
         <meta name="description" content="Analytics page for GAIL-SIH" />
