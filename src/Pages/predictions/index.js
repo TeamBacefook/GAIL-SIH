@@ -1,31 +1,20 @@
 import {
   Box,
-  Button,
   Grid,
   Typography,
   Divider,
   TextField,
+  Autocomplete,
 } from "@mui/material";
 import ComboChart from "../../components/prediction/combo";
 import BarCharts from "../../charts/barchart";
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import Helmet from "react-helmet";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-import Chip from "@mui/material/Chip";
 import Checkbox from "@mui/material/Checkbox";
 import IOSSlider from "../../components/common/slider";
-import { toast } from "react-toastify";
 import withLayout from "../../layout";
 import { getPredictions, getModelEval } from "../../actions/predictions";
-import LineChart from "../../charts/predchart";
 import "./style.css";
-import Papa from "papaparse";
-import FileSaver from "file-saver";
-import { useCurrentPng } from "recharts-to-png";
 
 const marks = [
   { label: "", value: 0 },
@@ -36,22 +25,30 @@ const marks = [
   { label: "", value: 0.8 },
   { label: "", value: 1 },
 ];
+const Errors = [{ label: "RMSE" }, { label: "MAPE" }, { label: "AIC" }];
 
 const Predictions = () => {
+  const [current, setCurrent] = useState();
   const [barData, setBarData] = useState([]);
   useEffect(() => {
     const getData2 = async () => {
       const data2 = await getModelEval();
-      const arr = [];
-      for (var key in data2.data[0]) {
-        if (data2.data[0].hasOwnProperty(key)) {
-          var val = data2.data[0][key];
-          if (key !== "index") {
-            arr.push({ label: key, value: val });
+      var final = {};
+
+      data2.data.map((item, index) => {
+        var arr = [];
+        for (var key in data2.data[index]) {
+          if (data2.data[index].hasOwnProperty(key)) {
+            var val = data2.data[index][key];
+            if (key !== "index") {
+              arr.push({ label: key, value: val });
+            }
           }
         }
-      }
-      setBarData(arr);
+        final[data2.data[index]["index"]] = arr;
+      });
+      setCurrent(data2.data[0]["index"]);
+      setBarData(final);
     };
     getData2();
   }, []);
@@ -191,20 +188,35 @@ const Predictions = () => {
           </Typography>
         </Grid>
         <Grid item xs={12} container justifyContent={"flex-end"} md={6}>
-          <TextField
-            sx={{ width: "80%" }}
-            variant="outlined"
-            value="RMSE"
-            select
-          />
+          {barData.length !== 0 && (
+            <Autocomplete
+              style={{ width: "100%", height: "80%", borderRadius: "3em" }}
+              id="combo-box-demo"
+              options={Errors}
+              value={Errors.find((item) => item.label === current)}
+              getOptionLabel={(option) => option.label}
+              onChange={(e, value) => {
+                setCurrent(value === null ? "RMSE" : value.label);
+              }}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  variant="outlined"
+                  label="Metric"
+                  placeholder="Metric"
+                  type="text"
+                />
+              )}
+            />
+          )}
         </Grid>
         <Grid sx={{ mt: 8 }} item container justifyContent="center" xs={12}>
           <Grid item sx={12} md={12}>
             {barData.length !== 0 && (
               <>
-                <p>RMSE</p>
+                <p>{current}</p>
                 <BarCharts
-                  data={barData}
+                  data={barData[current]}
                   bg1="#ACB6E5"
                   orientation={0}
                   bg2="#74ebd5"

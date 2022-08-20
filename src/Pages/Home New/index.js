@@ -19,6 +19,12 @@ import World from "../../components/analytics/globe";
 import Marquee from "react-fast-marquee";
 import { data } from "../../components/analytics/withdata";
 import LineChart from "../../charts/homelinechart";
+import ReactFC from "react-fusioncharts";
+import FusionCharts from "fusioncharts";
+import TimeSeries from "fusioncharts/fusioncharts.timeseries";
+import GammelTheme from "fusioncharts/themes/fusioncharts.theme.gammel";
+import { getStockData2 } from "../../actions/predictions";
+ReactFC.fcRoot(FusionCharts, TimeSeries, GammelTheme);
 
 const OutlinedButton = styled(Button)({
   border: "1px solid #FF5C00",
@@ -421,6 +427,84 @@ const Home = () => {
   const globeElement = useRef();
   const [tabledata, settabledata] = useState(null);
   const [selectedCountryonGlobe, setSelectedCountryonGlobe] = useState(null);
+  const [timeseriesDs, settimeseriesDs] = useState();
+  // const [multiSeriesDs, setMultiSeriesDs] = useState();
+
+  const dataSource = {
+    chart: {
+      theme: "gammel",
+    },
+    caption: {
+      text: "NG=F(Natural gas) Stock Prices",
+    },
+    subcaption: {
+      text: "Stock prices from 2000 - Present",
+    },
+    yaxis: [
+      {
+        plot: {
+          value: {
+            open: "Open",
+            high: "High",
+            low: "Low",
+            close: "Close",
+          },
+          type: "candlestick",
+        },
+        format: {
+          prefix: "$",
+        },
+        title: "Stock Value",
+      },
+    ],
+  };
+
+  useEffect(() => {
+    const getData = async () => {
+      const data = await getStockData2();
+      var schema = [
+        {
+          name: "Date",
+          type: "date",
+          format: "%d-%m-%Y",
+        },
+        {
+          name: "Low",
+          type: "number",
+        },
+        {
+          name: "Open",
+          type: "number",
+        },
+        {
+          name: "Close",
+          type: "number",
+        },
+        {
+          name: "High",
+          type: "number",
+        },
+      ];
+      const fusionTable = new FusionCharts.DataStore().createDataTable(
+        data,
+        schema
+      );
+      var timeseriesDsTemp = Object.assign(
+        {},
+        {
+          type: "timeseries",
+          renderAt: "container",
+          width: window.innerWidth / 1.4,
+          height: "600",
+          dataSource,
+        }
+      );
+      timeseriesDsTemp.dataSource.data = fusionTable;
+      settimeseriesDs(timeseriesDsTemp);
+    };
+    getData();
+  }, []);
+
   useEffect(() => {
     const getData = async () => {
       const data = await getNews("natural gas");
@@ -626,6 +710,7 @@ const Home = () => {
           </Grid>
         </Grid>
       </Grid>
+
       <Box sx={{ py: 8 }}>
         <Typography color="#00116A" fontSize="35px">
           Energy Prices
@@ -706,6 +791,13 @@ const Home = () => {
         })}
       </Marquee>
       <Divider style={{ marginTop: "3em" }} />
+      <Box sx={{ py: 8 }}>
+        <Typography color="#00116A" fontSize="35px">
+          Spot and Future prices of commodities
+        </Typography>
+        {timeseriesDs && <ReactFC {...timeseriesDs} />}
+      </Box>
+      <Divider style={{ marginTop: "3em" }} />
       <Grid item xs={12} sx={{ mt: 2 }} container>
         <Typography color="#00116A" fontSize="35px">
           Energy Gas Predictions
@@ -780,7 +872,6 @@ const Home = () => {
               >
                 <img src={up} alt="Fall Symbol" />
               </object>
-
               <Typography color="#309A30" fontSize={30}>
                 ₹270
               </Typography>

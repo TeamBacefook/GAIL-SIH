@@ -126,12 +126,12 @@ const Analytics = () => {
         spacing={3}
         xs={12}
       >
-        <Grid item xs={12} md={3} sx={{ p: "2%" }}>
+        <Grid item xs={12} sx={{ p: "2%" }}>
           <Typography color="#00116A" fontSize={35}>
             Global Trends
           </Typography>
         </Grid>
-        <Grid item xs={12} md={6} sx={{ p: "2%" }}>
+        <Grid container justifyContent="center" item xs={12} sx={{ p: "2%" }}>
           <TextField
             select
             onChange={(e) => setParameter(e.target.value)}

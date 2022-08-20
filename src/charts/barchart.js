@@ -1,9 +1,4 @@
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-} from "recharts";
+import { BarChart, Bar, XAxis, YAxis, Tooltip } from "recharts";
 import React from "react";
 
 const BarCharts = ({
@@ -53,7 +48,7 @@ const BarCharts = ({
             <stop offset="1" stopColor={bg1} />
           </linearGradient>
         </defs>
-
+        <Tooltip />
         <Bar dataKey="value" fill={`url(#${c_id})`} label="label"></Bar>
       </BarChart>
     </>
