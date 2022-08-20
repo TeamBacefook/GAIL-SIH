@@ -116,6 +116,7 @@ const Analytics = () => {
   const [petroleumRange, setPetroleumRange] = useState([2015, 2019]);
   const [petroleum, setPetroleum] = useState([]);
   const [lineChart, setLineChart] = useState([]);
+
   const getData = useCallback(async () => {
     if (
       monthlyFilter.end_month !== undefined &&
@@ -142,6 +143,7 @@ const Analytics = () => {
         setPetroleum(res.data);
       });
   }, [petroleumRange, setPetroleum]);
+
   return (
     <Box
       sx={{
@@ -220,7 +222,7 @@ const Analytics = () => {
               }}
             >
               <Typography color="#00116A" fontSize={30}>
-                Maharashtra(MH)
+                {coropleth.state}
               </Typography>
               <Typography sx={{ mt: 1 }} color="#004488">
                 Petroleum Production: 5.6tJ <br />

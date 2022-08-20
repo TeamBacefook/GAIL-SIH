@@ -4,9 +4,7 @@ import * as d3 from "d3";
 import { data } from "./withdata";
 
 const World = ({
-  year,
   commodity,
-  type,
   settabledata,
   globeElement,
   selectedCountryonGlobe,
@@ -31,11 +29,11 @@ const World = ({
 
   const getVal = useCallback(
     (feat) => {
-      return feat.properties[year] === undefined
+      return feat.properties[commodity] === undefined
         ? 0
-        : feat.properties[year][commodity][type];
+        : feat.properties[commodity]["value"];
     },
-    [year, commodity, type]
+    [commodity]
   );
 
   const maxVal = useMemo(
@@ -43,7 +41,7 @@ const World = ({
     [countries, getVal]
   );
   colorScale.domain([0, maxVal]);
-
+  console.log(maxVal);
   return (
     <ReactGlobe
       width={size[0]}
@@ -72,10 +70,10 @@ const World = ({
       polygonLabel={({ properties: d }) => `
       <div>
         <b>${d.SOVEREIGNT} (${d.ISO_A2}):</b> <br />
-        ${commodity} ${year} ${type}: <i>${
-        d[year] === undefined
+        ${commodity} Turn over: <i>${
+        d[commodity] === undefined
           ? "NA"
-          : d[year][commodity][type] + " " + d[year][commodity]["Metric"]
+          : d[commodity]["value"] + " " + d[commodity]["Metric"]
       } </i> <br />
         World Bank Region: <i>${d.REGION_WB}</i>
         </div>

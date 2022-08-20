@@ -506,7 +506,7 @@ const Home = () => {
     };
   }, [filters]);
   return (
-    <Box sx={{ py: 12, px: { xs: 2, md: 8 } }}>
+    <Box sx={{ py: 16, px: { xs: 2, md: 8 } }}>
       <Grid
         item
         xs={12}
@@ -541,42 +541,14 @@ const Home = () => {
             View Detailed Predictions
           </OutlinedButton>
         </Grid>
-        <Grid
-          item
-          xs={12}
-          justifyContent="flex-end"
-          alignItems="center"
-          spacing={3}
-          container
-          style={{ marginTop: "2vh" }}
-        >
-          <Grid item lg={4}>
-            <Autocomplete
-              style={{ width: "100%", height: "80%", borderRadius: "3em" }}
-              id="combo-box-demo"
-              options={years}
-              value={years.find((item) => item.val === filters.year)}
-              getOptionLabel={(option) => option.str}
-              onChange={(e, value) => {
-                setFilter((prev) => {
-                  return {
-                    ...prev,
-                    year: value === null ? 2020 : value.val,
-                  };
-                });
-              }}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  variant="outlined"
-                  label="Year"
-                  placeholder="Year"
-                  type="text"
-                />
-              )}
-            />
-          </Grid>
-          <Grid item lg={4}>
+      </Grid>
+      <Grid
+        container
+        spacing={4}
+        style={{ mt: "2em", width: "100%", height: "70vh" }}
+      >
+        <Grid item xs={12} md={6} lg={6} id="worldmap">
+          <Grid item xs={12} sx={{ mb: 4 }}>
             <Autocomplete
               style={{ width: "100%", height: "80%", borderRadius: "3em" }}
               id="combo-box-demo"
@@ -602,36 +574,6 @@ const Home = () => {
               )}
             />
           </Grid>
-          <Grid item lg={4}>
-            <Autocomplete
-              style={{ width: "100%", height: "80%", borderRadius: "3em" }}
-              id="combo-box-demo"
-              options={type}
-              value={type.find((item) => item.val === filters.type)}
-              getOptionLabel={(option) => option.str}
-              onChange={(e, value) => {
-                setFilter((prev) => {
-                  return {
-                    ...prev,
-                    type: value === null ? "Production" : value.val,
-                  };
-                });
-              }}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  variant="outlined"
-                  label="Type"
-                  placeholder="Type"
-                  type="text"
-                />
-              )}
-            />
-          </Grid>
-        </Grid>
-      </Grid>
-      <Grid container style={{ width: "100%", height: "70vh" }}>
-        <Grid sx={{ mt: 2 }} item xs={12} md={6} lg={6} id="worldmap">
           <World
             year={filters.year}
             commodity={filters.commodity}
@@ -646,16 +588,7 @@ const Home = () => {
             }
           />
         </Grid>
-        <Grid
-          item
-          mt="2em"
-          container
-          style={{ maxHeight: "50vh" }}
-          xs={12}
-          md={6}
-          lg={6}
-          spacing={3}
-        >
+        <Grid item container xs={12} md={6} lg={6} spacing={3}>
           <Grid item xs={12}>
             <Autocomplete
               style={{ width: "100%", height: "80%", borderRadius: "3em" }}
@@ -686,14 +619,14 @@ const Home = () => {
             {tabledata && (
               <LineChart
                 width={window.innerWidth / 2}
-                height={window.innerHeight / 2}
+                height={window.innerHeight * 0.7}
                 data={tabledata}
               />
             )}
           </Grid>
         </Grid>
       </Grid>
-      <Box sx={{ py: 4 }}>
+      <Box sx={{ py: 8 }}>
         <Typography color="#00116A" fontSize="35px">
           Energy Prices
         </Typography>

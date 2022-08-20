@@ -22,7 +22,6 @@ const geographyStyle = {
   },
 };
 
-// will generate random heatmap data on every call
 const getHeatMapData = () => {
   return [
     { id: "AP", state: "Andhra Pradesh" },

@@ -1,12 +1,16 @@
 const data = {
   type: "FeatureCollection",
-
   features: [
     {
       type: "Feature",
       properties: {
         SOVEREIGNT: "Afghanistan",
         ISO_A2: "AF",
+        ISO_A3: "AFG",
+        ISO_A3_EH: "AFG",
+        CONTINENT: "Asia",
+        REGION_UN: "Asia",
+        SUBREGION: "Southern Asia",
         REGION_WB: "South Asia",
         lat: 33.93911,
         lon: 67.709953,
@@ -940,6 +944,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 1010.5,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 387077.0962,
+          Metric: "Terajoules",
+        },
       },
       bbox: [60.52843, 29.318572, 75.158028, 38.486282],
       geometry: {
@@ -1024,6 +1047,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Angola",
         ISO_A2: "AO",
+        ISO_A3: "AGO",
+        ISO_A3_EH: "AGO",
+        CONTINENT: "Africa",
+        REGION_UN: "Africa",
+        SUBREGION: "Middle Africa",
         REGION_WB: "Sub-Saharan Africa",
         lat: -11.202692,
         lon: 17.873887,
@@ -1927,6 +1955,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 5149175.676000001,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 2777277.47848,
+          Metric: "Terajoules",
+        },
       },
       bbox: [11.640096, -17.930636, 24.079905, -4.438023],
       geometry: {
@@ -2023,6 +2070,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Albania",
         ISO_A2: "AL",
+        ISO_A3: "ALB",
+        ISO_A3_EH: "ALB",
+        CONTINENT: "Europe",
+        REGION_UN: "Europe",
+        SUBREGION: "Southern Europe",
         REGION_WB: "Europe & Central Asia",
         lat: 41.153332,
         lon: 20.168331,
@@ -2956,6 +3008,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 1821.5,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 257.26,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 40165.096000000005,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 81257.996,
+          Metric: "Terajoules",
+        },
       },
       bbox: [19.304486, 39.624998, 21.02004, 42.688247],
       geometry: {
@@ -2995,6 +3066,11 @@ const data = {
       properties: {
         SOVEREIGNT: "United Arab Emirates",
         ISO_A2: "AE",
+        ISO_A3: "ARE",
+        ISO_A3_EH: "ARE",
+        CONTINENT: "Asia",
+        REGION_UN: "Asia",
+        SUBREGION: "Western Asia",
         REGION_WB: "Middle East & North Africa",
         lat: 23.424076,
         lon: 53.847818,
@@ -3898,6 +3974,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 1018.012,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 5.652,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 9920488.499699999,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 96790496.17300001,
+          Metric: "Terajoules",
+        },
       },
       bbox: [51.579519, 22.496948, 56.396847, 26.055464],
       geometry: {
@@ -3935,6 +4030,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Argentina",
         ISO_A2: "AR",
+        ISO_A3: "ARG",
+        ISO_A3_EH: "ARG",
+        CONTINENT: "South America",
+        REGION_UN: "Americas",
+        SUBREGION: "South America",
         REGION_WB: "Latin America & Caribbean",
         lat: -38.416097,
         lon: -63.616672,
@@ -4868,6 +4968,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 1465701.9880000001,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 76032964.75400001,
+          Metric: "Terajoules",
+        },
       },
       bbox: [-73.415436, -55.25, -53.628349, -21.83231],
       geometry: {
@@ -5010,6 +5129,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Armenia",
         ISO_A2: "AM",
+        ISO_A3: "ARM",
+        ISO_A3_EH: "ARM",
+        CONTINENT: "Asia",
+        REGION_UN: "Asia",
+        SUBREGION: "Western Asia",
         REGION_WB: "Europe & Central Asia",
         lat: 40.069099,
         lon: 45.038189,
@@ -5883,6 +6007,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 45.111458999999996,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.6,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 3156418.4724179003,
+          Metric: "Terajoules",
+        },
       },
       bbox: [43.582746, 38.741201, 46.50572, 41.248129],
       geometry: {
@@ -5918,6 +6061,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Antarctica",
         ISO_A2: "AQ",
+        ISO_A3: "ATA",
+        ISO_A3_EH: "ATA",
+        CONTINENT: "Antarctica",
+        REGION_UN: "Antarctica",
+        SUBREGION: "Antarctica",
         REGION_WB: "Antarctica",
         lat: -75.250973,
         lon: -0.071389,
@@ -6627,6 +6775,11 @@ const data = {
       properties: {
         SOVEREIGNT: "France",
         ISO_A2: "TF",
+        ISO_A3: "ATF",
+        ISO_A3_EH: "ATF",
+        CONTINENT: "Seven seas (open ocean)",
+        REGION_UN: "Seven seas (open ocean)",
+        SUBREGION: "Seven seas (open ocean)",
         REGION_WB: "Sub-Saharan Africa",
         lat: -49.280366,
         lon: 69.348557,
@@ -7560,6 +7713,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 24256.111,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 39089.309,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 2273917.742,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 191141346.99,
+          Metric: "Terajoules",
+        },
       },
       bbox: [68.72, -49.775, 70.56, -48.625],
       geometry: {
@@ -7584,6 +7756,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Australia",
         ISO_A2: "AU",
+        ISO_A3: "AUS",
+        ISO_A3_EH: "AUS",
+        CONTINENT: "Oceania",
+        REGION_UN: "Oceania",
+        SUBREGION: "Australia and New Zealand",
         REGION_WB: "East Asia & Pacific",
         lat: -25.274398,
         lon: 133.775136,
@@ -8517,6 +8694,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 30672.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 1883188.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 1876452.455,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 115324432.165,
+          Metric: "Terajoules",
+        },
       },
       bbox: [113.338953, -43.634597, 153.569469, -10.668186],
       geometry: {
@@ -8779,6 +8975,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Austria",
         ISO_A2: "AT",
+        ISO_A3: "AUT",
+        ISO_A3_EH: "AUT",
+        CONTINENT: "Europe",
+        REGION_UN: "Europe",
+        SUBREGION: "Western Europe",
         REGION_WB: "Europe & Central Asia",
         lat: 47.516231,
         lon: 14.550072,
@@ -9712,6 +9913,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 1216.618,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 24120.385,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 266358.907,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 22257204.417,
+          Metric: "Terajoules",
+        },
       },
       bbox: [9.47997, 46.431817, 16.979667, 49.039074],
       geometry: {
@@ -9764,6 +9984,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Azerbaijan",
         ISO_A2: "AZ",
+        ISO_A3: "AZE",
+        ISO_A3_EH: "AZE",
+        CONTINENT: "Asia",
+        REGION_UN: "Asia",
+        SUBREGION: "Western Asia",
         REGION_WB: "Europe & Central Asia",
         lat: 40.143105,
         lon: 47.576927,
@@ -10607,6 +10832,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 2278735.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 21973958.299999997,
+          Metric: "Terajoules",
+        },
       },
       bbox: [44.79399, 38.270378, 50.392821, 41.860675],
       geometry: {
@@ -10672,6 +10916,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Burundi",
         ISO_A2: "BI",
+        ISO_A3: "BDI",
+        ISO_A3_EH: "BDI",
+        CONTINENT: "Africa",
+        REGION_UN: "Africa",
+        SUBREGION: "Eastern Africa",
         REGION_WB: "Sub-Saharan Africa",
         lat: -3.373056,
         lon: 29.918886,
@@ -10703,6 +10952,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Belgium",
         ISO_A2: "BE",
+        ISO_A3: "BEL",
+        ISO_A3_EH: "BEL",
+        CONTINENT: "Europe",
+        REGION_UN: "Europe",
+        SUBREGION: "Western Europe",
         REGION_WB: "Europe & Central Asia",
         lat: 50.503887,
         lon: 4.469936,
@@ -11636,6 +11890,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 29326.2,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 4459.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 975188.9,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 35085029.0,
+          Metric: "Terajoules",
+        },
       },
       bbox: [2.513573, 49.529484, 6.156658, 51.475024],
       geometry: {
@@ -11668,6 +11941,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Benin",
         ISO_A2: "BJ",
+        ISO_A3: "BEN",
+        ISO_A3_EH: "BEN",
+        CONTINENT: "Africa",
+        REGION_UN: "Africa",
+        SUBREGION: "Western Africa",
         REGION_WB: "Sub-Saharan Africa",
         lat: 9.30769,
         lon: 2.315834,
@@ -12241,6 +12519,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 3364.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 13765.61,
+          Metric: "Terajoules",
+        },
       },
       bbox: [0.772336, 6.142158, 3.797112, 12.235636],
       geometry: {
@@ -12281,6 +12578,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Burkina Faso",
         ISO_A2: "BF",
+        ISO_A3: "BFA",
+        ISO_A3_EH: "BFA",
+        CONTINENT: "Africa",
+        REGION_UN: "Africa",
+        SUBREGION: "Western Africa",
         REGION_WB: "Sub-Saharan Africa",
         lat: 12.238333,
         lon: -1.561593,
@@ -12338,6 +12640,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Bangladesh",
         ISO_A2: "BD",
+        ISO_A3: "BGD",
+        ISO_A3_EH: "BGD",
+        CONTINENT: "Asia",
+        REGION_UN: "Asia",
+        SUBREGION: "Southern Asia",
         REGION_WB: "South Asia",
         lat: 23.684994,
         lon: 90.356331,
@@ -13271,6 +13578,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 124.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 36706.028,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 25764164.9586,
+          Metric: "Terajoules",
+        },
       },
       bbox: [88.084422, 20.670883, 92.672721, 26.446526],
       geometry: {
@@ -13322,6 +13648,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Bulgaria",
         ISO_A2: "BG",
+        ISO_A3: "BGR",
+        ISO_A3_EH: "BGR",
+        CONTINENT: "Europe",
+        REGION_UN: "Europe",
+        SUBREGION: "Eastern Europe",
         REGION_WB: "Europe & Central Asia",
         lat: 42.733883,
         lon: 25.48583,
@@ -14225,6 +14556,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 19728.782,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 890526.921,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 182447.978,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 6451836.057,
+          Metric: "Terajoules",
+        },
       },
       bbox: [22.380526, 41.234486, 28.558081, 44.234923],
       geometry: {
@@ -14268,6 +14618,11 @@ const data = {
       properties: {
         SOVEREIGNT: "The Bahamas",
         ISO_A2: "BS",
+        ISO_A3: "BHS",
+        ISO_A3_EH: "BHS",
+        CONTINENT: "North America",
+        REGION_UN: "Americas",
+        SUBREGION: "Caribbean",
         REGION_WB: "Latin America & Caribbean",
         lat: 25.03428,
         lon: -77.39628,
@@ -14317,6 +14672,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Bosnia and Herzegovina",
         ISO_A2: "BA",
+        ISO_A3: "BIH",
+        ISO_A3_EH: "BIH",
+        CONTINENT: "Europe",
+        REGION_UN: "Europe",
+        SUBREGION: "Southern Europe",
         REGION_WB: "Europe & Central Asia",
         lat: 43.915886,
         lon: 17.679076,
@@ -15160,6 +15520,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 11049.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 457705.0,
+          Metric: "Terajoules",
+        },
       },
       bbox: [15.750026, 42.65, 19.59976, 45.233777],
       geometry: {
@@ -15198,6 +15577,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Belarus",
         ISO_A2: "BY",
+        ISO_A3: "BLR",
+        ISO_A3_EH: "BLR",
+        CONTINENT: "Europe",
+        REGION_UN: "Europe",
+        SUBREGION: "Eastern Europe",
         REGION_WB: "Europe & Central Asia",
         lat: 53.709807,
         lon: 27.953389,
@@ -16041,6 +16425,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 571110.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 25102609.0,
+          Metric: "Terajoules",
+        },
       },
       bbox: [23.199494, 51.319503, 32.693643, 56.16913],
       geometry: {
@@ -16101,6 +16504,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Belize",
         ISO_A2: "BZ",
+        ISO_A3: "BLZ",
+        ISO_A3_EH: "BLZ",
+        CONTINENT: "North America",
+        REGION_UN: "Americas",
+        SUBREGION: "Central America",
         REGION_WB: "Latin America & Caribbean",
         lat: 17.189877,
         lon: -88.49765,
@@ -16524,6 +16932,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 5343.91874935,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 1041.43,
+          Metric: "Terajoules",
+        },
       },
       bbox: [-89.229122, 15.886938, -88.106813, 18.499982],
       geometry: {
@@ -16559,6 +16986,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Bolivia",
         ISO_A2: "BO",
+        ISO_A3: "BOL",
+        ISO_A3_EH: "BOL",
+        CONTINENT: "South America",
+        REGION_UN: "Americas",
+        SUBREGION: "South America",
         REGION_WB: "Latin America & Caribbean",
         lat: -16.290154,
         lon: -63.588653,
@@ -17492,6 +17924,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 98.77700000000002,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 61835.91,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 24215055.101999998,
+          Metric: "Terajoules",
+        },
       },
       bbox: [-69.590424, -22.872919, -57.498371, -9.761988],
       geometry: {
@@ -17567,6 +18018,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Brazil",
         ISO_A2: "BR",
+        ISO_A3: "BRA",
+        ISO_A3_EH: "BRA",
+        CONTINENT: "South America",
+        REGION_UN: "Americas",
+        SUBREGION: "South America",
         REGION_WB: "Latin America & Caribbean",
         lat: -14.235004,
         lon: -51.92528,
@@ -18500,6 +18956,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 5410159.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 34791116.0,
+          Metric: "Terajoules",
+        },
       },
       bbox: [-73.987235, -33.768378, -34.729993, 5.244486],
       geometry: {
@@ -18718,6 +19193,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Brunei Darussalam",
         ISO_A2: "BN",
+        ISO_A3: "BRN",
+        ISO_A3_EH: "BRN",
+        CONTINENT: "Asia",
+        REGION_UN: "Asia",
+        SUBREGION: "South-Eastern Asia",
         REGION_WB: "East Asia & Pacific",
         lat: 4.535277,
         lon: 114.727669,
@@ -19651,6 +20131,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 641.0640000000001,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 870680.2427999999,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 24976212.935999997,
+          Metric: "Terajoules",
+        },
       },
       bbox: [114.204017, 4.007637, 115.45071, 5.44773],
       geometry: {
@@ -19674,6 +20173,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Bhutan",
         ISO_A2: "BT",
+        ISO_A3: "BTN",
+        ISO_A3_EH: "BTN",
+        CONTINENT: "Asia",
+        REGION_UN: "Asia",
+        SUBREGION: "Southern Asia",
         REGION_WB: "South Asia",
         lat: 27.514162,
         lon: 90.433601,
@@ -19705,6 +20209,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Botswana",
         ISO_A2: "BW",
+        ISO_A3: "BWA",
+        ISO_A3_EH: "BWA",
+        CONTINENT: "Africa",
+        REGION_UN: "Africa",
+        SUBREGION: "Southern Africa",
         REGION_WB: "Sub-Saharan Africa",
         lat: -22.328474,
         lon: 24.684866,
@@ -19737,6 +20246,25 @@ const data = {
             Consumption: 88.636,
             Metric: "Terajoules",
           },
+        },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 177.272,
+          Metric: "Terajoules",
         },
       },
       bbox: [19.895458, -26.828543, 29.432188, -17.661816],
@@ -19793,6 +20321,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Central African Republic",
         ISO_A2: "CF",
+        ISO_A3: "CAF",
+        ISO_A3_EH: "CAF",
+        CONTINENT: "Africa",
+        REGION_UN: "Africa",
+        SUBREGION: "Middle Africa",
         REGION_WB: "Sub-Saharan Africa",
         lat: 6.611111,
         lon: 20.939444,
@@ -19873,6 +20406,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Canada",
         ISO_A2: "CA",
+        ISO_A3: "CAN",
+        ISO_A3_EH: "CAN",
+        CONTINENT: "North America",
+        REGION_UN: "Americas",
+        SUBREGION: "Northern America",
         REGION_WB: "North America",
         lat: 56.130366,
         lon: -106.346771,
@@ -20806,6 +21344,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 21486.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 329828.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 9628501.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 387020562.85800004,
+          Metric: "Terajoules",
+        },
       },
       bbox: [-140.99778, 41.675105, -52.648099, 83.23324],
       geometry: {
@@ -21733,6 +22290,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Switzerland",
         ISO_A2: "CH",
+        ISO_A3: "CHE",
+        ISO_A3_EH: "CHE",
+        CONTINENT: "Europe",
+        REGION_UN: "Europe",
+        SUBREGION: "Western Europe",
         REGION_WB: "Europe & Central Asia",
         lat: 46.818188,
         lon: 8.227512,
@@ -22666,6 +23228,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 619.511,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 3001.639,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 133252.821,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 6872620.873,
+          Metric: "Terajoules",
+        },
       },
       bbox: [6.022609, 45.776948, 10.442701, 47.830828],
       geometry: {
@@ -22705,6 +23286,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Chile",
         ISO_A2: "CL",
+        ISO_A3: "CHL",
+        ISO_A3_EH: "CHL",
+        CONTINENT: "South America",
+        REGION_UN: "Americas",
+        SUBREGION: "South America",
         REGION_WB: "Latin America & Caribbean",
         lat: -35.675147,
         lon: -71.542969,
@@ -23638,6 +24224,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 19.363,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 280850.412,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 8585602.647999998,
+          Metric: "Terajoules",
+        },
       },
       bbox: [-75.644395, -55.61183, -66.95992, -17.580012],
       geometry: {
@@ -23773,6 +24378,11 @@ const data = {
       properties: {
         SOVEREIGNT: "China",
         ISO_A2: "CN",
+        ISO_A3: "CHN",
+        ISO_A3_EH: "CHN",
+        CONTINENT: "Asia",
+        REGION_UN: "Asia",
+        SUBREGION: "Eastern Asia",
         REGION_WB: "East Asia & Pacific",
         lat: 35.86166,
         lon: 104.195397,
@@ -24706,6 +25316,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 27574093.948,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 185986841.075,
+          Metric: "Terajoules",
+        },
       },
       bbox: [73.675379, 18.197701, 135.026311, 53.4588],
       geometry: {
@@ -24967,6 +25596,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Ivory Coast",
         ISO_A2: "CI",
+        ISO_A3: "CIV",
+        ISO_A3_EH: "CIV",
+        CONTINENT: "Africa",
+        REGION_UN: "Africa",
+        SUBREGION: "Western Africa",
         REGION_WB: "Sub-Saharan Africa",
         lat: 7.539989,
         lon: -5.54708,
@@ -25900,6 +26534,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 200198.66679999998,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 1875544.1882699998,
+          Metric: "Terajoules",
+        },
       },
       bbox: [-8.60288, 4.338288, -2.56219, 10.524061],
       geometry: {
@@ -25961,6 +26614,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Cameroon",
         ISO_A2: "CM",
+        ISO_A3: "CMR",
+        ISO_A3_EH: "CMR",
+        CONTINENT: "Africa",
+        REGION_UN: "Africa",
+        SUBREGION: "Middle Africa",
         REGION_WB: "Sub-Saharan Africa",
         lat: 7.369722,
         lon: 12.354722,
@@ -26894,6 +27552,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 519537.163,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 561214.0,
+          Metric: "Terajoules",
+        },
       },
       bbox: [8.488816, 1.727673, 16.012852, 12.859396],
       geometry: {
@@ -26970,6 +27647,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Democratic Republic of the Congo",
         ISO_A2: "CD",
+        ISO_A3: "COD",
+        ISO_A3_EH: "COD",
+        CONTINENT: "Africa",
+        REGION_UN: "Africa",
+        SUBREGION: "Middle Africa",
         REGION_WB: "Sub-Saharan Africa",
         lat: -4.038333,
         lon: 21.758664,
@@ -27873,6 +28555,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 116569.54299999999,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 5191.77,
+          Metric: "Terajoules",
+        },
       },
       bbox: [12.182337, -13.257227, 31.174149, 5.256088],
       geometry: {
@@ -28012,6 +28713,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Congo",
         ISO_A2: "CG",
+        ISO_A3: "COG",
+        ISO_A3_EH: "COG",
+        CONTINENT: "Africa",
+        REGION_UN: "Africa",
+        SUBREGION: "Middle Africa",
         REGION_WB: "Sub-Saharan Africa",
         lat: -0.228021,
         lon: 15.827659,
@@ -28915,6 +29621,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 1115421.196,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 180043.12,
+          Metric: "Terajoules",
+        },
       },
       bbox: [11.093773, -5.037987, 18.453065, 3.728197],
       geometry: {
@@ -28979,6 +29704,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Colombia",
         ISO_A2: "CO",
+        ISO_A3: "COL",
+        ISO_A3_EH: "COL",
+        CONTINENT: "South America",
+        REGION_UN: "Americas",
+        SUBREGION: "South America",
         REGION_WB: "Latin America & Caribbean",
         lat: 4.570868,
         lon: -74.297333,
@@ -29882,6 +30612,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 7.09,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 2342123.790153664,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 16561131.917999998,
+          Metric: "Terajoules",
+        },
       },
       bbox: [-78.990935, -4.298187, -66.876326, 12.437303],
       geometry: {
@@ -29997,6 +30746,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Costa Rica",
         ISO_A2: "CR",
+        ISO_A3: "CRI",
+        ISO_A3_EH: "CRI",
+        CONTINENT: "North America",
+        REGION_UN: "Americas",
+        SUBREGION: "Central America",
         REGION_WB: "Latin America & Caribbean",
         lat: 9.748917,
         lon: -83.753428,
@@ -30840,6 +31594,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.28147999999999995,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 9987.645933999998,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 0.0,
+          Metric: "Terajoules",
+        },
       },
       bbox: [-85.941725, 8.225028, -82.546196, 11.217119],
       geometry: {
@@ -30891,6 +31664,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Cuba",
         ISO_A2: "CU",
+        ISO_A3: "CUB",
+        ISO_A3_EH: "CUB",
+        CONTINENT: "North America",
+        REGION_UN: "Americas",
+        SUBREGION: "Caribbean",
         REGION_WB: "Latin America & Caribbean",
         lat: 21.521757,
         lon: -77.781167,
@@ -31794,6 +32572,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 1393.836,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 184878.875,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 1296563.97276,
+          Metric: "Terajoules",
+        },
       },
       bbox: [-84.974911, 19.855481, -74.178025, 23.188611],
       geometry: {
@@ -31851,6 +32648,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Northern Cyprus",
         ISO_A2: "-99",
+        ISO_A3: "-99",
+        ISO_A3_EH: "-99",
+        CONTINENT: "Asia",
+        REGION_UN: "Asia",
+        SUBREGION: "Western Asia",
         REGION_WB: "Europe & Central Asia",
       },
       bbox: [32.73178, 35.000345, 34.576474, 35.671596],
@@ -31883,6 +32685,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Cyprus",
         ISO_A2: "CY",
+        ISO_A3: "CYP",
+        ISO_A3_EH: "CYP",
+        CONTINENT: "Asia",
+        REGION_UN: "Asia",
+        SUBREGION: "Western Asia",
         REGION_WB: "Europe & Central Asia",
         lat: 35.126413,
         lon: 33.429859,
@@ -32636,6 +33443,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 20.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 13341.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 0.0,
+          Metric: "Terajoules",
+        },
       },
       bbox: [32.256667, 34.571869, 34.004881, 35.173125],
       geometry: {
@@ -32666,6 +33492,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Czechia",
         ISO_A2: "CZ",
+        ISO_A3: "CZE",
+        ISO_A3_EH: "CZE",
+        CONTINENT: "Europe",
+        REGION_UN: "Europe",
+        SUBREGION: "Eastern Europe",
         REGION_WB: "Europe & Central Asia",
         lat: 49.817492,
         lon: 15.472962,
@@ -33599,6 +34430,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 2320.903,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 1633748.846,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 233689.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 18980941.501000002,
+          Metric: "Terajoules",
+        },
       },
       bbox: [12.240111, 48.555305, 18.853144, 51.117268],
       geometry: {
@@ -33649,6 +34499,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Germany",
         ISO_A2: "DE",
+        ISO_A3: "DEU",
+        ISO_A3_EH: "DEU",
+        CONTINENT: "Europe",
+        REGION_UN: "Europe",
+        SUBREGION: "Western Europe",
         REGION_WB: "Europe & Central Asia",
         lat: 51.165691,
         lon: 10.451526,
@@ -34582,6 +35437,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 62886.085,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 5500436.865,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 3282260.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 206519733.463,
+          Metric: "Terajoules",
+        },
       },
       bbox: [5.988658, 47.302488, 15.016996, 54.983104],
       geometry: {
@@ -34655,6 +35529,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Djibouti",
         ISO_A2: "DJ",
+        ISO_A3: "DJI",
+        ISO_A3_EH: "DJI",
+        CONTINENT: "Africa",
+        REGION_UN: "Africa",
+        SUBREGION: "Eastern Africa",
         REGION_WB: "Middle East & North Africa",
         lat: 11.825138,
         lon: 42.590275,
@@ -34688,6 +35567,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Denmark",
         ISO_A2: "DK",
+        ISO_A3: "DNK",
+        ISO_A3_EH: "DNK",
+        CONTINENT: "Europe",
+        REGION_UN: "Europe",
+        SUBREGION: "Northern Europe",
         REGION_WB: "Europe & Central Asia",
         lat: 56.26392,
         lon: 9.501785,
@@ -35621,6 +36505,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 987062.3759999999,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 14609266.768,
+          Metric: "Terajoules",
+        },
       },
       bbox: [8.089977, 54.800015, 12.690006, 57.730017],
       geometry: {
@@ -35666,6 +36569,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Dominican Republic",
         ISO_A2: "DO",
+        ISO_A3: "DOM",
+        ISO_A3_EH: "DOM",
+        CONTINENT: "North America",
+        REGION_UN: "Americas",
+        SUBREGION: "Caribbean",
         REGION_WB: "Latin America & Caribbean",
         lat: 18.735693,
         lon: -70.162651,
@@ -36599,6 +37507,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 52499.938,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 603250.42593,
+          Metric: "Terajoules",
+        },
       },
       bbox: [-71.945112, 17.598564, -68.317943, 19.884911],
       geometry: {
@@ -36640,6 +37567,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Algeria",
         ISO_A2: "DZ",
+        ISO_A3: "DZA",
+        ISO_A3_EH: "DZA",
+        CONTINENT: "Africa",
+        REGION_UN: "Africa",
+        SUBREGION: "Northern Africa",
         REGION_WB: "Middle East & North Africa",
         lat: 28.033886,
         lon: 1.659626,
@@ -37543,6 +38475,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 2995648.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 163590308.5528,
+          Metric: "Terajoules",
+        },
       },
       bbox: [-8.6844, 19.057364, 11.999506, 37.118381],
       geometry: {
@@ -37620,6 +38571,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Ecuador",
         ISO_A2: "EC",
+        ISO_A3: "ECU",
+        ISO_A3_EH: "ECU",
+        CONTINENT: "South America",
+        REGION_UN: "Americas",
+        SUBREGION: "South America",
         REGION_WB: "Latin America & Caribbean",
         lat: -1.831239,
         lon: -78.183406,
@@ -38553,6 +39509,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 1664638.66,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 593327.8789,
+          Metric: "Terajoules",
+        },
       },
       bbox: [-80.967765, -4.959129, -75.233723, 1.380924],
       geometry: {
@@ -38601,6 +39576,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Egypt",
         ISO_A2: "EG",
+        ISO_A3: "EGY",
+        ISO_A3_EH: "EGY",
+        CONTINENT: "Africa",
+        REGION_UN: "Africa",
+        SUBREGION: "Northern Africa",
         REGION_WB: "Middle East & North Africa",
         lat: 26.820553,
         lon: 30.802498,
@@ -39504,6 +40484,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 1663504.0890000002,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 59241178.2575,
+          Metric: "Terajoules",
+        },
       },
       bbox: [24.70007, 22, 36.86623, 31.58568],
       geometry: {
@@ -39563,6 +40562,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Eritrea",
         ISO_A2: "ER",
+        ISO_A3: "ERI",
+        ISO_A3_EH: "ERI",
+        CONTINENT: "Africa",
+        REGION_UN: "Africa",
+        SUBREGION: "Eastern Africa",
         REGION_WB: "Sub-Saharan Africa",
         lat: 15.179384,
         lon: 39.782334,
@@ -39686,6 +40690,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 2469.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 0.0,
+          Metric: "Terajoules",
+        },
       },
       bbox: [36.32322, 12.455416, 43.081226, 17.998307],
       geometry: {
@@ -39729,6 +40752,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Spain",
         ISO_A2: "ES",
+        ISO_A3: "ESP",
+        ISO_A3_EH: "ESP",
+        CONTINENT: "Europe",
+        REGION_UN: "Europe",
+        SUBREGION: "Southern Europe",
         REGION_WB: "Europe & Central Asia",
         lat: 40.463667,
         lon: -3.74922,
@@ -40662,6 +41690,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 54918.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 181548.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 1802143.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 50516467.0,
+          Metric: "Terajoules",
+        },
       },
       bbox: [-9.392884, 35.94685, 3.039484, 43.748338],
       geometry: {
@@ -40728,6 +41775,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Estonia",
         ISO_A2: "EE",
+        ISO_A3: "EST",
+        ISO_A3_EH: "EST",
+        CONTINENT: "Europe",
+        REGION_UN: "Europe",
+        SUBREGION: "Northern Europe",
         REGION_WB: "Europe & Central Asia",
         lat: 58.595272,
         lon: 25.013607,
@@ -41601,6 +42653,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 1143981.028,
+          Metric: "Terajoules",
+        },
       },
       bbox: [23.339795, 57.474528, 28.131699, 59.61109],
       geometry: {
@@ -41635,6 +42706,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Ethiopia",
         ISO_A2: "ET",
+        ISO_A3: "ETH",
+        ISO_A3_EH: "ETH",
+        CONTINENT: "Africa",
+        REGION_UN: "Africa",
+        SUBREGION: "Eastern Africa",
         REGION_WB: "Sub-Saharan Africa",
         lat: 9.145,
         lon: 40.489673,
@@ -41758,6 +42834,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 3062.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 0.0,
+          Metric: "Terajoules",
+        },
       },
       bbox: [32.95418, 3.42206, 47.78942, 14.95943],
       geometry: {
@@ -41832,6 +42927,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Finland",
         ISO_A2: "FI",
+        ISO_A3: "FIN",
+        ISO_A3_EH: "FIN",
+        CONTINENT: "Europe",
+        REGION_UN: "Europe",
+        SUBREGION: "Northern Europe",
         REGION_WB: "Europe & Central Asia",
         lat: 61.92411,
         lon: 25.748151,
@@ -42765,6 +43865,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 11.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 323191.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 5607416.0,
+          Metric: "Terajoules",
+        },
       },
       bbox: [20.645593, 59.846373, 31.516092, 70.164193],
       geometry: {
@@ -42820,6 +43939,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Fiji",
         ISO_A2: "FJ",
+        ISO_A3: "FJI",
+        ISO_A3_EH: "FJI",
+        CONTINENT: "Oceania",
+        REGION_UN: "Oceania",
+        SUBREGION: "Melanesia",
         REGION_WB: "East Asia & Pacific",
         lat: -16.578193,
         lon: 179.414413,
@@ -43153,6 +44277,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0004,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 1.6557619999999997,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 98.0,
+          Metric: "Terajoules",
+        },
       },
       bbox: [-180, -18.28799, 180, -16.020882],
       geometry: {
@@ -43200,6 +44343,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Falkland Islands",
         ISO_A2: "FK",
+        ISO_A3: "FLK",
+        ISO_A3_EH: "FLK",
+        CONTINENT: "South America",
+        REGION_UN: "Americas",
+        SUBREGION: "South America",
         REGION_WB: "Latin America & Caribbean",
         lat: -51.796253,
         lon: -59.523613,
@@ -43413,6 +44561,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 57.574023600000004,
+          Metric: "Terajoules",
+        },
       },
       bbox: [-61.2, -52.3, -57.75, -51.1],
       geometry: {
@@ -43438,6 +44605,11 @@ const data = {
       properties: {
         SOVEREIGNT: "France",
         ISO_A2: "-99",
+        ISO_A3: "-99",
+        ISO_A3_EH: "-99",
+        CONTINENT: "Europe",
+        REGION_UN: "Europe",
+        SUBREGION: "Western Europe",
         REGION_WB: "Europe & Central Asia",
         2011: {
           Anthracite: {
@@ -44369,6 +45541,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 24256.111,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 39089.309,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 2273917.742,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 191141346.99,
+          Metric: "Terajoules",
+        },
       },
       bbox: [-54.524754, 2.053389, 9.560016, 51.148506],
       geometry: {
@@ -44468,6 +45659,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Gabon",
         ISO_A2: "GA",
+        ISO_A3: "GAB",
+        ISO_A3_EH: "GAB",
+        CONTINENT: "Africa",
+        REGION_UN: "Africa",
+        SUBREGION: "Middle Africa",
         REGION_WB: "Sub-Saharan Africa",
         lat: -0.803689,
         lon: 11.609444,
@@ -45371,6 +46567,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 1343227.048,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 280394.831,
+          Metric: "Terajoules",
+        },
       },
       bbox: [8.797996, -3.978827, 14.425456, 2.326758],
       geometry: {
@@ -45417,6 +46632,11 @@ const data = {
       properties: {
         SOVEREIGNT: "United Kingdom",
         ISO_A2: "GB",
+        ISO_A3: "GBR",
+        ISO_A3_EH: "GBR",
+        CONTINENT: "Europe",
+        REGION_UN: "Europe",
+        SUBREGION: "Northern Europe",
         REGION_WB: "Europe & Central Asia",
         lat: 55.378051,
         lon: -3.435973,
@@ -46350,6 +47570,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 9311755.947999999,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 189985222.26200002,
+          Metric: "Terajoules",
+        },
       },
       bbox: [-7.572168, 49.96, 1.681531, 58.635],
       geometry: {
@@ -46427,6 +47666,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Georgia",
         ISO_A2: "GE",
+        ISO_A3: "GEO",
+        ISO_A3_EH: "GEO",
+        CONTINENT: "Asia",
+        REGION_UN: "Asia",
+        SUBREGION: "Western Asia",
         REGION_WB: "Europe & Central Asia",
         lat: 42.315407,
         lon: 43.356892,
@@ -47300,6 +48544,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 199.26,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 5525.73,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 6273.286999999999,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 3162210.2133179996,
+          Metric: "Terajoules",
+        },
       },
       bbox: [39.955009, 41.064445, 46.637908, 43.553104],
       geometry: {
@@ -47339,6 +48602,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Ghana",
         ISO_A2: "GH",
+        ISO_A3: "GHA",
+        ISO_A3_EH: "GHA",
+        CONTINENT: "Africa",
+        REGION_UN: "Africa",
+        SUBREGION: "Western Africa",
         REGION_WB: "Sub-Saharan Africa",
         lat: 7.946527,
         lon: -1.023194,
@@ -48272,6 +49540,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 239512.34,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 518590.0,
+          Metric: "Terajoules",
+        },
       },
       bbox: [-3.24437, 4.710462, 1.060122, 11.098341],
       geometry: {
@@ -48312,6 +49599,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Guinea",
         ISO_A2: "GN",
+        ISO_A3: "GIN",
+        ISO_A3_EH: "GIN",
+        CONTINENT: "Africa",
+        REGION_UN: "Africa",
+        SUBREGION: "Western Africa",
         REGION_WB: "Sub-Saharan Africa",
         lat: 9.945587,
         lon: -9.696645,
@@ -48975,6 +50267,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 109.3702708,
+          Metric: "Terajoules",
+        },
       },
       bbox: [-15.130311, 7.309037, -7.8321, 12.586183],
       geometry: {
@@ -49060,6 +50371,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Gambia",
         ISO_A2: "GM",
+        ISO_A3: "GMB",
+        ISO_A3_EH: "GMB",
+        CONTINENT: "Africa",
+        REGION_UN: "Africa",
+        SUBREGION: "Western Africa",
         REGION_WB: "Sub-Saharan Africa",
         lat: 13.443182,
         lon: -15.310139,
@@ -49094,6 +50410,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Guinea-Bissau",
         ISO_A2: "GW",
+        ISO_A3: "GNB",
+        ISO_A3_EH: "GNB",
+        CONTINENT: "Africa",
+        REGION_UN: "Africa",
+        SUBREGION: "Western Africa",
         REGION_WB: "Sub-Saharan Africa",
         lat: 11.803749,
         lon: -15.180413,
@@ -49131,6 +50452,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Equatorial Guinea",
         ISO_A2: "GQ",
+        ISO_A3: "GNQ",
+        ISO_A3_EH: "GNQ",
+        CONTINENT: "Africa",
+        REGION_UN: "Africa",
+        SUBREGION: "Middle Africa",
         REGION_WB: "Sub-Saharan Africa",
         lat: 1.650801,
         lon: 10.267895,
@@ -50064,6 +51390,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 831826.3722209998,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 7425924.4933,
+          Metric: "Terajoules",
+        },
       },
       bbox: [9.305613, 1.01012, 11.285079, 2.283866],
       geometry: {
@@ -50086,6 +51431,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Greece",
         ISO_A2: "GR",
+        ISO_A3: "GRC",
+        ISO_A3_EH: "GRC",
+        CONTINENT: "Europe",
+        REGION_UN: "Europe",
+        SUBREGION: "Southern Europe",
         REGION_WB: "Europe & Central Asia",
         lat: 39.074208,
         lon: 21.824312,
@@ -51019,6 +52369,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 1728137.5259999998,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 618818.305,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 4113741.003,
+          Metric: "Terajoules",
+        },
       },
       bbox: [20.150016, 34.919988, 26.604196, 41.826905],
       geometry: {
@@ -51094,6 +52463,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Denmark",
         ISO_A2: "GL",
+        ISO_A3: "GRL",
+        ISO_A3_EH: "GRL",
+        CONTINENT: "North America",
+        REGION_UN: "Americas",
+        SUBREGION: "Northern America",
         REGION_WB: "Europe & Central Asia",
         lat: 71.706936,
         lon: -42.604303,
@@ -52027,6 +53401,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 987062.3759999999,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 14609266.768,
+          Metric: "Terajoules",
+        },
       },
       bbox: [-73.297, 60.03676, -12.20855, 83.64513],
       geometry: {
@@ -52174,6 +53567,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Guatemala",
         ISO_A2: "GT",
+        ISO_A3: "GTM",
+        ISO_A3_EH: "GTM",
+        CONTINENT: "North America",
+        REGION_UN: "Americas",
+        SUBREGION: "Central America",
         REGION_WB: "Latin America & Caribbean",
         lat: 15.783471,
         lon: -90.230759,
@@ -53107,6 +54505,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 72314.919,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 6186.0,
+          Metric: "Terajoules",
+        },
       },
       bbox: [-92.229249, 13.735338, -88.225023, 17.819326],
       geometry: {
@@ -53157,6 +54574,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Guyana",
         ISO_A2: "GY",
+        ISO_A3: "GUY",
+        ISO_A3_EH: "GUY",
+        CONTINENT: "South America",
+        REGION_UN: "Americas",
+        SUBREGION: "South America",
         REGION_WB: "Latin America & Caribbean",
         lat: 4.860416,
         lon: -58.93018,
@@ -53250,6 +54672,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 6.72,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 2.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 0.0,
+          Metric: "Terajoules",
+        },
       },
       bbox: [-61.410303, 1.268088, -56.539386, 8.367035],
       geometry: {
@@ -53305,6 +54746,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Honduras",
         ISO_A2: "HN",
+        ISO_A3: "HND",
+        ISO_A3_EH: "HND",
+        CONTINENT: "North America",
+        REGION_UN: "Americas",
+        SUBREGION: "Central America",
         REGION_WB: "Latin America & Caribbean",
         lat: 15.199999,
         lon: -86.241905,
@@ -53398,6 +54844,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 1105.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 0.0,
+          Metric: "Terajoules",
+        },
       },
       bbox: [-89.353326, 12.984686, -83.147219, 16.005406],
       geometry: {
@@ -53470,6 +54935,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Croatia",
         ISO_A2: "HR",
+        ISO_A3: "HRV",
+        ISO_A3_EH: "HRV",
+        CONTINENT: "Europe",
+        REGION_UN: "Europe",
+        SUBREGION: "Southern Europe",
         REGION_WB: "Europe & Central Asia",
         lat: 45.1,
         lon: 15.2,
@@ -54313,6 +55783,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 28.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 4838.1,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 126619.00000000001,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 5518828.546,
+          Metric: "Terajoules",
+        },
       },
       bbox: [13.656976, 42.479991, 19.390476, 46.503751],
       geometry: {
@@ -54371,6 +55860,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Haiti",
         ISO_A2: "HT",
+        ISO_A3: "HTI",
+        ISO_A3_EH: "HTI",
+        CONTINENT: "North America",
+        REGION_UN: "Americas",
+        SUBREGION: "Caribbean",
         REGION_WB: "Latin America & Caribbean",
         lat: 18.971187,
         lon: -72.285215,
@@ -54410,6 +55904,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Hungary",
         ISO_A2: "HU",
+        ISO_A3: "HUN",
+        ISO_A3_EH: "HUN",
+        CONTINENT: "Europe",
+        REGION_UN: "Europe",
+        SUBREGION: "Eastern Europe",
         REGION_WB: "Europe & Central Asia",
         lat: 47.162494,
         lon: 19.503304,
@@ -55343,6 +56842,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 23.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 391006.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 223345.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 24756228.0,
+          Metric: "Terajoules",
+        },
       },
       bbox: [16.202298, 45.759481, 22.710531, 48.623854],
       geometry: {
@@ -55390,6 +56908,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Indonesia",
         ISO_A2: "ID",
+        ISO_A3: "IDN",
+        ISO_A3_EH: "IDN",
+        CONTINENT: "Asia",
+        REGION_UN: "Asia",
+        SUBREGION: "South-Eastern Asia",
         REGION_WB: "East Asia & Pacific",
         lat: -0.789275,
         lon: 113.921327,
@@ -56293,6 +57816,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 3918682.982,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 134594003.57770002,
+          Metric: "Terajoules",
+        },
       },
       bbox: [95.293026, -10.359987, 141.033852, 5.479821],
       geometry: {
@@ -56608,6 +58150,11 @@ const data = {
       properties: {
         SOVEREIGNT: "India",
         ISO_A2: "IN",
+        ISO_A3: "IND",
+        ISO_A3_EH: "IND",
+        CONTINENT: "Asia",
+        REGION_UN: "Asia",
+        SUBREGION: "Southern Asia",
         REGION_WB: "South Asia",
         lat: 20.593684,
         lon: 78.96288,
@@ -57511,6 +59058,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 4441391.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 61501619.65619999,
+          Metric: "Terajoules",
+        },
       },
       bbox: [68.176645, 7.965535, 97.402561, 35.49401],
       geometry: {
@@ -57662,6 +59228,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Ireland",
         ISO_A2: "IE",
+        ISO_A3: "IRL",
+        ISO_A3_EH: "IRL",
+        CONTINENT: "Europe",
+        REGION_UN: "Europe",
+        SUBREGION: "Northern Europe",
         REGION_WB: "Europe & Central Asia",
         lat: 53.41291,
         lon: -8.24389,
@@ -58595,6 +60166,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 5408.817,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 88104.541,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 7192728.64,
+          Metric: "Terajoules",
+        },
       },
       bbox: [-9.977086, 51.669301, -6.032985, 55.131622],
       geometry: {
@@ -58623,6 +60213,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Iran",
         ISO_A2: "IR",
+        ISO_A3: "IRN",
+        ISO_A3_EH: "IRN",
+        CONTINENT: "Asia",
+        REGION_UN: "Asia",
+        SUBREGION: "Southern Asia",
         REGION_WB: "Middle East & North Africa",
         lat: 32.427908,
         lon: 53.688046,
@@ -59526,6 +61121,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 11755627.552819999,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 210019727.61025003,
+          Metric: "Terajoules",
+        },
       },
       bbox: [44.109225, 25.078237, 63.316632, 39.713003],
       geometry: {
@@ -59617,6 +61231,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Iraq",
         ISO_A2: "IQ",
+        ISO_A3: "IRQ",
+        ISO_A3_EH: "IRQ",
+        CONTINENT: "Asia",
+        REGION_UN: "Asia",
+        SUBREGION: "Western Asia",
         REGION_WB: "Middle East & North Africa",
         lat: 33.223191,
         lon: 43.679291,
@@ -60520,6 +62139,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 8475522.199000001,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 8608529.06104,
+          Metric: "Terajoules",
+        },
       },
       bbox: [38.792341, 29.099025, 48.567971, 37.385264],
       geometry: {
@@ -60565,6 +62203,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Iceland",
         ISO_A2: "IS",
+        ISO_A3: "ISL",
+        ISO_A3_EH: "ISL",
+        CONTINENT: "Europe",
+        REGION_UN: "Europe",
+        SUBREGION: "Northern Europe",
         REGION_WB: "Europe & Central Asia",
         lat: 64.963051,
         lon: -19.020835,
@@ -61498,6 +63141,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 4758.07,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 0.0,
+          Metric: "Terajoules",
+        },
       },
       bbox: [-24.326184, 63.496383, -13.609732, 66.526792],
       geometry: {
@@ -61533,6 +63195,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Israel",
         ISO_A2: "IL",
+        ISO_A3: "ISR",
+        ISO_A3_EH: "ISR",
+        CONTINENT: "Asia",
+        REGION_UN: "Asia",
+        SUBREGION: "Western Asia",
         REGION_WB: "Middle East & North Africa",
         lat: 31.046051,
         lon: 34.851612,
@@ -62466,6 +64133,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 327888.683,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 4071573.5820000004,
+          Metric: "Terajoules",
+        },
       },
       bbox: [34.265433, 29.501326, 35.836397, 33.277426],
       geometry: {
@@ -62507,6 +64193,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Italy",
         ISO_A2: "IT",
+        ISO_A3: "ITA",
+        ISO_A3_EH: "ITA",
+        CONTINENT: "Europe",
+        REGION_UN: "Europe",
+        SUBREGION: "Southern Europe",
         REGION_WB: "Europe & Central Asia",
         lat: 41.87194,
         lon: 12.56738,
@@ -63440,6 +65131,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 283.304,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 5189.2429999999995,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 2494476.287,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 134052860.42899999,
+          Metric: "Terajoules",
+        },
       },
       bbox: [6.749955, 36.619987, 18.480247, 47.115393],
       geometry: {
@@ -63552,6 +65262,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Jamaica",
         ISO_A2: "JM",
+        ISO_A3: "JAM",
+        ISO_A3_EH: "JAM",
+        CONTINENT: "North America",
+        REGION_UN: "Americas",
+        SUBREGION: "Caribbean",
         REGION_WB: "Latin America & Caribbean",
         lat: 18.109581,
         lon: -77.297508,
@@ -64485,6 +66200,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 32903.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 56827.0,
+          Metric: "Terajoules",
+        },
       },
       bbox: [-78.337719, 17.701116, -76.199659, 18.524218],
       geometry: {
@@ -64511,6 +66245,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Jordan",
         ISO_A2: "JO",
+        ISO_A3: "JOR",
+        ISO_A3_EH: "JOR",
+        CONTINENT: "Asia",
+        REGION_UN: "Asia",
+        SUBREGION: "Western Asia",
         REGION_WB: "Middle East & North Africa",
         lat: 30.585164,
         lon: 36.238414,
@@ -65414,6 +67153,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 124.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 101494.232860219,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 1831884.438,
+          Metric: "Terajoules",
+        },
       },
       bbox: [34.922603, 29.197495, 39.195468, 33.378686],
       geometry: {
@@ -65448,6 +67206,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Japan",
         ISO_A2: "JP",
+        ISO_A3: "JPN",
+        ISO_A3_EH: "JPN",
+        CONTINENT: "Asia",
+        REGION_UN: "Asia",
+        SUBREGION: "Eastern Asia",
         REGION_WB: "East Asia & Pacific",
         lat: 36.204824,
         lon: 138.252924,
@@ -66381,6 +68144,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 143566.616,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 5839503.898,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 143287766.467,
+          Metric: "Terajoules",
+        },
       },
       bbox: [129.408463, 31.029579, 145.543137, 45.551483],
       geometry: {
@@ -66471,6 +68253,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Kazakhstan",
         ISO_A2: "KZ",
+        ISO_A3: "KAZ",
+        ISO_A3_EH: "KAZ",
+        CONTINENT: "Asia",
+        REGION_UN: "Asia",
+        SUBREGION: "Central Asia",
         REGION_WB: "Europe & Central Asia",
         lat: 48.019573,
         lon: 66.923684,
@@ -67344,6 +69131,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 252078.48,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 3743666.3,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 52212188.9842,
+          Metric: "Terajoules",
+        },
       },
       bbox: [46.466446, 40.662325, 87.35997, 55.38525],
       geometry: {
@@ -67471,6 +69277,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Kenya",
         ISO_A2: "KE",
+        ISO_A3: "KEN",
+        ISO_A3_EH: "KEN",
+        CONTINENT: "Africa",
+        REGION_UN: "Africa",
+        SUBREGION: "Eastern Africa",
         REGION_WB: "Sub-Saharan Africa",
         lat: -0.023559,
         lon: 37.906193,
@@ -68344,6 +70155,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 44118.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 0.0,
+          Metric: "Terajoules",
+        },
       },
       bbox: [33.893569, -4.67677, 41.855083, 5.506],
       geometry: {
@@ -68396,6 +70226,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Kyrgyzstan",
         ISO_A2: "KG",
+        ISO_A3: "KGZ",
+        ISO_A3_EH: "KGZ",
+        CONTINENT: "Asia",
+        REGION_UN: "Asia",
+        SUBREGION: "Central Asia",
         REGION_WB: "Europe & Central Asia",
         lat: 41.20438,
         lon: 74.766098,
@@ -69269,6 +71104,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 942.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 43378.2,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 5963.4,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 1059272.6,
+          Metric: "Terajoules",
+        },
       },
       bbox: [69.464887, 39.279463, 80.25999, 43.298339],
       geometry: {
@@ -69319,6 +71173,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Cambodia",
         ISO_A2: "KH",
+        ISO_A3: "KHM",
+        ISO_A3_EH: "KHM",
+        CONTINENT: "Asia",
+        REGION_UN: "Asia",
+        SUBREGION: "South-Eastern Asia",
         REGION_WB: "East Asia & Pacific",
         lat: 12.565679,
         lon: 104.990963,
@@ -69354,6 +71213,11 @@ const data = {
       properties: {
         SOVEREIGNT: "South Korea",
         ISO_A2: "KR",
+        ISO_A3: "KOR",
+        ISO_A3_EH: "KOR",
+        CONTINENT: "Asia",
+        REGION_UN: "Asia",
+        SUBREGION: "Eastern Asia",
         REGION_WB: "East Asia & Pacific",
         lat: 35.907757,
         lon: 127.766922,
@@ -70287,6 +72151,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 157776.46899999998,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 3487347.403,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 58461835.599999994,
+          Metric: "Terajoules",
+        },
       },
       bbox: [126.117398, 34.390046, 129.468304, 38.612243],
       geometry: {
@@ -70321,6 +72204,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Kosovo",
         ISO_A2: "XK",
+        ISO_A3: "-99",
+        ISO_A3_EH: "-99",
+        CONTINENT: "Europe",
+        REGION_UN: "Europe",
+        SUBREGION: "Southern Europe",
         REGION_WB: "Europe & Central Asia",
         lat: 42.602636,
         lon: 20.902977,
@@ -70954,6 +72842,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 454.151,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 160689.553,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 0.0,
+          Metric: "Terajoules",
+        },
       },
       bbox: [20.0707, 41.84711, 21.77505, 43.27205],
       geometry: {
@@ -70990,6 +72897,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Kuwait",
         ISO_A2: "KW",
+        ISO_A3: "KWT",
+        ISO_A3_EH: "KWT",
+        CONTINENT: "Asia",
+        REGION_UN: "Asia",
+        SUBREGION: "Western Asia",
         REGION_WB: "Middle East & North Africa",
         lat: 29.31166,
         lon: 47.481766,
@@ -71923,6 +73835,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 7912668.51,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 19944733.605499998,
+          Metric: "Terajoules",
+        },
       },
       bbox: [46.568713, 28.526063, 48.416094, 30.05907],
       geometry: {
@@ -71947,6 +73878,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Laos",
         ISO_A2: "LA",
+        ISO_A3: "LAO",
+        ISO_A3_EH: "LAO",
+        CONTINENT: "Asia",
+        REGION_UN: "Asia",
+        SUBREGION: "South-Eastern Asia",
         REGION_WB: "East Asia & Pacific",
         lat: 19.85627,
         lon: 102.495496,
@@ -72850,6 +74786,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 81600.312,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 0.0,
+          Metric: "Terajoules",
+        },
       },
       bbox: [100.115988, 13.881091, 107.564525, 22.464753],
       geometry: {
@@ -72902,6 +74857,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Lebanon",
         ISO_A2: "LB",
+        ISO_A3: "LBN",
+        ISO_A3_EH: "LBN",
+        CONTINENT: "Asia",
+        REGION_UN: "Asia",
+        SUBREGION: "Western Asia",
         REGION_WB: "Middle East & North Africa",
         lat: 33.854721,
         lon: 35.862285,
@@ -73235,6 +75195,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 1283.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 11798.0,
+          Metric: "Terajoules",
+        },
       },
       bbox: [35.126053, 33.08904, 36.61175, 34.644914],
       geometry: {
@@ -73261,6 +75240,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Liberia",
         ISO_A2: "LR",
+        ISO_A3: "LBR",
+        ISO_A3_EH: "LBR",
+        CONTINENT: "Africa",
+        REGION_UN: "Africa",
+        SUBREGION: "Western Africa",
         REGION_WB: "Sub-Saharan Africa",
         lat: 6.428055,
         lon: -9.429499,
@@ -73306,6 +75290,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Libya",
         ISO_A2: "LY",
+        ISO_A3: "LBY",
+        ISO_A3_EH: "LBY",
+        CONTINENT: "Africa",
+        REGION_UN: "Africa",
+        SUBREGION: "Northern Africa",
         REGION_WB: "Middle East & North Africa",
         lat: 26.3351,
         lon: 17.228331,
@@ -74209,6 +76198,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 4807480.532,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 18890681.09,
+          Metric: "Terajoules",
+        },
       },
       bbox: [9.319411, 19.58047, 25.16482, 33.136996],
       geometry: {
@@ -74280,6 +76288,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Sri Lanka",
         ISO_A2: "LK",
+        ISO_A3: "LKA",
+        ISO_A3_EH: "LKA",
+        CONTINENT: "Asia",
+        REGION_UN: "Asia",
+        SUBREGION: "Southern Asia",
         REGION_WB: "South Asia",
         lat: 7.873054,
         lon: 80.771797,
@@ -75213,6 +77226,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 57869.417,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 0.0,
+          Metric: "Terajoules",
+        },
       },
       bbox: [79.695167, 5.96837, 81.787959, 9.824078],
       geometry: {
@@ -75238,6 +77270,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Lesotho",
         ISO_A2: "LS",
+        ISO_A3: "LSO",
+        ISO_A3_EH: "LSO",
+        CONTINENT: "Africa",
+        REGION_UN: "Africa",
+        SUBREGION: "Southern Africa",
         REGION_WB: "Sub-Saharan Africa",
         lat: -29.609988,
         lon: 28.233608,
@@ -75268,6 +77305,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Lithuania",
         ISO_A2: "LT",
+        ISO_A3: "LTU",
+        ISO_A3_EH: "LTU",
+        CONTINENT: "Europe",
+        REGION_UN: "Europe",
+        SUBREGION: "Northern Europe",
         REGION_WB: "Europe & Central Asia",
         lat: 55.169438,
         lon: 23.881275,
@@ -76141,6 +78183,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 123.2,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 45.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 216513.90000000002,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 4686340.0,
+          Metric: "Terajoules",
+        },
       },
       bbox: [21.0558, 53.905702, 26.588279, 56.372528],
       geometry: {
@@ -76175,6 +78236,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Luxembourg",
         ISO_A2: "LU",
+        ISO_A3: "LUX",
+        ISO_A3_EH: "LUX",
+        CONTINENT: "Europe",
+        REGION_UN: "Europe",
+        SUBREGION: "Western Europe",
         REGION_WB: "Europe & Central Asia",
         lat: 49.815273,
         lon: 6.129583,
@@ -77108,6 +79174,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 807.163,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 2010887.369,
+          Metric: "Terajoules",
+        },
       },
       bbox: [5.674052, 49.442667, 6.242751, 50.128052],
       geometry: {
@@ -77130,6 +79215,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Latvia",
         ISO_A2: "LV",
+        ISO_A3: "LVA",
+        ISO_A3_EH: "LVA",
+        CONTINENT: "Europe",
+        REGION_UN: "Europe",
+        SUBREGION: "Northern Europe",
         REGION_WB: "Europe & Central Asia",
         lat: 56.879635,
         lon: 24.603189,
@@ -78003,6 +80093,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 19.805999999999997,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 71.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 2124526.1720000003,
+          Metric: "Terajoules",
+        },
       },
       bbox: [21.0558, 55.615107, 28.176709, 57.970157],
       geometry: {
@@ -78040,6 +80149,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Morocco",
         ISO_A2: "MA",
+        ISO_A3: "MAR",
+        ISO_A3_EH: "MAR",
+        CONTINENT: "Africa",
+        REGION_UN: "Africa",
+        SUBREGION: "Northern Africa",
         REGION_WB: "Middle East & North Africa",
         lat: 31.791702,
         lon: -7.09262,
@@ -78943,6 +81057,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 152652.815,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 621508.983,
+          Metric: "Terajoules",
+        },
       },
       bbox: [-17.020428, 21.420734, -1.124551, 35.759988],
       geometry: {
@@ -79021,6 +81154,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Republic of Moldova",
         ISO_A2: "MD",
+        ISO_A3: "MDA",
+        ISO_A3_EH: "MDA",
+        CONTINENT: "Europe",
+        REGION_UN: "Europe",
+        SUBREGION: "Eastern Europe",
         REGION_WB: "Europe & Central Asia",
         lat: 47.411631,
         lon: 28.369885,
@@ -79864,6 +82002,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 3149.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 149.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 2293622.1,
+          Metric: "Terajoules",
+        },
       },
       bbox: [26.619337, 45.488283, 30.024659, 48.467119],
       geometry: {
@@ -79906,6 +82063,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Madagascar",
         ISO_A2: "MG",
+        ISO_A3: "MDG",
+        ISO_A3_EH: "MDG",
+        CONTINENT: "Africa",
+        REGION_UN: "Africa",
+        SUBREGION: "Eastern Africa",
         REGION_WB: "Sub-Saharan Africa",
         lat: -18.766947,
         lon: 46.869107,
@@ -80359,6 +82521,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 4102.149499,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 0.0,
+          Metric: "Terajoules",
+        },
       },
       bbox: [43.254187, -25.601434, 50.476537, -12.040557],
       geometry: {
@@ -80423,6 +82604,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Mexico",
         ISO_A2: "MX",
+        ISO_A3: "MEX",
+        ISO_A3_EH: "MEX",
+        CONTINENT: "North America",
+        REGION_UN: "Americas",
+        SUBREGION: "Central America",
         REGION_WB: "Latin America & Caribbean",
         lat: 23.634501,
         lon: -102.552784,
@@ -81356,6 +83542,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 2316.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 20662.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 10252219.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 85772084.255,
+          Metric: "Terajoules",
+        },
       },
       bbox: [-117.12776, 14.538829, -86.811982, 32.72083],
       geometry: {
@@ -81541,6 +83746,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Macedonia",
         ISO_A2: "MK",
+        ISO_A3: "MKD",
+        ISO_A3_EH: "MKD",
+        CONTINENT: "Europe",
+        REGION_UN: "Europe",
+        SUBREGION: "Southern Europe",
         REGION_WB: "Europe & Central Asia",
         lat: 41.608635,
         lon: 21.745275,
@@ -82384,6 +84594,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 251.91465699999998,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 130987.45659999999,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 15257.302999999998,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 131532.758,
+          Metric: "Terajoules",
+        },
       },
       bbox: [20.463175, 40.842727, 22.952377, 42.32026],
       geometry: {
@@ -82417,6 +84646,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Mali",
         ISO_A2: "ML",
+        ISO_A3: "MLI",
+        ISO_A3_EH: "MLI",
+        CONTINENT: "Africa",
+        REGION_UN: "Africa",
+        SUBREGION: "Western Africa",
         REGION_WB: "Sub-Saharan Africa",
         lat: 17.570692,
         lon: -3.996166,
@@ -82511,6 +84745,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Myanmar",
         ISO_A2: "MM",
+        ISO_A3: "MMR",
+        ISO_A3_EH: "MMR",
+        CONTINENT: "Asia",
+        REGION_UN: "Asia",
+        SUBREGION: "South-Eastern Asia",
         REGION_WB: "East Asia & Pacific",
         lat: 17.570692,
         lon: -3.996166,
@@ -83414,6 +85653,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 32789.380000000005,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 19251501.57,
+          Metric: "Terajoules",
+        },
       },
       bbox: [92.303234, 9.93296, 101.180005, 28.335945],
       geometry: {
@@ -83499,6 +85757,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Montenegro",
         ISO_A2: "ME",
+        ISO_A3: "MNE",
+        ISO_A3_EH: "MNE",
+        CONTINENT: "Europe",
+        REGION_UN: "Europe",
+        SUBREGION: "Southern Europe",
         REGION_WB: "Europe & Central Asia",
         lat: 42.708678,
         lon: 19.37439,
@@ -83982,6 +86245,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 27204.5,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 0.0,
+          Metric: "Terajoules",
+        },
       },
       bbox: [18.450017, 41.877551, 20.3398, 43.52384],
       geometry: {
@@ -84015,6 +86297,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Mongolia",
         ISO_A2: "MN",
+        ISO_A3: "MNG",
+        ISO_A3_EH: "MNG",
+        CONTINENT: "Asia",
+        REGION_UN: "Asia",
+        SUBREGION: "Eastern Asia",
         REGION_WB: "East Asia & Pacific",
         lat: 46.862496,
         lon: 103.846656,
@@ -84408,6 +86695,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 21888.5,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 0.0,
+          Metric: "Terajoules",
+        },
       },
       bbox: [87.751264, 41.59741, 119.772824, 52.047366],
       geometry: {
@@ -84498,6 +86804,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Mozambique",
         ISO_A2: "MZ",
+        ISO_A3: "MOZ",
+        ISO_A3_EH: "MOZ",
+        CONTINENT: "Africa",
+        REGION_UN: "Africa",
+        SUBREGION: "Eastern Africa",
         REGION_WB: "Sub-Saharan Africa",
         lat: -18.665695,
         lon: 35.529562,
@@ -85341,6 +87652,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 1320.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 4400229.0,
+          Metric: "Terajoules",
+        },
       },
       bbox: [30.179481, -26.742192, 40.775475, -10.317096],
       geometry: {
@@ -85435,6 +87765,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Mauritania",
         ISO_A2: "MR",
+        ISO_A3: "MRT",
+        ISO_A3_EH: "MRT",
+        CONTINENT: "Africa",
+        REGION_UN: "Africa",
+        SUBREGION: "Western Africa",
         REGION_WB: "Sub-Saharan Africa",
         lat: 21.00789,
         lon: -10.940835,
@@ -86098,6 +88433,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 18015.4332,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 0.0,
+          Metric: "Terajoules",
+        },
       },
       bbox: [-17.063423, 14.616834, -4.923337, 27.395744],
       geometry: {
@@ -86152,6 +88506,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Malawi",
         ISO_A2: "MW",
+        ISO_A3: "MWI",
+        ISO_A3_EH: "MWI",
+        CONTINENT: "Africa",
+        REGION_UN: "Africa",
+        SUBREGION: "Eastern Africa",
         REGION_WB: "Sub-Saharan Africa",
         lat: -13.254308,
         lon: 34.301525,
@@ -86198,6 +88557,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Malaysia",
         ISO_A2: "MY",
+        ISO_A3: "MYS",
+        ISO_A3_EH: "MYS",
+        CONTINENT: "Asia",
+        REGION_UN: "Asia",
+        SUBREGION: "South-Eastern Asia",
         REGION_WB: "East Asia & Pacific",
         lat: 4.210484,
         lon: 101.975766,
@@ -87101,6 +89465,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 2931794.455,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 95186971.3194,
+          Metric: "Terajoules",
+        },
       },
       bbox: [100.085757, 0.773131, 119.181904, 6.928053],
       geometry: {
@@ -87184,6 +89567,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Namibia",
         ISO_A2: "NA",
+        ISO_A3: "NAM",
+        ISO_A3_EH: "NAM",
+        CONTINENT: "Africa",
+        REGION_UN: "Africa",
+        SUBREGION: "Southern Africa",
         REGION_WB: "Sub-Saharan Africa",
       },
       bbox: [11.734199, -29.045462, 25.084443, -16.941343],
@@ -87244,6 +89632,11 @@ const data = {
       properties: {
         SOVEREIGNT: "France",
         ISO_A2: "NC",
+        ISO_A3: "NCL",
+        ISO_A3_EH: "NCL",
+        CONTINENT: "Oceania",
+        REGION_UN: "Oceania",
+        SUBREGION: "Melanesia",
         REGION_WB: "East Asia & Pacific",
         lat: -20.904305,
         lon: 165.618042,
@@ -88177,6 +90570,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 24256.111,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 39089.309,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 2273917.742,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 191141346.99,
+          Metric: "Terajoules",
+        },
       },
       bbox: [164.029606, -22.399976, 167.120011, -20.105646],
       geometry: {
@@ -88205,6 +90617,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Niger",
         ISO_A2: "NE",
+        ISO_A3: "NER",
+        ISO_A3_EH: "NER",
+        CONTINENT: "Africa",
+        REGION_UN: "Africa",
+        SUBREGION: "Western Africa",
         REGION_WB: "Sub-Saharan Africa",
         lat: 17.607789,
         lon: 8.081666,
@@ -88508,6 +90925,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 7518.048,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 0.0,
+          Metric: "Terajoules",
+        },
       },
       bbox: [0.295646, 11.660167, 15.903247, 23.471668],
       geometry: {
@@ -88581,6 +91017,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Nigeria",
         ISO_A2: "NG",
+        ISO_A3: "NGA",
+        ISO_A3_EH: "NGA",
+        CONTINENT: "Africa",
+        REGION_UN: "Africa",
+        SUBREGION: "Western Africa",
         REGION_WB: "Sub-Saharan Africa",
         lat: 9.081999,
         lon: 8.675277,
@@ -89484,6 +91925,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 8994002.801,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 44375394.947,
+          Metric: "Terajoules",
+        },
       },
       bbox: [2.691702, 4.240594, 14.577178, 13.865924],
       geometry: {
@@ -89557,6 +92017,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Nicaragua",
         ISO_A2: "NI",
+        ISO_A3: "NIC",
+        ISO_A3_EH: "NIC",
+        CONTINENT: "North America",
+        REGION_UN: "Americas",
+        SUBREGION: "Central America",
         REGION_WB: "Latin America & Caribbean",
         lat: 12.865416,
         lon: -85.207229,
@@ -90460,6 +92925,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 22106.326,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 0.0,
+          Metric: "Terajoules",
+        },
       },
       bbox: [-87.668493, 10.726839, -83.147219, 15.016267],
       geometry: {
@@ -90527,6 +93011,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Netherlands",
         ISO_A2: "NL",
+        ISO_A3: "NLD",
+        ISO_A3_EH: "NLD",
+        CONTINENT: "Europe",
+        REGION_UN: "Europe",
+        SUBREGION: "Western Europe",
         REGION_WB: "Europe & Central Asia",
         lat: 52.132633,
         lon: 5.291266,
@@ -91460,6 +93949,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 9270.431,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 5045.417,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 2463927.7729999996,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 466171373.41400003,
+          Metric: "Terajoules",
+        },
       },
       bbox: [3.314971, 50.803721, 7.092053, 53.510403],
       geometry: {
@@ -91490,6 +93998,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Norway",
         ISO_A2: "-99",
+        ISO_A3: "-99",
+        ISO_A3_EH: "-99",
+        CONTINENT: "Europe",
+        REGION_UN: "Europe",
+        SUBREGION: "Northern Europe",
         REGION_WB: "Europe & Central Asia",
         1990: {
           Anthracite: {
@@ -92421,6 +94934,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 12397758.414,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 191346428.20999998,
+          Metric: "Terajoules",
+        },
       },
       bbox: [4.992078, 58.078884, 31.293418, 80.657144],
       geometry: {
@@ -92538,6 +95070,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Nepal",
         ISO_A2: "NP",
+        ISO_A3: "NPL",
+        ISO_A3_EH: "NPL",
+        CONTINENT: "Asia",
+        REGION_UN: "Asia",
+        SUBREGION: "Southern Asia",
         REGION_WB: "South Asia",
         lat: 28.394857,
         lon: 84.124008,
@@ -92579,6 +95116,11 @@ const data = {
       properties: {
         SOVEREIGNT: "New Zealand",
         ISO_A2: "NZ",
+        ISO_A3: "NZL",
+        ISO_A3_EH: "NZL",
+        CONTINENT: "Oceania",
+        REGION_UN: "Oceania",
+        SUBREGION: "Australia and New Zealand",
         REGION_WB: "East Asia & Pacific",
         lat: -40.900557,
         lon: 174.885971,
@@ -93512,6 +96054,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 15940.677,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 274674.954,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 9113704.983,
+          Metric: "Terajoules",
+        },
       },
       bbox: [166.509144, -46.641235, 178.517094, -34.450662],
       geometry: {
@@ -93599,6 +96160,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Oman",
         ISO_A2: "OM",
+        ISO_A3: "OMN",
+        ISO_A3_EH: "OMN",
+        CONTINENT: "Asia",
+        REGION_UN: "Asia",
+        SUBREGION: "Western Asia",
         REGION_WB: "Middle East & North Africa",
         lat: 21.512583,
         lon: 55.923255,
@@ -94502,6 +97068,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 3548448.721,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 38387874.9413,
+          Metric: "Terajoules",
+        },
       },
       bbox: [52.00001, 16.651051, 59.80806, 26.395934],
       geometry: {
@@ -94570,6 +97155,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Pakistan",
         ISO_A2: "PK",
+        ISO_A3: "PAK",
+        ISO_A3_EH: "PAK",
+        CONTINENT: "Asia",
+        REGION_UN: "Asia",
+        SUBREGION: "Southern Asia",
         REGION_WB: "South Asia",
         lat: 30.375321,
         lon: 69.345116,
@@ -95503,6 +98093,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 306946.894,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 50148598.291999996,
+          Metric: "Terajoules",
+        },
       },
       bbox: [60.874248, 23.691965, 77.837451, 37.133031],
       geometry: {
@@ -95584,6 +98193,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Panama",
         ISO_A2: "PA",
+        ISO_A3: "PAN",
+        ISO_A3_EH: "PAN",
+        CONTINENT: "North America",
+        REGION_UN: "Americas",
+        SUBREGION: "Central America",
         REGION_WB: "Latin America & Caribbean",
         lat: 8.537981,
         lon: -80.782127,
@@ -96067,6 +98681,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 22955.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 58158.0,
+          Metric: "Terajoules",
+        },
       },
       bbox: [-82.965783, 7.220541, -77.242566, 9.61161],
       geometry: {
@@ -96134,6 +98767,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Peru",
         ISO_A2: "PE",
+        ISO_A3: "PER",
+        ISO_A3_EH: "PER",
+        CONTINENT: "South America",
+        REGION_UN: "Americas",
+        SUBREGION: "South America",
         REGION_WB: "Latin America & Caribbean",
         lat: -9.189967,
         lon: -75.015152,
@@ -97037,6 +99675,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 6356.2,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 315134.19999999995,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 9028395.3999,
+          Metric: "Terajoules",
+        },
       },
       bbox: [-81.410943, -18.347975, -68.66508, -0.057205],
       geometry: {
@@ -97128,6 +99785,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Philippines",
         ISO_A2: "PH",
+        ISO_A3: "PHL",
+        ISO_A3_EH: "PHL",
+        CONTINENT: "Asia",
+        REGION_UN: "Asia",
+        SUBREGION: "South-Eastern Asia",
         REGION_WB: "East Asia & Pacific",
         lat: 12.879721,
         lon: 121.774017,
@@ -98061,6 +100723,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 377730.131,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 2669350.6302710003,
+          Metric: "Terajoules",
+        },
       },
       bbox: [117.174275, 5.581003, 126.537424, 18.505227],
       geometry: {
@@ -98212,6 +100893,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Papua New Guinea",
         ISO_A2: "PG",
+        ISO_A3: "PNG",
+        ISO_A3_EH: "PNG",
+        CONTINENT: "Oceania",
+        REGION_UN: "Oceania",
+        SUBREGION: "Melanesia",
         REGION_WB: "East Asia & Pacific",
         lat: -6.314993,
         lon: 143.95555,
@@ -99145,6 +101831,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 260069.57629349997,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 1551013.7018,
+          Metric: "Terajoules",
+        },
       },
       bbox: [141.00021, -10.652476, 156.019965, -2.500002],
       geometry: {
@@ -99255,6 +101960,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Poland",
         ISO_A2: "PL",
+        ISO_A3: "POL",
+        ISO_A3_EH: "POL",
+        CONTINENT: "Europe",
+        REGION_UN: "Europe",
+        SUBREGION: "Eastern Europe",
         REGION_WB: "Europe & Central Asia",
         lat: 51.919438,
         lon: 19.145136,
@@ -100188,6 +102898,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 2197.0950000000003,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 1927064.702,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 628406.1870000002,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 30951508.0,
+          Metric: "Terajoules",
+        },
       },
       bbox: [14.074521, 49.027395, 24.029986, 54.851536],
       geometry: {
@@ -100248,6 +102977,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Puerto Rico",
         ISO_A2: "PR",
+        ISO_A3: "PRI",
+        ISO_A3_EH: "PRI",
+        CONTINENT: "North America",
+        REGION_UN: "Americas",
+        SUBREGION: "Caribbean",
         REGION_WB: "Latin America & Caribbean",
         lat: 18.220833,
         lon: -66.590149,
@@ -100851,6 +103585,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 824422.8,
+          Metric: "Terajoules",
+        },
       },
       bbox: [-67.242428, 17.946553, -65.591004, 18.520601],
       geometry: {
@@ -100875,6 +103628,11 @@ const data = {
       properties: {
         SOVEREIGNT: "North Korea",
         ISO_A2: "KP",
+        ISO_A3: "PRK",
+        ISO_A3_EH: "PRK",
+        CONTINENT: "Asia",
+        REGION_UN: "Asia",
+        SUBREGION: "Eastern Asia",
         REGION_WB: "East Asia & Pacific",
         lat: 40.339852,
         lon: 127.510093,
@@ -101808,6 +104566,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 336556.769,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 21909.576,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 0.0,
+          Metric: "Terajoules",
+        },
       },
       bbox: [124.265625, 37.669071, 130.780007, 42.985387],
       geometry: {
@@ -101877,6 +104654,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Portugal",
         ISO_A2: "PT",
+        ISO_A3: "PRT",
+        ISO_A3_EH: "PRT",
+        CONTINENT: "Europe",
+        REGION_UN: "Europe",
+        SUBREGION: "Southern Europe",
         REGION_WB: "Europe & Central Asia",
         lat: 39.399872,
         lon: -8.224454,
@@ -102810,6 +105592,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 526.343,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 373410.601,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 5414608.891,
+          Metric: "Terajoules",
+        },
       },
       bbox: [-9.526571, 36.838269, -6.389088, 42.280469],
       geometry: {
@@ -102858,6 +105659,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Paraguay",
         ISO_A2: "PY",
+        ISO_A3: "PRY",
+        ISO_A3_EH: "PRY",
+        CONTINENT: "South America",
+        REGION_UN: "Americas",
+        SUBREGION: "South America",
         REGION_WB: "Latin America & Caribbean",
         lat: -23.442503,
         lon: -58.443832,
@@ -103341,6 +106147,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 2544.93,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 0.0,
+          Metric: "Terajoules",
+        },
       },
       bbox: [-62.685057, -27.548499, -54.29296, -19.342747],
       geometry: {
@@ -103389,6 +106214,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Israel",
         ISO_A2: "PS",
+        ISO_A3: "PSE",
+        ISO_A3_EH: "PSE",
+        CONTINENT: "Asia",
+        REGION_UN: "Asia",
+        SUBREGION: "Western Asia",
         REGION_WB: "Middle East & North Africa",
         lat: 31.952162,
         lon: 35.233154,
@@ -104322,6 +107152,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 327888.683,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 4071573.5820000004,
+          Metric: "Terajoules",
+        },
       },
       bbox: [34.927408, 31.353435, 35.545665, 32.532511],
       geometry: {
@@ -104346,6 +107195,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Qatar",
         ISO_A2: "QA",
+        ISO_A3: "QAT",
+        ISO_A3_EH: "QAT",
+        CONTINENT: "Asia",
+        REGION_UN: "Asia",
+        SUBREGION: "Western Asia",
         REGION_WB: "Middle East & North Africa",
         lat: 25.354826,
         lon: 51.183884,
@@ -105249,6 +108103,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 2534595.76,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 161232533.5624,
+          Metric: "Terajoules",
+        },
       },
       bbox: [50.743911, 24.556331, 51.6067, 26.114582],
       geometry: {
@@ -105273,6 +108146,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Romania",
         ISO_A2: "RO",
+        ISO_A3: "ROU",
+        ISO_A3_EH: "ROU",
+        CONTINENT: "Europe",
+        REGION_UN: "Europe",
+        SUBREGION: "Eastern Europe",
         REGION_WB: "Europe & Central Asia",
         lat: 45.943161,
         lon: 24.96676,
@@ -106206,6 +109084,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 3747.5,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 982368.0210000001,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 385539.83999999997,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 31618780.662,
+          Metric: "Terajoules",
+        },
       },
       bbox: [20.220192, 43.688445, 29.626543, 48.220881],
       geometry: {
@@ -106265,6 +109162,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Russia",
         ISO_A2: "RU",
+        ISO_A3: "RUS",
+        ISO_A3_EH: "RUS",
+        CONTINENT: "Europe",
+        REGION_UN: "Europe",
+        SUBREGION: "Eastern Europe",
         REGION_WB: "Europe & Central Asia",
         lat: 61.52401,
         lon: 105.318756,
@@ -107168,6 +110070,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 383707.397,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 2411174.9050000003,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 24744075.797000002,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 1152863260.026,
+          Metric: "Terajoules",
+        },
       },
       bbox: [-180, 41.151416, 180, 81.2504],
       geometry: {
@@ -107862,6 +110783,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Rwanda",
         ISO_A2: "RW",
+        ISO_A3: "RWA",
+        ISO_A3_EH: "RWA",
+        CONTINENT: "Africa",
+        REGION_UN: "Africa",
+        SUBREGION: "Eastern Africa",
         REGION_WB: "Sub-Saharan Africa",
         lat: -1.940278,
         lon: 29.873888,
@@ -108795,6 +111721,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 11185.94674,
+          Metric: "Terajoules",
+        },
       },
       bbox: [29.024926, -2.917858, 30.816135, -1.134659],
       geometry: {
@@ -108824,6 +111769,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Western Sahara",
         ISO_A2: "EH",
+        ISO_A3: "ESH",
+        ISO_A3_EH: "ESH",
+        CONTINENT: "Africa",
+        REGION_UN: "Africa",
+        SUBREGION: "Northern Africa",
         REGION_WB: "Middle East & North Africa",
         lat: 24.215527,
         lon: -12.885834,
@@ -108870,6 +111820,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Saudi Arabia",
         ISO_A2: "SA",
+        ISO_A3: "SAU",
+        ISO_A3_EH: "SAU",
+        CONTINENT: "Asia",
+        REGION_UN: "Asia",
+        SUBREGION: "Western Asia",
         REGION_WB: "Middle East & North Africa",
         lat: 23.885942,
         lon: 45.079162,
@@ -109773,6 +112728,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 33335197.0317,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 112373341.4745,
+          Metric: "Terajoules",
+        },
       },
       bbox: [34.632336, 16.347891, 55.666659, 32.161009],
       geometry: {
@@ -109864,6 +112838,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Sudan",
         ISO_A2: "SD",
+        ISO_A3: "SDN",
+        ISO_A3_EH: "SDN",
+        CONTINENT: "Africa",
+        REGION_UN: "Africa",
+        SUBREGION: "Northern Africa",
         REGION_WB: "Sub-Saharan Africa",
         lat: 12.862807,
         lon: 30.217636,
@@ -110767,6 +113746,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 599077.1,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 0.0,
+          Metric: "Terajoules",
+        },
       },
       bbox: [21.93681, 8.229188, 38.41009, 22],
       geometry: {
@@ -110863,6 +113861,11 @@ const data = {
       properties: {
         SOVEREIGNT: "South Sudan",
         ISO_A2: "SS",
+        ISO_A3: "SSD",
+        ISO_A3_EH: "SSD",
+        CONTINENT: "Africa",
+        REGION_UN: "Africa",
+        SUBREGION: "Eastern Africa",
         REGION_WB: "Sub-Saharan Africa",
         2012: {
           Anthracite: {
@@ -111104,6 +114107,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 154252.64,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 0.0,
+          Metric: "Terajoules",
+        },
       },
       bbox: [23.88698, 3.509172, 35.298007, 12.248008],
       geometry: {
@@ -111182,6 +114204,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Senegal",
         ISO_A2: "SN",
+        ISO_A3: "SEN",
+        ISO_A3_EH: "SEN",
+        CONTINENT: "Africa",
+        REGION_UN: "Africa",
+        SUBREGION: "Western Africa",
         REGION_WB: "Sub-Saharan Africa",
         lat: 14.497401,
         lon: -14.452362,
@@ -112115,6 +115142,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 26349.805,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 22453.032,
+          Metric: "Terajoules",
+        },
       },
       bbox: [-17.625043, 12.33209, -11.467899, 16.598264],
       geometry: {
@@ -112174,6 +115220,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Solomon Islands",
         ISO_A2: "SB",
+        ISO_A3: "SLB",
+        ISO_A3_EH: "SLB",
+        CONTINENT: "Oceania",
+        REGION_UN: "Oceania",
+        SUBREGION: "Melanesia",
         REGION_WB: "East Asia & Pacific",
         lat: -9.64571,
         lon: 160.156194,
@@ -112247,6 +115298,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Sierra Leone",
         ISO_A2: "SL",
+        ISO_A3: "SLE",
+        ISO_A3_EH: "SLE",
+        CONTINENT: "Africa",
+        REGION_UN: "Africa",
+        SUBREGION: "Western Africa",
         REGION_WB: "Sub-Saharan Africa",
         lat: 8.460555,
         lon: -11.779889,
@@ -112310,6 +115366,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 395.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 0.0,
+          Metric: "Terajoules",
+        },
       },
       bbox: [-13.24655, 6.785917, -10.230094, 10.046984],
       geometry: {
@@ -112347,6 +115422,11 @@ const data = {
       properties: {
         SOVEREIGNT: "El Salvador",
         ISO_A2: "SV",
+        ISO_A3: "SLV",
+        ISO_A3_EH: "SLV",
+        CONTINENT: "North America",
+        REGION_UN: "Americas",
+        SUBREGION: "Central America",
         REGION_WB: "Latin America & Caribbean",
         lat: 13.794185,
         lon: -88.89653,
@@ -113070,6 +116150,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 20391.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 0.0,
+          Metric: "Terajoules",
+        },
       },
       bbox: [-90.095555, 13.149017, -87.723503, 14.424133],
       geometry: {
@@ -113105,6 +116204,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Somaliland",
         ISO_A2: "-99",
+        ISO_A3: "-99",
+        ISO_A3_EH: "-99",
+        CONTINENT: "Africa",
+        REGION_UN: "Africa",
+        SUBREGION: "Eastern Africa",
         REGION_WB: "Sub-Saharan Africa",
       },
       bbox: [42.55876, 7.99688, 48.948206, 11.46204],
@@ -113147,6 +116251,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Somalia",
         ISO_A2: "SO",
+        ISO_A3: "SOM",
+        ISO_A3_EH: "SOM",
+        CONTINENT: "Africa",
+        REGION_UN: "Africa",
+        SUBREGION: "Eastern Africa",
         REGION_WB: "Sub-Saharan Africa",
         lat: 5.152149,
         lon: 46.199616,
@@ -113930,6 +117039,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 1892.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 0.0,
+          Metric: "Terajoules",
+        },
       },
       bbox: [40.98105, -1.68325, 51.13387, 12.02464],
       geometry: {
@@ -113982,6 +117110,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Serbia",
         ISO_A2: "RS",
+        ISO_A3: "SRB",
+        ISO_A3_EH: "SRB",
+        CONTINENT: "Europe",
+        REGION_UN: "Europe",
+        SUBREGION: "Southern Europe",
         REGION_WB: "Europe & Central Asia",
         lat: 44.016521,
         lon: 21.005859,
@@ -114825,6 +117958,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 431.125,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 590468.452,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 74928.562,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 3825790.994,
+          Metric: "Terajoules",
+        },
       },
       bbox: [18.829825, 42.245224, 22.986019, 46.17173],
       geometry: {
@@ -114888,6 +118040,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Suriname",
         ISO_A2: "SR",
+        ISO_A3: "SUR",
+        ISO_A3_EH: "SUR",
+        CONTINENT: "South America",
+        REGION_UN: "Americas",
+        SUBREGION: "South America",
         REGION_WB: "Latin America & Caribbean",
         lat: 3.919305,
         lon: -56.027783,
@@ -115791,6 +118948,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 30130.506476,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 3094.18193,
+          Metric: "Terajoules",
+        },
       },
       bbox: [-58.044694, 1.817667, -53.958045, 6.025291],
       geometry: {
@@ -115832,6 +119008,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Slovakia",
         ISO_A2: "SK",
+        ISO_A3: "SVK",
+        ISO_A3_EH: "SVK",
+        CONTINENT: "Europe",
+        REGION_UN: "Europe",
+        SUBREGION: "Eastern Europe",
         REGION_WB: "Europe & Central Asia",
         lat: 48.669026,
         lon: 19.699024,
@@ -116705,6 +119886,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 4474.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 155179.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 159967.16400000002,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 11457694.0,
+          Metric: "Terajoules",
+        },
       },
       bbox: [16.879983, 47.758429, 22.558138, 49.571574],
       geometry: {
@@ -116753,6 +119953,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Slovenia",
         ISO_A2: "SI",
+        ISO_A3: "SVN",
+        ISO_A3_EH: "SVN",
+        CONTINENT: "Europe",
+        REGION_UN: "Europe",
+        SUBREGION: "Southern Europe",
         REGION_WB: "Europe & Central Asia",
         lat: 46.151241,
         lon: 14.995463,
@@ -117626,6 +120831,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 127818.777,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 3416.096,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 1908970.0189999999,
+          Metric: "Terajoules",
+        },
       },
       bbox: [13.69811, 45.452316, 16.564808, 46.852386],
       geometry: {
@@ -117659,6 +120883,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Sweden",
         ISO_A2: "SE",
+        ISO_A3: "SWE",
+        ISO_A3_EH: "SWE",
+        CONTINENT: "Europe",
+        REGION_UN: "Europe",
+        SUBREGION: "Northern Europe",
         REGION_WB: "Europe & Central Asia",
         lat: 60.128161,
         lon: 18.643501,
@@ -118592,6 +121821,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 2.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 590531.72,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 2004090.3080000002,
+          Metric: "Terajoules",
+        },
       },
       bbox: [11.027369, 55.361737, 23.903379, 69.106247],
       geometry: {
@@ -118647,6 +121895,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Eswatini",
         ISO_A2: "SZ",
+        ISO_A3: "SWZ",
+        ISO_A3_EH: "SWZ",
+        CONTINENT: "Africa",
+        REGION_UN: "Africa",
+        SUBREGION: "Southern Africa",
         REGION_WB: "Sub-Saharan Africa",
         lat: -26.522503,
         lon: 31.465866,
@@ -119340,6 +122593,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 13464.215372499999,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 0.0,
+          Metric: "Terajoules",
+        },
       },
       bbox: [30.676609, -27.285879, 32.071665, -25.660191],
       geometry: {
@@ -119366,6 +122638,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Syrian Arab Republic",
         ISO_A2: "SY",
+        ISO_A3: "SYR",
+        ISO_A3_EH: "SYR",
+        CONTINENT: "Asia",
+        REGION_UN: "Asia",
+        SUBREGION: "Western Asia",
         REGION_WB: "Middle East & North Africa",
         lat: 34.802075,
         lon: 38.996815,
@@ -120299,6 +123576,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 1234737.9649999999,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 7664070.0002,
+          Metric: "Terajoules",
+        },
       },
       bbox: [35.700798, 32.312938, 42.349591, 37.229873],
       geometry: {
@@ -120341,6 +123637,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Chad",
         ISO_A2: "TD",
+        ISO_A3: "TCD",
+        ISO_A3_EH: "TCD",
+        CONTINENT: "Africa",
+        REGION_UN: "Africa",
+        SUBREGION: "Middle Africa",
         REGION_WB: "Sub-Saharan Africa",
         lat: 15.454166,
         lon: 18.732207,
@@ -120854,6 +124155,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 310794.40693399997,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 0.0,
+          Metric: "Terajoules",
+        },
       },
       bbox: [13.540394, 7.421925, 23.88689, 23.40972],
       geometry: {
@@ -120927,6 +124247,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Togo",
         ISO_A2: "TG",
+        ISO_A3: "TGO",
+        ISO_A3_EH: "TGO",
+        CONTINENT: "Africa",
+        REGION_UN: "Africa",
+        SUBREGION: "Western Africa",
         REGION_WB: "Sub-Saharan Africa",
         lat: 8.619543,
         lon: 0.824782,
@@ -121200,6 +124525,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 10661.061512,
+          Metric: "Terajoules",
+        },
       },
       bbox: [-0.049785, 5.928837, 1.865241, 11.018682],
       geometry: {
@@ -121234,6 +124578,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Thailand",
         ISO_A2: "TH",
+        ISO_A3: "THA",
+        ISO_A3_EH: "THA",
+        CONTINENT: "Asia",
+        REGION_UN: "Asia",
+        SUBREGION: "South-Eastern Asia",
         REGION_WB: "East Asia & Pacific",
         lat: 15.870032,
         lon: 100.992541,
@@ -122137,6 +125486,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 2774.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 164429.001,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 1382710.6360000004,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 35897894.30607,
+          Metric: "Terajoules",
+        },
       },
       bbox: [97.375896, 5.691384, 105.589039, 20.41785],
       geometry: {
@@ -122216,6 +125584,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Tajikistan",
         ISO_A2: "TJ",
+        ISO_A3: "TJK",
+        ISO_A3_EH: "TJK",
+        CONTINENT: "Asia",
+        REGION_UN: "Asia",
+        SUBREGION: "Central Asia",
         REGION_WB: "Europe & Central Asia",
         lat: 38.861034,
         lon: 71.276093,
@@ -123089,6 +126462,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 552.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 940.9000000000001,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 924624.8,
+          Metric: "Terajoules",
+        },
       },
       bbox: [67.44222, 36.738171, 74.980002, 40.960213],
       geometry: {
@@ -123145,6 +126537,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Turkmenistan",
         ISO_A2: "TM",
+        ISO_A3: "TKM",
+        ISO_A3_EH: "TKM",
+        CONTINENT: "Asia",
+        REGION_UN: "Asia",
+        SUBREGION: "Central Asia",
         REGION_WB: "Europe & Central Asia",
         lat: 38.969719,
         lon: 59.556278,
@@ -123988,6 +127385,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 342317.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 111972867.33700001,
+          Metric: "Terajoules",
+        },
       },
       bbox: [52.50246, 35.270664, 66.54615, 42.751551],
       geometry: {
@@ -124057,6 +127473,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Timor-Leste",
         ISO_A2: "TL",
+        ISO_A3: "TLS",
+        ISO_A3_EH: "TLS",
+        CONTINENT: "Asia",
+        REGION_UN: "Asia",
+        SUBREGION: "South-Eastern Asia",
         REGION_WB: "East Asia & Pacific",
         lat: -8.874217,
         lon: 125.727539,
@@ -124540,6 +127961,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 173408.09999999998,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 5968949.6042,
+          Metric: "Terajoules",
+        },
       },
       bbox: [124.968682, -9.393173, 127.335928, -8.273345],
       geometry: {
@@ -124566,6 +128006,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Trinidad and Tobago",
         ISO_A2: "TT",
+        ISO_A3: "TTO",
+        ISO_A3_EH: "TTO",
+        CONTINENT: "North America",
+        REGION_UN: "Americas",
+        SUBREGION: "Caribbean",
         REGION_WB: "Latin America & Caribbean",
         lat: 10.691803,
         lon: -61.222503,
@@ -125499,6 +128944,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 480626.279,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 53944062.036,
+          Metric: "Terajoules",
+        },
       },
       bbox: [-61.95, 10, -60.895, 10.89],
       geometry: {
@@ -125522,6 +128986,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Tunisia",
         ISO_A2: "TN",
+        ISO_A3: "TUN",
+        ISO_A3_EH: "TUN",
+        CONTINENT: "Africa",
+        REGION_UN: "Africa",
+        SUBREGION: "Northern Africa",
         REGION_WB: "Middle East & North Africa",
         lat: 33.886917,
         lon: 9.537499,
@@ -126425,6 +129894,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 303478.325,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 6472181.767000001,
+          Metric: "Terajoules",
+        },
       },
       bbox: [7.524482, 30.307556, 11.488787, 37.349994],
       geometry: {
@@ -126471,6 +129959,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Turkey",
         ISO_A2: "TR",
+        ISO_A3: "TUR",
+        ISO_A3_EH: "TUR",
+        CONTINENT: "Asia",
+        REGION_UN: "Asia",
+        SUBREGION: "Western Asia",
         REGION_WB: "Europe & Central Asia",
         lat: 38.963745,
         lon: 35.243322,
@@ -127404,6 +130897,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 2228288.164,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 779661.861,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 48389682.863,
+          Metric: "Terajoules",
+        },
       },
       bbox: [26.043351, 35.821535, 44.79399, 42.141485],
       geometry: {
@@ -127493,6 +131005,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Taiwan",
         ISO_A2: "TW",
+        ISO_A3: "TWN",
+        ISO_A3_EH: "TWN",
+        CONTINENT: "Asia",
+        REGION_UN: "Asia",
+        SUBREGION: "Eastern Asia",
         REGION_WB: "East Asia & Pacific",
         lat: 23.69781,
         lon: 120.960515,
@@ -127520,6 +131037,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Tanzania",
         ISO_A2: "TZ",
+        ISO_A3: "TZA",
+        ISO_A3_EH: "TZA",
+        CONTINENT: "Africa",
+        REGION_UN: "Africa",
+        SUBREGION: "Eastern Africa",
         REGION_WB: "Sub-Saharan Africa",
         lat: -6.369028,
         lon: 34.888822,
@@ -128423,6 +131945,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 5475.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 518997.88,
+          Metric: "Terajoules",
+        },
       },
       bbox: [29.339998, -11.720938, 40.31659, -0.95],
       geometry: {
@@ -128490,6 +132031,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Uganda",
         ISO_A2: "UG",
+        ISO_A3: "UGA",
+        ISO_A3_EH: "UGA",
+        CONTINENT: "Africa",
+        REGION_UN: "Africa",
+        SUBREGION: "Eastern Africa",
         REGION_WB: "Sub-Saharan Africa",
         lat: 1.373333,
         lon: 32.290275,
@@ -128536,6 +132082,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Ukraine",
         ISO_A2: "UA",
+        ISO_A3: "UKR",
+        ISO_A3_EH: "UKR",
+        CONTINENT: "Europe",
+        REGION_UN: "Europe",
+        SUBREGION: "Eastern Europe",
         REGION_WB: "Europe & Central Asia",
         lat: 48.379433,
         lon: 31.16558,
@@ -129409,6 +132960,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 174092.2,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 47159.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 359979.7,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 111870257.262,
+          Metric: "Terajoules",
+        },
       },
       bbox: [22.085608, 45.293308, 40.080789, 52.335075],
       geometry: {
@@ -129517,6 +133087,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Uruguay",
         ISO_A2: "UY",
+        ISO_A3: "URY",
+        ISO_A3_EH: "URY",
+        CONTINENT: "South America",
+        REGION_UN: "Americas",
+        SUBREGION: "South America",
         REGION_WB: "Latin America & Caribbean",
         lat: -32.522779,
         lon: -55.765835,
@@ -130450,6 +134025,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 16.392135,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 49436.3,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 100704.4,
+          Metric: "Terajoules",
+        },
       },
       bbox: [-58.427074, -34.952647, -53.209589, -30.109686],
       geometry: {
@@ -130486,6 +134080,11 @@ const data = {
       properties: {
         SOVEREIGNT: "United States",
         ISO_A2: "US",
+        ISO_A3: "USA",
+        ISO_A3_EH: "USA",
+        CONTINENT: "North America",
+        REGION_UN: "Americas",
+        SUBREGION: "Northern America",
         REGION_WB: "North America",
         lat: 37.09024,
         lon: -95.712891,
@@ -131419,6 +135018,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 43344.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 2258370.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 26826284.841999996,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 1339094283.395,
+          Metric: "Terajoules",
+        },
       },
       bbox: [-171.791111, 18.91619, -66.96466, 71.357764],
       geometry: {
@@ -131919,6 +135537,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Uzbekistan",
         ISO_A2: "UZ",
+        ISO_A3: "UZB",
+        ISO_A3_EH: "UZB",
+        CONTINENT: "Asia",
+        REGION_UN: "Asia",
+        SUBREGION: "Central Asia",
         REGION_WB: "Europe & Central Asia",
         lat: 41.377491,
         lon: 64.585262,
@@ -132762,6 +136385,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 5565.2981,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 80156.04431,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 99962.692591,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 103049732.696675,
+          Metric: "Terajoules",
+        },
       },
       bbox: [55.928917, 37.144994, 73.055417, 45.586804],
       geometry: {
@@ -132831,6 +136473,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Venezuela",
         ISO_A2: "VE",
+        ISO_A3: "VEN",
+        ISO_A3_EH: "VEN",
+        CONTINENT: "South America",
+        REGION_UN: "Americas",
+        SUBREGION: "South America",
         REGION_WB: "Latin America & Caribbean",
         lat: 6.42375,
         lon: -66.58973,
@@ -133734,6 +137381,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 9909582.8008,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 43414213.4562,
+          Metric: "Terajoules",
+        },
       },
       bbox: [-73.304952, 0.724452, -59.758285, 12.162307],
       geometry: {
@@ -133841,6 +137507,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Vietnam",
         ISO_A2: "VN",
+        ISO_A3: "VNM",
+        ISO_A3_EH: "VNM",
+        CONTINENT: "Asia",
+        REGION_UN: "Asia",
+        SUBREGION: "South-Eastern Asia",
         REGION_WB: "East Asia & Pacific",
         lat: 14.058324,
         lon: 108.277199,
@@ -134774,6 +138445,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 1368749.6,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 6780283.284899999,
+          Metric: "Terajoules",
+        },
       },
       bbox: [102.170436, 8.59976, 109.33527, 23.352063],
       geometry: {
@@ -134833,6 +138523,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Vanuatu",
         ISO_A2: "VU",
+        ISO_A3: "VUT",
+        ISO_A3_EH: "VUT",
+        CONTINENT: "Oceania",
+        REGION_UN: "Oceania",
+        SUBREGION: "Melanesia",
         REGION_WB: "East Asia & Pacific",
         lat: -15.376706,
         lon: 166.959158,
@@ -134869,6 +138564,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Yemen",
         ISO_A2: "YE",
+        ISO_A3: "YEM",
+        ISO_A3_EH: "YEM",
+        CONTINENT: "Asia",
+        REGION_UN: "Asia",
+        SUBREGION: "Western Asia",
         REGION_WB: "Middle East & North Africa",
         lat: 15.552727,
         lon: 48.516388,
@@ -135772,6 +139472,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 957860.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 3596406.5,
+          Metric: "Terajoules",
+        },
       },
       bbox: [42.604873, 12.58595, 53.108573, 19.000003],
       geometry: {
@@ -135831,6 +139550,11 @@ const data = {
       properties: {
         SOVEREIGNT: "South Africa",
         ISO_A2: "ZA",
+        ISO_A3: "ZAF",
+        ISO_A3_EH: "ZAF",
+        CONTINENT: "Africa",
+        REGION_UN: "Africa",
+        SUBREGION: "Southern Africa",
         REGION_WB: "Sub-Saharan Africa",
         lat: -30.559482,
         lon: 22.937506,
@@ -136734,6 +140458,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 58860.644,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 599377.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 4438256.243,
+          Metric: "Terajoules",
+        },
       },
       bbox: [16.344977, -34.819166, 32.83012, -22.091313],
       geometry: {
@@ -136845,6 +140588,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Zambia",
         ISO_A2: "ZM",
+        ISO_A3: "ZMB",
+        ISO_A3_EH: "ZMB",
+        CONTINENT: "Africa",
+        REGION_UN: "Africa",
+        SUBREGION: "Eastern Africa",
         REGION_WB: "Sub-Saharan Africa",
         lat: -13.133897,
         lon: 27.849332,
@@ -137748,6 +141496,25 @@ const data = {
             Metric: "Terajoules",
           },
         },
+        Anthracite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 15278.107,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 0.0,
+          Metric: "Terajoules",
+        },
       },
       bbox: [21.887843, -17.961229, 33.485688, -8.238257],
       geometry: {
@@ -137824,6 +141591,11 @@ const data = {
       properties: {
         SOVEREIGNT: "Zimbabwe",
         ISO_A2: "ZW",
+        ISO_A3: "ZWE",
+        ISO_A3_EH: "ZWE",
+        CONTINENT: "Africa",
+        REGION_UN: "Africa",
+        SUBREGION: "Eastern Africa",
         REGION_WB: "Sub-Saharan Africa",
         lat: -19.015438,
         lon: 29.154857,
@@ -138066,6 +141838,25 @@ const data = {
             Consumption: 0.0,
             Metric: "Terajoules",
           },
+        },
+        Anthracite: {
+          value: 9.2,
+          Metric: "Thousand Metric tones",
+        },
+
+        Lignite: {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Crude oil": {
+          value: 0.0,
+          Metric: "Thousand Metric tones",
+        },
+
+        "Natural gas": {
+          value: 0.0,
+          Metric: "Terajoules",
         },
       },
       bbox: [25.264226, -22.271612, 32.849861, -15.507787],
