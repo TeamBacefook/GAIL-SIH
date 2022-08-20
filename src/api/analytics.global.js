@@ -11,3 +11,5 @@ export const getcountriesdata = ({
   API.get(
     `/countries?startyear=${start_year}&endyear=${end_year}&country=${country}&parameter=${parameter}`
   );
+
+export const getglobaltrends = () => API.get("/getTrend");

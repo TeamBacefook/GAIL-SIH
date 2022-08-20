@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Helmet from "react-helmet";
-import { Box, Divider, Grid, TextField, Typography } from "@mui/material";
+import { Box, Divider, Grid, Typography } from "@mui/material";
 import BarCharts from "../../charts/barchart";
 import IOSSlider from "../../components/common/slider";
 import OutlinedInput from "@mui/material/OutlinedInput";
@@ -42,8 +42,6 @@ const Analytics = () => {
     const {
       target: { value },
     } = event;
-
-    console.log(value);
     setCommo(
       // On autofill we get a stringified value.
       typeof value === "string" ? [value.split] : value
@@ -65,10 +63,10 @@ const Analytics = () => {
         ]);
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
   }, [filters, commo, setTree]);
-  console.log(tree);
+
   useEffect(() => {
     const getConsumption = async () => {
       const { data } = await getcontinentaldata(
@@ -127,7 +125,6 @@ const Analytics = () => {
               />
             }
             renderValue={(x) => {
-              console.log(x);
               return (
                 <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
                   {x.map((value) => (

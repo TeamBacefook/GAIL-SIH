@@ -5,11 +5,9 @@ import {
   Typography,
   Divider,
   TextField,
-  useMediaQuery,
 } from "@mui/material";
-import { styled } from "@mui/material/styles";
 import BarCharts from "../../charts/barchart";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import Helmet from "react-helmet";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
@@ -19,10 +17,12 @@ import Select from "@mui/material/Select";
 import Chip from "@mui/material/Chip";
 import Checkbox from "@mui/material/Checkbox";
 import IOSSlider from "../../components/common/slider";
-import CSVReader from "react-csv-reader";
+import { toast } from "react-toastify";
 import withLayout from "../../layout";
 import { getPredictions, getModelEval } from "../../actions/predictions";
 import LineChart from "../../charts/predchart";
+import "./style.css";
+import Papa from "papaparse";
 
 const marks = [
   { label: "", value: 0 },
@@ -33,54 +33,48 @@ const marks = [
   { label: "", value: 0.8 },
   { label: "", value: 1 },
 ];
-const CssTextField = styled(TextField)({
-  "& .MuiOutlinedInput-root": {
-    backgroundColor: "rgba(255,255,255,0.6)",
-    height: "3em",
-    borderRadius: "10px",
-  },
-});
+
 const Predictions = () => {
-  const csvRef = useRef(null);
   const [data, setData] = useState([]);
-  const handleForce = async (item) => {
-    const pred = await getPredictions(item);
-    setData(pred.data);
-    csvRef.current.value = null;
+  const handleFileChange = (e) => {
+    if (e.target.files.length) {
+      const inputFile = e.target.files[0];
+      const fileExtension = inputFile?.type.split("/")[1];
+      if (!["csv"].includes(fileExtension)) {
+        toast.error("Please input a csv file");
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = async ({ target }) => {
+        const csv = Papa.parse(target.result, { header: true });
+        const parsedData = csv?.data;
+        const columns = Object.keys(parsedData[0]);
+        if (!columns.includes("date") || !columns.includes("close")) {
+          toast.error("Please input correct csv file");
+        } else {
+          toast.info("Predicting ...");
+          parsedData.pop();
+          const pred = await getPredictions(parsedData);
+          setData(pred.data);
+        }
+      };
+      reader.readAsText(inputFile);
+    }
   };
+
   const [commo, setCommo] = useState([]);
   const [all, setAll] = useState([]);
-  function csvJSON(csv) {
-    var lines = csv.split("\n");
 
-    var result = [];
-
-    var headers = lines[0].split(",");
-
-    for (var i = 1; i < lines.length; i++) {
-      var obj = {};
-      var currentline = lines[i].split(",");
-
-      for (var j = 0; j < headers.length; j++) {
-        obj[headers[j]] = currentline[j];
-      }
-
-      result.push(obj);
-    }
-
-    //return result; //JavaScript object
-    return JSON.stringify(result); //JSON
-  }
   useEffect(() => {
     const arr = [];
     for (var key in data[0]) {
       if (data[0].hasOwnProperty(key)) {
-        var val = data[0][key];
         if (key !== "index") {
           arr.push(key);
         }
       }
     }
+    console.log(arr);
     setAll(arr);
     setCommo(arr);
   }, [data]);
@@ -94,34 +88,22 @@ const Predictions = () => {
         if (data2.data[0].hasOwnProperty(key)) {
           var val = data2.data[0][key];
           if (key !== "index") {
-            console.log({ label: key, value: val });
             arr.push({ label: key, value: val });
           }
         }
       }
       setBarData(arr);
-      console.log(arr);
     };
     getData2();
   }, []);
-  const papaparseOptions = {
-    header: true,
-    dynamicTyping: true,
-    skipEmptyLines: true,
-    transformHeader: (header) => header.toLowerCase().replace(/\W/g, "_"),
-  };
-
-  const small = useMediaQuery("(max-width:756px)");
 
   const handleChange = (event) => {
     const {
       target: { value },
     } = event;
-    setCommo(
-      // On autofill we get a stringified value.
-      typeof value === "string" ? value.split(",") : value
-    );
+    setCommo(typeof value === "string" ? value.split(",") : value);
   };
+  console.log(data);
   return (
     <Box sx={{ my: 12, px: { xs: 1, md: 4 } }}>
       <Helmet>
@@ -141,36 +123,13 @@ const Predictions = () => {
             Model Prediction
           </Typography>
         </Grid>
-        <Grid item xs={3}>
-          {/* <label
-            className="d-flex justify-content-center align-items-center btn"
-            style={{ height: "fit-content" }}
-          > */}
-          {/* <Typography contentKey="dataFile.home.createLabel">
-              Import data from file
-            </Typography> */}
-          {/* <Button
-              variant="contained"
-              contentKey="dataFile.home.createLabel"
-              sx={{
-                background:
-                  "linear-gradient(169.84deg, #FFE53B -30.77%, #FF2525 119.39%)",
-                color: "white",
-                borderRadius: "11px",
-                textTransform: "none",
-                width: "70%",
-              }}
-            >
-              Import Data
-            </Button> */}
-          <CSVReader
-            inputRef={csvRef}
-            cssClass="react-csv-input"
-            onFileLoaded={handleForce}
-            parserOptions={papaparseOptions}
-          />
-          {/* </label> */}
+        <Grid item xs={2}>
+          <input type="file" id="file" onChange={handleFileChange} />
+          <label for="file" className="btn-3" style={{ textAlign: "center" }}>
+            <span>Upload CSV File</span>
+          </label>
         </Grid>
+        <Grid item xs={1}></Grid>
         <Grid item xs={2}>
           <Button
             variant="contained"
@@ -182,6 +141,7 @@ const Predictions = () => {
               textTransform: "none",
               width: "70%",
             }}
+            disabled={data.length !== 0 ? false : true}
           >
             Download Graph
           </Button>
@@ -196,15 +156,19 @@ const Predictions = () => {
               textTransform: "none",
               width: "70%",
             }}
+            disabled={data.length !== 0 ? false : true}
+            onClick={() => {
+              window.downloadCSV(data, commo, "Predictions");
+            }}
           >
-            Download Graph
+            Download CSV
           </Button>
         </Grid>
       </Grid>
       {data.length !== 0 && (
         <>
-          <Grid item justifyContent="center" xs={12} md={12} lg={12}>
-            <FormControl sx={{ m: 1, width: "40%" }}>
+          <Grid item justify="center" xs={12} md={12} lg={12} align="center">
+            <FormControl sx={{ m: 1, width: "100%" }}>
               <InputLabel id="demo-multiple-chip-label">Chip</InputLabel>
               <Select
                 labelId="demo-multiple-chip-label"
@@ -229,9 +193,9 @@ const Predictions = () => {
                   );
                 }}
               >
-                {all.map((obj) => {
+                {all.map((obj, index) => {
                   return (
-                    <MenuItem value={obj} key={obj}>
+                    <MenuItem value={obj} key={index}>
                       {obj}
                     </MenuItem>
                   );

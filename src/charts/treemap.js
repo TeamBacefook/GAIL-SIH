@@ -115,7 +115,6 @@ const CustomizedContent = (props) => {
     height,
     index,
     colors,
-    name,
     sub_region,
     size,
     // myScale,

@@ -1,0 +1,65 @@
+@charset "UTF-8";
+[type="file"] {
+  height: 0;
+  overflow: hidden;
+  width: 0;
+}
+
+[type="file"] + label {
+  background: #f15d22;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  height: 20%;
+  width: 50%;
+  margin-bottom: 1rem;
+  outline: none;
+  padding: 0.5em;
+  position: relative;
+  transition: all 0.3s;
+  vertical-align: middle;
+}
+[type="file"] + label:hover {
+  background-color: #d3460d;
+}
+
+/* linear-gradient(169.84deg, #ffe53b -30.77%, #ff2525 119.39%); */
+[type="file"] + label.btn-3 {
+  background: linear-gradient(169.84deg, #ffe53b -30.77%, #ff2525 119.39%);
+  border-radius: 11px;
+  overflow: hidden;
+}
+[type="file"] + label.btn-3 span {
+  display: inline-block;
+  height: 100%;
+  transition: all 0.3s;
+  width: 100%;
+}
+[type="file"] + label.btn-3::before {
+  color: #fff;
+  content: "\f382";
+  font-family: "Font Awesome 5 Free";
+  font-size: 130%;
+  height: 100%;
+  font-weight: 900;
+  left: 0%;
+  line-height: 2.6;
+  position: absolute;
+  top: -130%;
+  transition: all 0.3s;
+  width: 100%;
+}
+[type="file"] + label.btn-3:hover {
+  background: linear-gradient(169.84deg, #ffe53b -30.77%, #ff2525 119.39%);
+}
+[type="file"] + label.btn-3:hover span {
+  transform: translateY(200%);
+}
+[type="file"] + label.btn-3:hover::before {
+  top: 0;
+}

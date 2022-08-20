@@ -11,6 +11,13 @@
       href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
@@ -22,6 +29,32 @@
         style="display: none; visibility: hidden"
       ></iframe
     ></noscript>
+    <script>
+      function createCSV(array, arr) {
+        var result = "";
+        arr.push("index");
+        result += arr.join(",");
+        result += "\n";
+
+        array.forEach(function (item) {
+          arr.forEach(function (key) {
+            result += item[key] + ",";
+          });
+          result += "\n";
+        });
+
+        return result;
+      }
+
+      function downloadCSV(array, filter, name) {
+        csv = "data:text/csv;charset=utf-8," + createCSV(array, filter);
+        excel = encodeURI(csv);
+        link = document.createElement("a");
+        link.setAttribute("href", excel);
+        link.setAttribute("download", `${name}.csv`);
+        link.click();
+      }
+    </script>
     <!-- End Google Tag Manager (noscript) -->
     <div id="root"></div>
   </body>

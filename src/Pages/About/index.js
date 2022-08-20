@@ -127,6 +127,7 @@ const Home = () => {
           sx={{ mt: { md: -10 } }}
         >
           <object
+            aria-labelledby="label1"
             style={{ width: small ? "70%" : "100%" }}
             type="image/svg+xml"
             data={homesvg}

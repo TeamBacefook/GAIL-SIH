@@ -3,8 +3,6 @@ import {
   Bar,
   XAxis,
   YAxis,
-  CartesianGrid,
-  LabelList,
 } from "recharts";
 import React from "react";
 

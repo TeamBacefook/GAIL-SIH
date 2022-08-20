@@ -23,7 +23,6 @@ const COLORS = [
 ];
 
 export default function DataLineChart({ width, height, data }) {
-  console.log(data);
   return (
     <ResponsiveContainer width="100%" height="100%">
       <LineChart
@@ -44,7 +43,7 @@ export default function DataLineChart({ width, height, data }) {
         <Legend />
         {Object.keys(data[0]).map((key, index) => {
           return (
-            <>
+            <React.Fragment key={index}>
               {key !== "year" && key !== "metric" && key !== "commodity" && (
                 <Line
                   type="monotone"
@@ -54,7 +53,7 @@ export default function DataLineChart({ width, height, data }) {
                   strokeWidth={3}
                 />
               )}
-            </>
+            </React.Fragment>
           );
         })}
       </LineChart>

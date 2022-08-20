@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
   LineChart,
   Line,
@@ -44,7 +44,7 @@ export default function DataLineChart({ width, height, data, display }) {
           <Legend />
           {Object.keys(data[0]).map((key, index) => {
             return (
-              <>
+              <React.Fragment key={index}>
                 {key !== "index" && display.includes(`${key}`) && (
                   <>
                     <Line
@@ -57,7 +57,7 @@ export default function DataLineChart({ width, height, data, display }) {
                     />
                   </>
                 )}
-              </>
+              </React.Fragment>
             );
           })}
         </LineChart>

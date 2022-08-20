@@ -11,33 +11,6 @@ import {
 
 const color = ["#ff6600", "#ff2200", "#a34100", "#853500"];
 
-const data = [
-  {
-    name: "Production",
-    uv: 4000,
-    pv: 2400,
-    amt: 2400,
-  },
-  {
-    name: "Transformation",
-    uv: 3000,
-    pv: 1398,
-    amt: 2210,
-  },
-  {
-    name: "Production",
-    uv: 2000,
-    pv: 9800,
-    amt: 2290,
-  },
-  {
-    name: "Consumption",
-    uv: 2780,
-    pv: 3908,
-    amt: 2000,
-  },
-];
-
 export default function Grouped({ data, countries }) {
   return (
     <BarChart
@@ -59,6 +32,7 @@ export default function Grouped({ data, countries }) {
       {countries.map((value, index) => {
         return (
           <Bar
+            key={index}
             dataKey={value}
             fill={color[index]}
             label={{ fill: "white", fontSize: 10 }}

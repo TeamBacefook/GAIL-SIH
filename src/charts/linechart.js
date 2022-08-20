@@ -43,7 +43,7 @@ export default function DataLineChart({ width, height, data }) {
         <Legend />
         {Object.keys(data[0]).map((key, index) => {
           return (
-            <>
+            <React.Fragment key={index}>
               {key !== "time" && key !== "Month" && key !== "Year" && (
                 <Line
                   type="monotone"
@@ -53,7 +53,7 @@ export default function DataLineChart({ width, height, data }) {
                   strokeWidth={3}
                 />
               )}
-            </>
+            </React.Fragment>
           );
         })}
       </LineChart>

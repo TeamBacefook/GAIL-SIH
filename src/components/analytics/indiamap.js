@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { ComposableMap, Geographies, Geography } from "react-simple-maps";
-import { scaleQuantile } from "d3-scale";
 import ReactTooltip from "react-tooltip";
 
 const PROJECTION_CONFIG = {
@@ -8,24 +7,7 @@ const PROJECTION_CONFIG = {
   center: [78.9629, 22.5937], // always in [East Latitude, North Longitude]
 };
 
-// Red Variants
-const COLOR_RANGE = [
-  "#ffedea",
-  "#ffcec5",
-  "#ffad9f",
-  "#ff8a75",
-  "#ff5533",
-  "#e2492d",
-  "#be3d26",
-  "#9a311f",
-  "#782618",
-];
-
 const DEFAULT_COLOR = "#008080";
-
-const getRandomInt = () => {
-  return parseInt(Math.random() * 100);
-};
 
 const geographyStyle = {
   default: {
@@ -86,12 +68,12 @@ const getHeatMapData = () => {
 
 function IndiaMap({ onChange }) {
   const [tooltipContent, setTooltipContent] = useState("");
-  const [data, setData] = useState(getHeatMapData());
+  const [data] = useState(getHeatMapData());
 
   const onMouseEnter = (geo, current = { value: "NA" }) => {
     return () => {
       setTooltipContent(`${geo.properties.name}`);
-      onChange(`${geo.properties.name}`);//this function chages state 
+      onChange(`${geo.properties.name}`); //this function chages state
     };
   };
 

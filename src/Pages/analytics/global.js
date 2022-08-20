@@ -13,7 +13,10 @@ import withSubheader from "../../layout/sub-header";
 import withLayout from "../../layout";
 import { Helmet } from "react-helmet";
 import GroupedBarChart from "../../charts/groupedbarchart";
-import { getGlobalData } from "../../actions/analystics.global";
+import {
+  getGlobalData,
+  getGlobalTrends,
+} from "../../actions/analystics.global";
 import Divider from "@mui/material/Divider";
 
 const marks = [
@@ -185,6 +188,7 @@ const Analytics = () => {
     data: [],
     parameter: "Natural gas",
   });
+  const [trends, setTrends] = useState([]);
   const [compare, setCompare] = useState({
     country1: "India",
     country2: "Austria",
@@ -195,6 +199,8 @@ const Analytics = () => {
     data2: [],
   });
 
+  const [parameter, setParameter] = useState("Primary production");
+
   // const groupedbarchart = useGroupedBarChart(500, 500);
   useEffect(() => {
     const getData = async () => {
@@ -204,6 +210,8 @@ const Analytics = () => {
         country: "India",
         parameter: "Natural gas",
       });
+      const result = await getGlobalTrends();
+      setTrends(result);
       const data2 = await getGlobalData({
         start_year: "2000",
         end_year: "2010",
@@ -263,7 +271,7 @@ const Analytics = () => {
       };
     });
   };
-
+  console.log([...trends.filter((item) => item.Type === parameter)]);
   const getCompare = async () => {
     const globe = await getGlobalData({
       start_year: compare.start_year,
@@ -380,7 +388,6 @@ const Analytics = () => {
               select
               label="Parameter"
               onChange={(value) => {
-                console.log(value.target.value);
                 setData({ ...data, parameter: value.target.value });
               }}
               value={data.parameter}
@@ -442,10 +449,39 @@ const Analytics = () => {
       </Grid>
 
       <Divider />
-      <Grid item padding={"2%"} container spacing={3} xs={12}>
-        <Grid item xs={12} sx={{ p: "2%" }}>
+      <Grid
+        item
+        padding={"2%"}
+        alignItems="center"
+        container
+        spacing={3}
+        xs={12}
+      >
+        <Grid item xs={12} md={3} sx={{ p: "2%" }}>
           <Typography variant="h4">Global Trends</Typography>
         </Grid>
+        <Grid item xs={12} md={6} sx={{ p: "2%" }}>
+          <TextField
+            select
+            onChange={(e) => setParameter(e.target.value)}
+            value={parameter}
+            variant="outlined"
+            label="Parameter"
+            sx={{ width: { xs: "100%", md: "50%" } }}
+          >
+            <MenuItem value="Primary production">Production</MenuItem>
+            <MenuItem value="Final consumption">Consumption</MenuItem>
+            <MenuItem value="Transformation">Transformation</MenuItem>
+          </TextField>
+        </Grid>
+        {[...trends.filter((item) => item.Type === parameter)].map((obj) => {
+          console.log(JSON.parse(obj.data));
+          return (
+            <Grid item xs={12} md={6}>
+              {/* <Linec */}
+            </Grid>
+          );
+        })}
       </Grid>
 
       <Grid container padding={"2%"}>
@@ -499,8 +535,8 @@ const Analytics = () => {
             helperText="Please select country"
             variant="outlined"
           >
-            {countries.map((option) => (
-              <MenuItem key={option.value} value={option}>
+            {countries.map((option, index) => (
+              <MenuItem key={index} value={option}>
                 {option}
               </MenuItem>
             ))}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useRef } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import ReactGlobe from "react-globe.gl";
 import * as d3 from "d3";
 import { data } from "./withdata";
@@ -10,8 +10,8 @@ const World = ({
   settabledata,
   globeElement,
   selectedCountryonGlobe,
+  setCountry,
 }) => {
-  // const globeElement = useRef();
   const [size, setSize] = useState([0, 0]);
 
   useEffect(() => {
@@ -20,7 +20,7 @@ const World = ({
     globeElement.current.controls().autoRotate = true;
     globeElement.current.controls().autoRotateSpeed = -1;
     globeElement.current.pointOfView({ lat: 39.6, lng: -98.5, altitude: 1.45 });
-  }, []);
+  }, [globeElement]);
 
   const [countries, setCountries] = useState({ features: [] });
   const [hoverD, setHoverD] = useState();
@@ -29,14 +29,18 @@ const World = ({
   }, []);
   const colorScale = d3.scaleSequentialSqrt(d3.interpolateYlOrRd);
 
-  const getVal = (feat) =>
-    feat.properties[year] === undefined
-      ? 0
-      : feat.properties[year][commodity][type];
+  const getVal = useCallback(
+    (feat) => {
+      return feat.properties[year] === undefined
+        ? 0
+        : feat.properties[year][commodity][type];
+    },
+    [year, commodity, type]
+  );
 
   const maxVal = useMemo(
     () => Math.max(...countries.features.map(getVal)),
-    [countries, year, commodity, type]
+    [countries, getVal]
   );
   colorScale.domain([0, maxVal]);
 
@@ -52,15 +56,15 @@ const World = ({
       polygonsData={countries.features.filter(
         (d) => d.properties.ISO_A2 !== "AQ"
       )}
-      polygonAltitude={(d) =>
-        d === hoverD ? 0.06 : d === selectedCountryonGlobe ? 0.3 : 0.02
-      }
+      polygonAltitude={(d) => {
+        return d === hoverD ? 0.06 : d === selectedCountryonGlobe ? 0.1 : 0.02;
+      }}
       // polygonAltitude={(d) => (d === hoverD ? 0.06 : 0.02)}
       polygonCapColor={(d) =>
         d === hoverD
           ? "steelblue"
           : d === selectedCountryonGlobe
-          ? "pink"
+          ? "turquoise"
           : colorScale(getVal(d))
       }
       polygonSideColor={() => "rgba(0, 100, 0, 0.15)"}
@@ -78,6 +82,7 @@ const World = ({
       `}
       onPolygonHover={setHoverD}
       onPolygonClick={(value) => {
+        setCountry(value.properties.SOVEREIGNT);
         var tabledata = [];
         for (var year of [
           "1990",

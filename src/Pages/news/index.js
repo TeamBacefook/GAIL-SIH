@@ -37,22 +37,28 @@ const News = () => {
       >
         <Grid spacing={2} alignItems="flex-start" item xs={12} md={8}>
           {news?.map((obj, index) => {
-            if (index > 3 && index < 9)
+            if (index > 3 && index < 9) {
               return (
-                <Grid sx={{ mt: 2 }} key={index} item xs={12}>
+                <Grid sx={{ mt: 2 }} key={index * 5} item xs={12}>
                   <Card data={obj} />
                 </Grid>
               );
+            } else {
+              return <React.Fragment key={index * 100}></React.Fragment>;
+            }
           })}
         </Grid>
         <Grid item xs={12} md={4}>
           {news?.map((obj, index) => {
-            if (index < 3)
+            if (index < 3) {
               return (
-                <Grid sx={{ mt: 2 }} item xs={12}>
+                <Grid sx={{ mt: 2 }} key={index} item xs={12}>
                   <CardSmall data={obj} />
                 </Grid>
               );
+            } else {
+              return <React.Fragment key={index}></React.Fragment>;
+            }
           })}
         </Grid>
       </Grid>

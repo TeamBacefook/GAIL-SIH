@@ -111,7 +111,7 @@ const Header = () => {
         <Grid container item xs={6} md={6}>
           <Grid item xs={12} style={{ cursor: "pointer" }} md={3}>
             <Link to="/">
-              <img src={logo} style={{ width: "15em" }} />
+              <img alt={"logo"} src={logo} style={{ width: "15em" }} />
             </Link>
           </Grid>
         </Grid>

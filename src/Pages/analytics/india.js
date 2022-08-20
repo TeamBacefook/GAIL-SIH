@@ -1,22 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   Autocomplete,
   Box,
   Divider,
   Grid,
-  Button,
   TextField,
   Typography,
 } from "@mui/material";
-// import { DatePicker } from "@mui/x-date-pickers";
 import withSubheader from "../../layout/sub-header";
 import withLayout from "../../layout";
-import useDonut from "../../charts/donut";
 import IOSSlider from "../../components/common/slider";
-import { useLineChart } from "../../charts/linechart";
 import IndiaMap from "../../components/analytics/indiamap";
 import axios from "axios";
-import TreeMap from "../../charts/treemap.js";
 import { Helmet } from "react-helmet";
 import { baseurl } from "../../api/url";
 import Donut from "../../charts/donut";
@@ -35,7 +30,6 @@ const marks = [
   { label: 2020, value: 2020 },
   { label: 2021, value: 2021 },
 ];
-const comodity = ["Natural Gas", "Petroleum"];
 
 const states = [
   "CHANDIGARH",
@@ -106,51 +100,6 @@ const years = [
   { str: "2022", val: 2022 },
 ];
 
-const lineData = [
-  {
-    name: "Page A",
-    uv: 4000,
-    pv: 2400,
-    amt: 2400,
-  },
-  {
-    name: "Page B",
-    uv: 3000,
-    pv: 1398,
-    amt: 2210,
-  },
-  {
-    name: "Page C",
-    uv: 2000,
-    pv: 9800,
-    amt: 2290,
-  },
-  {
-    name: "Page D",
-    uv: 2780,
-    pv: 3908,
-    amt: 2000,
-  },
-  {
-    name: "Page E",
-    uv: 1890,
-    pv: 4800,
-    amt: 2181,
-  },
-  {
-    name: "Page F",
-    uv: 2390,
-    pv: 3800,
-    amt: 2500,
-  },
-  {
-    name: "Page G",
-    uv: 3490,
-    pv: 4300,
-    amt: 2100,
-  },
-];
-
 const Analytics = () => {
   const [monthlyFilter, setMonthly] = useState({
     parameter: "Consumption",
@@ -167,14 +116,22 @@ const Analytics = () => {
   const [petroleumRange, setPetroleumRange] = useState([2015, 2019]);
   const [petroleum, setPetroleum] = useState([]);
   const [lineChart, setLineChart] = useState([]);
-  const getData = async () => {
-    const data = await getNaturalGas(monthlyFilter);
-    console.log(data);
-    setLineChart(data);
-  };
+  const getData = useCallback(async () => {
+    if (
+      monthlyFilter.end_month !== undefined &&
+      monthlyFilter.end_year !== undefined &&
+      monthlyFilter.start_month !== undefined &&
+      monthlyFilter.start_year !== undefined
+    ) {
+      const data = await getNaturalGas(monthlyFilter);
+      setLineChart(data);
+    }
+  }, [monthlyFilter]);
+
   useEffect(() => {
     getData();
-  }, []);
+  }, [getData]);
+
   useEffect(() => {
     axios
       .get(
@@ -361,7 +318,7 @@ const Analytics = () => {
                 getOptionLabel={(option) => option.str}
                 onChange={(e, value) => {
                   setMonthly((prev) => {
-                    return { ...prev, start_year: value.val };
+                    return { ...prev, start_year: value?.val };
                   });
                 }}
                 renderInput={(params) => (
@@ -448,25 +405,6 @@ const Analytics = () => {
                   />
                 )}
               />
-            </Grid>
-          </Grid>
-          <Grid sx={{ my: 2 }} item container spacing={2} xs={12}>
-            <Grid item xs={12} md={6}></Grid>
-            <Grid item xs={12} md={6}>
-              <Button
-                variant="contained"
-                sx={{
-                  background:
-                    "linear-gradient(169.84deg, #FFE53B -30.77%, #FF2525 119.39%)",
-                  color: "white",
-                  borderRadius: "11px",
-                  textTransform: "none",
-                  width: "70%",
-                }}
-                onClick={getData}
-              >
-                Get Data
-              </Button>
             </Grid>
           </Grid>
         </Grid>

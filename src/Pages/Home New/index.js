@@ -7,7 +7,6 @@ import {
   Divider,
   Autocomplete,
   TextField,
-  MenuItem,
 } from "@mui/material";
 import withLayout from "../../layout";
 import { styled } from "@mui/system";
@@ -67,7 +66,6 @@ const years = [
   { str: "2019", val: 2019 },
   { str: "2020", val: 2020 },
 ];
-const countryarr = [];
 
 const commodity = [
   { str: "Natural gas", val: "Natural gas" },
@@ -257,155 +255,159 @@ const NewsCard = ({ data }) => {
     </Box>
   );
 };
+
 const countries = [
-  "Albania",
-  "Armenia",
-  "Australia",
-  "Austria",
-  "Belgium",
-  "Bolivia",
-  "Bulgaria",
-  "Canada",
-  "Chile",
-  "Colombia",
-  "Costa Rica",
-  "Croatia",
-  "Cuba",
-  "Czechia",
-  "Finland",
-  "France",
-  "Georgia",
-  "Germany",
-  "Guyana",
-  "Hungary",
-  "Iceland",
-  "Ireland",
-  "Italy",
-  "Japan",
-  "North Korea",
-  "South Korea",
-  "Kosovo",
-  "Kyrgyzstan",
-  "Latvia",
-  "Lithuania",
-  "Luxembourg",
-  "Mexico",
-  "Netherlands",
-  "Macedonia",
-  "Peru",
-  "Poland",
-  "Portugal",
-  "Republic of Moldova",
-  "Romania",
-  "Russia",
-  "Serbia",
-  "Slovakia",
-  "South Africa",
-  "Spain",
-  "Switzerland",
-  "Tajikistan",
-  "Thailand",
-  "Ukraine",
-  "United Arab Emirates",
-  "United States of America",
-  "Uruguay",
-  "Uzbekistan",
-  "Zimbabwe",
-  "Bangladesh",
-  "Brunei Darussalam",
-  "Cyprus",
-  "Fiji",
-  "Greece",
-  "Jordan",
-  "Kazakhstan",
-  "Laos",
-  "Montenegro",
-  "New Zealand",
-  "Slovenia",
-  "Sweden",
-  "Turkey",
-  "Afghanistan",
-  "Algeria",
-  "Angola",
-  "Argentina",
-  "Azerbaijan",
-  "Belarus",
-  "Belize",
-  "Benin",
-  "Bosnia and Herzegovina",
-  "Brazil",
-  "Cameroon",
-  "Chad",
-  "China",
-  "Congo",
-  "Ivory Coast",
-  "Democratic Republic of the Congo",
-  "Denmark",
-  "Dominican Republic",
-  "Ecuador",
-  "Egypt",
-  "El Salvador",
-  "Equatorial Guinea",
-  "Eritrea",
-  "Ethiopia",
-  "Gabon",
-  "Ghana",
-  "Guatemala",
-  "Honduras",
-  "India",
-  "Indonesia",
-  "Iran",
-  "Iraq",
-  "Israel",
-  "Jamaica",
-  "Kenya",
-  "Kuwait",
-  "Lebanon",
-  "Libya",
-  "Madagascar",
-  "Malaysia",
-  "Mauritania",
-  "Mongolia",
-  "Morocco",
-  "Mozambique",
-  "Myanmar",
-  "Nicaragua",
-  "Niger",
-  "Nigeria",
-  "Norway",
-  "Oman",
-  "Pakistan",
-  "Panama",
-  "Papua New Guinea",
-  "Paraguay",
-  "Philippines",
-  "Qatar",
-  "Saudi Arabia",
-  "Senegal",
-  "Sierra Leone",
-  "Somalia",
-  "South Sudan",
-  "Sri Lanka",
-  "Sudan",
-  "Suriname",
-  "Syrian Arab Republic",
-  "Timor-Leste",
-  "Trinidad and Tobago",
-  "Tunisia",
-  "Turkmenistan",
-  "United Kingdom",
-  "Tanzania",
-  "Venezuela",
-  "Vietnam",
-  "Yemen",
-  "Zambia",
-  "Botswana",
-  "Estonia",
-  "Falkland Islands",
-  "Guinea",
-  "Puerto Rico",
-  "Rwanda",
-  "Togo",
+  { str: "Albania", val: "Albania" },
+  { str: "Armenia", val: "Armenia" },
+  { str: "Australia", val: "Australia" },
+  { str: "Austria", val: "Austria" },
+  { str: "Belgium", val: "Belgium" },
+  { str: "Bolivia", val: "Bolivia" },
+  { str: "Bulgaria", val: "Bulgaria" },
+  { str: "Canada", val: "Canada" },
+  { str: "Chile", val: "Chile" },
+  { str: "Colombia", val: "Colombia" },
+  { str: "Costa Rica", val: "Costa Rica" },
+  { str: "Croatia", val: "Croatia" },
+  { str: "Cuba", val: "Cuba" },
+  { str: "Czechia", val: "Czechia" },
+  { str: "Finland", val: "Finland" },
+  { str: "France", val: "France" },
+  { str: "Georgia", val: "Georgia" },
+  { str: "Germany", val: "Germany" },
+  { str: "Guyana", val: "Guyana" },
+  { str: "Hungary", val: "Hungary" },
+  { str: "Iceland", val: "Iceland" },
+  { str: "Ireland", val: "Ireland" },
+  { str: "Italy", val: "Italy" },
+  { str: "Japan", val: "Japan" },
+  { str: "North Korea", val: "North Korea" },
+  { str: "South Korea", val: "South Korea" },
+  { str: "Kosovo", val: "Kosovo" },
+  { str: "Kyrgyzstan", val: "Kyrgyzstan" },
+  { str: "Latvia", val: "Latvia" },
+  { str: "Lithuania", val: "Lithuania" },
+  { str: "Luxembourg", val: "Luxembourg" },
+  { str: "Mexico", val: "Mexico" },
+  { str: "Netherlands", val: "Netherlands" },
+  { str: "Macedonia", val: "Macedonia" },
+  { str: "Peru", val: "Peru" },
+  { str: "Poland", val: "Poland" },
+  { str: "Portugal", val: "Portugal" },
+  { str: "Republic of Moldova", val: "Republic of Moldova" },
+  { str: "Romania", val: "Romania" },
+  { str: "Russia", val: "Russia" },
+  { str: "Serbia", val: "Serbia" },
+  { str: "Slovakia", val: "Slovakia" },
+  { str: "South Africa", val: "South Africa" },
+  { str: "Spain", val: "Spain" },
+  { str: "Switzerland", val: "Switzerland" },
+  { str: "Tajikistan", val: "Tajikistan" },
+  { str: "Thailand", val: "Thailand" },
+  { str: "Ukraine", val: "Ukraine" },
+  { str: "United Arab Emirates", val: "United Arab Emirates" },
+  { str: "United States of America", val: "United States" },
+  { str: "Uruguay", val: "Uruguay" },
+  { str: "Uzbekistan", val: "Uzbekistan" },
+  { str: "Zimbabwe", val: "Zimbabwe" },
+  { str: "Bangladesh", val: "Bangladesh" },
+  { str: "Brunei Darussalam", val: "Brunei Darussalam" },
+  { str: "Cyprus", val: "Cyprus" },
+  { str: "Fiji", val: "Fiji" },
+  { str: "Greece", val: "Greece" },
+  { str: "Jordan", val: "Jordan" },
+  { str: "Kazakhstan", val: "Kazakhstan" },
+  { str: "Laos", val: "Laos" },
+  { str: "Montenegro", val: "Montenegro" },
+  { str: "New Zealand", val: "New Zealand" },
+  { str: "Slovenia", val: "Slovenia" },
+  { str: "Sweden", val: "Sweden" },
+  { str: "Turkey", val: "Turkey" },
+  { str: "Afghanistan", val: "Afghanistan" },
+  { str: "Algeria", val: "Algeria" },
+  { str: "Angola", val: "Angola" },
+  { str: "Argentina", val: "Argentina" },
+  { str: "Azerbaijan", val: "Azerbaijan" },
+  { str: "Belarus", val: "Belarus" },
+  { str: "Belize", val: "Belize" },
+  { str: "Benin", val: "Benin" },
+  { str: "Bosnia and Herzegovina", val: "Bosnia and Herzegovina" },
+  { str: "Brazil", val: "Brazil" },
+  { str: "Cameroon", val: "Cameroon" },
+  { str: "Chad", val: "Chad" },
+  { str: "China", val: "China" },
+  { str: "Congo", val: "Congo" },
+  { str: "Ivory Coast", val: "Ivory Coast" },
+  {
+    str: "Democratic Republic of the Congo",
+    val: "Democratic Republic of the Congo",
+  },
+  { str: "Denmark", val: "Denmark" },
+  { str: "Dominican Republic", val: "Dominican Republic" },
+  { str: "Ecuador", val: "Ecuador" },
+  { str: "Egypt", val: "Egypt" },
+  { str: "El Salvador", val: "El Salvador" },
+  { str: "Equatorial Guinea", val: "Equatorial Guinea" },
+  { str: "Eritrea", val: "Eritrea" },
+  { str: "Ethiopia", val: "Ethiopia" },
+  { str: "Gabon", val: "Gabon" },
+  { str: "Ghana", val: "Ghana" },
+  { str: "Guatemala", val: "Guatemala" },
+  { str: "Honduras", val: "Honduras" },
+  { str: "India", val: "India" },
+  { str: "Indonesia", val: "Indonesia" },
+  { str: "Iran", val: "Iran" },
+  { str: "Iraq", val: "Iraq" },
+  { str: "Israel", val: "Israel" },
+  { str: "Jamaica", val: "Jamaica" },
+  { str: "Kenya", val: "Kenya" },
+  { str: "Kuwait", val: "Kuwait" },
+  { str: "Lebanon", val: "Lebanon" },
+  { str: "Libya", val: "Libya" },
+  { str: "Madagascar", val: "Madagascar" },
+  { str: "Malaysia", val: "Malaysia" },
+  { str: "Mauritania", val: "Mauritania" },
+  { str: "Mongolia", val: "Mongolia" },
+  { str: "Morocco", val: "Morocco" },
+  { str: "Mozambique", val: "Mozambique" },
+  { str: "Myanmar", val: "Myanmar" },
+  { str: "Nicaragua", val: "Nicaragua" },
+  { str: "Niger", val: "Niger" },
+  { str: "Nigeria", val: "Nigeria" },
+  { str: "Norway", val: "Norway" },
+  { str: "Oman", val: "Oman" },
+  { str: "Pakistan", val: "Pakistan" },
+  { str: "Panama", val: "Panama" },
+  { str: "Papua New Guinea", val: "Papua New Guinea" },
+  { str: "Paraguay", val: "Paraguay" },
+  { str: "Philippines", val: "Philippines" },
+  { str: "Qatar", val: "Qatar" },
+  { str: "Saudi Arabia", val: "Saudi Arabia" },
+  { str: "Senegal", val: "Senegal" },
+  { str: "Sierra Leone", val: "Sierra Leone" },
+  { str: "Somalia", val: "Somalia" },
+  { str: "South Sudan", val: "South Sudan" },
+  { str: "Sri Lanka", val: "Sri Lanka" },
+  { str: "Sudan", val: "Sudan" },
+  { str: "Suriname", val: "Suriname" },
+  { str: "Syrian Arab Republic", val: "Syrian Arab Republic" },
+  { str: "Timor-Leste", val: "Timor-Leste" },
+  { str: "Trinidad and Tobago", val: "Trinidad and Tobago" },
+  { str: "Tunisia", val: "Tunisia" },
+  { str: "Turkmenistan", val: "Turkmenistan" },
+  { str: "United Kingdom", val: "United Kingdom" },
+  { str: "Tanzania", val: "Tanzania" },
+  { str: "Venezuela", val: "Venezuela" },
+  { str: "Vietnam", val: "Vietnam" },
+  { str: "Yemen", val: "Yemen" },
+  { str: "Zambia", val: "Zambia" },
+  { str: "Botswana", val: "Botswana" },
+  { str: "Estonia", val: "Estonia" },
+  { str: "Falkland Islands", val: "Falkland Islands" },
+  { str: "Guinea", val: "Guinea" },
+  { str: "Puerto Rico", val: "Puerto Rico" },
+  { str: "Rwanda", val: "Rwanda" },
+  { str: "Togo", val: "Togo" },
 ];
 
 const Home = () => {
@@ -414,6 +416,7 @@ const Home = () => {
     year: 2020,
     commodity: "Natural gas",
     type: "Production",
+    country: "India",
   });
   const globeElement = useRef();
   const [tabledata, settabledata] = useState(null);
@@ -425,7 +428,82 @@ const Home = () => {
     };
     getData();
   }, []);
-
+  useEffect(() => {
+    var countrydata = data.features.find(
+      (x) => x.properties.SOVEREIGNT === filters.country
+    );
+    var tabledata = [];
+    for (var year of [
+      "1990",
+      "1991",
+      "1992",
+      "1993",
+      "1994",
+      "1995",
+      "1996",
+      "1997",
+      "1998",
+      "1999",
+      "2000",
+      "2001",
+      "2002",
+      "2003",
+      "2004",
+      "2005",
+      "2006",
+      "2007",
+      "2008",
+      "2009",
+      "2010",
+      "2011",
+      "2012",
+      "2013",
+      "2014",
+      "2015",
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+    ]) {
+      if (countrydata.properties[year] !== undefined) {
+        tabledata.push({
+          commodity: filters.commodity,
+          year: year,
+          imports: countrydata.properties[year][filters.commodity]["Imports"],
+          exports: countrydata.properties[year][filters.commodity]["Exports"],
+          consumption:
+            countrydata.properties[year][filters.commodity]["Consumption"],
+          production:
+            countrydata.properties[year][filters.commodity]["Production"],
+          metric: countrydata.properties[year][filters.commodity]["Metric"],
+        });
+      }
+    }
+    settabledata(tabledata);
+    globeElement.current.pointOfView(
+      {
+        lat: countrydata.properties.lat,
+        lng: countrydata.properties.lon,
+        altitude: 1.45,
+      },
+      1500
+    );
+    globeElement.current.controls().autoRotate = false;
+    globeElement.current.controls().autoRotateSpeed = 0;
+    const myTimeout1 = setTimeout(() => {
+      setSelectedCountryonGlobe(countrydata);
+    }, 1500);
+    const myTimeout2 = setTimeout(() => {
+      globeElement.current.controls().autoRotate = true;
+      globeElement.current.controls().autoRotateSpeed = -1;
+      setSelectedCountryonGlobe(null);
+    }, 5000);
+    return () => {
+      clearTimeout(myTimeout1);
+      clearTimeout(myTimeout2);
+    };
+  }, [filters]);
   return (
     <Box sx={{ py: 12, px: { xs: 2, md: 8 } }}>
       <Grid
@@ -560,120 +638,58 @@ const Home = () => {
             settabledata={settabledata}
             globeElement={globeElement}
             selectedCountryonGlobe={selectedCountryonGlobe}
+            setCountry={(c) =>
+              setFilter((prev) => {
+                return { ...prev, country: c };
+              })
+            }
           />
         </Grid>
-        <Grid item style={{ maxHeight: "50vh" }} xs={12} md={6} lg={6}>
-          <TextField
-            id="standard-select-currency"
-            select
-            label="Country"
-            // value={compare.country1}
-            onChange={(e) => {
-              var countrydata = data.features.find(
-                (x) => x.properties.SOVEREIGNT === e.target.value
-              );
-              var tabledata = [];
-              for (var year of [
-                "1990",
-                "1991",
-                "1992",
-                "1993",
-                "1994",
-                "1995",
-                "1996",
-                "1997",
-                "1998",
-                "1999",
-                "2000",
-                "2001",
-                "2002",
-                "2003",
-                "2004",
-                "2005",
-                "2006",
-                "2007",
-                "2008",
-                "2009",
-                "2010",
-                "2011",
-                "2012",
-                "2013",
-                "2014",
-                "2015",
-                "2016",
-                "2017",
-                "2018",
-                "2019",
-                "2020",
-              ]) {
-                if (countrydata.properties[year] !== undefined) {
-                  tabledata.push({
-                    commodity: filters.commodity,
-                    year: year,
-                    imports:
-                      countrydata.properties[year][filters.commodity][
-                        "Imports"
-                      ],
-                    exports:
-                      countrydata.properties[year][filters.commodity][
-                        "Exports"
-                      ],
-                    consumption:
-                      countrydata.properties[year][filters.commodity][
-                        "Consumption"
-                      ],
-                    production:
-                      countrydata.properties[year][filters.commodity][
-                        "Production"
-                      ],
-                    metric:
-                      countrydata.properties[year][filters.commodity]["Metric"],
-                  });
-                }
-              }
-              settabledata(tabledata);
-              globeElement.current.pointOfView(
-                {
-                  lat: countrydata.properties.lat,
-                  lng: countrydata.properties.lon,
-                  altitude: 1.45,
-                },
-                1500
-              );
-              globeElement.current.controls().autoRotate = false;
-              globeElement.current.controls().autoRotateSpeed = 0;
-              setTimeout(() => {
-                setSelectedCountryonGlobe(countrydata);
-              }, 1500);
-
-              setTimeout(() => {
-                globeElement.current.controls().autoRotate = true;
-                globeElement.current.controls().autoRotateSpeed = -1;
-
-                setSelectedCountryonGlobe(null);
-              }, 5000);
-            }}
-            style={{
-              width: "90%",
-              margin: "2%",
-              marginBottom: "4%",
-            }}
-            helperText="Please select country"
-            variant="outlined"
-          >
-            {countries.map((option) => (
-              <MenuItem key={option.value} value={option}>
-                {option}
-              </MenuItem>
-            ))}
-          </TextField>
-          {tabledata && (
-            <LineChart
-              width={window.innerWidth / 2}
-              height={window.innerHeight / 2}
-              data={tabledata}
+        <Grid
+          item
+          mt="2em"
+          container
+          style={{ maxHeight: "50vh" }}
+          xs={12}
+          md={6}
+          lg={6}
+          spacing={3}
+        >
+          <Grid item xs={12}>
+            <Autocomplete
+              style={{ width: "100%", height: "80%", borderRadius: "3em" }}
+              id="combo-box-demo"
+              options={countries}
+              value={countries.find((item) => item.val === filters.country)}
+              getOptionLabel={(option) => option.str}
+              onChange={(e, value) => {
+                setFilter((prev) => {
+                  return {
+                    ...prev,
+                    country: value === null ? "India" : value.val,
+                  };
+                });
+              }}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  variant="outlined"
+                  label="Country"
+                  placeholder="Country"
+                  type="text"
+                />
+              )}
             />
-          )}
+          </Grid>
+          <Grid item xs={12}>
+            {tabledata && (
+              <LineChart
+                width={window.innerWidth / 2}
+                height={window.innerHeight / 2}
+                data={tabledata}
+              />
+            )}
+          </Grid>
         </Grid>
       </Grid>
       <Box sx={{ py: 4 }}>
@@ -682,9 +698,9 @@ const Home = () => {
         </Typography>
       </Box>
       <Marquee>
-        {marqueedata.map((item) => {
+        {marqueedata.map((item, index) => {
           return (
-            <>
+            <React.Fragment key={index}>
               {item["24hrpercentchange"][0] === "-" ? (
                 <Box
                   xs={4}
@@ -751,7 +767,7 @@ const Home = () => {
                   </Typography>
                 </Box>
               )}
-            </>
+            </React.Fragment>
           );
         })}
       </Marquee>
@@ -856,10 +872,12 @@ const Home = () => {
         {news?.map((obj, index) => {
           if (index < 2) {
             return (
-              <Grid item xs={6}>
-                <NewsCard data={obj} key={index} />
+              <Grid item key={index*12} xs={6}>
+                <NewsCard data={obj} />
               </Grid>
             );
+          } else {
+            return <React.Fragment key={index}></React.Fragment>;
           }
         })}
       </Grid>

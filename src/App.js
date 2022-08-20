@@ -6,10 +6,9 @@ import Global from "./Pages/analytics/global";
 import { createTheme, ThemeProvider } from "@mui/material";
 import Continental from "./Pages/analytics/continental";
 import India from "./Pages/analytics/india";
-
+import { ToastContainer } from "react-toastify";
 import Predictions from "./Pages/predictions";
-// import { ToastContainer } from "react-toastify";
-// import "react-toastify/dist/ReactToastify.css";
+import "react-toastify/dist/ReactToastify.css";
 import News from "./Pages/news";
 // import Team from "./Pages/team";
 
@@ -23,7 +22,7 @@ function App() {
   });
   return (
     <>
-      {/* <ToastContainer
+      <ToastContainer
         position="top-center"
         autoClose={5000}
         hideProgressBar={false}
@@ -33,7 +32,7 @@ function App() {
         pauseOnFocusLoss
         dragable={false}
         pauseOnHover={false}
-      /> */}
+      />
       <ThemeProvider theme={theme}>
         <Router>
           <Routes>

@@ -74,7 +74,7 @@ const SubHeader = () => {
                   <div
                     layoutId="navigation-underline"
                     className="navigation-underline"
-                    animate
+                    animate="true"
                   />
                 )}
               </Typography>
