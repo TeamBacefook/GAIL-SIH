@@ -21,7 +21,6 @@ const renderActiveShape = (props) => {
     payload,
   } = props;
 
-
   return (
     <g>
       <text
@@ -85,8 +84,8 @@ export default function Donut({ g_width, g_height, data }) {
         data={data}
         cx={200}
         cy={200}
-        innerRadius={80}
-        outerRadius={120}
+        innerRadius={120}
+        outerRadius={200}
         fill="#8884d8"
         dataKey="value"
         onMouseEnter={onPieEnter}

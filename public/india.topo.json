@@ -39,7 +39,7 @@
         {
           "type": "Polygon",
           "id": "AR",
-          "properties": { "name": "Arunanchal Pradesh" },
+          "properties": { "name": "Arunachal Pradesh" },
           "arcs": [[19, 20, 21]]
         },
         {
@@ -281,7 +281,7 @@
         {
           "type": "Polygon",
           "id": "DL",
-          "properties": { "name": "NCT of Delhi" },
+          "properties": { "name": "Delhi" },
           "arcs": [[-88, -132]]
         }
       ]

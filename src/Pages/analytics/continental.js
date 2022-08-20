@@ -1,320 +1,604 @@
+import {
+  Button,
+  Grid,
+  Typography,
+  Autocomplete,
+  TextField,
+  MenuItem,
+  Paper,
+} from "@mui/material";
 import React, { useState, useEffect } from "react";
-import Helmet from "react-helmet";
-import { Box, Divider, Grid, Typography } from "@mui/material";
-import BarCharts from "../../charts/barchart";
+import LineChart from "../../charts/globalChart";
 import IOSSlider from "../../components/common/slider";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import axios from "axios";
-import { baseurl } from "../../api/url";
-import Select from "@mui/material/Select";
-import Chip from "@mui/material/Chip";
-import { getcontinentaldata } from "../../api/analytics.continental";
-import withLayout from "../../layout";
+import BarCharts from "../../charts/barchart";
 import withSubheader from "../../layout/sub-header";
-import TreeMap from "../../charts/treemap";
+import withLayout from "../../layout";
+import { Helmet } from "react-helmet";
+import GroupedBarChart from "../../charts/groupedbarchart";
+import {
+  getGlobalData,
+  getGlobalTrends,
+} from "../../actions/analystics.global";
+import Divider from "@mui/material/Divider";
 
+const COLORS = [
+  "#e41a1c",
+  "#377eb8",
+  "#4daf4a",
+  "#984ea3",
+  "#ff7f00",
+  "#ffff33",
+  "#a65628",
+  "#f781bf",
+  "#999999",
+];
 const marks = [
-  { label: 2011, value: 2011 },
-  { label: 2012, value: 2012 },
-  { label: 2013, value: 2013 },
-  { label: 2014, value: 2014 },
+  { label: 1990, value: 1990 },
+  { label: 1995, value: 1995 },
+  { label: 2000, value: 2000 },
+  { label: 2005, value: 2005 },
+  { label: 2010, value: 2010 },
   { label: 2015, value: 2015 },
-  { label: 2016, value: 2016 },
-  { label: 2017, value: 2017 },
-  { label: 2018, value: 2018 },
-  { label: 2019, value: 2019 },
   { label: 2020, value: 2020 },
-  { label: 2021, value: 2021 },
+  { label: 2025, value: 2025 },
 ];
 
+const countries = [
+  "Albania",
+  "Armenia",
+  "Australia",
+  "Austria",
+  "Belgium",
+  "Bolivia",
+  "Bulgaria",
+  "Canada",
+  "Chile",
+  "Colombia",
+  "Costa Rica",
+  "Croatia",
+  "Cuba",
+  "Czechia",
+  "Finland",
+  "France",
+  "Georgia",
+  "Germany",
+  "Guyana",
+  "Hungary",
+  "Iceland",
+  "Ireland",
+  "Italy",
+  "Japan",
+  "North Korea",
+  "South Korea",
+  "Kosovo",
+  "Kyrgyzstan",
+  "Latvia",
+  "Lithuania",
+  "Luxembourg",
+  "Mexico",
+  "Netherlands",
+  "Macedonia",
+  "Peru",
+  "Poland",
+  "Portugal",
+  "Republic of Moldova",
+  "Romania",
+  "Russia",
+  "Serbia",
+  "Slovakia",
+  "South Africa",
+  "Spain",
+  "Switzerland",
+  "Tajikistan",
+  "Thailand",
+  "Ukraine",
+  "United Arab Emirates",
+  "United States of America",
+  "Uruguay",
+  "Uzbekistan",
+  "Zimbabwe",
+  "Bangladesh",
+  "Brunei Darussalam",
+  "Cyprus",
+  "Fiji",
+  "Greece",
+  "Jordan",
+  "Kazakhstan",
+  "Laos",
+  "Montenegro",
+  "New Zealand",
+  "Slovenia",
+  "Sweden",
+  "Turkey",
+  "Afghanistan",
+  "Algeria",
+  "Angola",
+  "Argentina",
+  "Azerbaijan",
+  "Belarus",
+  "Belize",
+  "Benin",
+  "Bosnia and Herzegovina",
+  "Brazil",
+  "Cameroon",
+  "Chad",
+  "China",
+  "Congo",
+  "Ivory Coast",
+  "Democratic Republic of the Congo",
+  "Denmark",
+  "Dominican Republic",
+  "Ecuador",
+  "Egypt",
+  "El Salvador",
+  "Equatorial Guinea",
+  "Eritrea",
+  "Ethiopia",
+  "Gabon",
+  "Ghana",
+  "Guatemala",
+  "Honduras",
+  "India",
+  "Indonesia",
+  "Iran",
+  "Iraq",
+  "Israel",
+  "Jamaica",
+  "Kenya",
+  "Kuwait",
+  "Lebanon",
+  "Libya",
+  "Madagascar",
+  "Malaysia",
+  "Mauritania",
+  "Mongolia",
+  "Morocco",
+  "Mozambique",
+  "Myanmar",
+  "Nicaragua",
+  "Niger",
+  "Nigeria",
+  "Norway",
+  "Oman",
+  "Pakistan",
+  "Panama",
+  "Papua New Guinea",
+  "Paraguay",
+  "Philippines",
+  "Qatar",
+  "Saudi Arabia",
+  "Senegal",
+  "Sierra Leone",
+  "Somalia",
+  "South Sudan",
+  "Sri Lanka",
+  "Sudan",
+  "Suriname",
+  "Syrian Arab Republic",
+  "Timor-Leste",
+  "Trinidad and Tobago",
+  "Tunisia",
+  "Turkmenistan",
+  "United Kingdom",
+  "Tanzania",
+  "Venezuela",
+  "Vietnam",
+  "Yemen",
+  "Zambia",
+  "Botswana",
+  "Estonia",
+  "Falkland Islands",
+  "Guinea",
+  "Puerto Rico",
+  "Rwanda",
+  "Togo",
+];
 const Analytics = () => {
-  const [commo, setCommo] = useState(["Biofuels and waste", "Natural Gas"]);
-  const [consumption, setconsumptiondata] = useState({ data: [], max: 0 }); //parameter = "Final consumption"
-  const [productiondata, setproductiondata] = useState(null); //parameter = 'Primary production'
-  const [transformationdata, settransformationdata] = useState(null); //parameter = "Transformation"
-  const [energyYear, setEnergyYear] = useState(2008);
-  const [filters, setFilters] = useState([2015, 2020]);
-  const [tree, setTree] = useState([]);
-  const handleChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setCommo(
-      // On autofill we get a stringified value.
-      typeof value === "string" ? [value.split] : value
-    );
+  const [data, setData] = useState({
+    start_year: 2000,
+    end_year: 2010,
+    country: "India",
+    data: [],
+    parameter: "Natural gas",
+  });
+  const [trends, setTrends] = useState([]);
+  const [compare, setCompare] = useState({
+    country1: "India",
+    country2: "Austria",
+    parameter: "Natural gas",
+    start_year: "2000",
+    end_year: "2010",
+    data1: [],
+    data2: [],
+  });
+
+  const [parameter, setParameter] = useState("Primary production");
+
+  // const groupedbarchart = useGroupedBarChart(500, 500);
+  useEffect(() => {
+    const getData = async () => {
+      const data = await getGlobalData({
+        start_year: "2000",
+        end_year: "2010",
+        country: "India",
+        parameter: "Natural gas",
+      });
+      const result = await getGlobalTrends();
+      setTrends(result);
+      const data2 = await getGlobalData({
+        start_year: "2000",
+        end_year: "2010",
+        country: "Austria",
+        parameter: "Natural gas",
+      });
+
+      setData((prev) => {
+        return {
+          ...prev,
+          data: [
+            { label: "Production", value: data?.[0]?.["Production"] },
+            { label: "Consumption", value: data?.[0]?.["Consumption"] },
+            { label: "Exports", value: data?.[0]?.["Exports"] },
+            { label: "Imports", value: data?.[0]?.["Imports"] },
+          ],
+        };
+      });
+      setCompare((prev) => {
+        return {
+          ...prev,
+          data1: [
+            { label: "Production", value: data?.[0]?.["Production"] },
+            { label: "Consumption", value: data?.[0]?.["Consumption"] },
+            { label: "Exports", value: data?.[0]?.["Exports"] },
+            { label: "Imports", value: data?.[0]?.["Imports"] },
+          ],
+          data2: [
+            { label: "Production", value: data2?.[0]?.["Production"] },
+            { label: "Consumption", value: data2?.[0]?.["Consumption"] },
+            { label: "Exports", value: data2?.[0]?.["Exports"] },
+            { label: "Imports", value: data2?.[0]?.["Imports"] },
+          ],
+        };
+      });
+    };
+    getData();
+  }, []);
+
+  const getData = async () => {
+    const Globe = await getGlobalData({
+      start_year: data.start_year,
+      end_year: data.end_year,
+      country: data.country,
+      parameter: data.parameter,
+    });
+
+    setData((prev) => {
+      return {
+        ...prev,
+        data: [
+          { label: "Production", value: Globe?.[0]?.["Production"] },
+          { label: "Consumption", value: Globe?.[0]?.["Consumption"] },
+          { label: "Exports", value: Globe?.[0]?.["Exports"] },
+          { label: "Imports", value: Globe?.[0]?.["Imports"] },
+        ],
+      };
+    });
   };
-
-  useEffect(() => {
-    axios
-      .post(baseurl + "/data/continents/treemap", {
-        startyear: filters[0],
-        endyear: filters[1],
-        commodity: commo,
-      })
-      .then((res) => {
-        setTree([
-          ...res.data.map((obj) => {
-            return { ...obj, data: JSON.parse(obj.data) };
-          }),
-        ]);
-      })
-      .catch((error) => {
-        // console.log(error);
-      });
-  }, [filters, commo, setTree]);
-
-  useEffect(() => {
-    const getConsumption = async () => {
-      const { data } = await getcontinentaldata(
-        `?year=${energyYear}&type=Final%20consumption`
-      );
-      setconsumptiondata(data);
-    };
-    const getTransformation = async () => {
-      const { data } = await getcontinentaldata(
-        `?year=${energyYear}&type=Transformation`
-      );
-      let new_data = data.map((item) => {
-        if (item.value >= 0) return item;
-        return { label: item.label, value: 0 };
-      });
-      settransformationdata(new_data);
-    };
-
-    const getProduction = async () => {
-      const { data } = await getcontinentaldata(
-        `?year=${energyYear}&type=Primary%20production`
-      );
-      setproductiondata(data);
-    };
-    getConsumption();
-    getTransformation();
-    getProduction();
-  }, [
-    energyYear,
-    setconsumptiondata,
-    settransformationdata,
-    setproductiondata,
-  ]);
+  const getCompare = async () => {
+    const globe = await getGlobalData({
+      start_year: compare.start_year,
+      end_year: compare.end_year,
+      country: compare.country1,
+      parameter: compare.parameter,
+    });
+    const globe2 = await getGlobalData({
+      start_year: compare.start_year,
+      end_year: compare.end_year,
+      country: compare.country2,
+      parameter: compare.parameter,
+    });
+    setCompare((prev) => {
+      return {
+        ...prev,
+        data1: [
+          { label: "Production", value: globe?.[0]?.["Production"] },
+          { label: "Consumption", value: globe?.[0]?.["Consumption"] },
+          { label: "Exports", value: globe?.[0]?.["Exports"] },
+          { label: "Imports", value: globe?.[0]?.["Imports"] },
+        ],
+        data2: [
+          { label: "Production", value: globe2?.[0]?.["Production"] },
+          { label: "Consumption", value: globe2?.[0]?.["Consumption"] },
+          { label: "Exports", value: globe2?.[0]?.["Exports"] },
+          { label: "Imports", value: globe2?.[0]?.["Imports"] },
+        ],
+      };
+    });
+  };
   return (
-    <Box sx={{ px: { xs: 1, md: 8 } }}>
-      {" "}
+    <>
       <Helmet>
-        <title>GAIL SIH | Analytics-Continental</title>
+        <title>GAIL SIH | Analytics</title>
         <meta name="description" content="Analytics page for GAIL-SIH" />
         <link rel="icon" href="/favicon.ico" />
       </Helmet>
-      <Grid item container justifyContent="center" xs={12}>
-        <FormControl sx={{ m: 1, width: "40%" }}>
-          <InputLabel id="demo-multiple-chip-label">Commodities</InputLabel>
-          <Select
-            labelId="demo-multiple-chip-label"
-            id="demo-multiple-chip"
-            multiple
-            value={commo}
-            onChange={handleChange}
-            input={
-              <OutlinedInput
-                id="select-multiple-chip"
-                inputProps={{ style: { borderRadius: "1em" } }}
-                label="Chip"
-              />
-            }
-            renderValue={(x) => {
-              return (
-                <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
-                  {x.map((value) => (
-                    <Chip key={value} label={value} />
-                  ))}
-                </Box>
-              );
-            }}
+      <Grid container padding={"2%"} sx={{ minHeight: "max-content" }}>
+        <Grid id="worldmap" item xs={0} md={6} lg={6}>
+          <Grid
+            item
+            container
+            xs={12}
+            style={{ border: "1px solid #404D8xF", padding: "2%" }}
           >
-            {[
-              "Biofuels and waste",
-              "Oil",
-              "Electricity and heat",
-              "Natural Gas",
-              "Coal",
-            ].map((obj) => {
-              return (
-                <MenuItem value={obj} key={obj}>
-                  {obj}
-                </MenuItem>
-              );
-            })}
-          </Select>
-        </FormControl>
-      </Grid>
-      <Grid item container justifyContent="center" sx={{ mt: 4 }} xs={12}>
-        <IOSSlider
-          step={1}
-          sx={{ width: { xs: "90%", md: "50%" } }}
-          marks={marks}
-          onChange={(e) => setFilters(e.target.value)}
-          defaultValue={filters}
-          min={2011}
-          max={2021}
-        />
-      </Grid>
-      <Grid container item xs={12}>
-        {tree?.length !== 0 &&
-          commo.map((value, index) => {
-            const exportsData = tree?.find((obj) => {
-              return obj.commodity === value && obj.type === "Exports";
-            })?.data;
-            const importsData = tree?.find((obj) => {
-              return obj.commodity === value && obj.type === "Imports";
-            })?.data;
-            return (
-              <Grid
-                container
-                justifyContent="center"
-                alignItems="center"
-                item
-                spacing={3}
-                xs={12}
-              >
-                <Grid item xs={12}>
-                  <Typography
-                    variant="h3"
-                    sx={{ textAlign: "center", color: "rgb(2,36,96)" }}
-                  >
-                    {value}
-                  </Typography>
-                </Grid>
-                {exportsData && (
-                  <Grid item xs={12} md={5} sx={{ margin: "2%" }}>
-                    <Typography
-                      variant="h5"
-                      sx={{ textAlign: "center", color: "rgb(2,36,96)" }}
-                    >
-                      Exports
-                    </Typography>
-                    <TreeMap
-                      g_width={0.4 * window.innerWidth}
-                      g_height={0.4 * window.innerHeight}
-                      data={exportsData}
-                    />
-                  </Grid>
-                )}
-                {importsData && (
-                  <Grid item xs={12} md={5} sx={{ margin: "2%" }}>
-                    <Typography
-                      variant="h5"
-                      sx={{ textAlign: "center", color: "rgb(2,36,96)" }}
-                    >
-                      Imports
-                    </Typography>
-                    <TreeMap
-                      g_width={0.4 * window.innerWidth}
-                      g_height={0.4 * window.innerHeight}
-                      data={importsData}
-                    />
-                  </Grid>
-                )}{" "}
-              </Grid>
-            );
-          })}
-      </Grid>
-      <Divider sx={{ my: 4 }} />
-      <Grid sx={{ py: 4 }} item container xs={12}>
-        <Grid item xs={12} style={{ marginBottom: "2%" }}>
-          <Typography color="#00116A" fontSize={35}>
-            Energy Balance Sheet
-          </Typography>
-        </Grid>
-        <Grid container justifyContent="center" item xs={12} md={12}>
-          <Grid item xs={12}>
-            <IOSSlider
-              sx={{ width: { xs: "90%", md: "100%" } }}
-              track={false}
-              step={1}
-              onChange={(e) => {
-                setEnergyYear(e.target.value);
+            <Grid
+              item
+              xs={12}
+              md={12}
+              lg={12}
+              style={{
+                // border: "2px solid #404D8F",
+                borderRadius: "50px",
+                padding: "2%",
               }}
-              value={energyYear}
-              marks={[
-                { label: 1990, value: 1990 },
-                { label: 1991, value: 1991 },
-                { label: 1992, value: 1992 },
-                { label: 1993, value: 1993 },
-                { label: 1994, value: 1994 },
-                { label: 1995, value: 1995 },
-                { label: 1996, value: 1996 },
-                { label: 1997, value: 1997 },
-                { label: 1998, value: 1998 },
-                { label: 1999, value: 1999 },
-                { label: 2000, value: 2000 },
-                { label: 2001, value: 2001 },
-                { label: 2002, value: 2002 },
-                { label: 2003, value: 2003 },
-                { label: 2004, value: 2004 },
-                { label: 2005, value: 2005 },
-                { label: 2006, value: 2006 },
-                { label: 2007, value: 2007 },
-                { label: 2008, value: 2008 },
-                { label: 2009, value: 2009 },
-                { label: 2010, value: 2010 },
-                { label: 2011, value: 2011 },
-                { label: 2012, value: 2012 },
-                { label: 2013, value: 2013 },
-                { label: 2014, value: 2014 },
-                { label: 2015, value: 2015 },
-                { label: 2016, value: 2016 },
-                { label: 2017, value: 2017 },
-                { label: 2018, value: 2018 },
-                { label: 2019, value: 2019 },
-              ]}
-              min={1990}
-              max={2019}
+            >
+              <Typography variant="h4">{data?.country}</Typography>
+            </Grid>
+            <Grid
+              item
+              xs={12}
+              md={12}
+              lg={12}
+              style={{
+                // border: "2px solid #404D8xF",
+                borderRadius: "50px",
+              }}
+            >
+              <BarCharts
+                data={data?.data}
+                bg1="#ACB6E5"
+                bg2="#74ebd5"
+                g_width={window.innerWidth * 0.4}
+                g_height={window.innerHeight * 0.5}
+                c_id={5}
+                orientation={0}
+              />
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid
+          item
+          xs={12}
+          container
+          spacing={1}
+          md={6}
+          lg={6}
+          justifyContent="center"
+        >
+          <Grid item xs={12} md={12} lg={12}>
+            <Autocomplete
+              style={{ width: "100%", borderRadius: "3em" }}
+              id="combo-box-demo"
+              options={countries}
+              getOptionLabel={(option) => option}
+              value={data.country}
+              onChange={(e, value) => {
+                setData({ ...data, country: value });
+              }}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  variant="outlined"
+                  label="Country"
+                  placeholder="Country"
+                  type="text"
+                />
+              )}
             />
+          </Grid>
+          <Grid item xs={12} md={12} lg={12}>
+            <TextField
+              select
+              label="Parameter"
+              onChange={(value) => {
+                setData({ ...data, parameter: value.target.value });
+              }}
+              value={data.parameter}
+              style={{
+                width: "100%",
+              }}
+              helperText="Please select your parameter"
+              variant="outlined"
+            >
+              {[
+                { value: "Natural gas", id: "NG" },
+                { value: "Crude oil", id: "CO" },
+                { value: "Anthracite", id: "An" },
+                { value: "Lignite", id: "LI" },
+              ].map((option) => (
+                <MenuItem key={option.id} value={option.value}>
+                  {option.value}
+                </MenuItem>
+              ))}
+            </TextField>
+          </Grid>
+          <Grid container item xs={12} md={12} lg={12}>
+            <Grid item xs={10} md={10} lg={10}>
+              <IOSSlider
+                step={1}
+                sx={{ width: { xs: "90%", md: "80%" } }}
+                marks={marks}
+                value={[data.start_year, data.end_year]}
+                min={1990}
+                max={2025}
+                onChange={(e) => {
+                  setData((prev) => {
+                    return {
+                      ...prev,
+                      start_year: e.target.value?.[0],
+                      end_year: e.target.value[1],
+                    };
+                  });
+                }}
+              />
+            </Grid>
+            <Grid item xs={2} md={2} lg={2} style={{ textAlign: "right" }}>
+              <Button
+                onClick={getData}
+                sx={{
+                  background:
+                    "linear-gradient(169.84deg, #FFE53B -30.77%, #FF2525 119.39%)",
+                  color: "white",
+                  borderRadius: "11px",
+                  textTransform: "none",
+                  width: "100%",
+                }}
+              >
+                Get data
+              </Button>
+            </Grid>
           </Grid>
         </Grid>
       </Grid>
-      <Grid item xs={12} container justifyContent={"space-evenly"} spacing={2}>
-        <Grid item sx={12} md={12}>
-          <p>Energy Consumption</p>
-          <BarCharts
-            data={consumption}
-            bg1="#fc4a1a"
-            bg2="#f7b733"
-            g_width={window.innerWidth * 0.9}
-            g_height={window.innerHeight * 0.3}
-            orientation={0}
-            c_id={1}
-          />
+
+      <Grid container padding={"2%"}>
+        <Grid item xs={12} md={12} lg={12}>
+          <Divider light />
         </Grid>
-        <Grid item sx={12} md={12}>
-          <p>Energy Transformation</p>
-          <BarCharts
-            data={transformationdata}
-            bg1="#ACB6E5"
-            orientation={0}
-            bg2="#74ebd5"
-            g_width={window.innerWidth * 0.9}
-            g_height={window.innerHeight * 0.3}
-            c_id={2}
-          />
+        <Grid item xs={12} md={12} lg={12} sx={{ padding: "2%" }}>
+          <Typography variant="h4">Compare Nations:</Typography>
         </Grid>
-        <Grid item sx={12} md={12}>
-          <p>Energy Production</p>{" "}
-          <BarCharts
-            data={productiondata}
-            bg1="#00b09b"
-            bg2="#96c93d"
-            orientation={0}
-            g_width={window.innerWidth * 0.9}
-            g_height={window.innerHeight * 0.3}
-            c_id={3}
-          />
+        <Grid item xs={12} md={6} lg={4}>
+          <TextField
+            id="standard-select-currency"
+            select
+            label="Country"
+            value={compare.country1}
+            onChange={(e) => {
+              setCompare((prev) => {
+                return { ...prev, country1: e.target.value };
+              });
+            }}
+            style={{
+              width: "90%",
+              margin: "2%",
+              marginBottom: "4%",
+            }}
+            helperText="Please select country"
+            variant="outlined"
+          >
+            {countries.map((option) => (
+              <MenuItem key={option.value} value={option}>
+                {option}
+              </MenuItem>
+            ))}
+          </TextField>
         </Grid>
+        <Grid item xs={12} md={6} lg={4}>
+          <TextField
+            id="standard-select-currency"
+            select
+            label="Country"
+            value={compare.country2}
+            onChange={(e) => {
+              setCompare((prev) => {
+                return { ...prev, country2: e.target.value };
+              });
+            }}
+            style={{
+              width: "90%",
+              margin: "2%",
+            }}
+            helperText="Please select country"
+            variant="outlined"
+          >
+            {countries.map((option, index) => (
+              <MenuItem key={index} value={option}>
+                {option}
+              </MenuItem>
+            ))}
+          </TextField>
+        </Grid>
+        <Grid item xs={12} md={6} lg={4}>
+          <TextField
+            select
+            fullWidth
+            style={{
+              width: "90%",
+              margin: "2%",
+            }}
+            label="Parameter"
+            onChange={(value, values) => {
+              setCompare({ ...compare, parameter: value.target.value });
+            }}
+            value={compare.parameter}
+            helperText="Please select your parameter"
+            variant="outlined"
+          >
+            {[
+              { value: "Natural gas", id: "NG" },
+              { value: "Crude oil", id: "CO" },
+              { value: "Anthracite", id: "An" },
+              { value: "Lignite", id: "LI" },
+            ].map((option) => (
+              <MenuItem key={option.id} value={option.value}>
+                {option.value}
+              </MenuItem>
+            ))}
+          </TextField>
+        </Grid>
+        <Grid container item xs={12}>
+          <Grid item xs={10} md={10} lg={10}>
+            <IOSSlider
+              step={1}
+              sx={{ ml: { xs: 0, md: 3 }, width: { xs: "90%", md: "80%" } }}
+              marks={marks}
+              value={[compare.start_year, compare.end_year]}
+              min={1990}
+              max={2025}
+              onChange={(e) => {
+                setCompare((prev) => {
+                  return {
+                    ...prev,
+                    start_year: e.target.value?.[0],
+                    end_year: e.target.value[1],
+                  };
+                });
+              }}
+            />
+          </Grid>
+          <Grid item xs={2} md={2} lg={2}>
+            <Button
+              onClick={getCompare}
+              sx={{
+                background:
+                  "linear-gradient(169.84deg, #FFE53B -30.77%, #FF2525 119.39%)",
+                color: "white",
+                borderRadius: "11px",
+                textTransform: "none",
+                width: "70%",
+              }}
+            >
+              Compare
+            </Button>
+          </Grid>
+        </Grid>
+
+        <GroupedBarChart
+          data={[
+            ...compare.data1.map((obj) => {
+              return {
+                name: obj.label,
+                [compare.country1]: obj.value,
+                [compare.country2]: compare.data2.find(
+                  (item) => item.label === obj.label
+                ).value,
+              };
+            }),
+          ]}
+          countries={[compare.country1, compare.country2]}
+        />
       </Grid>
-    </Box>
+    </>
   );
 };
 

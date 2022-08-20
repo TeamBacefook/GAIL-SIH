@@ -112,10 +112,12 @@ const Analytics = () => {
     state: "DELHI",
     start: 2015,
     end: 2020,
+    value: "19392.5",
   });
   const [petroleumRange, setPetroleumRange] = useState([2015, 2019]);
   const [petroleum, setPetroleum] = useState([]);
   const [lineChart, setLineChart] = useState([]);
+  const [petroleumstatedata, setPetroleumstatedata] = useState([]);
 
   const getData = useCallback(async () => {
     if (
@@ -144,6 +146,17 @@ const Analytics = () => {
       });
   }, [petroleumRange, setPetroleum]);
 
+  useEffect(() => {
+    axios
+      .get(
+        baseurl +
+          `/data/petroleum/local?startyear=${coropleth.start}&endyear=${coropleth.end}`
+      )
+      .then((res) => {
+        setPetroleumstatedata(res.data);
+      });
+  }, [coropleth.start, coropleth.end]);
+
   return (
     <Box
       sx={{
@@ -167,9 +180,17 @@ const Analytics = () => {
           style={{ border: "1px solid A3A3A3" }}
         >
           <IndiaMap
-            onChange={(state) =>
-              setCoropleth((prev) => ({ ...prev, state: state }))
-            }
+            onChange={(state) => {
+              console.log(state);
+              var x = petroleumstatedata.find(
+                (y) => y.State === state.toUpperCase()
+              );
+              setCoropleth((prev) => ({
+                ...prev,
+                state: state.toUpperCase(),
+                value: x.Value,
+              }));
+            }}
           />
         </Grid>
         <Grid container spacing={2} justifyContent="center" item xs={12} md={6}>
@@ -177,9 +198,15 @@ const Analytics = () => {
             <Autocomplete
               style={{ width: "80%", borderRadius: "3em" }}
               id="combo-box-demo"
-              onChange={(x, e) =>
-                setCoropleth((state) => ({ ...state, state: e }))
-              }
+              onChange={(x, e) => {
+                var z = petroleumstatedata.find((y) => y.State === e);
+                console.log(z);
+                setCoropleth((state) => ({
+                  ...state,
+                  state: e,
+                  value: z.Value,
+                }));
+              }}
               value={coropleth.state}
               options={states}
               getOptionLabel={(option) => option}
@@ -225,8 +252,8 @@ const Analytics = () => {
                 {coropleth.state}
               </Typography>
               <Typography sx={{ mt: 1 }} color="#004488">
-                Petroleum Production: 5.6tJ <br />
-                Petroleum Consumption: 1.2tJ
+                {/* Petroleum Production: 5.6tJ <br /> */}
+                Petroleum Consumption: {coropleth.value} Terrajoules
               </Typography>
               <Typography color="#6F7F8EA8" fontSize={10}>
                 *Approximate Figures
@@ -270,8 +297,8 @@ const Analytics = () => {
         </Grid>
         <Grid item xs={12} md={6} container alignItems="center">
           <Donut
-            g_width={window.innerWidth * 0.7}
-            g_height={window.innerHeight * 0.7}
+            g_width={window.innerWidth * 0.9}
+            g_height={window.innerHeight * 0.9}
             data={petroleum}
           />
         </Grid>

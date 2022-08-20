@@ -186,7 +186,12 @@ const Header = () => {
                   key={index}
                   variants={linkVariants}
                 >
-                  <Link to={obj.href}>{obj.name}</Link>
+                  <Link
+                    style={{ textDecoration: "none", color: "#003973" }}
+                    to={obj.href}
+                  >
+                    {obj.name}
+                  </Link>
                 </Link2>
               </Grid>
             );
