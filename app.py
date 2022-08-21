@@ -302,5 +302,5 @@ if __name__ == "__main__":
         current_app.saved_data = blended_models(current_app.dataframe, models=current_app.ng_models_month)
         current_app.evals = get_model_evals(current_app.ng_models_month).to_json(orient='table')
 
-    # app.run(host='0.0.0.0', port=5005)
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5005)
+    # app.run(debug=True)
