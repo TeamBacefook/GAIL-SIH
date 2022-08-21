@@ -21,19 +21,20 @@ import {
 import "./style.css";
 
 const Errors = [{ label: "RMSE" }, { label: "MAPE" }, { label: "AIC" }];
+let yourDate = new Date();
 
 const Predictions = () => {
   const [current, setCurrent] = useState();
   const [barData, setBarData] = useState([]);
   const [warIntensity, setWarIntensity] = useState(1.1238);
   const [warData, setWarData] = useState({
-    start_date: "2022-10-01", // yyyy-mm-dd
+    start_date: yourDate.toISOString().split("T")[0], // yyyy-mm-dd
     end_date: "2025-10-01",
   });
   const [recessionIntensity, setRecessionIntensity] = useState(1.11664);
   const [recessionData, setRecessionData] = useState({
     end_date: "2025-10-01",
-    start_date: "2022-10-01",
+    start_date: yourDate.toISOString().split("T")[0],
   });
   const [check, setCheck] = useState({ war: false, recession: false });
   console.log(check);
@@ -53,6 +54,7 @@ const Predictions = () => {
           }
         }
         final[data2.data[index]["index"]] = arr;
+        return "ok";
       });
       setCurrent(data2.data[0]["index"]);
       setBarData(final);
@@ -80,6 +82,7 @@ const Predictions = () => {
         time={"M"}
         war={check.war}
         rec={check.recession}
+        withcsvfilter={["Ensemble Predictions"]}
         filter={["Ensemble Predictions", "Actual Price"]}
       />
       <Grid item container xs={12}>

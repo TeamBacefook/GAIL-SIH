@@ -5,10 +5,8 @@ import {
   Autocomplete,
   TextField,
   MenuItem,
-  Paper,
 } from "@mui/material";
 import React, { useState, useEffect } from "react";
-import LineChart from "../../charts/globalChart";
 import IOSSlider from "../../components/common/slider";
 import BarCharts from "../../charts/barchart";
 import withSubheader from "../../layout/sub-header";
@@ -17,21 +15,10 @@ import { Helmet } from "react-helmet";
 import GroupedBarChart from "../../charts/groupedbarchart";
 import {
   getGlobalData,
-  getGlobalTrends,
+  // getGlobalTrends,
 } from "../../actions/analystics.global";
 import Divider from "@mui/material/Divider";
 
-const COLORS = [
-  "#e41a1c",
-  "#377eb8",
-  "#4daf4a",
-  "#984ea3",
-  "#ff7f00",
-  "#ffff33",
-  "#a65628",
-  "#f781bf",
-  "#999999",
-];
 const marks = [
   { label: 1990, value: 1990 },
   { label: 1995, value: 1995 },
@@ -201,7 +188,7 @@ const Analytics = () => {
     data: [],
     parameter: "Natural gas",
   });
-  const [trends, setTrends] = useState([]);
+  // const [trends, setTrends] = useState([]);
   const [compare, setCompare] = useState({
     country1: "India",
     country2: "Russia",
@@ -212,7 +199,7 @@ const Analytics = () => {
     data2: [],
   });
 
-  const [parameter, setParameter] = useState("Primary production");
+  // const [parameter, setParameter] = useState("Primary production");
 
   // const groupedbarchart = useGroupedBarChart(500, 500);
   useEffect(() => {
@@ -223,8 +210,8 @@ const Analytics = () => {
         country: "India",
         parameter: "Natural gas",
       });
-      const result = await getGlobalTrends();
-      setTrends(result);
+      // const result = await getGlobalTrends();
+      // setTrends(result);
       const data2 = await getGlobalData({
         start_year: "2000",
         end_year: "2010",

@@ -36,6 +36,7 @@ export default function ComboChart({
   war,
   rec,
   filter,
+  withcsvfilter,
 }) {
   const [data, setData] = useState([]);
   const handleFileChange = (e) => {
@@ -98,55 +99,88 @@ export default function ComboChart({
   const [all, setAll] = useState([]);
 
   useEffect(() => {
-    const arr = [];
-    for (var key in data[0]) {
-      if (data[0].hasOwnProperty(key)) {
-        if (key !== "index") {
-          arr.push(key);
+    if (data[0] !== undefined) {
+      if (name === "for 6 year" && data[0]["Actual Price"] === null) {
+        const arr = [];
+        for (var key in data[0]) {
+          if (data[0].hasOwnProperty(key)) {
+            if (key !== "index" && key !== "Actual Price") {
+              arr.push(key);
+            }
+          }
         }
+        setAll(arr);
+        setCommo(withcsvfilter);
+      } else {
+        const arr = [];
+        for (var key2 in data[0]) {
+          if (data[0].hasOwnProperty(key2)) {
+            if (key2 !== "index") {
+              arr.push(key2);
+            }
+          }
+        }
+        setAll(arr);
+        setCommo(filter);
       }
     }
-    setAll(arr);
-    console.log(filter);
-    // setCommo(["Ensemble Predictions", "Actual Price"]);
-    setCommo(filter);
-  }, [data, filter]);
+  }, [data, filter, name, withcsvfilter]);
 
-  useEffect(async () => {
-    if (war === true || rec === true) {
-      const pred = await getPredictionsFunction2({
+  useEffect(() => {
+    if (parameter) {
+      if (war === true || rec === true) {
+        const getData = async () => {
+          const pred = await getPredictionsFunction2({
+            csv: [],
+            warIntensity: war === true ? warIntensity : undefined,
+            recessionIntensity: rec === true ? recessionIntensity : undefined,
+            warData:
+              war === true
+                ? {
+                    start_date: convert(warData.start_date),
+                    end_date: convert(warData.end_date),
+                  }
+                : undefined,
+            recessionData:
+              rec === true
+                ? {
+                    start_date: convert(recessionData.start_date),
+                    end_date: convert(recessionData.end_date),
+                  }
+                : undefined,
+            ticker: ticker,
+            time: time,
+          });
+          setData(pred.data);
+        };
+        getData();
+      }
+    }
+  }, [
+    war,
+    rec,
+    ticker,
+    time,
+    warIntensity,
+    recessionData,
+    recessionIntensity,
+    getPredictionsFunction2,
+    parameter,
+    warData,
+  ]);
+
+  useEffect(() => {
+    const getData2 = async () => {
+      const pred = await getPredictionsFunction({
         csv: [],
-        warIntensity: war === true ? warIntensity : undefined,
-        recessionIntensity: rec === true ? recessionIntensity : undefined,
-        warData:
-          war === true
-            ? {
-                start_date: convert(warData.start_date),
-                end_date: convert(warData.end_date),
-              }
-            : undefined,
-        recessionData:
-          rec === true
-            ? {
-                start_date: convert(recessionData.start_date),
-                end_date: convert(recessionData.end_date),
-              }
-            : undefined,
         ticker: ticker,
         time: time,
       });
       setData(pred.data);
-    }
-  }, [war, rec]);
+    };
+    getData2();
+  }, [ticker, time, getPredictionsFunction]);
 
-  useEffect(async () => {
-    const pred = await getPredictionsFunction({
-      csv: [],
-      ticker: ticker,
-      time: time,
-    });
-    setData(pred.data);
-  }, []);
   const [getPng, { ref }] = useCurrentPng();
   const handleDownload = useCallback(async () => {
     const png = await getPng();
