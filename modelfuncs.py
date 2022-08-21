@@ -33,7 +33,7 @@ def get_models(model_loc, learning_rate):
 def data_fetch(df=None):
   data = df
   if not (type(df) == pd.DataFrame or type(df) == pd.Series):
-    data = si.get_data('NG=F', end_date='2020-12-31')
+    data = si.get_data('NG=F')
     data = data[['close']]
     data = data.resample('1D').mean()
   data = pd.DataFrame(data)
@@ -87,7 +87,7 @@ def data_pred_lstm(
     if len(df) % 24 != 0:
       raise Exception(f'Size of input data must be a multiple of 24, found size: {len(df)}')
     shape = df.shape
-    pred = model.predict(df.to_numpy().reshape(1,shape[0],shape[1]))
+    pred = model.predict(df.to_numpy().reshape(1,168) if type(model) == XGBRegressor else df.to_numpy().reshape(1,shape[0],shape[1]))
     final_preds = pred[0]
     if fhw == 1:
       return final_preds
@@ -137,10 +137,13 @@ def blended_models(dataset, start=None, end=None, models=[]):
       merged_out = pd.concat([merged_out, pred], axis=1)
       weighted_df = pd.concat([weighted_df, pred * weight], axis=1)
   merged_out['Ensemble Predictions'] = weighted_df.sum(axis=1)
+  og = data_fetch()['close']['2021-01-31':].rename("Actual Price")
+  og.index = pd.DatetimeIndex(og.index).strftime('%m/%Y')
+  merged_out = pd.concat([og, merged_out], axis=1)
   return merged_out
 
 def get_model_evals(models):
-  data = data_fetch()
+  data = data_fetch()[:'2020-12-31']
   evals = pd.DataFrame(columns=np.array(models)[:, 0])
   for name, model, attrs, _ in models:
     if name == 'ARIMA':
@@ -148,7 +151,7 @@ def get_model_evals(models):
       pred = model.forecast(steps=72)
       aic = model.aic
     else:
-      pred = data_pred_lstm(data, data.index[-24], data.index[-1], attrs, model)
+      pred = data_pred_lstm(data, data.index[-23-72], data.index[-72], attrs, model)
       num_params = 24 * (6 if "Boole" in name else 7 if "Babbage" in name else 8)
       aic = calculate_aic(72, data.close[-72:], pred, num_params + 1)
     evals[name] = pd.DataFrame([

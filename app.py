@@ -30,6 +30,36 @@ def getcountriesdata1():
     countrydataparameter = countrydataparameter.groupby(["Country"], as_index=False).sum()
     return countrydataparameter.to_json(orient="records")
 
+
+def getYahooFinancePrice(ticker):
+    df = {}
+    df = si.get_data(ticker)
+    df = pd.DataFrame(df)
+    resampled_df = df.resample('1D').mean()
+    resampled_df = resampled_df.reset_index()
+    resampled_df = resampled_df [['index','low', 'open', 'close','high']].round(3)
+    resampled_df = resampled_df.drop_duplicates(subset=["index"], keep='first')
+    resampled_df.interpolate(method='ffill', axis = 0, inplace= True, limit_direction='forward')
+    resampled_df['index'] = resampled_df['index'].dt.strftime('%d-%m-%Y')
+    return resampled_df.to_json(orient="split")
+
+def getTradingEconomicsPrice(ticker):
+    das = pd.DataFrame(requests.get(f"https://markets.tradingeconomics.com/chart?s={ticker}&span=max&securify=new&url=/commodity/crude-oil&AUTH=npGRLNizfDRd4E31Bvg9eQxZ6e1GsBkEw%2FpzlKcQmmKf0BSfSjf6mt3PsOvxdgJ%2F&ohlc=1").json()["series"][0]['data'])
+    das['date'] = pd.to_datetime(das.date)
+    das['date'] = das['date'].dt.strftime('%d-%m-%Y')
+    das = das.drop(columns=["y", "x", "percentChange","change"])
+    das = das.rename(columns={"date": "index"})
+    das = das[["index","low","open","close","high"]]
+    return das.to_json(orient="split")
+
+@app.route('/getstockdata1',methods=['GET'])
+def getStockData():
+    data = request.args
+    if data["type"] == "yahoofinance":
+        return getYahooFinancePrice(data["ticker"])
+    if data["type"] == "Tradingeconomics":
+        return getTradingEconomicsPrice(data["ticker"])
+
 @app.route('/getstockdata',methods=['GET'])
 def quotetable2():
     df = {}
@@ -198,13 +228,17 @@ def getlocalpetroleumdata12():
 @app.route('/predictions', methods=['POST'])
 def predictions():
     data = json.loads(request.data)
-    if not len(data['csv']): return current_app.saved_data
+    # print(data)
+    out = ''
+    if not len(data['csv']): out = current_app.saved_data
     else: 
         dataframe = pd.DataFrame.from_records(data['csv']).set_index('date')
         dataframe["close"] = pd.to_numeric(dataframe["close"]) 
         dataframe.index = pd.DatetimeIndex(dataframe.index)
         dataframe = data_fetch(dataframe.close)
-    return json.loads(blended_models(dataframe, models=current_app.ng_models_month).to_json(orient='table'))
+        out = blended_models(dataframe, models=current_app.ng_models_month)
+    
+    return out.to_json(orient='table')
     
 @app.route('/modelEvals', methods=['GET'])
 def getEvals():
@@ -214,34 +248,46 @@ def getEvals():
 
 if __name__ == "__main__":
     with app.app_context():
-        current_app.dataframe = data_fetch()
+        current_app.dataframe = data_fetch()[:'2020-12-31']
         
         # NG Monthly Models
-        current_app.model_xgb = get_models(f'./models/XGB-Babbage-4.44err-(1,120)ip-(1,24)op.ubj', 0)
-        current_app.model_boole = get_models(f'./models/Model_V20_Boole.h5', 0.0027)
-        current_app.model_babbage_1 = get_models(f'./models/Model[Babbage]_v3.h5', 0.0027)
-        current_app.model_babbage_2 = get_models(f'./models/Model[Babbage]_v4.h5', 0.0027)
-        current_app.model_bell_1 = get_models(f'./models/Model_V22_Bell.h5', 0.02)
-        current_app.model_bell_2 = get_models(f'./models/Model_V23_Bell.h5', 0.009)
+        current_app.model_xgb = get_models(f'./models/NG Monthly/XGB-Babbage-4.36err-(1,168)ip-(1,24)op.ubj', 0)
+        current_app.model_boole = get_models(f'./models/NG Monthly/Model_V20_Boole.h5', 0.0012)
+        current_app.model_babbage_1 = get_models(f'./models/NG Monthly/Model[Babbage]_v3.h5', 0.0027)
+        current_app.model_bell_1 = get_models(f'./models/NG Monthly/Model_V22_Bell.h5', 0.009)
+        current_app.model_bell_2 = get_models(f'./models/NG Monthly/Model_V23_Bell.h5', 0.009)
+      
+        # NG Weekly Models
+        current_app.model_weekly_babbage_v1 = get_models(
+            f'./models/NG Weekly/LSTM Weekly Babbage err = 0.78.h5', 0.027)
+        current_app.model_babbage_weekly_v2 = get_models(f'./models/NG Weekly/Weekly_babbage.h5',0.027)
 
         # NG Daily Models
+        current_app.model_daily = get_models(
+            f'./models/NG Daily/LSTM Daily NG=F .h5', 0.027)   # takes 24 gives 24
 
 
         # CL Monthly Models
         current_app.cl_model = get_models(f'./models/Crude Oil v3.h5', 0.027)
 
-        # CL Daily Models
+        # CL Weekly Models
 
+        # CL Daily Models
+        current_app.cl_model_daily_v1 = get_models(
+            f'models/Crude Daily/Crude Oil v1.h5', 0.027)
+
+        current_app.cl_model_daily_v2 = get_models(
+            f'models/Crude Daily/Crude Oil v2.h5', 0.027)
         
         current_app.ng_models_month = [
-            ('ARIMA', None, [], -1.0),
-            # ("XGBoost", current_app.model_xgb, ['close', '180ma', '60ma', '30ma', 'close_min', 'close_max', 'gradient'], 0.2),
-            ('LSTM - Boole', current_app.model_boole, ['close', '30ma', '60ma', '180ma', 'close_min', 'close_max'], 0.5),
-            ('LSTM - Babbage v1', current_app.model_babbage_1, ['close', '180ma', '60ma', '30ma', 'close_min', 'close_max', 'gradient'], 0.5),
-            ('LSTM - Babbage v2', current_app.model_babbage_2, ['close', '180ma', '60ma', '30ma', 'close_min', 'close_max', 'gradient'], 0.5),
-            ('LSTM - Bell v1', current_app.model_bell_1, ['close', '180ma', '60ma', '30ma', 'close_min', 'close_max', 'gradient', 'd_gradient'], -0.12),
-            ('LSTM - Bell v2', current_app.model_bell_2, ['close', '180ma', '60ma', '30ma', 'close_min', 'close_max', 'gradient', 'd_gradient'], 1.0),
+            ('ARIMA', None, [], 0.2),
+            ("XGBoost", current_app.model_xgb, ['close', '30ma', '60ma', '180ma', 'close_min', 'close_max', 'gradient'], 0.2),
+            ('LSTM - Boole', current_app.model_boole, ['close', '30ma', '60ma', '180ma', 'close_min', 'close_max'], 0.2),
+            ('LSTM - Babbage v1', current_app.model_babbage_1, ['close', '180ma', '60ma', '30ma', 'close_min', 'close_max', 'gradient'], 0.2),
+            ('LSTM - Bell v1', current_app.model_bell_1, ['close', '180ma', '60ma', '30ma', 'close_min', 'close_max', 'gradient', 'd_gradient'], 0.2),
         ]
+
+        current_app.ng_models_week = []
 
         current_app.ng_models_day = []
 
@@ -249,9 +295,11 @@ if __name__ == "__main__":
             ('LSTM - Babbage', current_app.cl_model, ['close', '180ma', '60ma', '30ma', 'close_min', 'close_max', 'gradient'], 1)
         ]
 
+        current_app.cl_model_week = []
+
         current_app.cl_model_day = []
 
-        current_app.saved_data = blended_models(current_app.dataframe, models=current_app.ng_models_month).to_json(orient='table')
+        current_app.saved_data = blended_models(current_app.dataframe, models=current_app.ng_models_month)
         current_app.evals = get_model_evals(current_app.ng_models_month).to_json(orient='table')
 
     # app.run(host='0.0.0.0', port=5005)
