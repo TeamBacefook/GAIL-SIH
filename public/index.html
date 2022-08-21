@@ -34,7 +34,7 @@
         var keys = Object.keys(array[0]);
 
         var result = "";
-        var f1 = [...filter, "index"];
+        var f1 = ["index", ...filter];
         result += f1.join(",");
         result += "\n";
 

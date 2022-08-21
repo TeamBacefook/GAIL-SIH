@@ -16,20 +16,14 @@ import withLayout from "../../layout";
 import { getPredictions, getModelEval } from "../../actions/predictions";
 import "./style.css";
 
-const marks = [
-  { label: "", value: 0 },
-  { label: "", value: 0.2 },
-  { label: "", value: 0.4 },
-  { label: "", value: 0.4 },
-  { label: "", value: 0.6 },
-  { label: "", value: 0.8 },
-  { label: "", value: 1 },
-];
 const Errors = [{ label: "RMSE" }, { label: "MAPE" }, { label: "AIC" }];
 
 const Predictions = () => {
   const [current, setCurrent] = useState();
   const [barData, setBarData] = useState([]);
+  const [warIntensity, setWarIntensity] = useState(0);
+  const [recessionIntensity, setRecessionIntensity] = useState(0);
+  const [check, setCheck] = useState({ war: false, recession: false });
   useEffect(() => {
     const getData2 = async () => {
       const data2 = await getModelEval();
@@ -60,7 +54,13 @@ const Predictions = () => {
         <meta name="description" content="Analytics page for GAIL-SIH" />
         <link rel="icon" href="/favicon.ico" />
       </Helmet>
-      <ComboChart name="6 year" getPredictionsFunction={getPredictions} />
+      <ComboChart
+        name="6 year"
+        getPredictionsFunction={getPredictions}
+        warIntensity={check.war ? warIntensity : undefined}
+        recessionIntensity={check.recession ? recessionIntensity : undefined}
+        parameter={true}
+      />
       <Grid item container xs={12}>
         <Grid item sx={{ mb: 3 }} xs={12}>
           <Typography color="#00116A" fontSize={40}>
@@ -76,9 +76,16 @@ const Predictions = () => {
             alignItems="center"
             container
           >
-            <Grid item xs={3}>
+            <Grid item xs={2}>
               <Box sx={{ display: "flex" }}>
-                <Checkbox />{" "}
+                <Checkbox
+                  value={check.war}
+                  onChange={(e) => {
+                    setCheck((prev) => {
+                      return { ...prev, war: e.target.value };
+                    });
+                  }}
+                />{" "}
                 <Typography color="#00116A" fontSize={30}>
                   {" "}
                   War
@@ -91,16 +98,46 @@ const Predictions = () => {
             <Grid item xs={3}>
               <TextField variant="outlined" label="Estimate End" />
             </Grid>
-            <Grid item xs={2} container justifyContent="center">
+            <Grid item xs={3} container justifyContent="center">
               <Typography fontSize={20} sx={{ opacity: "0.5" }}>
                 Intensity
               </Typography>
               <IOSSlider
-                min={0}
+                onChange={(e) => {
+                  let val = 0;
+                  switch (e.target.value) {
+                    case 1:
+                      val = 1.1238;
+                      break;
+                    case 2:
+                      val = 1.2476;
+                      break;
+                    case 3:
+                      val = 1.3714;
+                      break;
+                    case 4:
+                      val = 1.4952;
+                      break;
+                    case 5:
+                      val = 1.6192;
+                      break;
+                    default:
+                      val = 0;
+                      break;
+                  }
+                  setWarIntensity(val);
+                }}
                 track={false}
-                step={0.2}
-                max={1}
-                marks={marks}
+                marks={[
+                  { label: "very low", value: 1 },
+                  { label: "low", value: 2 },
+                  { label: "moderate", value: 3 },
+                  { label: "high", value: 4 },
+                  { label: "very high", value: 5 },
+                ]}
+                min={1}
+                max={5}
+                step={1}
               />
             </Grid>
           </Grid>
@@ -113,46 +150,16 @@ const Predictions = () => {
             alignItems="center"
             container
           >
-            <Grid item xs={3}>
+            <Grid item xs={2}>
               <Box sx={{ display: "flex" }}>
-                <Checkbox />{" "}
-                <Typography color="#00116A" fontSize={30}>
-                  {" "}
-                  Pandemic
-                </Typography>{" "}
-              </Box>
-            </Grid>
-            <Grid item xs={3}>
-              <TextField variant="outlined" label="Estimate Start" />
-            </Grid>
-            <Grid item xs={3}>
-              <TextField variant="outlined" label="Estimate End" />
-            </Grid>
-            <Grid item xs={2} container justifyContent="center">
-              <Typography fontSize={20} sx={{ opacity: "0.5" }}>
-                Intensity
-              </Typography>
-              <IOSSlider
-                min={0}
-                track={false}
-                step={0.2}
-                max={1}
-                marks={marks}
-              />
-            </Grid>
-          </Grid>
-          <Divider />
-          <Grid
-            item
-            xs={12}
-            justifyContent="space-evenly"
-            sx={{ pt: 1, pb: 2 }}
-            alignItems="center"
-            container
-          >
-            <Grid item xs={3}>
-              <Box sx={{ display: "flex" }}>
-                <Checkbox />{" "}
+                <Checkbox
+                  value={check.recession}
+                  onChange={(e) => {
+                    setCheck((prev) => {
+                      return { ...prev, recession: e.target.value };
+                    });
+                  }}
+                />{" "}
                 <Typography color="#00116A" fontSize={30}>
                   {" "}
                   Recession
@@ -165,16 +172,46 @@ const Predictions = () => {
             <Grid item xs={3}>
               <TextField variant="outlined" label="Estimate End" />
             </Grid>
-            <Grid item xs={2} container justifyContent="center">
+            <Grid item xs={3} container justifyContent="center">
               <Typography fontSize={20} sx={{ opacity: "0.5" }}>
                 Intensity
               </Typography>
               <IOSSlider
-                min={0}
+                onChange={(e) => {
+                  let val = 0;
+                  switch (e.target.value) {
+                    case 1:
+                      val = 1.11664;
+                      break;
+                    case 2:
+                      val = 1.3328;
+                      break;
+                    case 3:
+                      val = 1.4992;
+                      break;
+                    case 4:
+                      val = 1.6656;
+                      break;
+                    case 5:
+                      val = 1.8302;
+                      break;
+                    default:
+                      val = 0;
+                      break;
+                  }
+                  setRecessionIntensity(val);
+                }}
                 track={false}
-                step={0.2}
-                max={1}
-                marks={marks}
+                marks={[
+                  { label: "very low", value: 1 },
+                  { label: "low", value: 2 },
+                  { label: "moderate", value: 3 },
+                  { label: "high", value: 4 },
+                  { label: "very high", value: 5 },
+                ]}
+                min={1}
+                max={5}
+                step={1}
               />
             </Grid>
           </Grid>

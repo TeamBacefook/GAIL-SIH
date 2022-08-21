@@ -5,9 +5,14 @@ import {
 } from "../api/predictions";
 import { toast } from "react-toastify";
 
-export const getPredictions = async (csv) => {
+export const getPredictions = async (csv, warIntensity, recessionIntensity) => {
   try {
-    const { data } = await getpredictions(csv);
+    const { data } = await getpredictions(
+      csv,
+      warIntensity,
+      recessionIntensity
+    );
+    console.log(data);
     return data;
   } catch (error) {
     toast.error("Something went wrong");
@@ -23,9 +28,9 @@ export const getModelEval = async () => {
   }
 };
 
-export const getStockData2 = async () => {
+export const getStockData2 = async (formdata) => {
   try {
-    const { data } = await getstockdata2();
+    const { data } = await getstockdata2(formdata);
     return data.data;
   } catch (error) {
     toast.error("Something went wrong");

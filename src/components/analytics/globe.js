@@ -25,6 +25,15 @@ const World = ({
   useEffect(() => {
     setCountries(data);
   }, []);
+  useEffect(() => {
+    if (hoverD) {
+      globeElement.current.controls().autoRotate = true;
+      globeElement.current.controls().autoRotateSpeed = 0;
+    } else {
+      globeElement.current.controls().autoRotate = true;
+      globeElement.current.controls().autoRotateSpeed = -1;
+    }
+  }, [hoverD]);
   const colorScale = d3.scaleSequentialSqrt(d3.interpolateYlOrRd);
 
   const getVal = useCallback(
@@ -41,7 +50,6 @@ const World = ({
     [countries, getVal]
   );
   colorScale.domain([0, maxVal]);
-  console.log(maxVal);
   return (
     <ReactGlobe
       width={size[0]}
@@ -68,7 +76,7 @@ const World = ({
       polygonSideColor={() => "rgba(0, 100, 0, 0.15)"}
       polygonStrokeColor={() => "#111"}
       polygonLabel={({ properties: d }) => `
-      <div>
+      <div style="background-color:white; color:black; border-radius:3px; padding:5px; border-color:brown;">
         <b>${d.SOVEREIGNT} (${d.ISO_A2}):</b> <br />
         ${commodity} Turn over: <i>${
         d[commodity] === undefined

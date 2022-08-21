@@ -181,7 +181,6 @@ const Analytics = () => {
         >
           <IndiaMap
             onChange={(state) => {
-              console.log(state);
               var x = petroleumstatedata.find(
                 (y) => y.State === state.toUpperCase()
               );
@@ -200,7 +199,6 @@ const Analytics = () => {
               id="combo-box-demo"
               onChange={(x, e) => {
                 var z = petroleumstatedata.find((y) => y.State === e);
-                console.log(z);
                 setCoropleth((state) => ({
                   ...state,
                   state: e,

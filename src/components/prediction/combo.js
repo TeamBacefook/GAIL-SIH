@@ -12,7 +12,13 @@ import Papa from "papaparse";
 import FileSaver from "file-saver";
 import { useCurrentPng } from "recharts-to-png";
 
-export default function ComboChart({ getPredictionsFunction, name }) {
+export default function ComboChart({
+  getPredictionsFunction,
+  name,
+  warIntensity,
+  recessionIntensity,
+  parameter,
+}) {
   const [data, setData] = useState([]);
   const handleFileChange = (e) => {
     if (e.target.files.length) {
@@ -32,8 +38,17 @@ export default function ComboChart({ getPredictionsFunction, name }) {
         } else {
           toast.info("Predicting ...");
           parsedData.pop();
-          const pred = await getPredictionsFunction(parsedData);
-          setData(pred.data);
+          if (parameter) {
+            const pred = await getPredictionsFunction(
+              parsedData,
+              warIntensity,
+              recessionIntensity
+            );
+            setData(pred.data);
+          } else {
+            const pred = await getPredictionsFunction(parsedData);
+            setData(pred.data);
+          }
         }
       };
       reader.readAsText(inputFile);

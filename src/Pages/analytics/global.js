@@ -72,9 +72,7 @@ const Analytics = () => {
           }),
         ]);
       })
-      .catch((error) => {
-        // console.log(error);
-      });
+      .catch((error) => {});
   }, [filters, commo, setTree]);
 
   useEffect(() => {

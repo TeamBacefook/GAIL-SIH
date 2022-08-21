@@ -39,40 +39,6 @@ const OutlinedButton = styled(Button)({
   },
 });
 
-const years = [
-  { str: "1990", val: 1990 },
-  { str: "1991", val: 1991 },
-  { str: "1992", val: 1992 },
-  { str: "1993", val: 1993 },
-  { str: "1994", val: 1994 },
-  { str: "1995", val: 1995 },
-  { str: "1996", val: 1996 },
-  { str: "1997", val: 1997 },
-  { str: "1998", val: 1998 },
-  { str: "1999", val: 1999 },
-  { str: "2000", val: 2000 },
-  { str: "2001", val: 2001 },
-  { str: "2002", val: 2002 },
-  { str: "2003", val: 2003 },
-  { str: "2004", val: 2004 },
-  { str: "2005", val: 2005 },
-  { str: "2006", val: 2006 },
-  { str: "2007", val: 2007 },
-  { str: "2008", val: 2008 },
-  { str: "2009", val: 2009 },
-  { str: "2010", val: 2010 },
-  { str: "2011", val: 2011 },
-  { str: "2012", val: 2012 },
-  { str: "2013", val: 2013 },
-  { str: "2014", val: 2014 },
-  { str: "2015", val: 2015 },
-  { str: "2016", val: 2016 },
-  { str: "2017", val: 2017 },
-  { str: "2018", val: 2018 },
-  { str: "2019", val: 2019 },
-  { str: "2020", val: 2020 },
-];
-
 const commodity = [
   { str: "Natural gas", val: "Natural gas" },
   { str: "Anthracite", val: "Anthracite" },
@@ -80,12 +46,40 @@ const commodity = [
   { str: "Crude oil", val: "Crude oil" },
 ];
 
-const type = [
-  { str: "Production", val: "Production" },
-  { str: "Imports", val: "Imports" },
-  { str: "Exports", val: "Exports" },
-  { str: "Consumption", val: "Consumption" },
+const commodityprice = [
+  {
+    str: "Natural gas - Yahoo Finance",
+    val: "NG=F",
+    type: "yahoofinance",
+    text: "Natural gas prices from Yahoo Finance (NG=F)",
+  },
+  {
+    str: "Natural gas - Trading Economics",
+    val: "ng1:com",
+    type: "Tradingeconomics",
+    text: "Natural gas prices from Trading Economics",
+  },
+
+  {
+    str: "Crude oil - Trading Economics",
+    val: "cl1:com",
+    type: "Tradingeconomics",
+    text: "Crude oil prices from Trading Economics",
+  },
+  {
+    str: "Crude oil - Yahoo Finance",
+    val: "CL=F",
+    type: "yahoofinance",
+    text: "Crude oil prices from Yahoo Finance (CL=F)",
+  },
+  {
+    str: "Coal - Trading economics",
+    val: "xal1:com",
+    type: "Tradingeconomics",
+    text: "Coal prices from Trading Economics",
+  },
 ];
+
 const marqueedata = [
   {
     commodity: "Methanol\n\nCNY/T",
@@ -424,44 +418,49 @@ const Home = () => {
     type: "Production",
     country: "India",
   });
+  const [filtercommodityprice, setFiltercommodityprice] = useState({
+    commodityprice: "ng1:com",
+    type: "Tradingeconomics",
+    text: "Natural gas prices from Trading Economics",
+  });
   const globeElement = useRef();
   const [tabledata, settabledata] = useState(null);
   const [selectedCountryonGlobe, setSelectedCountryonGlobe] = useState(null);
   const [timeseriesDs, settimeseriesDs] = useState();
-  // const [multiSeriesDs, setMultiSeriesDs] = useState();
-
-  const dataSource = {
-    chart: {
-      theme: "gammel",
-    },
-    caption: {
-      text: "NG=F(Natural gas) Stock Prices",
-    },
-    subcaption: {
-      text: "Stock prices from 2000 - Present",
-    },
-    yaxis: [
-      {
-        plot: {
-          value: {
-            open: "Open",
-            high: "High",
-            low: "Low",
-            close: "Close",
-          },
-          type: "candlestick",
-        },
-        format: {
-          prefix: "$",
-        },
-        title: "Stock Value",
-      },
-    ],
-  };
 
   useEffect(() => {
     const getData = async () => {
-      const data = await getStockData2();
+      const data = await getStockData2(filtercommodityprice);
+      const dataSource = {
+        chart: {
+          exportenabled: 1,
+          multicanvas: false,
+          theme: "gammel",
+        },
+        caption: {
+          text: filtercommodityprice.text,
+        },
+        subcaption: {
+          text: "Stock prices based on available data",
+        },
+        yaxis: [
+          {
+            plot: {
+              value: {
+                open: "Open",
+                high: "High",
+                low: "Low",
+                close: "Close",
+              },
+              type: "candlestick",
+            },
+            format: {
+              prefix: "$",
+            },
+            title: "Stock Value",
+          },
+        ],
+      };
       var schema = [
         {
           name: "Date",
@@ -494,7 +493,7 @@ const Home = () => {
         {
           type: "timeseries",
           renderAt: "container",
-          width: window.innerWidth / 1.4,
+          width: window.innerWidth / 1.2,
           height: "600",
           dataSource,
         }
@@ -503,7 +502,7 @@ const Home = () => {
       settimeseriesDs(timeseriesDsTemp);
     };
     getData();
-  }, []);
+  }, [filtercommodityprice]);
 
   useEffect(() => {
     const getData = async () => {
@@ -746,12 +745,7 @@ const Home = () => {
                   >
                     <img src={down} alt="Fall Symbol" />
                   </object>
-                  <Typography
-                    variant="h1"
-                    fontSize={20}
-                    id="angdu"
-                    sx={{ ml: 2, mr: 1 }}
-                  >
+                  <Typography variant="h1" fontSize={20} sx={{ ml: 2, mr: 1 }}>
                     {item.commodity} {item.price}
                   </Typography>
                 </Box>
@@ -792,9 +786,51 @@ const Home = () => {
       </Marquee>
       <Divider style={{ marginTop: "3em" }} />
       <Box sx={{ py: 8 }}>
-        <Typography color="#00116A" fontSize="35px">
-          Spot and Future prices of commodities
-        </Typography>
+        <Grid justifyContent="space-between" spacing={1} item container xs={12}>
+          <Grid item xs={12} md={6}>
+            <Typography color="#00116A" fontSize="35px">
+              Spot and Future prices of commodities
+            </Typography>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Autocomplete
+              style={{ width: "100%", height: "80%", borderRadius: "3em" }}
+              id="combo-box-demo"
+              options={commodityprice}
+              value={commodityprice.find((item) => {
+                console.log(commodityprice);
+                return item.val === filtercommodityprice.commodityprice;
+              })}
+              getOptionLabel={(option) => option.str}
+              onChange={(e, value) => {
+                console.log(value);
+                setFiltercommodityprice((prev) => {
+                  return {
+                    ...prev,
+                    commodityprice:
+                      value === null
+                        ? "Natural gas - Yahoo Finance"
+                        : value.val,
+                    type: value === null ? "yahoofinance" : value.type,
+                    text:
+                      value === null
+                        ? "Natural gas prices from Yahoo Finance"
+                        : value.text,
+                  };
+                });
+              }}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  variant="outlined"
+                  label="Commodity"
+                  placeholder="Commodity"
+                  type="text"
+                />
+              )}
+            />
+          </Grid>
+        </Grid>
         {timeseriesDs && <ReactFC {...timeseriesDs} />}
       </Box>
       <Divider style={{ marginTop: "3em" }} />
