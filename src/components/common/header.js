@@ -9,7 +9,7 @@ import Hamburger from "hamburger-react";
 import { Nav, Link as Link2 } from "./nav-overlay";
 const links = [
   {
-    name: "Home",
+    name: "Dashboard",
     href: "/",
   },
   {
@@ -25,7 +25,7 @@ const links = [
     href: "/news",
   },
   {
-    name: "About",
+    name: "Rationale",
     href: "/about",
   },
   {

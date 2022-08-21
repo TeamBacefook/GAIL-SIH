@@ -16,7 +16,10 @@ import { Helmet } from "react-helmet";
 import { baseurl } from "../../api/url";
 import Donut from "../../charts/donut";
 import LineChart from "../../charts/linechart";
-import { getNaturalGas } from "../../actions/analystics.india.js";
+import {
+  getNaturalGas,
+  getCrudeOilPrices,
+} from "../../actions/analystics.india.js";
 const marks = [
   { label: 2011, value: 2011 },
   { label: 2012, value: 2012 },
@@ -108,6 +111,15 @@ const Analytics = () => {
     end_month: new Date().getMonth() + 2,
     end_year: 2018,
   });
+
+  const [priceFilter, setPriceFilter] = useState({
+    parameter: "Consumption",
+    start_month: new Date().getMonth() + 1,
+    start_year: 2011,
+    end_month: new Date().getMonth() + 2,
+    end_year: 2018,
+  });
+
   const [coropleth, setCoropleth] = useState({
     state: "DELHI",
     start: 2015,
@@ -117,6 +129,7 @@ const Analytics = () => {
   const [petroleumRange, setPetroleumRange] = useState([2015, 2019]);
   const [petroleum, setPetroleum] = useState([]);
   const [lineChart, setLineChart] = useState([]);
+  const [priceChart, setPriceChart] = useState([]);
   const [petroleumstatedata, setPetroleumstatedata] = useState([]);
 
   const getData = useCallback(async () => {
@@ -130,10 +143,25 @@ const Analytics = () => {
       setLineChart(data);
     }
   }, [monthlyFilter]);
+  const getPrice = useCallback(async () => {
+    if (
+      priceFilter.end_month !== undefined &&
+      priceFilter.end_year !== undefined &&
+      priceFilter.start_month !== undefined &&
+      priceFilter.start_year !== undefined
+    ) {
+      const data = await getCrudeOilPrices(priceFilter);
+      setPriceChart(data);
+    }
+  }, [priceFilter, setPriceChart]);
 
   useEffect(() => {
     getData();
   }, [getData]);
+
+  useEffect(() => {
+    getPrice();
+  }, [getPrice]);
 
   useEffect(() => {
     axios
@@ -442,8 +470,7 @@ const Analytics = () => {
             </Grid>
           </Grid>
         </Grid>
-
-        {lineChart.length !== 0 && (
+        {lineChart && lineChart?.length !== 0 && (
           <Grid
             item
             xs={12}
@@ -451,6 +478,156 @@ const Analytics = () => {
             style={{ display: "flex", alignItems: "center", height: "40vh" }}
           >
             <LineChart width="100%" height="100%" data={lineChart} />
+          </Grid>
+        )}
+      </Grid>
+      <Divider />
+      <Grid
+        item
+        justifyContent="space-between"
+        xs={12}
+        sx={{ py: 8 }}
+        container
+      >
+        <Grid item xs={12} md={5}>
+          <Grid sx={{ my: 2 }} item container spacing={2} xs={12}>
+            <Typography fontSize={30} color="#0A2540">
+              Monthwise Price Trend Of Crude Oil
+            </Typography>
+          </Grid>
+          <Grid sx={{ my: 2 }} item container spacing={2} xs={12}>
+            <Grid item xs={12} md={6}>
+              <Autocomplete
+                style={{ width: "100%", borderRadius: "3em" }}
+                id="combo-box-demo"
+                options={months}
+                value={months.find(
+                  (item) => item.index === priceFilter.start_month
+                )}
+                getOptionLabel={(option) => option.month}
+                onChange={(e, values) => {
+                  setPriceFilter((prev) => {
+                    return { ...prev, start_month: values?.index };
+                  });
+                }}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    variant="outlined"
+                    label="Start month"
+                    placeholder="Month"
+                    type="text"
+                  />
+                )}
+              />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Autocomplete
+                style={{ width: "100%", borderRadius: "3em" }}
+                id="combo-box-demo"
+                options={years}
+                value={years.find(
+                  (item) => item.val === priceFilter.start_year
+                )}
+                getOptionLabel={(option) => option.str}
+                onChange={(e, value) => {
+                  setPriceFilter((prev) => {
+                    return { ...prev, start_year: value?.val };
+                  });
+                }}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    variant="outlined"
+                    label="Start year"
+                    placeholder="Year"
+                    type="text"
+                  />
+                )}
+              />
+            </Grid>
+          </Grid>
+
+          {/* <Autocomplete
+            style={{ width: "100%", borderRadius: "3em" }}
+            id="combo-box-demo"
+            value={monthlyFilter.parameter}
+            options={["Consumption", "Production", "Imports"]}
+            getOptionLabel={(option) => option}
+            onChange={(e, value) => {
+              setMonthly((prev) => {
+                return { ...prev, parameter: value };
+              });
+            }}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                variant="outlined"
+                label="Commodity"
+                placeholder="Commodity"
+                type="text"
+              />
+            )}
+          /> */}
+          <Grid sx={{ my: 2 }} item container spacing={2} xs={12}>
+            <Grid item xs={12} md={6}>
+              <Autocomplete
+                style={{ width: "100%", borderRadius: "3em" }}
+                id="combo-box-demo"
+                options={months}
+                value={months.find(
+                  (item) => item.index === priceFilter.end_month
+                )}
+                getOptionLabel={(option) => option.month}
+                onChange={(e, values) => {
+                  setPriceFilter((prev) => {
+                    return { ...prev, end_month: values?.index };
+                  });
+                }}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    variant="outlined"
+                    label="End month"
+                    placeholder="Month"
+                    type="text"
+                  />
+                )}
+              />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Autocomplete
+                style={{ width: "100%", borderRadius: "3em" }}
+                id="combo-box-demo"
+                options={years}
+                value={years.find((item) => item.val === priceFilter.end_year)}
+                getOptionLabel={(option) => option.str}
+                onChange={(e, value) => {
+                  setPriceFilter((prev) => {
+                    return { ...prev, end_year: value?.val };
+                  });
+                }}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    variant="outlined"
+                    label="End year"
+                    placeholder="Year"
+                    type="text"
+                  />
+                )}
+              />
+            </Grid>
+          </Grid>
+        </Grid>
+        {priceChart && priceChart?.length !== 0 && (
+          <Grid
+            item
+            xs={12}
+            md={6}
+            style={{ display: "flex", alignItems: "center", height: "40vh" }}
+          >
+            <LineChart width="100%" height="100%" data={priceChart} />
           </Grid>
         )}
       </Grid>

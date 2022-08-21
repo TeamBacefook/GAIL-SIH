@@ -33,7 +33,7 @@ const marks = [
 ];
 
 const Analytics = () => {
-  const [commo, setCommo] = useState(["Biofuels and waste", "Natural Gas"]);
+  const [commo, setCommo] = useState(["Natural Gas"]);
   const [consumption, setconsumptiondata] = useState({ data: [], max: 0 }); //parameter = "Final consumption"
   const [productiondata, setproductiondata] = useState(null); //parameter = 'Primary production'
   const [transformationdata, settransformationdata] = useState(null); //parameter = "Transformation"

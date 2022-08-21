@@ -1,4 +1,8 @@
-import { getpetroleumdata, getnaturalgas } from "../api/analytics.india";
+import {
+  getpetroleumdata,
+  getnaturalgas,
+  getcrudeoilprices,
+} from "../api/analytics.india";
 import { toast } from "react-toastify";
 
 export const getPetroleumData = async () => {
@@ -13,6 +17,15 @@ export const getPetroleumData = async () => {
 export const getNaturalGas = async (req) => {
   try {
     const { data } = await getnaturalgas(req);
+    return data;
+  } catch (error) {
+    toast.error("Something went wrong");
+  }
+};
+
+export const getCrudeOilPrices = async (req) => {
+  try {
+    const { data } = await getcrudeoilprices(req);
     return data;
   } catch (error) {
     toast.error("Something went wrong");

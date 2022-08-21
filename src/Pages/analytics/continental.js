@@ -204,7 +204,7 @@ const Analytics = () => {
   const [trends, setTrends] = useState([]);
   const [compare, setCompare] = useState({
     country1: "India",
-    country2: "Austria",
+    country2: "Russia",
     parameter: "Natural gas",
     start_year: "2000",
     end_year: "2010",
@@ -228,7 +228,7 @@ const Analytics = () => {
       const data2 = await getGlobalData({
         start_year: "2000",
         end_year: "2010",
-        country: "Austria",
+        country: "Russia",
         parameter: "Natural gas",
       });
 

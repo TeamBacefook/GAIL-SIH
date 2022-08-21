@@ -2,16 +2,40 @@ import {
   getpredictions,
   getmodeleval,
   getstockdata2,
+  getpredictionsFn,
 } from "../api/predictions";
 import { toast } from "react-toastify";
 
-export const getPredictions = async (csv, warIntensity, recessionIntensity) => {
+export const getPredictions = async ({ csv, time, ticker }) => {
+  console.log(time);
   try {
-    const { data } = await getpredictions(
+    const { data } = await getpredictions({ csv, time, ticker });
+    console.log(data);
+    return data;
+  } catch (error) {
+    toast.error("Something went wrong");
+  }
+};
+
+export const getPredictionsFn = async ({
+  csv,
+  warIntensity,
+  recessionIntensity,
+  warData,
+  recessionData,
+  ticker,
+  time,
+}) => {
+  try {
+    const { data } = await getpredictionsFn({
       csv,
       warIntensity,
-      recessionIntensity
-    );
+      recessionIntensity,
+      warData,
+      recessionData,
+      time,
+      ticker,
+    });
     console.log(data);
     return data;
   } catch (error) {

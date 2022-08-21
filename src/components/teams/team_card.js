@@ -1,57 +1,52 @@
 import React from "react";
-import { LayoutGroup, motion, useAnimationControls } from "framer-motion";
+
 import { Grid, Typography } from "@mui/material";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import InstagramIcon from "@mui/icons-material/Instagram";
 
 const Card = ({ image, f_name, l_name, lnkIn, github, insta }) => {
-  const barControls = useAnimationControls();
-  const imgControls = useAnimationControls();
-  const nameControls = useAnimationControls();
-  const socialsControls = useAnimationControls();
+  // const onCardHover = () => {
+  //   barControls.start({ height: 0 });
+  //   socialsControls.start({ opacity: 1 });
+  //   imgControls.start({
+  //     top: 0,
+  //     height: "37vh",
+  //     width: "100%",
+  //     borderRadius: "15px 15px 0 0",
+  //   });
+  //   nameControls.start({
+  //     opacity: 0,
+  //   });
+  // };
 
-  const onCardHover = () => {
-    barControls.start({ height: 0 });
-    socialsControls.start({ opacity: 1 });
-    imgControls.start({
-      top: 0,
-      height: "37vh",
-      width: "100%",
-      borderRadius: "15px 15px 0 0",
-    });
-    nameControls.start({
-      opacity: 0,
-    });
-  };
-
-  const endCardHover = () => {
-    barControls.start({ height: "1.5em" });
-    socialsControls.start({ opacity: 0 });
-    imgControls.start({
-      top: "17%",
-      height: "18vh",
-      width: "18vh",
-      borderRadius: "300px",
-    });
-    nameControls.start({
-      opacity: 1,
-    });
-  };
+  // const endCardHover = () => {
+  //   barControls.start({ height: "1.5em" });
+  //   socialsControls.start({ opacity: 0 });
+  //   imgControls.start({
+  //     top: "17%",
+  //     height: "18vh",
+  //     width: "18vh",
+  //     borderRadius: "300px",
+  //   });
+  //   nameControls.start({
+  //     opacity: 1,
+  //   });
+  // };
 
   return (
-    <LayoutGroup id="cards">
-      <motion.div
+    <div>
+      <div
         style={{
           borderRadius: 15,
-          width: "75%",
+          width: "17em",
           boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
           borderRadius: "15px",
           backgroundColor: "#FFF",
           position: "relative",
         }}
-        onHoverStart={onCardHover}
-        onHoverEnd={endCardHover}
+        // onHoverStart={onCardHover}
+        // onHoverEnd={endCardHover}
       >
         {/* Photo Top */}
         <div
@@ -63,18 +58,18 @@ const Card = ({ image, f_name, l_name, lnkIn, github, insta }) => {
           }}
         >
           {/* Top Bar */}
-          <motion.div
+          <div
             style={{
               width: "70%",
               backgroundColor: "#FF5C00",
               height: "1.5em",
               borderRadius: "0 0 20px 20px",
             }}
-            animate={barControls}
+            // animate={barControls}
             transition={{ type: "spring", duration: 1, bounce: 0 }}
           />
           {/* Image Circle */}
-          <motion.div
+          <div
             style={{
               backgroundColor: "#FF5C00",
               backgroundImage: `url(${image})`,
@@ -86,13 +81,13 @@ const Card = ({ image, f_name, l_name, lnkIn, github, insta }) => {
               position: "absolute",
               top: "17%",
             }}
-            animate={imgControls}
+            // animate={imgControls}
             transition={{ type: "tween", duration: 0.75, bounce: 0 }}
           />
           {/* Name */}
-          <motion.div
+          <div
             style={{ paddingTop: "25vh", position: "absolute", top: "15%" }}
-            animate={nameControls}
+            // animate={nameControls}
             transition={{ type: "spring", duration: 0.8, bounce: 0 }}
           >
             <Grid container flexDirection="column">
@@ -103,17 +98,17 @@ const Card = ({ image, f_name, l_name, lnkIn, github, insta }) => {
                 <Typography variant="h5">{l_name}</Typography>
               </Grid>
             </Grid>
-          </motion.div>
+          </div>
         </div>
         {/* Socials Bottom */}
-        <motion.div
+        <div
           style={{
             height: "7em",
             backgroundColor: "#FF5C00",
             borderRadius: "0 0 15px 15px",
             opacity: 0,
           }}
-          animate={socialsControls}
+          // animate={socialsControls}
           transition={{ type: "spring", duration: 1, bounce: 0 }}
         >
           <Grid
@@ -125,7 +120,7 @@ const Card = ({ image, f_name, l_name, lnkIn, github, insta }) => {
             {/* Github */}
             <Grid item style={{ height: 40, width: 40 }}>
               <GitHubIcon
-                style={{ color: "white", fontSize: 35 , cursor: "pointer" }}
+                style={{ color: "white", fontSize: 35, cursor: "pointer" }}
                 onClick={() => {
                   window.open(github, "_blank");
                 }}
@@ -150,9 +145,9 @@ const Card = ({ image, f_name, l_name, lnkIn, github, insta }) => {
               />
             </Grid>
           </Grid>
-        </motion.div>
-      </motion.div>
-    </LayoutGroup>
+        </div>
+      </div>
+    </div>
   );
 };
 

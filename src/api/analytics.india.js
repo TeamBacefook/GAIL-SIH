@@ -12,3 +12,12 @@ export const getnaturalgas = ({
   API.get(
     `/naturalgas/local?startmonth=${start_month}&startyear=${start_year}&endmonth=${end_month}&endyear=${end_year}`
   );
+export const getcrudeoilprices = ({
+  start_month,
+  start_year,
+  end_month,
+  end_year,
+}) =>
+  API.get(
+    `/indianbasket/crudeprices?startmonth=${start_month}&startyear=${start_year}&endmonth=${end_month}&endyear=${end_year}`
+  );

@@ -11,13 +11,31 @@ import LineChart from "../../charts/predchart";
 import Papa from "papaparse";
 import FileSaver from "file-saver";
 import { useCurrentPng } from "recharts-to-png";
-
+const convert = (date) => {
+  let dt = new Date(date);
+  let month = dt.getMonth() + 1;
+  var date1 = "";
+  if (month < 10) {
+    date1 = `0${month}/${dt.getFullYear()}`;
+  } else {
+    date1 = `${month}/${dt.getFullYear()}`;
+  }
+  return date1;
+};
 export default function ComboChart({
   getPredictionsFunction,
   name,
   warIntensity,
   recessionIntensity,
+  warData,
+  recessionData,
+  getPredictionsFunction2,
   parameter,
+  ticker,
+  time,
+  war,
+  rec,
+  filter,
 }) {
   const [data, setData] = useState([]);
   const handleFileChange = (e) => {
@@ -32,21 +50,42 @@ export default function ComboChart({
       reader.onload = async ({ target }) => {
         const csv = Papa.parse(target.result, { header: true });
         const parsedData = csv?.data;
-        const columns = Object.keys(parsedData[0]);
+        var columns = Object.keys(parsedData[0]);
+        columns = columns.map((item) => item.toLocaleLowerCase());
         if (!columns.includes("date") || !columns.includes("close")) {
           toast.error("Please input correct csv file");
         } else {
           toast.info("Predicting ...");
           parsedData.pop();
-          if (parameter) {
-            const pred = await getPredictionsFunction(
-              parsedData,
-              warIntensity,
-              recessionIntensity
-            );
+          if (parameter && warIntensity !== undefined) {
+            const pred = await getPredictionsFunction2({
+              csv: parsedData,
+              warIntensity: warIntensity,
+              recessionIntensity: recessionIntensity,
+              warData:
+                warIntensity !== undefined
+                  ? {
+                      start_date: convert(warData.start_date),
+                      end_date: convert(warData.end_date),
+                    }
+                  : undefined,
+              recessionData:
+                recessionIntensity !== undefined
+                  ? {
+                      start_date: convert(recessionData.start_date),
+                      end_date: convert(recessionData.end_date),
+                    }
+                  : undefined,
+              ticker: ticker,
+              time: time,
+            });
             setData(pred.data);
           } else {
-            const pred = await getPredictionsFunction(parsedData);
+            const pred = await getPredictionsFunction({
+              csv: parsedData,
+              ticker: ticker,
+              time: time,
+            });
             setData(pred.data);
           }
         }
@@ -68,14 +107,46 @@ export default function ComboChart({
       }
     }
     setAll(arr);
-    setCommo(arr);
-  }, [data]);
+    console.log(filter);
+    // setCommo(["Ensemble Predictions", "Actual Price"]);
+    setCommo(filter);
+  }, [data, filter]);
 
   useEffect(async () => {
-    const pred = await getPredictionsFunction([]);
+    if (war === true || rec === true) {
+      const pred = await getPredictionsFunction2({
+        csv: [],
+        warIntensity: war === true ? warIntensity : undefined,
+        recessionIntensity: rec === true ? recessionIntensity : undefined,
+        warData:
+          war === true
+            ? {
+                start_date: convert(warData.start_date),
+                end_date: convert(warData.end_date),
+              }
+            : undefined,
+        recessionData:
+          rec === true
+            ? {
+                start_date: convert(recessionData.start_date),
+                end_date: convert(recessionData.end_date),
+              }
+            : undefined,
+        ticker: ticker,
+        time: time,
+      });
+      setData(pred.data);
+    }
+  }, [war, rec]);
+
+  useEffect(async () => {
+    const pred = await getPredictionsFunction({
+      csv: [],
+      ticker: ticker,
+      time: time,
+    });
     setData(pred.data);
   }, []);
-
   const [getPng, { ref }] = useCurrentPng();
   const handleDownload = useCallback(async () => {
     const png = await getPng();
@@ -100,7 +171,7 @@ export default function ComboChart({
       >
         <Grid item sx={1} xs={3}>
           <Typography color="#00116A" fontSize={30}>
-            Model Prediction for {name}
+            Model Prediction {name}
           </Typography>
         </Grid>
         <Grid item xs={2}>

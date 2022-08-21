@@ -10,7 +10,7 @@ import { ToastContainer } from "react-toastify";
 import Predictions from "./Pages/predictions";
 import "react-toastify/dist/ReactToastify.css";
 import News from "./Pages/news";
-// import Team from "./Pages/team";
+import Team from "./Pages/team";
 
 import "./App.css";
 
@@ -48,6 +48,7 @@ function App() {
             />
 
             <Route path="/news" element={<News />} />
+            <Route path="/team" element={<Team />} />
 
             {/* <Route path="*" /> */}
           </Routes>

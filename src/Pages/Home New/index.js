@@ -834,7 +834,7 @@ const Home = () => {
         {timeseriesDs && <ReactFC {...timeseriesDs} />}
       </Box>
       <Divider style={{ marginTop: "3em" }} />
-      <Grid item xs={12} sx={{ mt: 2 }} container>
+      {/* <Grid item xs={12} sx={{ mt: 2 }} container>
         <Typography color="#00116A" fontSize="35px">
           Energy Gas Predictions
         </Typography>
@@ -914,8 +914,8 @@ const Home = () => {
             </Box>
           </Grid>
         </Grid>
-      </Grid>
-      <Divider />
+      </Grid> 
+      <Divider />*/}
       <Grid
         item
         xs={12}
