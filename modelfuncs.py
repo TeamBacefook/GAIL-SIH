@@ -29,16 +29,18 @@ def get_models(model_loc, learning_rate):
     model.compile(loss = rmse, optimizer= tf.keras.optimizers.Adam(learning_rate=learning_rate))
   return model
 
-
-def data_fetch(df=None):
+def data_fetch(df=None, period='M', ticker='NG=F', attrs=['close']):
   data = df
   if not (type(df) == pd.DataFrame or type(df) == pd.Series):
-    data = si.get_data('NG=F')
-    data = data[['close']]
+    data = si.get_data(ticker)
+    data = data[attrs]
     data = data.resample('1D').mean()
   data = pd.DataFrame(data)
   data.interpolate(method='linear', axis = 0, inplace=True, limit_direction='forward')
+  if period=='D':
+    return data
   data = data.resample('1M').mean()
+  data.interpolate(method='linear', axis = 0, inplace=True, limit_direction='forward')
   data['30ma'] = data['close']
   data['60ma'] = data['close'].rolling(2).mean()
   data['180ma'] = data['close'].rolling(6).mean()
@@ -49,7 +51,6 @@ def data_fetch(df=None):
   start = data.isna().sum().max()
   data = data[start:]
   return data
-
 
 def get_month_wise_date(date):
   m_date = pd.date_range(start=date, periods=1, freq='M')
@@ -120,8 +121,8 @@ def data_pred_lstm(
 def blended_models(dataset, start=None, end=None, models=[]):
   merged_out = None
   weighted_df = pd.DataFrame()
-  if not start: start = dataset.index[-24]
   if not end: end = dataset.index[-1]
+  if not start: start = dataset[:end].index[-24]
   for name, model, attrs, weight in models:
     pred=''
     if name == 'ARIMA':
@@ -137,7 +138,8 @@ def blended_models(dataset, start=None, end=None, models=[]):
       merged_out = pd.concat([merged_out, pred], axis=1)
       weighted_df = pd.concat([weighted_df, pred * weight], axis=1)
   merged_out['Ensemble Predictions'] = weighted_df.sum(axis=1)
-  og = data_fetch()['close']['2021-01-31':].rename("Actual Price")
+  temp_date = pd.date_range(start = end, freq='M', periods=2)[1]
+  og = dataset['close'][temp_date:].rename("Actual Price")
   og.index = pd.DatetimeIndex(og.index).strftime('%m/%Y')
   merged_out = pd.concat([og, merged_out], axis=1)
   return merged_out
@@ -162,4 +164,14 @@ def get_model_evals(models):
   evals.index = pd.Index(['RMSE', 'MAPE', 'AIC'])
   return evals
   
-  
+def daily_pred(model, data):
+  index = pd.date_range(start=data.index[-1], freq='D', periods=8)[1:]
+  data = np.array(data[-21:].values)
+  scaler = StandardScaler().fit(data)
+  closed_scaler = StandardScaler().fit(data[:,0].reshape(-1,1))
+  scaled_data = scaler.transform(data)
+  frame = [scaled_data[i:i+14] for i in range(len(scaled_data)-14)]
+  pred = [model.predict(np.array([ip]))[0][0] for ip in frame]
+  pred = closed_scaler.inverse_transform(np.array(pred).reshape(-1,1))
+  index=pd.DatetimeIndex(index).strftime('%d/%m/%Y')
+  return pd.DataFrame(pred, index=index, columns=['Predicted Price'])
