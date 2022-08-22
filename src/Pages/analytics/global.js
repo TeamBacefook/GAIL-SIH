@@ -112,8 +112,8 @@ const Analytics = () => {
     <Box sx={{ px: { xs: 1, md: 8 } }}>
       {" "}
       <Helmet>
-        <title>GAIL SIH | Analytics-Continental</title>
-        <meta name="description" content="Analytics page for GAIL-SIH" />
+        <title>PEGASUS | Analytics-Continental</title>
+        <meta name="description" content="Analytics page for PEGASUS" />
         <link rel="icon" href="/favicon.ico" />
       </Helmet>
       <Grid
@@ -403,15 +403,15 @@ const Analytics = () => {
       </Grid>
       <Grid item xs={12} container justifyContent={"space-evenly"} spacing={2}>
         <Grid item sx={12} md={12}>
-          <p>Energy Consumption</p>
+          <p>Energy Production</p>{" "}
           <BarCharts
-            data={consumption}
-            bg1="#fc4a1a"
-            bg2="#f7b733"
+            data={productiondata}
+            bg1="#00b09b"
+            bg2="#96c93d"
+            orientation={0}
             g_width={window.innerWidth * 0.9}
             g_height={window.innerHeight * 0.3}
-            orientation={0}
-            c_id={1}
+            c_id={3}
           />
         </Grid>
         <Grid item sx={12} md={12}>
@@ -427,15 +427,15 @@ const Analytics = () => {
           />
         </Grid>
         <Grid item sx={12} md={12}>
-          <p>Energy Production</p>{" "}
+          <p>Energy Consumption</p>
           <BarCharts
-            data={productiondata}
-            bg1="#00b09b"
-            bg2="#96c93d"
-            orientation={0}
+            data={consumption}
+            bg1="#fc4a1a"
+            bg2="#f7b733"
             g_width={window.innerWidth * 0.9}
             g_height={window.innerHeight * 0.3}
-            c_id={3}
+            orientation={0}
+            c_id={1}
           />
         </Grid>
       </Grid>

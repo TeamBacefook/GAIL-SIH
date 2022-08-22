@@ -86,8 +86,8 @@ const Home = () => {
   return (
     <Box sx={{ py: 14, px: { xs: 2, md: 9 } }}>
       <Helmet>
-        <title>GAIL SIH</title>
-        <meta name="description" content="Home page for GAIL-SIH" />
+        <title>PEGASUS</title>
+        <meta name="description" content="Home page of PEGASUS" />
         <link rel="icon" href="/favicon.ico" />
       </Helmet>
       <Grid

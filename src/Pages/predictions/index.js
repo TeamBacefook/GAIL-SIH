@@ -69,8 +69,8 @@ const Predictions = () => {
   return (
     <Box sx={{ my: 12, px: { xs: 1, md: 4 } }}>
       <Helmet>
-        <title>GAIL SIH | Dashboard</title>
-        <meta name="description" content="Analytics page for GAIL-SIH" />
+        <title>PEGASUS | Predictions</title>
+        <meta name="description" content="Analytics page for PEGASUS" />
         <link rel="icon" href="/favicon.ico" />
       </Helmet>
       <ComboChart

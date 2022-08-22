@@ -24,6 +24,7 @@ import FusionCharts from "fusioncharts";
 import TimeSeries from "fusioncharts/fusioncharts.timeseries";
 import GammelTheme from "fusioncharts/themes/fusioncharts.theme.gammel";
 import { getStockData2 } from "../../actions/predictions";
+import { Helmet } from "react-helmet";
 ReactFC.fcRoot(FusionCharts, TimeSeries, GammelTheme);
 
 const OutlinedButton = styled(Button)({
@@ -590,6 +591,11 @@ const Home = () => {
   }, [filters]);
   return (
     <Box sx={{ py: 16, px: { xs: 2, md: 8 } }}>
+      <Helmet>
+        <title>PEGASUS | Dashboard</title>
+        <meta name="description" content="Analytics page for PEGASUS" />
+        <link rel="icon" href="/favicon.ico" />
+      </Helmet>
       <Grid
         item
         xs={12}

@@ -19,8 +19,8 @@ const News = () => {
   return (
     <Box sx={{ mt: 10, py: 4, px: { sx: 1, md: 8 } }}>
       <Helmet>
-        <title>GAIL SIH | News</title>
-        <meta name="description" content="Analytics page for GAIL-SIH" />
+        <title>PEGASUS | News</title>
+        <meta name="description" content="Analytics page for PEGASUS" />
         <link rel="icon" href="/favicon.ico" />
       </Helmet>
 

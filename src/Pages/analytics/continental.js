@@ -305,8 +305,8 @@ const Analytics = () => {
   return (
     <>
       <Helmet>
-        <title>GAIL SIH | Analytics</title>
-        <meta name="description" content="Analytics page for GAIL-SIH" />
+        <title>PEGASUS | Analytics</title>
+        <meta name="description" content="Analytics page for PEGASUS" />
         <link rel="icon" href="/favicon.ico" />
       </Helmet>
       <Grid container padding={"2%"} sx={{ minHeight: "max-content" }}>

@@ -16,8 +16,8 @@ const Team = () => {
       }}
     >
       <Helmet>
-        <title>GAIL SIH | Team</title>
-        <meta name="description" content="Analytics page for GAIL-SIH" />
+        <title>PEGASUS | Team</title>
+        <meta name="description" content="Analytics page for PEGASUS" />
         <link rel="icon" href="/favicon.ico" />
       </Helmet>
       <Box sx={{ my: 4 }}>

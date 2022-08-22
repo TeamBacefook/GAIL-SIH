@@ -195,8 +195,8 @@ const Analytics = () => {
       }}
     >
       <Helmet>
-        <title>GAIL SIH | Analytics-India</title>
-        <meta name="description" content="Analytics page for GAIL-SIH" />
+        <title>PEGASUS | Analytics-India</title>
+        <meta name="description" content="Analytics page for PEGASUS" />
         <link rel="icon" href="/favicon.ico" />
       </Helmet>
       <Grid sx={{ mb: 4 }} item container xs={12}>
