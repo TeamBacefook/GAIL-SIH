@@ -61,7 +61,7 @@ const Predictions = () => {
         getPredictionsFunction={getPredictions}
         parameter={true}
         getPredictionsFunction2={getPredictionsFn}
-        ticker={"CL=F"}
+        ticker={"NG=F"}
         time={"M"}
         withcsvfilter={["Ensemble Predictions"]}
         filter={["Ensemble Predictions", "Actual Price"]}

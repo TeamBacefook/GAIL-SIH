@@ -19,6 +19,7 @@ import LineChart from "../../charts/predchart";
 import Papa from "papaparse";
 import FileSaver from "file-saver";
 import { useCurrentPng } from "recharts-to-png";
+// import { getpredictionsFn } from "../../api/predictions";
 let yourDate = new Date();
 const convert = (date) => {
   let dt = new Date(date);
@@ -41,6 +42,7 @@ export default function ComboChart({
   filter,
   withcsvfilter,
 }) {
+  const [csvData, setCsvData] = useState([]);
   const [data, setData] = useState([]);
   const [warIntensity, setWarIntensity] = useState(1.1238);
   const [warData, setWarData] = useState({
@@ -76,37 +78,7 @@ export default function ComboChart({
         } else {
           toast.info(`Predicting ...`);
           parsedData.pop();
-          if (parameter) {
-            const pred = await getPredictionsFunction2({
-              csv: parsedData,
-              warIntensity: check.war ? warIntensity : undefined,
-              recessionIntensity: check.recession
-                ? recessionIntensity
-                : undefined,
-              warData: check.war
-                ? {
-                    start_date: convert(warData.start_date),
-                    end_date: convert(warData.end_date),
-                  }
-                : undefined,
-              recessionData: check.recession
-                ? {
-                    start_date: convert(recessionData.start_date),
-                    end_date: convert(recessionData.end_date),
-                  }
-                : undefined,
-              ticker: ticker,
-              time: time,
-            });
-            setData(pred.data);
-          } else {
-            const pred = await getPredictionsFunction({
-              csv: parsedData,
-              ticker: ticker,
-              time: time,
-            });
-            setData(pred.data);
-          }
+          setCsvData(parsedData);
         }
       };
       reader.readAsText(inputFile);
@@ -150,7 +122,7 @@ export default function ComboChart({
       if (check.war === true || check.recession === true) {
         const getData = async () => {
           const pred = await getPredictionsFunction2({
-            csv: [],
+            csv: csvData,
             warIntensity: check.war === true ? warIntensity : undefined,
             recessionIntensity:
               check.recession === true ? recessionIntensity : undefined,
@@ -174,7 +146,27 @@ export default function ComboChart({
           setData(pred.data);
         };
         getData();
+      } else {
+        const getData2 = async () => {
+          const pred = await getPredictionsFunction({
+            csv: csvData,
+            ticker: ticker,
+            time: time,
+          });
+          setData(pred.data);
+        };
+        getData2();
       }
+    } else {
+      const getData2 = async () => {
+        const pred = await getPredictionsFunction({
+          csv: csvData,
+          ticker: ticker,
+          time: time,
+        });
+        setData(pred.data);
+      };
+      getData2();
     }
   }, [
     check,
@@ -186,19 +178,12 @@ export default function ComboChart({
     getPredictionsFunction2,
     parameter,
     warData,
+    csvData,
+    setData,
+    getPredictionsFunction,
   ]);
 
-  useEffect(() => {
-    const getData2 = async () => {
-      const pred = await getPredictionsFunction({
-        csv: [],
-        ticker: ticker,
-        time: time,
-      });
-      setData(pred.data);
-    };
-    getData2();
-  }, [ticker, time, getPredictionsFunction]);
+  // useEffect(() => {}, [ticker, time, getPredictionsFunction]);
 
   const [getPng, { ref }] = useCurrentPng();
   const handleDownload = useCallback(async () => {
