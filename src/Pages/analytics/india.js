@@ -207,18 +207,22 @@ const Analytics = () => {
           sx={{ px: 4, py: 4 }}
           style={{ border: "1px solid A3A3A3" }}
         >
-          <IndiaMap
-            onChange={(state) => {
-              var x = petroleumstatedata.find(
-                (y) => y.State === state.toUpperCase()
-              );
-              setCoropleth((prev) => ({
-                ...prev,
-                state: state.toUpperCase(),
-                value: x.Value,
-              }));
-            }}
-          />
+          {petroleumstatedata.length !== 0 && (
+            <IndiaMap
+              onChange={(state) => {
+                console.log("Printing state", state);
+                var x = petroleumstatedata.find(
+                  (y) => y.State === state.toUpperCase()
+                );
+                setCoropleth((prev) => ({
+                  ...prev,
+                  state: state.toUpperCase(),
+                  value: x.Value,
+                }));
+              }}
+              petroleumdata={petroleumstatedata}
+            />
+          )}
         </Grid>
         <Grid container spacing={2} justifyContent="center" item xs={12} md={6}>
           <Grid container justifyContent="center" item xs={12}>

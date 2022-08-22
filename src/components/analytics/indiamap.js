@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useCallback, useMemo } from "react";
 import { ComposableMap, Geographies, Geography } from "react-simple-maps";
 import ReactTooltip from "react-tooltip";
+import * as d3 from "d3";
 
 const PROJECTION_CONFIG = {
   scale: 1125,
@@ -65,9 +66,19 @@ const getHeatMapData = () => {
   ];
 };
 
-function IndiaMap({ onChange }) {
+function IndiaMap({ onChange, petroleumdata }) {
   const [tooltipContent, setTooltipContent] = useState("");
   const [data] = useState(getHeatMapData());
+  const colorScale = d3.scaleSequentialSqrt(d3.interpolateYlOrRd);
+  const getVal = useCallback((feat) => {
+    return feat === undefined ? 0 : feat.Value;
+  }, []);
+
+  const maxVal = useMemo(
+    () => Math.max(...petroleumdata.map(getVal)),
+    [petroleumdata]
+  );
+  colorScale.domain([0, maxVal]);
 
   const onMouseEnter = (geo, current = { value: "NA" }) => {
     return () => {
@@ -91,14 +102,21 @@ function IndiaMap({ onChange }) {
         <Geographies geography="/india.topo.json">
           {({ geographies }) =>
             geographies.map((geo) => {
-              const current = data.find((s) => s.id === geo.id);
+              const current = data.find((s) => s.state === geo.properties.name);
+              const petroleumdatastate = petroleumdata.find(
+                (s) => s.State === geo.properties.name.toUpperCase()
+              );
               return (
                 <Geography
                   key={geo.rsmKey}
                   geography={geo}
                   stroke="#D4AF37"
                   strokeWidth="2"
-                  fill={DEFAULT_COLOR}
+                  fill={
+                    current
+                      ? colorScale(petroleumdatastate.Value)
+                      : DEFAULT_COLOR
+                  }
                   style={geographyStyle}
                   onMouseEnter={onMouseEnter(geo, current)}
                   onMouseLeave={onMouseLeave}

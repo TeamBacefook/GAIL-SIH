@@ -5,12 +5,6 @@
       "type": "GeometryCollection",
       "geometries": [
         {
-          "type": "Polygon",
-          "properties": { "name": null },
-          "id": "-99",
-          "arcs": [[0]]
-        },
-        {
           "type": "MultiPolygon",
           "id": "AN",
           "properties": { "name": "Andaman & Nicobar Island" },
