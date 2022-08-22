@@ -9,7 +9,7 @@ import json
 from gnews import GNews
 from tensorflow import keras as k
 import requests
-from modelfuncs import get_model_evals, get_models, blended_models, data_fetch, daily_pred
+from modelfuncs import daily_multi_models, get_model_evals, get_models, blended_models, data_fetch, daily_pred, weekly_multi_models, weekly_pred
 from yahoo_fin import stock_info as si
 
 app = Flask(__name__)
@@ -269,7 +269,13 @@ def predictions(ticker, period):
             return out.to_json(orient='table')
 
         elif period.lower() == "w":
-            return current_app.saved_data
+            if not len(data['csv']): preds = current_app.weekly_saved_data
+            else: 
+                dataframe = pd.DataFrame.from_records(data['csv']).set_index('date').close
+                dataframe = dataframe.astype(float)
+                dataframe.index = pd.DatetimeIndex(dataframe.index)
+                preds = daily_pred(current_app.model_daily, dataframe)
+            return preds.to_json(orient='table')
 
         elif period.lower() == "d":
             if not len(data['csv']): preds = current_app.daily_saved_data
@@ -291,6 +297,7 @@ def getEvals():
 if __name__ == "__main__":
     with app.app_context():
         current_app.daily_dataframe = data_fetch(period='D', attrs=['open', 'close', 'high', 'low'])
+        current_app.weekly_dataframe = data_fetch(period='W', attrs=['close'])
         current_app.dataframe = data_fetch()
         
         # NG Monthly Models
@@ -318,10 +325,9 @@ if __name__ == "__main__":
 
         # CL Daily Models
         current_app.cl_model_daily_v1 = get_models(
-            f'models/Crude Daily/Crude Oil v1.h5', 0.027) # close, ma180,60,30, stdmin, stdmax, gradient futures
-
+            f'models/Crude Daily/Crude Oil v1.h5', 0.012) # close, ma180,60,30, stdmin, stdmax, gradient futures
         current_app.cl_model_daily_v2 = get_models(
-            f'models/Crude Daily/Crude Oil v2.h5', 0.027) # close, ma180,60,30, stdmin, stdmax, gradient futures
+            f'models/Crude Daily/Crude Oil v2.h5', 0.021) # close, ma180,60,30, stdmin, stdmax, gradient futures
         
         current_app.ng_models_month = [
             ('ARIMA', None, [], -0.92),
@@ -332,12 +338,11 @@ if __name__ == "__main__":
         ]
 
         current_app.ng_models_week = [
-            ('LSTM - Derivate based v1', current_app.model_weekly_babbage_v1, ['close', '180ma', '60ma', '30ma', 'close_min', 'close_max', 'gradient'], 0.5),
-            # ('LSTM - Derivate based v2', current_app.model_babbage_weekly_v2, ['close', '180ma', '60ma', '30ma', 'close_min', 'close_max', 'gradient'], 0.5),
+            ('LSTM - Derivate based', current_app.model_weekly_babbage_v1, ['close', '180ma', '60ma', '30ma', 'close_min', 'close_max', 'gradient'], 1),
         ]
 
         current_app.ng_models_day = [
-            
+            ('LSTM - Price based', current_app.model_daily, ['open', 'close', 'high', 'low'], 1)
         ]
 
         current_app.cl_models_month = [
@@ -351,7 +356,8 @@ if __name__ == "__main__":
         current_app.saved_data = blended_models(current_app.dataframe, models=current_app.ng_models_month, end='12/2020')
         current_app.evals = get_model_evals(current_app.ng_models_month).to_json(orient='table')
 
-        current_app.daily_saved_data = daily_pred(current_app.model_daily, current_app.daily_dataframe)
+        current_app.daily_saved_data = daily_multi_models(current_app.daily_dataframe, end='2020-12-31', models=current_app.ng_models_day)
+        current_app.weekly_saved_data = weekly_multi_models(current_app.weekly_dataframe, models=current_app.ng_models_week)
 
-    app.run(host='0.0.0.0', port=5000)
-    # app.run(debug=True)
+    # app.run(host='0.0.0.0', port=5000)
+    app.run(debug=True)
