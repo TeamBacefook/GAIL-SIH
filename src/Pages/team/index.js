@@ -61,7 +61,7 @@ const Team = () => {
             style={{ display: "flex", justifyContent: "center" }}
           >
             <Card
-              image="https://images-ext-1.discordapp.net/external/aSI0NRyeyJLv6XeMLAQm4PuKwxu48r9D8t9LaTMTYxU/%3Fe%3D2147483647%26v%3Dbeta%26t%3DTdkc1-tVHlXsT2yXQhBsWuw5vr7HeQ-Xx8VKZ-nGAwc/https/media-exp1.licdn.com/dms/image/C4D03AQGPYtTgy_h5zg/profile-displayphoto-shrink_200_200/0/1655836786626"
+              image="https://cdn.discordapp.com/attachments/935444469426294855/1011159471403319296/IMG-20220821-WA0015.jpg"
               f_name="Mr. Ankur"
               l_name="Singh"
             />
@@ -88,7 +88,7 @@ const Team = () => {
             }}
           >
             <Card
-              image="https://media.discordapp.net/attachments/922487378290044928/1006428014877343835/unknown.png"
+              image="https://cdn.discordapp.com/attachments/935444469426294855/1011159543855730708/IMG-20220821-WA0016.jpg"
               f_name="Dhrumil"
               l_name="Vora"
             />
@@ -104,7 +104,7 @@ const Team = () => {
             }}
           >
             <Card
-              image="https://media.discordapp.net/attachments/922487378290044928/1006427905334710272/unknown.png?width=795&height=702"
+              image="https://cdn.discordapp.com/attachments/935444469426294855/1011200064489803807/unknown.png"
               f_name="Ehlaam"
               l_name="Hanwari"
             />
@@ -120,7 +120,7 @@ const Team = () => {
             }}
           >
             <Card
-              image="https://cdn.discordapp.com/attachments/922487378290044928/1006428269299630130/unknown.png"
+              image="https://cdn.discordapp.com/attachments/935444469426294855/1011159498402045973/IMG-20220821-WA0022.jpg"
               f_name="Om"
               l_name="Parab"
             />
@@ -136,7 +136,7 @@ const Team = () => {
             }}
           >
             <Card
-              image="https://media.discordapp.net/attachments/1005520464405340272/1006412135473090640/IMG_20220418_113403_Bokeh-02-02.jpeg?width=701&height=701"
+              image="https://cdn.discordapp.com/attachments/1005520464405340272/1010957853470760960/IMG_20220418_113403_Bokeh-02-02.jpeg"
               f_name="Sharvil"
               l_name="Dandekar"
             />
@@ -152,7 +152,7 @@ const Team = () => {
             }}
           >
             <Card
-              image="https://media.discordapp.net/attachments/724216775776141372/1001352798954340362/unknown-2.png"
+              image="https://cdn.discordapp.com/attachments/1005520464405340272/1011200868990865408/unknown.png"
               f_name="Taksha"
               l_name="Limbashia"
             />

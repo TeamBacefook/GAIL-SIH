@@ -210,7 +210,6 @@ const Analytics = () => {
           {petroleumstatedata.length !== 0 && (
             <IndiaMap
               onChange={(state) => {
-                console.log("Printing state", state);
                 var x = petroleumstatedata.find(
                   (y) => y.State === state.toUpperCase()
                 );

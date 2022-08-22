@@ -2,17 +2,14 @@ import {
   Box,
   Grid,
   Typography,
-  Divider,
   TextField,
-  Button,
   Autocomplete,
+  Divider,
 } from "@mui/material";
 import ComboChart from "../../components/prediction/combo";
 import BarCharts from "../../charts/barchart";
 import React, { useState, useEffect } from "react";
 import Helmet from "react-helmet";
-import Checkbox from "@mui/material/Checkbox";
-import IOSSlider from "../../components/common/slider";
 import withLayout from "../../layout";
 import {
   getPredictions,
@@ -22,26 +19,11 @@ import {
 import "./style.css";
 
 const Errors = [{ label: "RMSE" }, { label: "MAPE" }, { label: "AIC" }];
-let yourDate = new Date();
 
 const Predictions = () => {
   const [current, setCurrent] = useState();
   const [barData, setBarData] = useState([]);
-  const [warIntensity, setWarIntensity] = useState(1.1238);
-  const [warData, setWarData] = useState({
-    start_date: yourDate.toISOString().split("T")[0], // yyyy-mm-dd
-    end_date: "2025-10-01",
-  });
-  const [recessionIntensity, setRecessionIntensity] = useState(1.11664);
-  const [recessionData, setRecessionData] = useState({
-    end_date: "2025-10-01",
-    start_date: yourDate.toISOString().split("T")[0],
-  });
-  const [check, setCheck] = useState({ war: false, recession: false });
-  const [pandemicData, setpandemicData] = useState({
-    end_date: "2025-10-01",
-    start_date: yourDate.toISOString().split("T")[0],
-  });
+
   useEffect(() => {
     const getData2 = async () => {
       const data2 = await getModelEval();
@@ -73,342 +55,38 @@ const Predictions = () => {
         <meta name="description" content="Analytics page for PEGASUS" />
         <link rel="icon" href="/favicon.ico" />
       </Helmet>
+
       <ComboChart
         name="for 6 year"
         getPredictionsFunction={getPredictions}
-        warIntensity={check.war ? warIntensity : undefined}
-        recessionIntensity={check.recession ? recessionIntensity : undefined}
-        warData={warData}
-        recessionData={recessionData}
         parameter={true}
         getPredictionsFunction2={getPredictionsFn}
-        ticker={"NG=F"}
+        ticker={"CL=F"}
         time={"M"}
-        war={check.war}
-        rec={check.recession}
         withcsvfilter={["Ensemble Predictions"]}
         filter={["Ensemble Predictions", "Actual Price"]}
       />
-      <Grid item container xs={12}>
-        <Grid item sx={{ mb: 3 }} xs={12}>
-          <Typography color="#00116A" fontSize={40}>
-            {" "}
-            Global Parameters
-          </Typography>
-          <Divider />
-          <Grid
-            item
-            xs={12}
-            justifyContent="space-between"
-            alignItems="center"
-            container
-          >
-            <Grid item xs={2.5}>
-              <TextField
-                fullWidth
-                type="date"
-                variant="outlined"
-                label="Estimate Start"
-                value={warData.start_date}
-                onChange={(e) => {
-                  setWarData((prev) => {
-                    return { ...prev, start_date: e.target.value };
-                  });
-                }}
-              />
-            </Grid>
-            <Grid item xs={2.5}>
-              <TextField
-                fullWidth
-                type="date"
-                variant="outlined"
-                value={warData.end_date}
-                onChange={(e) => {
-                  setWarData((prev) => {
-                    return { ...prev, end_date: e.target.value };
-                  });
-                }}
-                label="Estimate End"
-              />
-            </Grid>
-            <Grid item xs={3} container justifyContent="center">
-              <Typography fontSize={20} sx={{ opacity: "0.5" }}>
-                Intensity
-              </Typography>
-              <IOSSlider
-                onChange={(e) => {
-                  let val = 0;
-                  switch (e.target.value) {
-                    case 1:
-                      val = 1.1238;
-                      break;
-                    case 2:
-                      val = 1.2476;
-                      break;
-                    case 3:
-                      val = 1.3714;
-                      break;
-                    case 4:
-                      val = 1.4952;
-                      break;
-                    case 5:
-                      val = 1.6192;
-                      break;
-                    default:
-                      val = 0;
-                      break;
-                  }
-                  setWarIntensity(val);
-                }}
-                track={false}
-                marks={[
-                  { label: "very low", value: 1 },
-                  { label: "low", value: 2 },
-                  { label: "moderate", value: 3 },
-                  { label: "high", value: 4 },
-                  { label: "very high", value: 5 },
-                ]}
-                min={1}
-                max={5}
-                step={1}
-              />
-            </Grid>
-            <Grid item xs={3}>
-              <Box sx={{ display: "flex" }}>
-                <Button
-                  variant="contained"
-                  sx={{
-                    background:
-                      "linear-gradient(180deg, #005CB9 0%, #270097 100%)",
-                    color: "white",
-                    borderRadius: "11px",
-                    textTransform: "none",
-                    width: "70%",
-                  }}
-                  onClick={(e) => {
-                    setCheck((prev) => {
-                      return { ...prev, war: !prev.war };
-                    });
-                  }}
-                >
-                  {check.war ? "Remove" : "Add"} War Sentiment
-                </Button>
-              </Box>
-            </Grid>
-          </Grid>
-          <Divider />
-          <Grid
-            item
-            xs={12}
-            justifyContent="space-between"
-            sx={{ pt: 1, pb: 2 }}
-            alignItems="center"
-            container
-          >
-            <Grid item xs={2.5}>
-              <TextField
-                type="date"
-                fullWidth
-                value={recessionData.start_date}
-                variant="outlined"
-                label="Estimate Start"
-                onChange={(e) => {
-                  setRecessionData((prev) => {
-                    return { ...prev, start_date: e.target.value };
-                  });
-                }}
-              />
-            </Grid>
-            <Grid item xs={2.5}>
-              <TextField
-                type="date"
-                fullWidth
-                variant="outlined"
-                label="Estimate End"
-                value={recessionData.end_date}
-                onChange={(e) => {
-                  setRecessionData((prev) => {
-                    return { ...prev, end_date: e.target.value };
-                  });
-                }}
-              />
-            </Grid>
-            <Grid item xs={3} container justifyContent="center">
-              <Typography fontSize={20} sx={{ opacity: "0.5" }}>
-                Intensity
-              </Typography>
-              <IOSSlider
-                onChange={(e) => {
-                  let val = 0;
-                  switch (e.target.value) {
-                    case 1:
-                      val = 1.11664;
-                      break;
-                    case 2:
-                      val = 1.3328;
-                      break;
-                    case 3:
-                      val = 1.4992;
-                      break;
-                    case 4:
-                      val = 1.6656;
-                      break;
-                    case 5:
-                      val = 1.8302;
-                      break;
-                    default:
-                      val = 0;
-                      break;
-                  }
-                  setRecessionIntensity(val);
-                }}
-                track={false}
-                marks={[
-                  { label: "very low", value: 1 },
-                  { label: "low", value: 2 },
-                  { label: "moderate", value: 3 },
-                  { label: "high", value: 4 },
-                  { label: "very high", value: 5 },
-                ]}
-                min={1}
-                max={5}
-                step={1}
-              />
-            </Grid>
-            <Grid item xs={3}>
-              <Box sx={{ display: "flex" }}>
-                <Button
-                  variant="contained"
-                  sx={{
-                    background:
-                      "linear-gradient(169.84deg, #FFE53B -30.77%, #FF2525 119.39%)",
-                    color: "white",
-                    borderRadius: "11px",
-                    textTransform: "none",
-                    width: "70%",
-                  }}
-                  onClick={(e) => {
-                    setCheck((prev) => {
-                      return {
-                        ...prev,
-                        recession: !prev.recession,
-                      };
-                    });
-                  }}
-                >
-                  {check.recession ? "Remove" : "Add"} Recession Sentiment
-                </Button>
-              </Box>
-            </Grid>
-          </Grid>
-          <Divider />
-          <Grid
-            item
-            xs={12}
-            justifyContent="space-between"
-            alignItems="center"
-            container
-          >
-            <Grid item xs={2.5}>
-              <TextField
-                fullWidth
-                type="date"
-                variant="outlined"
-                label="Estimate Start"
-                value={pandemicData.start_date}
-                onChange={(e) => {
-                  setpandemicData((prev) => {
-                    return { ...prev, start_date: e.target.value };
-                  });
-                }}
-              />
-            </Grid>
-            <Grid item xs={2.5}>
-              <TextField
-                fullWidth
-                type="date"
-                variant="outlined"
-                value={pandemicData.end_date}
-                onChange={(e) => {
-                  setpandemicData((prev) => {
-                    return { ...prev, end_date: e.target.value };
-                  });
-                }}
-                label="Estimate End"
-              />
-            </Grid>
-            <Grid item xs={3} container justifyContent="center">
-              <Typography fontSize={20} sx={{ opacity: "0.5" }}>
-                Intensity
-              </Typography>
-              <IOSSlider
-                // onChange={(e) => {
-                //   let val = 0;
-                //   switch (e.target.value) {
-                //     case 1:
-                //       val = 1.1238;
-                //       break;
-                //     case 2:
-                //       val = 1.2476;
-                //       break;
-                //     case 3:
-                //       val = 1.3714;
-                //       break;
-                //     case 4:
-                //       val = 1.4952;
-                //       break;
-                //     case 5:
-                //       val = 1.6192;
-                //       break;
-                //     default:
-                //       val = 0;
-                //       break;
-                //   }
-                //   setWarIntensity(val);
-                // }}
-                track={false}
-                marks={[
-                  { label: "very low", value: 1 },
-                  { label: "low", value: 2 },
-                  { label: "moderate", value: 3 },
-                  { label: "high", value: 4 },
-                  { label: "very high", value: 5 },
-                ]}
-                min={1}
-                max={5}
-                step={1}
-              />
-            </Grid>
-            <Grid item xs={3}>
-              <Box sx={{ display: "flex" }}>
-                <Button
-                  variant="contained"
-                  sx={{
-                    background:
-                      "linear-gradient(180deg, #005CB9 0%, #270097 100%)",
-                    color: "white",
-                    borderRadius: "11px",
-                    textTransform: "none",
-                    width: "70%",
-                  }}
-                >
-                  Add Pandemic Sentiment
-                </Button>
-              </Box>
-            </Grid>
-          </Grid>
-          <Divider />
-        </Grid>
-      </Grid>
+      <Divider style={{ marginTop: "1em", marginBottom: "2em" }} />
+      <ComboChart
+        name="Weekly"
+        getPredictionsFunction={getPredictions}
+        parameter={false}
+        ticker={"NG=F"}
+        time={"W"}
+        withcsvfilter={["Ensemble Predictions"]}
+        filter={["Ensemble Predictions", "Actual Price"]}
+      />
+      <Divider style={{ marginTop: "1em", marginBottom: "2em" }} />
       <ComboChart
         name="Daywise"
         getPredictionsFunction={getPredictions}
         parameter={false}
         ticker={"NG=F"}
         time={"D"}
-        filter={["Predicted Price"]}
+        withcsvfilter={["Ensemble Predictions"]}
+        filter={["Ensemble Predictions", "Actual Price"]}
       />
-
+      <Divider style={{ marginTop: "1em", marginBottom: "2em" }} />
       <Grid item sx={{ mt: 3, pr: 4 }} container xs={12}>
         <Grid item xs={12} md={6}>
           <Typography color="#00116A" fontSize={40}>
