@@ -419,9 +419,9 @@ const Home = () => {
     country: "India",
   });
   const [filtercommodityprice, setFiltercommodityprice] = useState({
-    commodityprice: "ng1:com",
-    type: "Tradingeconomics",
-    text: "Natural gas prices from Trading Economics",
+    commodityprice: "NG=F",
+    type: "yahoofinance",
+    text: "Natural gas prices from Yahoo Finance (NG=F)",
   });
   const globeElement = useRef();
   const [tabledata, settabledata] = useState(null);
