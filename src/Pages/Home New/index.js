@@ -427,91 +427,91 @@ const Home = () => {
   const globeElement = useRef();
   const [tabledata, settabledata] = useState(null);
   const [selectedCountryonGlobe, setSelectedCountryonGlobe] = useState(null);
-  const [timeseriesDs, settimeseriesDs] = useState();
+  // const [timeseriesDs, settimeseriesDs] = useState();
 
-  useEffect(() => {
-    const getData = async () => {
-      const data = await getStockData2(filtercommodityprice);
-      const dataSource = {
-        chart: {
-          exportenabled: 1,
-          multicanvas: false,
-          theme: "gammel",
-        },
-        caption: {
-          text: filtercommodityprice.text,
-        },
-        subcaption: {
-          text: "Stock prices based on available data",
-        },
-        yaxis: [
-          {
-            plot: {
-              value: {
-                open: "Open",
-                high: "High",
-                low: "Low",
-                close: "Close",
-              },
-              type: "candlestick",
-            },
-            format: {
-              prefix: "$",
-            },
-            title: "Stock Value",
-          },
-        ],
-      };
-      var schema = [
-        {
-          name: "Date",
-          type: "date",
-          format: "%d-%m-%Y",
-        },
-        {
-          name: "Low",
-          type: "number",
-        },
-        {
-          name: "Open",
-          type: "number",
-        },
-        {
-          name: "Close",
-          type: "number",
-        },
-        {
-          name: "High",
-          type: "number",
-        },
-      ];
-      const fusionTable = new FusionCharts.DataStore().createDataTable(
-        data,
-        schema
-      );
-      var timeseriesDsTemp = Object.assign(
-        {},
-        {
-          type: "timeseries",
-          renderAt: "container",
-          width: window.innerWidth / 1.2,
-          height: "600",
-          dataSource,
-        }
-      );
-      timeseriesDsTemp.dataSource.data = fusionTable;
-      settimeseriesDs(timeseriesDsTemp);
-    };
-    getData();
-  }, [filtercommodityprice]);
+  // useEffect(() => {
+  //   const getData = async () => {
+  //     const data = await getStockData2(filtercommodityprice);
+  //     const dataSource = {
+  //       chart: {
+  //         exportenabled: 1,
+  //         multicanvas: false,
+  //         theme: "gammel",
+  //       },
+  //       caption: {
+  //         text: filtercommodityprice.text,
+  //       },
+  //       subcaption: {
+  //         text: "Stock prices based on available data",
+  //       },
+  //       yaxis: [
+  //         {
+  //           plot: {
+  //             value: {
+  //               open: "Open",
+  //               high: "High",
+  //               low: "Low",
+  //               close: "Close",
+  //             },
+  //             type: "candlestick",
+  //           },
+  //           format: {
+  //             prefix: "$",
+  //           },
+  //           title: "Stock Value",
+  //         },
+  //       ],
+  //     };
+  //     var schema = [
+  //       {
+  //         name: "Date",
+  //         type: "date",
+  //         format: "%d-%m-%Y",
+  //       },
+  //       {
+  //         name: "Low",
+  //         type: "number",
+  //       },
+  //       {
+  //         name: "Open",
+  //         type: "number",
+  //       },
+  //       {
+  //         name: "Close",
+  //         type: "number",
+  //       },
+  //       {
+  //         name: "High",
+  //         type: "number",
+  //       },
+  //     ];
+  //     const fusionTable = new FusionCharts.DataStore().createDataTable(
+  //       data,
+  //       schema
+  //     );
+  //     var timeseriesDsTemp = Object.assign(
+  //       {},
+  //       {
+  //         type: "timeseries",
+  //         renderAt: "container",
+  //         width: window.innerWidth / 1.2,
+  //         height: "600",
+  //         dataSource,
+  //       }
+  //     );
+  //     timeseriesDsTemp.dataSource.data = fusionTable;
+  //     settimeseriesDs(timeseriesDsTemp);
+  //   };
+  //   getData();
+  // }, [filtercommodityprice]);
 
-  useEffect(() => {
-    const getData = async () => {
-      const data = await getNews("natural gas");
-      setNews(data);
-    };
-    getData();
-  }, []);
+  // useEffect(() => {
+  //   const getData = async () => {
+  //     const data = await getNews("natural gas");
+  //     setNews(data);
+  //   };
+  //   getData();
+  // }, []);
 
   useEffect(() => {
     var countrydata = data.features.find(
@@ -579,14 +579,8 @@ const Home = () => {
     const myTimeout1 = setTimeout(() => {
       setSelectedCountryonGlobe(countrydata);
     }, 1500);
-    const myTimeout2 = setTimeout(() => {
-      globeElement.current.controls().autoRotate = true;
-      globeElement.current.controls().autoRotateSpeed = -1;
-      setSelectedCountryonGlobe(null);
-    }, 5000);
     return () => {
       clearTimeout(myTimeout1);
-      clearTimeout(myTimeout2);
     };
   }, [filters]);
   return (
@@ -715,7 +709,6 @@ const Home = () => {
           </Grid>
         </Grid>
       </Grid>
-
       <Box sx={{ py: 8 }}>
         <Typography color="#00116A" fontSize="35px">
           Energy Prices
@@ -791,7 +784,7 @@ const Home = () => {
         })}
       </Marquee>
       <Divider style={{ marginTop: "3em" }} />
-      <Box sx={{ py: 8 }}>
+      {/* <Box sx={{ py: 8 }}>
         <Grid justifyContent="space-between" spacing={1} item container xs={12}>
           <Grid item xs={12} md={6}>
             <Typography color="#00116A" fontSize="35px">
@@ -838,7 +831,7 @@ const Home = () => {
           </Grid>
         </Grid>
         {timeseriesDs && <ReactFC {...timeseriesDs} />}
-      </Box>
+      </Box> */}
       <Divider style={{ marginTop: "3em" }} />
       {/* <Grid item xs={12} sx={{ mt: 2 }} container>
         <Typography color="#00116A" fontSize="35px">
@@ -922,7 +915,7 @@ const Home = () => {
         </Grid>
       </Grid> 
       <Divider />*/}
-      <Grid
+      {/* <Grid
         item
         xs={12}
         spacing={3}
@@ -947,7 +940,7 @@ const Home = () => {
             return <React.Fragment key={index}></React.Fragment>;
           }
         })}
-      </Grid>
+      </Grid> */}
     </Box>
   );
 };

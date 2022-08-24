@@ -7,7 +7,7 @@
         {
           "type": "MultiPolygon",
           "id": "AN",
-          "properties": { "name": "Andaman & Nicobar Island" },
+          "properties": { "name": "Andaman & Nicobar" },
           "arcs": [
             [[0]],
             [[1]],
