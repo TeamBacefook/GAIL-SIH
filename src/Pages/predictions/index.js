@@ -25,23 +25,28 @@ const Predictions = () => {
   const [barData, setBarData] = useState([]);
 
   const getData2 = async (data2) => {
-    var final = {};
+    if (data2.data.length !== 0) {
+      var final = {};
 
-    data2.data.map((item, index) => {
-      var arr = [];
-      for (var key in data2.data[index]) {
-        if (data2.data[index].hasOwnProperty(key)) {
-          var val = data2.data[index][key];
-          if (key !== "index") {
-            arr.push({ label: key, value: val });
+      data2.data.map((item, index) => {
+        var arr = [];
+        for (var key in data2.data[index]) {
+          if (data2.data[index].hasOwnProperty(key)) {
+            var val = data2.data[index][key];
+            if (key !== "index") {
+              arr.push({ label: key, value: val });
+            }
           }
         }
-      }
-      final[data2.data[index]["index"]] = arr;
-      return "ok";
-    });
-    setCurrent(data2.data[0]["index"]);
-    setBarData(final);
+        final[data2.data[index]["index"]] = arr;
+        return "ok";
+      });
+      setCurrent(data2.data[0]["index"]);
+      setBarData(final);
+    } else {
+      setBarData([]);
+      setCurrent("");
+    }
   };
   // useEffect(() => {
 

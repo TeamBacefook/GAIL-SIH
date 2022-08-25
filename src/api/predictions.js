@@ -4,9 +4,10 @@ const API = axios.create({ baseURL: `${baseurl}` });
 // const API1 = axios.create({
 //   baseURL: `https://takshalimbashia.pythonanywhere.com`,
 // });
-export const getpredictions = ({ csv, time, ticker }) =>
+export const getpredictions = ({ csv, time, ticker, start_date }) =>
   API.post(`/predictions/${ticker}/${time}`, {
     csv: csv,
+    start_date: csv.length !== 0 ? start_date : undefined,
   });
 
 export const getpredictionsFn = ({
@@ -17,6 +18,7 @@ export const getpredictionsFn = ({
   warData,
   time,
   ticker,
+  start_date,
 }) =>
   API.post(`/predictions/${ticker}/${time}`, {
     csv: csv,
@@ -24,6 +26,7 @@ export const getpredictionsFn = ({
     recessionData: recessionData,
     warIntensity: warIntensity,
     recessionIntensity: recessionIntensity,
+    start_date: csv.length !== 0 ? start_date : undefined,
   });
 export const getstockdata2 = ({ type, commodityprice }) =>
   API.get(`/getstockdata1?ticker=${commodityprice}&type=${type}`);

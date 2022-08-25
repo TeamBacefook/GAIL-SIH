@@ -170,6 +170,7 @@ export default function ComboChart({
             csv: csvData,
             ticker: ticker,
             time: time,
+            start_date: date,
           });
 
           if (time === "M") {
@@ -187,6 +188,7 @@ export default function ComboChart({
           csv: csvData,
           ticker: ticker,
           time: time,
+          start_date: date,
         });
 
         if (time === "M") {
@@ -211,6 +213,7 @@ export default function ComboChart({
     csvData,
     setData,
     getPredictionsFunction,
+    date,
   ]);
 
   // useEffect(() => {}, [ticker, time, getPredictionsFunction]);
@@ -302,7 +305,7 @@ export default function ComboChart({
           </Button>
         </Grid>
       </Grid>
-      {false && (
+      {parameter && (
         <Grid item container xs={12}>
           <Grid item sx={{ mb: 3 }} xs={12}>
             <Typography color="#00116A" fontSize={20}>
