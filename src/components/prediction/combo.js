@@ -41,6 +41,7 @@ export default function ComboChart({
   time,
   filter,
   withcsvfilter,
+  setBarData,
 }) {
   const [csvData, setCsvData] = useState([]);
   const [data, setData] = useState([]);
@@ -95,22 +96,28 @@ export default function ComboChart({
         const arr = [];
         for (var key in data[0]) {
           if (data[0].hasOwnProperty(key)) {
-            if (key !== "index" && key !== "Actual Price") {
+            if (
+              key !== "index" &&
+              key !== "Actual Price" &&
+              key !== "Ensemble Predictions"
+            ) {
               arr.push(key);
             }
           }
         }
+        console.log(arr);
         setAll(arr);
         setCommo(withcsvfilter);
       } else {
         const arr = [];
         for (var key2 in data[0]) {
           if (data[0].hasOwnProperty(key2)) {
-            if (key2 !== "index") {
+            if (key2 !== "index" && key2 !== "Ensemble Predictions") {
               arr.push(key2);
             }
           }
         }
+        console.log(arr);
         setAll(arr);
         setCommo(filter);
       }
@@ -121,7 +128,7 @@ export default function ComboChart({
     if (parameter) {
       if (check.war === true || check.recession === true) {
         const getData = async () => {
-          const pred = await getPredictionsFunction2({
+          const data = await getPredictionsFunction2({
             csv: csvData,
             warIntensity: check.war === true ? warIntensity : undefined,
             recessionIntensity:
@@ -143,28 +150,47 @@ export default function ComboChart({
             ticker: ticker,
             time: time,
           });
-          setData(pred.data);
+          // const pred1 = JSON.parse(data.predictions.data);
+          console.log(data);
+          if (time === "M") {
+            setBarData(data.evals);
+            setData(data.predictions.data);
+          } else {
+            setData(data.data);
+          }
         };
         getData();
       } else {
         const getData2 = async () => {
-          const pred = await getPredictionsFunction({
+          const data = await getPredictionsFunction({
             csv: csvData,
             ticker: ticker,
             time: time,
           });
-          setData(pred.data);
+          // const pred1 = JSON.parse(data.predictions);
+          if (time === "M") {
+            setBarData(data.evals);
+            setData(data.predictions.data);
+          } else {
+            setData(data.data);
+          }
         };
         getData2();
       }
     } else {
       const getData2 = async () => {
-        const pred = await getPredictionsFunction({
+        const data = await getPredictionsFunction({
           csv: csvData,
           ticker: ticker,
           time: time,
         });
-        setData(pred.data);
+
+        if (time === "M") {
+          setBarData(data.evals);
+          setData(data.predictions.data);
+        } else {
+          setData(data.data);
+        }
       };
       getData2();
     }
@@ -181,10 +207,11 @@ export default function ComboChart({
     csvData,
     setData,
     getPredictionsFunction,
+    setBarData,
   ]);
 
   // useEffect(() => {}, [ticker, time, getPredictionsFunction]);
-
+  console.log("data", data);
   const [getPng, { ref }] = useCurrentPng();
   const handleDownload = useCallback(async () => {
     const png = await getPng();
@@ -259,7 +286,7 @@ export default function ComboChart({
           </Button>
         </Grid>
       </Grid>
-      {parameter && (
+      {false && (
         <Grid item container xs={12}>
           <Grid item sx={{ mb: 3 }} xs={12}>
             <Typography color="#00116A" fontSize={20}>
@@ -622,6 +649,7 @@ export default function ComboChart({
               data={data}
               display={commo}
               refi={ref}
+              unit={"$"}
             />
           </Grid>
         </>

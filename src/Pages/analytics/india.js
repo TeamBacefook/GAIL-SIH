@@ -329,6 +329,7 @@ const Analytics = () => {
             g_width={window.innerWidth * 0.9}
             g_height={window.innerHeight * 0.9}
             data={petroleum}
+            unit={"MMSCMD"}
           />
         </Grid>
       </Grid>
@@ -480,7 +481,7 @@ const Analytics = () => {
             md={6}
             style={{ display: "flex", alignItems: "center", height: "40vh" }}
           >
-            <LineChart width="100%" height="100%" data={lineChart} />
+            <LineChart width="100%" height="100%" data={lineChart} unit={"$"} />
           </Grid>
         )}
       </Grid>
@@ -630,7 +631,12 @@ const Analytics = () => {
             md={6}
             style={{ display: "flex", alignItems: "center", height: "40vh" }}
           >
-            <LineChart width="100%" height="100%" data={priceChart} />
+            <LineChart
+              width="100%"
+              height="100%"
+              data={priceChart}
+              unit={"$"}
+            />
           </Grid>
         )}
       </Grid>

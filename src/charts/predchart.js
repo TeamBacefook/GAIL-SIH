@@ -22,7 +22,14 @@ const COLORS = [
   "#999999",
 ];
 
-export default function DataLineChart({ width, height, data, display, refi }) {
+export default function DataLineChart({
+  width,
+  height,
+  data,
+  display,
+  refi,
+  unit = "",
+}) {
   return (
     <>
       <ResponsiveContainer width="100%" height="100%">
@@ -41,7 +48,12 @@ export default function DataLineChart({ width, height, data, display, refi }) {
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="index" />
           <YAxis />
-          <Tooltip />
+          <Tooltip
+            formatter={(value) => {
+              console.log(value);
+              return unit + value;
+            }}
+          />
           <Legend />
           {Object.keys(data[0]).map((key, index) => {
             return (

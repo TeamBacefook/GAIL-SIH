@@ -180,6 +180,7 @@ const countries = [
   "Rwanda",
   "Togo",
 ];
+//UNIT = "TERAJOULES"
 const Analytics = () => {
   const [data, setData] = useState({
     start_year: 2000,
@@ -348,6 +349,7 @@ const Analytics = () => {
                 g_height={window.innerHeight * 0.5}
                 c_id={5}
                 orientation={0}
+                unit={data.parameter === "Natural gas" ? "TMT" : "Terajoules"}
               />
             </Grid>
           </Grid>
@@ -583,6 +585,7 @@ const Analytics = () => {
             }),
           ]}
           countries={[compare.country1, compare.country2]}
+          unit={compare.parameter === "Natural gas" ? "TMT" : "Terajoules"}
         />
       </Grid>
     </>
