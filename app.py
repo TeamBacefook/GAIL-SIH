@@ -276,11 +276,30 @@ def predictions(ticker, period):
                 actual = out['Actual Price']
                 out = out.drop('Actual Price', axis=1)
                 out[recession['start_date'] : recession['end_date']] = out[recession['start_date'] : recession['end_date']] * data['recessionIntensity']
-                out = pd.concat([actual, out], axis=1)
+                out = pd.concat([actual, out], axis=1).iloc[1:]
                 
-            evals = get_model_evals(out)
+            if 'pandemicData' in data.keys():
+                pandemic = data['pandemicData']
+                actual = out['Actual Price']
+                out = out.drop('Actual Price', axis=1)
+                out[pandemic['start_date'] : pandemic['end_date']] = out[pandemic['start_date'] : pandemic['end_date']] * data['pandemicIntensity']
+                out = pd.concat([actual, out], axis=1).iloc[1:]
+                
+            evals = get_model_evals(out.drop([ "Past Ensemble Predictions",
+                "Past LSTM - Derivative based Predictions",
+                "Past LSTM - Double derivative and MA based Predictions",
+                "Past LSTM - MA Based Predictions",
+                "Past Price"], axis=1))
             
-            return {'predictions': json.loads(out.to_json(orient='table')), 'evals': json.loads(evals.to_json(orient='table'))}
+            return {
+                'predictions': json.loads(out.to_json(orient='table')), 
+                'evals': json.loads(evals.to_json(orient='table')), 
+                'model_csv': json.loads(out.drop(
+                    ['Actual Price', 'Past Price', 'Past Ensemble Predictions', 
+                     'Past LSTM - Derivative based Predictions', 'Past LSTM - Double derivative and MA based Predictions', 
+                     'Past LSTM - MA Based Predictions'
+                     ], axis=1).iloc[-72:].to_json(orient='table'))
+                }
 
         elif period.lower() == "w":
             if not len(data['csv']): preds = current_app.weekly_saved_data
@@ -328,7 +347,7 @@ def predictions(ticker, period):
             
             evals = get_model_evals(out)
             
-            return {'predictions': json.loads(out.to_json(orient='table')), 'evals': json.loads(evals.to_json(orient='table'))}
+            return {'predictions': json.loads(out.to_json(orient='table')), 'evals': json.loads(evals.to_json(orient='table')), 'model_csv': json.loads(out.drop(['Actual Price', 'Past Price'], axis=1).to_json(orient='table'))}
     
 # @app.route('/modelEvals', methods=['GET'])
 # def getEvals():
@@ -381,11 +400,11 @@ if __name__ == "__main__":
         
         
         current_app.ng_models_month = [
-            ('ARIMA', None, [], -0.92),
-            ("XGBoost", current_app.model_xgb, ['close', '30ma', '60ma', '180ma', 'close_min', 'close_max', 'gradient'], 0.9),
-            ('LSTM - MA Based', current_app.model_boole, ['close', '30ma', '60ma', '180ma', 'close_min', 'close_max'], 0.04),
-            ('LSTM - Derivative based', current_app.model_babbage_1, ['close', '180ma', '60ma', '30ma', 'close_min', 'close_max', 'gradient'], -0.32),
-            ('LSTM - Double derivative and MA based', current_app.model_bell_1, ['close', '180ma', '60ma', '30ma', 'close_min', 'close_max', 'gradient', 'd_gradient'], 1.0),
+            # ('ARIMA', None, [], -0.92),
+            # ("XGBoost", current_app.model_xgb, ['close', '30ma', '60ma', '180ma', 'close_min', 'close_max', 'gradient'], 0.9),
+            ('LSTM - MA Based', current_app.model_boole, ['close', '30ma', '60ma', '180ma', 'close_min', 'close_max'], 0.22),
+            ('LSTM - Derivative based', current_app.model_babbage_1, ['close', '180ma', '60ma', '30ma', 'close_min', 'close_max', 'gradient'], 1),
+            ('LSTM - Double derivative and MA based', current_app.model_bell_1, ['close', '180ma', '60ma', '30ma', 'close_min', 'close_max', 'gradient', 'd_gradient'], -0.38),
         ]
 
         current_app.ng_models_week = [

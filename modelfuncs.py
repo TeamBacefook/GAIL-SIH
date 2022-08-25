@@ -125,35 +125,58 @@ def data_pred_lstm(
 def blended_models(dataset, start=None, end=None, models=[]):
   merged_out = None
   weighted_df = pd.DataFrame()
+  past_weighted_df = pd.DataFrame()
   if end is None: end = dataset.index[-1]
   if start is None: start = pd.date_range(start=dataset[:end].index[-24], freq='M', periods=1).strftime('%m/%Y')[0]
+  temp_date = pd.date_range(start = end, freq='M', periods=2)[1]
+  og = dataset['close'][temp_date:].rename("Actual Price")
+  og.index = pd.DatetimeIndex(og.index).strftime('%m/%Y')
+  rest = dataset['close'][:temp_date]
+  back_og = rest.iloc[-48:].rename("Past Price")
+  back_og.index = pd.DatetimeIndex(back_og.index).strftime('%m/%Y')
+  past_preds = pd.DataFrame()
+  
   for name, model, attrs, weight in models:
     pred=''
+    past_pred = ''
     if name == 'ARIMA':
-      pred = pd.DataFrame(ARIMA(dataset.close[:end], order=(10, 1, 8)).fit().forecast(steps=73))[1:]
+      pred = pd.DataFrame(ARIMA(dataset.close[:end], order=(10, 1, 8)).fit().forecast(steps=72))
+      past_pred = pd.DataFrame(ARIMA(dataset.close[:end], order=(10, 1, 8)).fit().predict(dynamic=False)[-48:])
     else: 
       pred = data_pred_lstm(dataset, start, end, attrs, model)
+      past_pred = data_pred_lstm(dataset, rest.index[-72], rest.index[-49], attrs, model)[:23]
+      past_pred = pd.concat([past_pred, data_pred_lstm(dataset, rest.index[-49], rest.index[-26], attrs, model)[:23]], axis=0)
     pred.columns = pd.Index([name + ' Predictions'])
     pred.index = pred.index.strftime('%m/%Y')
+    
+    past_pred.columns = pd.Index(['Past ' + name + ' Predictions'])
+    past_pred.index = past_pred.index.strftime('%m/%Y')
     if not type(merged_out) == pd.DataFrame:
       merged_out = pred
       weighted_df = pred * weight
     else:
       merged_out = pd.concat([merged_out, pred], axis=1)
       weighted_df = pd.concat([weighted_df, pred * weight], axis=1)
+      
+    if not type(past_preds) == pd.DataFrame:
+      past_preds = past_pred
+      past_weighted_df = past_pred * weight
+    else:
+      past_preds = pd.concat([past_preds, past_pred], axis=1)
+      past_weighted_df = pd.concat([past_weighted_df, past_pred * weight], axis=1)
+      
   merged_out['Ensemble Predictions'] = weighted_df.sum(axis=1)
-  print(merged_out[~merged_out.isnull()].index)
-  temp_date = pd.date_range(start = end, freq='M', periods=2)[1]
-  og = dataset['close'][temp_date:].rename("Actual Price")
-  og.index = pd.DatetimeIndex(og.index).strftime('%m/%Y')
-  merged_out = pd.concat([og, merged_out], axis=1)
+  past_preds['Past Ensemble Predictions'] = past_weighted_df.sum(axis=1)
+  merged_out = pd.concat([back_og, og, merged_out, past_preds], axis=1)
   return merged_out
 
 def get_model_evals(df):
   data = df.dropna()
   if len(data) == 0:
     return pd.DataFrame()
-  columns = [f'{" ".join(name.split()[:-1])}' for name in list(data.columns)[1:]]
+  columns = [f'{" ".join(name.split()[:-1])}' for name in set(data.columns)]
+  columns.remove('Actual')
+  
   evals = pd.DataFrame(columns=columns)
   for preds in columns:
     if preds == 'index':
