@@ -34,8 +34,8 @@ def data_fetch(df=None, period='M', ticker='NG=F', attrs=['close']):
   if not (type(df) == pd.DataFrame or type(df) == pd.Series):
     data = si.get_data(ticker)
     data = data[attrs]
-    data = data.resample('1D').mean()
   data = pd.DataFrame(data)
+  data = data.resample('1D').mean()
   data.interpolate(method='linear', axis = 0, inplace=True, limit_direction='forward')
   if period=='D':
     return data
@@ -119,7 +119,7 @@ def data_pred_lstm(
   scaled_df.index = data.index
   rolled_prediction = pd.DataFrame(roll(scaled_df, columns, model, start, end, fhw), index=pd.date_range(start=end, periods=73, freq='M')[1:], columns=['Close Prediction'])
   rescaled_df = pd.DataFrame(close_scaler.inverse_transform(rolled_prediction), index=pd.date_range(start=end, periods=73, freq='M')[1:], columns=['Close Prediction'])
-  return rescaled_df
+  return rescaled_df.round(3)
 
 
 def blended_models(dataset, start=None, end=None, models=[]):
@@ -148,24 +148,21 @@ def blended_models(dataset, start=None, end=None, models=[]):
   merged_out = pd.concat([og, merged_out], axis=1)
   return merged_out
 
-def get_model_evals(models):
-  data = data_fetch()[:'2020-12-31']
-  evals = pd.DataFrame(columns=np.array(models)[:, 0])
-  for name, model, attrs, _ in models:
-    if name == 'ARIMA':
-      model = ARIMA(data.close[:-72], order=(10, 1, 8)).fit()
-      pred = model.forecast(steps=72)
-      aic = model.aic
-    else:
-      pred = data_pred_lstm(data, data.index[-23-72], data.index[-72], attrs, model)
-      num_params = 24 * (6 if "Boole" in name else 7 if "Babbage" in name else 8)
-      aic = calculate_aic(72, data.close[-72:], pred, num_params + 1)
-    evals[name] = pd.DataFrame([
-      mean_squared_error(data.close[-72:], pred, squared=False),
-      mean_absolute_percentage_error(data.close[-72:], pred),
+def get_model_evals(df):
+  data = pd.DataFrame(df).dropna()
+  columns = [f'{" ".join(name.split()[:-1])}' for name in list(data.columns)[1:]]
+  evals = pd.DataFrame(columns=columns)
+  for preds in columns:
+    if preds == 'index':
+      continue
+    num_params = 24 * (6 if preds == "LSTM - MA Based" else 7 if (preds == "LSTM - Derivative based" or preds == "XGB") else 8)
+    aic = calculate_aic(len(data), data['Actual Price'], data[f'{preds} Predictions'], num_params)
+    evals[preds] = pd.DataFrame([
+      mean_squared_error(data['Actual Price'], data[f'{preds} Predictions'], squared=False),
+      mean_absolute_percentage_error(data['Actual Price'], data[f'{preds} Predictions']),
       aic,
-      ])
-  evals.index = pd.Index(['RMSE', 'MAPE', 'AIC'])
+    ])
+  evals.index=pd.Index(['RMSE', 'MAPE', 'AIC'])
   return evals
   
 def daily_pred(model, data):

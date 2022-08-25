@@ -241,7 +241,6 @@ def predictions(ticker, period):
     data = json.loads(request.data)
     if ticker == 'NG=F':
         if period.lower() == "m":
-            # data = json.loads(request.data)
             out = ''
             if not len(data['csv']): out = current_app.saved_data
             else: 
@@ -250,6 +249,7 @@ def predictions(ticker, period):
                 dataframe = dataframe.astype(float)
                 dataframe.index = pd.DatetimeIndex(dataframe.index)
                 dataframe = data_fetch(dataframe.close)
+                print(dataframe)
                 out = blended_models(dataframe, models=current_app.ng_models_month)
             
             if 'warData' in data.keys():
@@ -265,8 +265,10 @@ def predictions(ticker, period):
                 out = out.drop('Actual Price', axis=1)
                 out[recession['start_date'] : recession['end_date']] = out[recession['start_date'] : recession['end_date']] * data['recessionIntensity']
                 out = pd.concat([actual, out], axis=1)
+                
+            evals = get_model_evals(out)
             
-            return out.to_json(orient='table')
+            return {'predictions': json.loads(out.to_json(orient='table')), 'evals': json.loads(evals.to_json(orient='table'))}
 
         elif period.lower() == "w":
             if not len(data['csv']): preds = current_app.weekly_saved_data
@@ -287,11 +289,39 @@ def predictions(ticker, period):
             return preds.to_json(orient='table')
             
     elif ticker == 'CL=F':
-        return current_app.saved_data
+        if period.lower() == "m":
+            out = ''
+            if not len(data['csv']): out = current_app.cl_saved_data
+            else: 
+                dataframe = pd.DataFrame.from_records(data['csv'])
+                dataframe = dataframe.set_index('date')
+                dataframe = dataframe.astype(float)
+                dataframe.index = pd.DatetimeIndex(dataframe.index)
+                dataframe = data_fetch(dataframe.close)
+                out = blended_models(dataframe, models=current_app.cl_models_month)
+            
+            if 'warData' in data.keys():
+                war = data['warData']
+                actual = out['Actual Price']
+                out = out.drop('Actual Price', axis=1)
+                out[war['start_date'] : war['end_date']] = out[war['start_date'] : war['end_date']] * data['warIntensity']
+                out = pd.concat([actual, out], axis=1)
+
+            if 'recessionData' in data.keys():
+                recession = data['recessionData']
+                actual = out['Actual Price']
+                out = out.drop('Actual Price', axis=1)
+                out[recession['start_date'] : recession['end_date']] = out[recession['start_date'] : recession['end_date']] * data['recessionIntensity']
+                out = pd.concat([actual, out], axis=1)
+            
+            evals = get_model_evals(out)
+            
+            return {'predictions': json.loads(out.to_json(orient='table')), 'evals': json.loads(evals.to_json(orient='table'))}
     
-@app.route('/modelEvals', methods=['GET'])
-def getEvals():
-    return current_app.evals
+# @app.route('/modelEvals', methods=['GET'])
+# def getEvals():
+#     pass
+#     return current_app.evals
 
 
 if __name__ == "__main__":
@@ -300,17 +330,24 @@ if __name__ == "__main__":
         current_app.weekly_dataframe = data_fetch(period='W', attrs=['close'])
         current_app.dataframe = data_fetch()
         
+        current_app.cl_daily_dataframe = data_fetch(period='D', attrs=['open', 'close', 'high', 'low'], ticker="CL=F")
+        current_app.cl_weekly_dataframe = data_fetch(period='W', attrs=['close'], ticker="CL=F")
+        current_app.cl_dataframe = data_fetch(ticker="CL=F")
+        
+        
         # NG Monthly Models
         current_app.model_xgb = get_models(f'./models/NG Monthly/XGB-Babbage-4.36err-(1,168)ip-(1,24)op.ubj', 0) # futures
         current_app.model_boole = get_models(f'./models/NG Monthly/Model_V20_Boole.h5', 0.0012) # futures
         current_app.model_babbage_1 = get_models(f'./models/NG Monthly/Model[Babbage]_v3.h5', 0.0027) # futures
-        current_app.model_bell_1 = get_models(f'./models/NG Monthly/Model_V22_Bell.h5', 0.009) # yahoo futures
+        current_app.model_bell_1 = get_models(f'./models/NG Monthly/Model_V22_Bell.h5', 0.009) # yahoo futures+
         current_app.model_bell_2 = get_models(f'./models/NG Monthly/Model_V23_Bell.h5', 0.009) # te spot
+      
       
         # NG Weekly Models
         current_app.model_weekly_babbage_v1 = get_models(
             f'./models/NG Weekly/LSTM Weekly Babbage err = 0.78.h5', 0.027) # close, ma180,60,30, stdmin, stdmax, gradient spot 24 ip 24 op
         # current_app.model_babbage_weekly_v2 = get_models(f'./models/NG Weekly/Weekly_babbage.h5', 0.027) # close, ma180,60,30, stdmin, stdmax, gradient spot
+
 
         # NG Daily Models
         current_app.model_daily = get_models(
@@ -320,6 +357,7 @@ if __name__ == "__main__":
         # CL Monthly Models
         current_app.cl_model = get_models(f'./models/Crude Oil v3.h5', 0.027) # close, ma180,60,30, stdmin, stdmax, gradient future
 
+
         # CL Weekly Models
 
 
@@ -328,6 +366,7 @@ if __name__ == "__main__":
             f'models/Crude Daily/Crude Oil v1.h5', 0.012) # close, ma180,60,30, stdmin, stdmax, gradient futures
         current_app.cl_model_daily_v2 = get_models(
             f'models/Crude Daily/Crude Oil v2.h5', 0.021) # close, ma180,60,30, stdmin, stdmax, gradient futures
+        
         
         current_app.ng_models_month = [
             ('ARIMA', None, [], -0.92),
@@ -349,15 +388,24 @@ if __name__ == "__main__":
             ('LSTM - Derivate based', current_app.cl_model, ['close', '180ma', '60ma', '30ma', 'close_min', 'close_max', 'gradient'], 1)
         ]
 
-        current_app.cl_model_week = []
+        current_app.cl_model_week = [
+            
+        ]
 
-        current_app.cl_model_day = []
+        current_app.cl_model_day = [
+            ('LSTM - Derivate based v1', current_app.cl_model_daily_v1, ['close', '180ma', '60ma', '30ma', 'close_min', 'close_max', 'gradient'], 0.5),
+            ('LSTM - Derivate based v2', current_app.cl_model_daily_v2, ['close', '180ma', '60ma', '30ma', 'close_min', 'close_max', 'gradient'], 0.5)
+        ]
 
         current_app.saved_data = blended_models(current_app.dataframe, models=current_app.ng_models_month, end='12/2020')
-        current_app.evals = get_model_evals(current_app.ng_models_month).to_json(orient='table')
-
-        current_app.daily_saved_data = daily_multi_models(current_app.daily_dataframe, end='2020-12-31', models=current_app.ng_models_day)
+        current_app.daily_saved_data = daily_multi_models(current_app.daily_dataframe, end='2020-08-15', models=current_app.ng_models_day)
         current_app.weekly_saved_data = weekly_multi_models(current_app.weekly_dataframe, models=current_app.ng_models_week)
+        
+        current_app.cl_saved_data = blended_models(current_app.cl_dataframe, models=current_app.cl_models_month, end='12/2020')
+        # current_app.cl_daily_saved_data = daily_multi_models(current_app.daily_dataframe, end='2020-08-15', models=current_app.cl_model_day)
+        # current_app.weekly_saved_data = weekly_multi_models(current_app.weekly_dataframe, models=current_app.ng_models_week)
+        
+        # current_app.evals = get_model_evals(current_app.ng_models_month).to_json(orient='table')
 
     # app.run(host='0.0.0.0', port=5000)
     app.run(debug=True)
