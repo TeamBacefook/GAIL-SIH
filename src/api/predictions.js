@@ -19,6 +19,8 @@ export const getpredictionsFn = ({
   time,
   ticker,
   start_date,
+  pandemicIntensity,
+  pandemicData,
 }) =>
   API.post(`/predictions/${ticker}/${time}`, {
     csv: csv,
@@ -26,6 +28,8 @@ export const getpredictionsFn = ({
     recessionData: recessionData,
     warIntensity: warIntensity,
     recessionIntensity: recessionIntensity,
+    pandemicIntensity: pandemicIntensity,
+    pandemicData: pandemicData,
     start_date: csv.length !== 0 ? start_date : undefined,
   });
 export const getstockdata2 = ({ type, commodityprice }) =>

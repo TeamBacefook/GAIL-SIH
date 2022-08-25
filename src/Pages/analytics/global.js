@@ -40,7 +40,7 @@ const Analytics = () => {
   const [productiondata, setproductiondata] = useState(null); //parameter = 'Primary production'
   const [transformationdata, settransformationdata] = useState(null); //parameter = "Transformation"
   const [trends, setTrends] = useState([]);
-  const [parameter, setParameter] = useState("Primary production");
+  const [parameter, setParameter] = useState("all");
   const [collatedTrend, setCollatedTrend] = useState([]);
   const [energyYear, setEnergyYear] = useState(2008);
   const [filters, setFilters] = useState([2015, 2020]);

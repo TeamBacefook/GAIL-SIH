@@ -34,8 +34,7 @@
         var keys = Object.keys(array[0]);
 
         var result = "";
-        keys2 = keys.filter((item) => item !== "Ensemble Predictions");
-        keys3 = keys2.map((item) => {
+        keys3 = keys.map((item) => {
           if (item === "index") {
             return "Date";
           } else {
@@ -47,7 +46,7 @@
 
         array.forEach(function (item) {
           keys3.forEach(function (key) {
-            if (key !== "Ensemble Predictions") {
+            if (key !== "Past Price") {
               if (key === "Date") {
                 result += item["index"] + ",";
               } else {

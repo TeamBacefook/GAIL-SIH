@@ -26,6 +26,8 @@ export const getPredictionsFn = async ({
   ticker,
   time,
   start_date,
+  pandemicIntensity,
+  pandemicData,
 }) => {
   try {
     const { data } = await getpredictionsFn({
@@ -37,6 +39,8 @@ export const getPredictionsFn = async ({
       time,
       ticker,
       start_date,
+      pandemicIntensity,
+      pandemicData,
     });
     console.log(data);
     return data;

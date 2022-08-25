@@ -68,8 +68,18 @@ const Predictions = () => {
         getPredictionsFunction2={getPredictionsFn}
         ticker={"NG=F"}
         time={"M"}
-        withcsvfilter={["LSTM - MA Based Predictions"]}
-        filter={["LSTM - MA Based Predictions", "Actual Price"]}
+        withcsvfilter={[
+          "LSTM - MA Based Predictions",
+          "Ensemble Predictions",
+          "Actual Price",
+          "Past Price",
+        ]}
+        filter={[
+          "LSTM - MA Based Predictions",
+          "Actual Price",
+          "Past Price",
+          "Ensemble Predictions",
+        ]}
         setBarData={(data2) => getData2(data2)}
         unit={"$"}
       />

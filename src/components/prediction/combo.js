@@ -56,7 +56,12 @@ export default function ComboChart({
     end_date: "2025-10-01",
     start_date: yourDate.toISOString().split("T")[0],
   });
-  const [check, setCheck] = useState({ war: false, recession: false });
+  const [pandemicIntensity, setPandemicIntensity] = useState(1);
+  const [check, setCheck] = useState({
+    war: false,
+    recession: false,
+    pandemic: false,
+  });
   const [pandemicData, setpandemicData] = useState({
     end_date: "2025-10-01",
     start_date: yourDate.toISOString().split("T")[0],
@@ -94,18 +99,14 @@ export default function ComboChart({
 
   const [commo, setCommo] = useState([]);
   const [all, setAll] = useState([]);
-
+  const [modelcsv, setModelCsv] = useState([]);
   useEffect(() => {
     if (data[0] !== undefined) {
-      if (data[0]["Actual Price"] === null) {
+      if (time !== "M") {
         const arr = [];
         for (var key in data[0]) {
           if (data[0].hasOwnProperty(key)) {
-            if (
-              key !== "index" &&
-              key !== "Actual Price" &&
-              key !== "Ensemble Predictions"
-            ) {
+            if (key !== "index" && key !== "Actual Price") {
               arr.push(key);
             }
           }
@@ -117,7 +118,7 @@ export default function ComboChart({
         const arr = [];
         for (var key2 in data[0]) {
           if (data[0].hasOwnProperty(key2)) {
-            if (key2 !== "index" && key2 !== "Ensemble Predictions") {
+            if (key2 !== "index") {
               arr.push(key2);
             }
           }
@@ -136,6 +137,8 @@ export default function ComboChart({
           const data = await getPredictionsFunction2({
             csv: csvData,
             warIntensity: check.war === true ? warIntensity : undefined,
+            pandemicIntensity:
+              check.pandemic === true ? pandemicIntensity : undefined,
             recessionIntensity:
               check.recession === true ? recessionIntensity : undefined,
             warData:
@@ -143,6 +146,13 @@ export default function ComboChart({
                 ? {
                     start_date: convert(warData.start_date),
                     end_date: convert(warData.end_date),
+                  }
+                : undefined,
+            pandemicData:
+              check.pandemic === true
+                ? {
+                    start_date: convert(pandemicData.start_date),
+                    end_date: convert(pandemicData.end_date),
                   }
                 : undefined,
             recessionData:
@@ -159,6 +169,7 @@ export default function ComboChart({
           if (time === "M") {
             setBarData(data.evals);
             setData(data.predictions.data);
+            setModelCsv(data.model_csv.data);
           } else {
             setData(data.data);
           }
@@ -176,6 +187,7 @@ export default function ComboChart({
           if (time === "M") {
             setBarData(data.evals);
             setData(data.predictions.data);
+            setModelCsv(data.model_csv.data);
           } else {
             setData(data.data);
           }
@@ -194,6 +206,7 @@ export default function ComboChart({
         if (time === "M") {
           setBarData(data.evals);
           setData(data.predictions.data);
+          setModelCsv(data.model_csv.data);
         } else {
           setData(data.data);
         }
@@ -213,6 +226,8 @@ export default function ComboChart({
     csvData,
     setData,
     getPredictionsFunction,
+    pandemicIntensity,
+    pandemicData,
     date,
   ]);
 
@@ -298,7 +313,11 @@ export default function ComboChart({
             }}
             disabled={data.length !== 0 ? false : true}
             onClick={() => {
-              window.downloadCSV(data, commo, "Predictions");
+              if (time === "M") {
+                window.downloadCSV(modelcsv, commo, "Predictions");
+              } else {
+                window.downloadCSV(data, commo, "Predictions");
+              }
             }}
           >
             Download CSV
@@ -558,30 +577,30 @@ export default function ComboChart({
                   Intensity
                 </Typography>
                 <IOSSlider
-                  // onChange={(e) => {
-                  //   let val = 0;
-                  //   switch (e.target.value) {
-                  //     case 1:
-                  //       val = 1.1238;
-                  //       break;
-                  //     case 2:
-                  //       val = 1.2476;
-                  //       break;
-                  //     case 3:
-                  //       val = 1.3714;
-                  //       break;
-                  //     case 4:
-                  //       val = 1.4952;
-                  //       break;
-                  //     case 5:
-                  //       val = 1.6192;
-                  //       break;
-                  //     default:
-                  //       val = 0;
-                  //       break;
-                  //   }
-                  //   setWarIntensity(val);
-                  // }}
+                  onChange={(e) => {
+                    let val = 0;
+                    switch (e.target.value) {
+                      case 1:
+                        val = 1;
+                        break;
+                      case 2:
+                        val = 0.97;
+                        break;
+                      case 3:
+                        val = 0.94;
+                        break;
+                      case 4:
+                        val = 0.91;
+                        break;
+                      case 5:
+                        val = 0.85;
+                        break;
+                      default:
+                        val = 1;
+                        break;
+                    }
+                    setPandemicIntensity(val);
+                  }}
                   track={false}
                   marks={[
                     { label: "very low", value: 1 },
@@ -599,6 +618,12 @@ export default function ComboChart({
                 <Box sx={{ display: "flex" }}>
                   <Button
                     variant="contained"
+                    onClick={() => {
+                      setCheck((state) => ({
+                        ...state,
+                        pandemic: !state.pandemic,
+                      }));
+                    }}
                     sx={{
                       background:
                         "linear-gradient(180deg, #005CB9 0%, #270097 100%)",
@@ -608,7 +633,7 @@ export default function ComboChart({
                       width: "70%",
                     }}
                   >
-                    Add Pandemic Sentiment
+                    {check.pandemic ? "Remove" : "Add"} Pandemic Sentiment
                   </Button>
                 </Box>
               </Grid>
