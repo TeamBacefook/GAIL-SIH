@@ -35,13 +35,24 @@
 
         var result = "";
         keys2 = keys.filter((item) => item !== "Ensemble Predictions");
-        result += keys2.join(",");
+        keys3 = keys2.map((item) => {
+          if (item === "index") {
+            return "Date";
+          } else {
+            return item;
+          }
+        });
+        result += keys3.join(",");
         result += "\n";
 
         array.forEach(function (item) {
-          keys.forEach(function (key) {
+          keys3.forEach(function (key) {
             if (key !== "Ensemble Predictions") {
-              result += item[key] + ",";
+              if (key === "Date") {
+                result += item["index"] + ",";
+              } else {
+                result += item[key] + ",";
+              }
             }
           });
           result += "\n";

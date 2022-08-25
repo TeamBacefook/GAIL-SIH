@@ -302,7 +302,7 @@ export default function ComboChart({
           </Button>
         </Grid>
       </Grid>
-      {false && (
+      {parameter && (
         <Grid item container xs={12}>
           <Grid item sx={{ mb: 3 }} xs={12}>
             <Typography color="#00116A" fontSize={20}>
