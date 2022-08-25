@@ -6,10 +6,10 @@ import {
 } from "../api/predictions";
 import { toast } from "react-toastify";
 
-export const getPredictions = async ({ csv, time, ticker }) => {
+export const getPredictions = async ({ csv, time, ticker, start_date }) => {
   console.log(time);
   try {
-    const { data } = await getpredictions({ csv, time, ticker });
+    const { data } = await getpredictions({ csv, time, ticker, start_date });
     console.log(data);
     return data;
   } catch (error) {

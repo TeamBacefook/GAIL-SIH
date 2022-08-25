@@ -170,6 +170,7 @@ export default function ComboChart({
             csv: csvData,
             ticker: ticker,
             time: time,
+            start_date: date,
           });
 
           if (time === "M") {
@@ -187,6 +188,7 @@ export default function ComboChart({
           csv: csvData,
           ticker: ticker,
           time: time,
+          start_date: date,
         });
 
         if (time === "M") {
@@ -211,6 +213,7 @@ export default function ComboChart({
     csvData,
     setData,
     getPredictionsFunction,
+    date,
   ]);
 
   // useEffect(() => {}, [ticker, time, getPredictionsFunction]);
