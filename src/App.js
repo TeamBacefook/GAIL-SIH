@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Home from "./Pages/Home New";
+import Home from "./Pages/Home New copy";
 import About from "./Pages/About";
 import Global from "./Pages/analytics/global";
 import { createTheme, ThemeProvider } from "@mui/material";
