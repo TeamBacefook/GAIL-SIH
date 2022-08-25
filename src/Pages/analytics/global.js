@@ -155,6 +155,7 @@ const Analytics = () => {
                   height={window.innerHeight / 2}
                   data={newData}
                   COLOR={"#e41a1c"}
+                  unit={"Terajoules"}
                 />
                 <Typography sx={{ my: 1 }}>
                   {parameter === "Primary production"
@@ -412,6 +413,7 @@ const Analytics = () => {
             g_width={window.innerWidth * 0.9}
             g_height={window.innerHeight * 0.3}
             c_id={3}
+            unit={"Terajoules"}
           />
         </Grid>
         <Grid item sx={12} md={12}>
@@ -424,6 +426,7 @@ const Analytics = () => {
             g_width={window.innerWidth * 0.9}
             g_height={window.innerHeight * 0.3}
             c_id={2}
+            unit={"Terajoules"}
           />
         </Grid>
         <Grid item sx={12} md={12}>
@@ -436,6 +439,7 @@ const Analytics = () => {
             g_height={window.innerHeight * 0.3}
             orientation={0}
             c_id={1}
+            unit={"Terajoules"}
           />
         </Grid>
       </Grid>

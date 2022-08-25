@@ -24,29 +24,29 @@ const Predictions = () => {
   const [current, setCurrent] = useState();
   const [barData, setBarData] = useState([]);
 
-  useEffect(() => {
-    const getData2 = async () => {
-      const data2 = await getModelEval();
-      var final = {};
+  const getData2 = async (data2) => {
+    var final = {};
 
-      data2.data.map((item, index) => {
-        var arr = [];
-        for (var key in data2.data[index]) {
-          if (data2.data[index].hasOwnProperty(key)) {
-            var val = data2.data[index][key];
-            if (key !== "index") {
-              arr.push({ label: key, value: val });
-            }
+    data2.data.map((item, index) => {
+      var arr = [];
+      for (var key in data2.data[index]) {
+        if (data2.data[index].hasOwnProperty(key)) {
+          var val = data2.data[index][key];
+          if (key !== "index") {
+            arr.push({ label: key, value: val });
           }
         }
-        final[data2.data[index]["index"]] = arr;
-        return "ok";
-      });
-      setCurrent(data2.data[0]["index"]);
-      setBarData(final);
-    };
-    getData2();
-  }, []);
+      }
+      final[data2.data[index]["index"]] = arr;
+      return "ok";
+    });
+    setCurrent(data2.data[0]["index"]);
+    setBarData(final);
+  };
+  // useEffect(() => {
+
+  //   getData2();
+  // }, []);
 
   return (
     <Box sx={{ my: 12, px: { xs: 1, md: 4 } }}>
@@ -63,8 +63,10 @@ const Predictions = () => {
         getPredictionsFunction2={getPredictionsFn}
         ticker={"NG=F"}
         time={"M"}
-        withcsvfilter={["Ensemble Predictions"]}
-        filter={["Ensemble Predictions", "Actual Price"]}
+        withcsvfilter={["LSTM - MA Based Predictions"]}
+        filter={["LSTM - MA Based Predictions", "Actual Price"]}
+        setBarData={(data2) => getData2(data2)}
+        unit={"$"}
       />
       <Divider style={{ marginTop: "1em", marginBottom: "2em" }} />
       <ComboChart
@@ -73,8 +75,9 @@ const Predictions = () => {
         parameter={false}
         ticker={"NG=F"}
         time={"W"}
-        withcsvfilter={["Ensemble Predictions"]}
-        filter={["Ensemble Predictions", "Actual Price"]}
+        withcsvfilter={["LSTM - Derivate based Predictions"]}
+        filter={["LSTM - Derivate based Predictions", "Actual Price"]}
+        unit={"$"}
       />
       <Divider style={{ marginTop: "1em", marginBottom: "2em" }} />
       <ComboChart
@@ -83,8 +86,9 @@ const Predictions = () => {
         parameter={false}
         ticker={"NG=F"}
         time={"D"}
-        withcsvfilter={["Ensemble Predictions"]}
-        filter={["Ensemble Predictions", "Actual Price"]}
+        withcsvfilter={["LSTM - Price based Predictions"]}
+        filter={["LSTM - Price based Predictions", "Actual Price"]}
+        unit={"$"}
       />
       <Divider style={{ marginTop: "1em", marginBottom: "2em" }} />
       <Grid item sx={{ mt: 3, pr: 4 }} container xs={12}>
@@ -129,6 +133,7 @@ const Predictions = () => {
                   g_width={window.innerWidth * 0.97}
                   g_height={window.innerHeight * 0.3}
                   c_id={2}
+                  unit={""}
                 />
               </>
             )}

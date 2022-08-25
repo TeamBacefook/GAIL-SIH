@@ -9,7 +9,7 @@ import {
   Legend,
 } from "recharts";
 
-export default function DataLineChart({ width, height, data, COLOR }) {
+export default function DataLineChart({ width, height, data, COLOR, unit }) {
   return (
     <LineChart
       width={width}
@@ -29,7 +29,12 @@ export default function DataLineChart({ width, height, data, COLOR }) {
           return `${tick / 1000000}M`;
         }}
       />
-      <Tooltip />
+      <Tooltip
+        formatter={(value) => {
+          console.log(value);
+          return value + " " + unit;
+        }}
+      />
       <Legend />
       <Line
         type="monotone"

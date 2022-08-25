@@ -43,7 +43,7 @@ const renderActiveShape = (props) => {
         fill={fill}
         width={65}
       >
-        {payload.value}
+        {payload.value + " MMSCMD"}
       </text>
       <Sector
         cx={cx}
@@ -67,7 +67,7 @@ const renderActiveShape = (props) => {
   );
 };
 
-export default function Donut({ g_width, g_height, data }) {
+export default function Donut({ g_width, g_height, data, unit = "" }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const onPieEnter = useCallback(
     (_, index) => {

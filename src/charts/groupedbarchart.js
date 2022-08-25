@@ -11,7 +11,7 @@ import {
 
 const color = ["#ff6600", "#ff2200", "#a34100", "#853500"];
 
-export default function Grouped({ data, countries }) {
+export default function Grouped({ data, countries, unit = "" }) {
   return (
     <BarChart
       width={window.innerWidth * 0.9}
@@ -27,7 +27,12 @@ export default function Grouped({ data, countries }) {
       <CartesianGrid strokeDasharray="4 4" />
       <XAxis dataKey="name" />
       <YAxis />
-      <Tooltip />
+      <Tooltip
+        formatter={(value) => {
+          console.log(value);
+          return value + " " + unit;
+        }}
+      />
       <Legend />
       {countries.map((value, index) => {
         return (

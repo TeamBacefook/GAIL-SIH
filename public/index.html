@@ -34,13 +34,13 @@
         var keys = Object.keys(array[0]);
 
         var result = "";
-        var f1 = ["index", ...filter];
-        result += f1.join(",");
+        keys2 = keys.filter((item) => item !== "Ensemble Predictions");
+        result += keys2.join(",");
         result += "\n";
 
         array.forEach(function (item) {
           keys.forEach(function (key) {
-            if (f1.includes(key)) {
+            if (key !== "Ensemble Predictions") {
               result += item[key] + ",";
             }
           });

@@ -704,6 +704,7 @@ const Home = () => {
                 width={window.innerWidth / 2}
                 height={window.innerHeight * 0.7}
                 data={tabledata}
+                unit={"$"}
               />
             )}
           </Grid>

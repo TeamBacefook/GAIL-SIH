@@ -155,14 +155,14 @@ const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
     return (
       <p>
-        {payload[0].payload.sub_region} : {payload[0].value}
+        {payload[0].payload.sub_region} : {payload[0].value} Terajoules
       </p>
     );
   }
   return null;
 };
 
-export default function App({ data, g_width, g_height, comm }) {
+export default function App({ data, g_width, g_height, comm, unit }) {
   let myScale = d3.scaleLinear();
   const getVal = (feat) => feat.size;
   const maxVal = useMemo(() => Math.max(...data?.map(getVal)), [data]);
@@ -181,7 +181,13 @@ export default function App({ data, g_width, g_height, comm }) {
         <CustomizedContent colors={COLORS.natural_gas} fontSize={myScale} />
       }
     >
-      <Tooltip content={<CustomTooltip />} />
+      <Tooltip
+        content={<CustomTooltip />}
+        formatter={(value) => {
+          console.log(value);
+          return value + " " + unit ? unit : "";
+        }}
+      />
     </Treemap>
   );
 }

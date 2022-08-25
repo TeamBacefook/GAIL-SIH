@@ -8,30 +8,30 @@ import logo from "../../images/logo.svg";
 import Hamburger from "hamburger-react";
 import { Nav, Link as Link2 } from "./nav-overlay";
 const links = [
-  {
-    name: "Dashboard",
-    href: "/",
-  },
+  // {
+  //   name: "Dashboard",
+  //   href: "/",
+  // },
   {
     name: "Predictions",
-    href: "/predictions",
+    href: "/",
   },
   {
     name: "Analytics",
     href: "/analytics/global",
   },
-  {
-    name: "News",
-    href: "/news",
-  },
+  // {
+  //   name: "News",
+  //   href: "/news",
+  // },
   {
     name: "Rationale",
     href: "/about",
   },
-  {
-    name: "Team",
-    href: "/team",
-  },
+  // {
+  //   name: "Team",
+  //   href: "/team",
+  // },
 ];
 
 const isActiveLink = (href, currentPathname) => {

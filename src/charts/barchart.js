@@ -9,6 +9,7 @@ const BarCharts = ({
   g_height,
   c_id,
   orientation = 90,
+  unit = "",
 }) => {
   return (
     <>
@@ -48,7 +49,12 @@ const BarCharts = ({
             <stop offset="1" stopColor={bg1} />
           </linearGradient>
         </defs>
-        <Tooltip />
+        <Tooltip
+          formatter={(value) => {
+            console.log(value);
+            return value + " " + unit;
+          }}
+        />
         <Bar dataKey="value" fill={`url(#${c_id})`} label="label"></Bar>
       </BarChart>
     </>

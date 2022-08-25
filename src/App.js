@@ -36,11 +36,11 @@ function App() {
       <ThemeProvider theme={theme}>
         <Router>
           <Routes>
-            <Route exact path="/" element={<Home />} />
+            {/* <Route exact path="/" element={<Home />} /> */}
             <Route exact path="/about" element={<About />} />
             <Route exact path="/analytics/global" element={<Global />} />
             <Route exact path="/analytics/india" element={<India />} />
-            <Route exact path="/predictions" element={<Predictions />} />
+            <Route exact path="/" element={<Predictions />} />
             <Route
               exact
               path="/analytics/continental"
