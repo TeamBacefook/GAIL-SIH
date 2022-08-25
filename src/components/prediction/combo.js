@@ -44,6 +44,7 @@ export default function ComboChart({
   setBarData,
 }) {
   const [csvData, setCsvData] = useState([]);
+  const [date, setDate] = useState(yourDate.toISOString().split("T")[0]);
   const [data, setData] = useState([]);
   const [warIntensity, setWarIntensity] = useState(1.1238);
   const [warData, setWarData] = useState({
@@ -74,7 +75,11 @@ export default function ComboChart({
         const parsedData = csv?.data;
         var columns = Object.keys(parsedData[0]);
         columns = columns.map((item) => item.toLocaleLowerCase());
-        if (!columns.includes("date") || !columns.includes("close")) {
+        if (
+          !columns.includes("date") ||
+          !columns.includes("close") ||
+          parsedData.length < 24
+        ) {
           toast.error("Please input correct csv file");
         } else {
           toast.info(`Predicting ...`);
@@ -149,9 +154,8 @@ export default function ComboChart({
                 : undefined,
             ticker: ticker,
             time: time,
+            start_date: date,
           });
-          // const pred1 = JSON.parse(data.predictions.data);
-          console.log(data);
           if (time === "M") {
             setBarData(data.evals);
             setData(data.predictions.data);
@@ -167,7 +171,7 @@ export default function ComboChart({
             ticker: ticker,
             time: time,
           });
-          // const pred1 = JSON.parse(data.predictions);
+
           if (time === "M") {
             setBarData(data.evals);
             setData(data.predictions.data);
@@ -207,7 +211,6 @@ export default function ComboChart({
     csvData,
     setData,
     getPredictionsFunction,
-    setBarData,
   ]);
 
   // useEffect(() => {}, [ticker, time, getPredictionsFunction]);
@@ -249,7 +252,20 @@ export default function ComboChart({
             <span class="button">Upload CSV File</span>
           </div>
         </Grid>
-
+        {time === "M" && (
+          <Grid xs={2}>
+            <TextField
+              type="date"
+              fullWidth
+              variant="outlined"
+              label="Predict From"
+              value={date}
+              onChange={(e) => {
+                setDate(e.target.value);
+              }}
+            />
+          </Grid>
+        )}
         <Grid item xs={2}>
           <Button
             variant="contained"
