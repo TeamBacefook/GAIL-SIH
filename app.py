@@ -239,18 +239,30 @@ def getlocalpetroleumdata12():
 @app.route('/predictions/<ticker>/<period>', methods=['POST'])
 def predictions(ticker, period):
     data = json.loads(request.data)
+    pred_start = ''
+    if 'start_date' in data.keys():
+        pred_start = data['start_date']
     if ticker == 'NG=F':
         if period.lower() == "m":
             out = ''
-            if not len(data['csv']): out = current_app.saved_data
+            if not len(data['csv']):
+                if pred_start == '': 
+                    out = current_app.saved_data
+                else:
+                    out = blended_models(current_app.dataframe, models=current_app.ng_models_month, end=pred_start)
             else: 
                 dataframe = pd.DataFrame.from_records(data['csv'])
                 dataframe = dataframe.set_index('date')
                 dataframe = dataframe.astype(float)
                 dataframe.index = pd.DatetimeIndex(dataframe.index)
                 dataframe = data_fetch(dataframe.close)
-                print(dataframe)
-                out = blended_models(dataframe, models=current_app.ng_models_month)
+                if not pred_start == '':
+                    out = blended_models(dataframe, models=current_app.ng_models_month, end=pred_start)
+                    drop = pd.date_range(start=pred_start, freq='M', periods=1)[0].strftime('%m/%Y')
+                    if drop in out.index:
+                        out = out.drop(drop)
+                else:
+                    out = blended_models(dataframe, models=current_app.ng_models_month)
             
             if 'warData' in data.keys():
                 war = data['warData']

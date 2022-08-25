@@ -125,12 +125,12 @@ def data_pred_lstm(
 def blended_models(dataset, start=None, end=None, models=[]):
   merged_out = None
   weighted_df = pd.DataFrame()
-  if not end: end = dataset.index[-1]
-  if not start: start = dataset[:end].index[-24]
+  if end is None: end = dataset.index[-1]
+  if start is None: start = pd.date_range(start=dataset[:end].index[-24], freq='M', periods=1).strftime('%m/%Y')[0]
   for name, model, attrs, weight in models:
     pred=''
     if name == 'ARIMA':
-      pred = pd.DataFrame(ARIMA(dataset.close[:end], order=(10, 1, 8)).fit().forecast(steps=72))
+      pred = pd.DataFrame(ARIMA(dataset.close[:end], order=(10, 1, 8)).fit().forecast(steps=73))[1:]
     else: 
       pred = data_pred_lstm(dataset, start, end, attrs, model)
     pred.columns = pd.Index([name + ' Predictions'])
@@ -142,6 +142,7 @@ def blended_models(dataset, start=None, end=None, models=[]):
       merged_out = pd.concat([merged_out, pred], axis=1)
       weighted_df = pd.concat([weighted_df, pred * weight], axis=1)
   merged_out['Ensemble Predictions'] = weighted_df.sum(axis=1)
+  print(merged_out[~merged_out.isnull()].index)
   temp_date = pd.date_range(start = end, freq='M', periods=2)[1]
   og = dataset['close'][temp_date:].rename("Actual Price")
   og.index = pd.DatetimeIndex(og.index).strftime('%m/%Y')
@@ -149,7 +150,9 @@ def blended_models(dataset, start=None, end=None, models=[]):
   return merged_out
 
 def get_model_evals(df):
-  data = pd.DataFrame(df).dropna()
+  data = df.dropna()
+  if len(data) == 0:
+    return pd.DataFrame()
   columns = [f'{" ".join(name.split()[:-1])}' for name in list(data.columns)[1:]]
   evals = pd.DataFrame(columns=columns)
   for preds in columns:
