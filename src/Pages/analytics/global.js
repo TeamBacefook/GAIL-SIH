@@ -5,12 +5,14 @@ import BarCharts from "../../charts/barchart";
 import IOSSlider from "../../components/common/slider";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
+import CollatedLineChart from "../../charts/collated trend chart";
 import LineChart from "../../charts/globalChart";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import axios from "axios";
 import { baseurl } from "../../api/url";
 import Select from "@mui/material/Select";
+
 import Chip from "@mui/material/Chip";
 import { getcontinentaldata } from "../../api/analytics.continental";
 import { getGlobalTrends } from "../../actions/analystics.global";
@@ -39,7 +41,7 @@ const Analytics = () => {
   const [transformationdata, settransformationdata] = useState(null); //parameter = "Transformation"
   const [trends, setTrends] = useState([]);
   const [parameter, setParameter] = useState("Primary production");
-
+  const [collatedTrend, setCollatedTrend] = useState([]);
   const [energyYear, setEnergyYear] = useState(2008);
   const [filters, setFilters] = useState([2015, 2020]);
   const [tree, setTree] = useState([]);
@@ -108,6 +110,43 @@ const Analytics = () => {
     settransformationdata,
     setproductiondata,
   ]);
+
+  useEffect(() => {
+    // setCollatedTrend(data);
+    let filters = [
+      "Biofuels and waste",
+      "Coal",
+      "Electricity and heat",
+      "Natural Gas",
+      "Oil",
+    ];
+    if (trends.length > 0) {
+      let collated = filters.map((obj) => {
+        let x = trends.filter((item) => item.commodity === obj);
+        let consumption = x?.find((item) => item.Type === "Final consumption");
+        let production = x?.find((item) => item.Type === "Primary production");
+        let transformation = x?.find((item) => item.Type === "Transformation");
+
+        let consumptionData = JSON.parse(consumption?.data);
+        let productionData = JSON.parse(production?.data);
+        let transformationData = JSON.parse(transformation?.data);
+
+        console.log(consumption);
+        let y = consumptionData?.map((item, index) => {
+          return {
+            year: item.Year,
+            Consumption: item.value,
+            Production: productionData[index].value,
+            Transformation: transformationData[index].value,
+          };
+        });
+
+        return { commodity: obj, data: y };
+      });
+      setCollatedTrend(collated);
+    }
+  }, [trends, setCollatedTrend]);
+  console.log(collatedTrend);
   return (
     <Box sx={{ px: { xs: 1, md: 8 } }}>
       {" "}
@@ -141,16 +180,21 @@ const Analytics = () => {
             <MenuItem value="Primary production">Production</MenuItem>
             <MenuItem value="Final consumption">Consumption</MenuItem>
             <MenuItem value="Transformation">Transformation</MenuItem>
+            <MenuItem value="all">All</MenuItem>
           </TextField>
         </Grid>
-        {[...trends?.filter((item) => item.Type === parameter)]?.map(
-          (obj, index) => {
+        {parameter !== "all" &&
+          [
+            ...trends?.filter((item) => {
+              return item.Type === parameter;
+            }),
+          ]?.map((obj, index) => {
             const newData = JSON.parse(obj.data);
-
             return (
               <Grid item key={index} xs={12} md={5.8} sx={{ m: 1 }}>
                 <Typography sx={{ my: 1 }}>{obj.commodity}</Typography>
                 <LineChart
+                  option={parameter}
                   width={window.innerWidth / 2.6}
                   height={window.innerHeight / 2}
                   data={newData}
@@ -165,7 +209,13 @@ const Analytics = () => {
                     : "Transformation"}
                   :
                 </Typography>
-                <Grid item container xs={12} alignItems="center">
+                <Grid
+                  item
+                  display={parameter === "all" && "none"}
+                  container
+                  xs={12}
+                  alignItems="center"
+                >
                   <Grid
                     item
                     sx={{
@@ -225,8 +275,23 @@ const Analytics = () => {
                 </Grid>
               </Grid>
             );
-          }
-        )}
+          })}
+
+        {parameter === "all" &&
+          collatedTrend.map((obj, index) => {
+            return (
+              <Grid item key={index} xs={12} md={5.8} sx={{ m: 1 }}>
+                <Typography sx={{ my: 1 }}>{obj.commodity}</Typography>
+                <CollatedLineChart
+                  width={window.innerWidth / 2.6}
+                  height={window.innerHeight / 2}
+                  data={obj.data}
+                  display={["year"]}
+                  unit={"Terajoules"}
+                />
+              </Grid>
+            );
+          })}
       </Grid>
       <Divider />
       <Grid item xs={12} sx={{ p: "2%" }}>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   LineChart,
   Line,
@@ -36,6 +36,7 @@ export default function DataLineChart({ width, height, data, COLOR, unit }) {
         }}
       />
       <Legend />
+      {}
       <Line
         type="monotone"
         dataKey={"value"}

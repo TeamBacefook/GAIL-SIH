@@ -1,0 +1,9 @@
+{
+  "children": [
+    { "name": "mister_d", "value": 55 },
+    { "name": "mister_a", "value": 28 },
+    { "name": "mister_b", "value": 19 },
+    { "name": "mister_c", "value": 18 }
+  ],
+  "colname": "level2"
+}
