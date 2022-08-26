@@ -1,5 +1,10 @@
-import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import React, { useEffect } from "react";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  useLocation,
+} from "react-router-dom";
 import Home from "./Pages/Home New copy";
 import About from "./Pages/About";
 import Global from "./Pages/analytics/global";
@@ -13,6 +18,15 @@ import News from "./Pages/news";
 import Team from "./Pages/team";
 
 import "./App.css";
+
+function useScrollToTop({ children }) {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return children;  
+}
 
 function App() {
   const theme = createTheme({
@@ -35,23 +49,25 @@ function App() {
       />
       <ThemeProvider theme={theme}>
         <Router>
-          <Routes>
-            {/* <Route exact path="/" element={<Home />} /> */}
-            <Route exact path="/about" element={<About />} />
-            <Route exact path="/analytics/global" element={<Global />} />
-            <Route exact path="/analytics/india" element={<India />} />
-            <Route exact path="/" element={<Predictions />} />
-            <Route
-              exact
-              path="/analytics/continental"
-              element={<Continental />}
-            />
+          <useScrollToTop>
+            <Routes>
+              {/* <Route exact path="/" element={<Home />} /> */}
+              <Route exact path="/about" element={<About />} />
+              <Route exact path="/analytics/global" element={<Global />} />
+              <Route exact path="/analytics/india" element={<India />} />
+              <Route exact path="/" element={<Predictions />} />
+              <Route
+                exact
+                path="/analytics/continental"
+                element={<Continental />}
+              />
 
-            <Route path="/news" element={<News />} />
-            <Route path="/team" element={<Team />} />
+              <Route path="/news" element={<News />} />
+              <Route path="/team" element={<Team />} />
 
-            {/* <Route path="*" /> */}
-          </Routes>
+              {/* <Route path="*" /> */}
+            </Routes>
+          </useScrollToTop>
         </Router>
       </ThemeProvider>
     </>

@@ -1,12 +1,20 @@
 import React, { useState, useEffect } from "react";
 import Helmet from "react-helmet";
-import { Box, Divider, Grid, Typography, TextField } from "@mui/material";
+import {
+  Box,
+  Divider,
+  Grid,
+  Typography,
+  TextField,
+  Autocomplete,
+} from "@mui/material";
 import BarCharts from "../../charts/barchart";
 import IOSSlider from "../../components/common/slider";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
 import CollatedLineChart from "../../charts/collated trend chart";
 import LineChart from "../../charts/globalChart";
+import World from "../Home New copy";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import axios from "axios";
@@ -33,6 +41,159 @@ const marks = [
   { label: 2020, value: 2020 },
   { label: 2021, value: 2021 },
 ];
+const countries = [
+  { str: "Albania", val: "Albania" },
+  { str: "Armenia", val: "Armenia" },
+  { str: "Australia", val: "Australia" },
+  { str: "Austria", val: "Austria" },
+  { str: "Belgium", val: "Belgium" },
+  { str: "Bolivia", val: "Bolivia" },
+  { str: "Bulgaria", val: "Bulgaria" },
+  { str: "Canada", val: "Canada" },
+  { str: "Chile", val: "Chile" },
+  { str: "Colombia", val: "Colombia" },
+  { str: "Costa Rica", val: "Costa Rica" },
+  { str: "Croatia", val: "Croatia" },
+  { str: "Cuba", val: "Cuba" },
+  { str: "Czechia", val: "Czechia" },
+  { str: "Finland", val: "Finland" },
+  { str: "France", val: "France" },
+  { str: "Georgia", val: "Georgia" },
+  { str: "Germany", val: "Germany" },
+  { str: "Guyana", val: "Guyana" },
+  { str: "Hungary", val: "Hungary" },
+  { str: "Iceland", val: "Iceland" },
+  { str: "Ireland", val: "Ireland" },
+  { str: "Italy", val: "Italy" },
+  { str: "Japan", val: "Japan" },
+  { str: "North Korea", val: "North Korea" },
+  { str: "South Korea", val: "South Korea" },
+  { str: "Kosovo", val: "Kosovo" },
+  { str: "Kyrgyzstan", val: "Kyrgyzstan" },
+  { str: "Latvia", val: "Latvia" },
+  { str: "Lithuania", val: "Lithuania" },
+  { str: "Luxembourg", val: "Luxembourg" },
+  { str: "Mexico", val: "Mexico" },
+  { str: "Netherlands", val: "Netherlands" },
+  { str: "Macedonia", val: "Macedonia" },
+  { str: "Peru", val: "Peru" },
+  { str: "Poland", val: "Poland" },
+  { str: "Portugal", val: "Portugal" },
+  { str: "Republic of Moldova", val: "Republic of Moldova" },
+  { str: "Romania", val: "Romania" },
+  { str: "Russia", val: "Russia" },
+  { str: "Serbia", val: "Serbia" },
+  { str: "Slovakia", val: "Slovakia" },
+  { str: "South Africa", val: "South Africa" },
+  { str: "Spain", val: "Spain" },
+  { str: "Switzerland", val: "Switzerland" },
+  { str: "Tajikistan", val: "Tajikistan" },
+  { str: "Thailand", val: "Thailand" },
+  { str: "Ukraine", val: "Ukraine" },
+  { str: "United Arab Emirates", val: "United Arab Emirates" },
+  { str: "United States of America", val: "United States" },
+  { str: "Uruguay", val: "Uruguay" },
+  { str: "Uzbekistan", val: "Uzbekistan" },
+  { str: "Zimbabwe", val: "Zimbabwe" },
+  { str: "Bangladesh", val: "Bangladesh" },
+  { str: "Brunei Darussalam", val: "Brunei Darussalam" },
+  { str: "Cyprus", val: "Cyprus" },
+  { str: "Fiji", val: "Fiji" },
+  { str: "Greece", val: "Greece" },
+  { str: "Jordan", val: "Jordan" },
+  { str: "Kazakhstan", val: "Kazakhstan" },
+  { str: "Laos", val: "Laos" },
+  { str: "Montenegro", val: "Montenegro" },
+  { str: "New Zealand", val: "New Zealand" },
+  { str: "Slovenia", val: "Slovenia" },
+  { str: "Sweden", val: "Sweden" },
+  { str: "Turkey", val: "Turkey" },
+  { str: "Afghanistan", val: "Afghanistan" },
+  { str: "Algeria", val: "Algeria" },
+  { str: "Angola", val: "Angola" },
+  { str: "Argentina", val: "Argentina" },
+  { str: "Azerbaijan", val: "Azerbaijan" },
+  { str: "Belarus", val: "Belarus" },
+  { str: "Belize", val: "Belize" },
+  { str: "Benin", val: "Benin" },
+  { str: "Bosnia and Herzegovina", val: "Bosnia and Herzegovina" },
+  { str: "Brazil", val: "Brazil" },
+  { str: "Cameroon", val: "Cameroon" },
+  { str: "Chad", val: "Chad" },
+  { str: "China", val: "China" },
+  { str: "Congo", val: "Congo" },
+  { str: "Ivory Coast", val: "Ivory Coast" },
+  {
+    str: "Democratic Republic of the Congo",
+    val: "Democratic Republic of the Congo",
+  },
+  { str: "Denmark", val: "Denmark" },
+  { str: "Dominican Republic", val: "Dominican Republic" },
+  { str: "Ecuador", val: "Ecuador" },
+  { str: "Egypt", val: "Egypt" },
+  { str: "El Salvador", val: "El Salvador" },
+  { str: "Equatorial Guinea", val: "Equatorial Guinea" },
+  { str: "Eritrea", val: "Eritrea" },
+  { str: "Ethiopia", val: "Ethiopia" },
+  { str: "Gabon", val: "Gabon" },
+  { str: "Ghana", val: "Ghana" },
+  { str: "Guatemala", val: "Guatemala" },
+  { str: "Honduras", val: "Honduras" },
+  { str: "India", val: "India" },
+  { str: "Indonesia", val: "Indonesia" },
+  { str: "Iran", val: "Iran" },
+  { str: "Iraq", val: "Iraq" },
+  { str: "Israel", val: "Israel" },
+  { str: "Jamaica", val: "Jamaica" },
+  { str: "Kenya", val: "Kenya" },
+  { str: "Kuwait", val: "Kuwait" },
+  { str: "Lebanon", val: "Lebanon" },
+  { str: "Libya", val: "Libya" },
+  { str: "Madagascar", val: "Madagascar" },
+  { str: "Malaysia", val: "Malaysia" },
+  { str: "Mauritania", val: "Mauritania" },
+  { str: "Mongolia", val: "Mongolia" },
+  { str: "Morocco", val: "Morocco" },
+  { str: "Mozambique", val: "Mozambique" },
+  { str: "Myanmar", val: "Myanmar" },
+  { str: "Nicaragua", val: "Nicaragua" },
+  { str: "Niger", val: "Niger" },
+  { str: "Nigeria", val: "Nigeria" },
+  { str: "Norway", val: "Norway" },
+  { str: "Oman", val: "Oman" },
+  { str: "Pakistan", val: "Pakistan" },
+  { str: "Panama", val: "Panama" },
+  { str: "Papua New Guinea", val: "Papua New Guinea" },
+  { str: "Paraguay", val: "Paraguay" },
+  { str: "Philippines", val: "Philippines" },
+  { str: "Qatar", val: "Qatar" },
+  { str: "Saudi Arabia", val: "Saudi Arabia" },
+  { str: "Senegal", val: "Senegal" },
+  { str: "Sierra Leone", val: "Sierra Leone" },
+  { str: "Somalia", val: "Somalia" },
+  { str: "South Sudan", val: "South Sudan" },
+  { str: "Sri Lanka", val: "Sri Lanka" },
+  { str: "Sudan", val: "Sudan" },
+  { str: "Suriname", val: "Suriname" },
+  { str: "Syrian Arab Republic", val: "Syrian Arab Republic" },
+  { str: "Timor-Leste", val: "Timor-Leste" },
+  { str: "Trinidad and Tobago", val: "Trinidad and Tobago" },
+  { str: "Tunisia", val: "Tunisia" },
+  { str: "Turkmenistan", val: "Turkmenistan" },
+  { str: "United Kingdom", val: "United Kingdom" },
+  { str: "Tanzania", val: "Tanzania" },
+  { str: "Venezuela", val: "Venezuela" },
+  { str: "Vietnam", val: "Vietnam" },
+  { str: "Yemen", val: "Yemen" },
+  { str: "Zambia", val: "Zambia" },
+  { str: "Botswana", val: "Botswana" },
+  { str: "Estonia", val: "Estonia" },
+  { str: "Falkland Islands", val: "Falkland Islands" },
+  { str: "Guinea", val: "Guinea" },
+  { str: "Puerto Rico", val: "Puerto Rico" },
+  { str: "Rwanda", val: "Rwanda" },
+  { str: "Togo", val: "Togo" },
+];
 
 const Analytics = () => {
   const [commo, setCommo] = useState(["Natural Gas"]);
@@ -42,6 +203,8 @@ const Analytics = () => {
   const [trends, setTrends] = useState([]);
   const [parameter, setParameter] = useState("all");
   const [collatedTrend, setCollatedTrend] = useState([]);
+  const [tabledata, settabledata] = useState(null);
+
   const [energyYear, setEnergyYear] = useState(2008);
   const [filters, setFilters] = useState([2015, 2020]);
   const [tree, setTree] = useState([]);
@@ -154,103 +317,8 @@ const Analytics = () => {
         <meta name="description" content="Analytics page for PEGASUS" />
         <link rel="icon" href="/favicon.ico" />
       </Helmet>
-      <Grid sx={{ py: 4 }} item container xs={12}>
-        <Grid item xs={12} style={{ marginBottom: "2%" }}>
-          <Typography color="#00116A" fontSize={35}>
-            Energy Balance Sheet
-          </Typography>
-        </Grid>
-        <Grid container justifyContent="center" item xs={12} md={12}>
-          <Grid item xs={12}>
-            <IOSSlider
-              sx={{ width: { xs: "90%", md: "100%" } }}
-              track={false}
-              step={1}
-              onChange={(e) => {
-                setEnergyYear(e.target.value);
-              }}
-              value={energyYear}
-              marks={[
-                { label: 1990, value: 1990 },
-                { label: 1991, value: 1991 },
-                { label: 1992, value: 1992 },
-                { label: 1993, value: 1993 },
-                { label: 1994, value: 1994 },
-                { label: 1995, value: 1995 },
-                { label: 1996, value: 1996 },
-                { label: 1997, value: 1997 },
-                { label: 1998, value: 1998 },
-                { label: 1999, value: 1999 },
-                { label: 2000, value: 2000 },
-                { label: 2001, value: 2001 },
-                { label: 2002, value: 2002 },
-                { label: 2003, value: 2003 },
-                { label: 2004, value: 2004 },
-                { label: 2005, value: 2005 },
-                { label: 2006, value: 2006 },
-                { label: 2007, value: 2007 },
-                { label: 2008, value: 2008 },
-                { label: 2009, value: 2009 },
-                { label: 2010, value: 2010 },
-                { label: 2011, value: 2011 },
-                { label: 2012, value: 2012 },
-                { label: 2013, value: 2013 },
-                { label: 2014, value: 2014 },
-                { label: 2015, value: 2015 },
-                { label: 2016, value: 2016 },
-                { label: 2017, value: 2017 },
-                { label: 2018, value: 2018 },
-                { label: 2019, value: 2019 },
-              ]}
-              min={1990}
-              max={2019}
-            />
-          </Grid>
-        </Grid>
-      </Grid>
-      <Grid item xs={12} container justifyContent={"space-evenly"} spacing={2}>
-        <Grid item sx={12} md={12}>
-          <p>Energy Production</p>{" "}
-          <BarCharts
-            data={productiondata}
-            bg1="#00b09b"
-            bg2="#96c93d"
-            orientation={0}
-            g_width={window.innerWidth * 0.9}
-            g_height={window.innerHeight * 0.3}
-            c_id={3}
-            unit={"Terajoules"}
-          />
-        </Grid>
-        <Grid item sx={12} md={12}>
-          <p>Energy Transformation</p>
-          <BarCharts
-            data={transformationdata}
-            bg1="#ACB6E5"
-            orientation={0}
-            bg2="#74ebd5"
-            g_width={window.innerWidth * 0.9}
-            g_height={window.innerHeight * 0.3}
-            c_id={2}
-            unit={"Terajoules"}
-          />
-        </Grid>
-        <Grid item sx={12} md={12}>
-          <p>Energy Consumption</p>
-          <BarCharts
-            data={consumption}
-            bg1="#fc4a1a"
-            bg2="#f7b733"
-            g_width={window.innerWidth * 0.9}
-            g_height={window.innerHeight * 0.3}
-            orientation={0}
-            c_id={1}
-            unit={"Terajoules"}
-          />
-        </Grid>
-      </Grid>
-      <Divider />
-      <Grid item xs={12} sx={{ p: "2%" }}>
+      <World />
+      <Grid item xs={12} sx={{ mt: 8, p: "2%" }}>
         <Typography color="#00116A" fontSize={35}>
           Global Trends for Imports & Exports
         </Typography>
@@ -368,7 +436,7 @@ const Analytics = () => {
             );
           })}
       </Grid>
-      <Divider sx={{ my: 4 }} />
+      <Divider />
       <Grid
         item
         sx={{ px: 4, py: 2 }}

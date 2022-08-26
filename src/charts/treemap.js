@@ -4,24 +4,14 @@ import * as d3 from "d3";
 
 const COLORS = {
   natural_gas: [
-    "#e6ffe6",
-    "#ccffcc",
-    "#b3ffb3",
-    "#99ff99",
-    "#80ff80",
-    "#66ff66",
+    "#395989",
+    "#4582BB",
+    "#4988C0",
+    "#4988C0",
+    "#417DB7",
+    "#CCE0F1",
     "#4dff4d",
     "#33ff33",
-    "#1aff1a",
-    "#00ff00",
-    "#00e600",
-    "#00cc00",
-    "#00b300",
-    "#009900",
-    "#008000",
-    "#006600",
-    "#004d00",
-    "#003300",
   ],
   biofuels: [
     "#e6f5ff",
@@ -141,7 +131,7 @@ const CustomizedContent = (props) => {
           x={x + width / 2}
           y={y + height / 2 + 7}
           textAnchor="middle"
-          fill="#000000"
+          fill="#fffffff"
           fontSize={props.fontSize(size)}
         >
           {sub_region}
@@ -154,7 +144,7 @@ const CustomizedContent = (props) => {
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
     return (
-      <p>
+      <p style={{ color: "white" }}>
         {payload[0].payload.sub_region} : {payload[0].value} Terajoules
       </p>
     );

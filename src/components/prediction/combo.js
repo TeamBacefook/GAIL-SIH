@@ -7,6 +7,7 @@ import {
   TextField,
 } from "@mui/material";
 import { toast } from "react-toastify";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import React, { useState, useEffect, useCallback } from "react";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
@@ -20,6 +21,9 @@ import Papa from "papaparse";
 import FileSaver from "file-saver";
 import { useCurrentPng } from "recharts-to-png";
 // import { getpredictionsFn } from "../../api/predictions";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
 let yourDate = new Date();
 const convert = (date) => {
   let dt = new Date(date);
@@ -251,30 +255,22 @@ export default function ComboChart({
       <Grid
         container
         alignItems="center"
-        justifyContent="space-between"
+        justifyContent="space-evenly"
         item
+        spacing={2}
+        sx={{ my: 2 }}
         xs={12}
       >
-        <Grid item sx={1} xs={3}>
+        <Grid item xs={6}>
           <Typography color="#00116A" fontSize={30}>
-            Model Prediction {name}
+            {name}
           </Typography>
         </Grid>
-        <Grid item xs={2}>
-          <div class="file-input">
-            <input
-              type="file"
-              id={time}
-              onChange={(e) => handleFileChange(e, time, ticker)}
-            />
-            <span class="button">Upload CSV File</span>
-          </div>
-        </Grid>
         {time === "M" && (
-          <Grid xs={2}>
+          <Grid xs={6}>
             <TextField
               type="date"
-              fullWidth
+              style={{ width: "50%" }}
               variant="outlined"
               label="Predict From"
               value={date}
@@ -284,375 +280,419 @@ export default function ComboChart({
             />
           </Grid>
         )}
-        <Grid item xs={2}>
-          <Button
-            variant="contained"
-            sx={{
-              background:
-                "linear-gradient(169.84deg, #FFE53B -30.77%, #FF2525 119.39%)",
-              color: "white",
-              borderRadius: "11px",
-              textTransform: "none",
-              width: "70%",
-            }}
-            onClick={handleDownload}
-            disabled={data.length !== 0 ? false : true}
-          >
-            Download Graph
-          </Button>
-        </Grid>
-        <Grid item xs={2}>
-          <Button
-            variant="contained"
-            sx={{
-              background: "linear-gradient(180deg, #005CB9 0%, #270097 100%)",
-              color: "white",
-              borderRadius: "11px",
-              textTransform: "none",
-              width: "70%",
-            }}
-            disabled={data.length !== 0 ? false : true}
-            onClick={() => {
-              if (time === "M") {
-                window.downloadCSV(modelcsv, commo, "Predictions");
-              } else {
-                window.downloadCSV(data, commo, "Predictions");
-              }
-            }}
-          >
-            Download CSV
-          </Button>
+        <Grid item xs={12} />
+        <Grid
+          item
+          justifyContent="center"
+          alignItems="center"
+          container
+          xs={12}
+        >
+          <Grid item xs={4}>
+            <Button
+              className="file-input"
+              sx={{
+                background:
+                  "linear-gradient(169.84deg, #FFE53B -30.77%, #FF2525 119.39%)",
+                color: "white",
+                borderRadius: "11px",
+                textTransform: "none",
+                width: "70%",
+              }}
+            >
+              <input
+                type="file"
+                id={time}
+                onChange={(e) => handleFileChange(e, time, ticker)}
+              />
+              <span class="button">Upload CSV File</span>
+            </Button>
+          </Grid>
+          <Grid item xs={4}>
+            <Button
+              variant="contained"
+              sx={{
+                background: "linear-gradient(180deg, #005CB9 0%, #270097 100%)",
+                color: "white",
+                borderRadius: "11px",
+                textTransform: "none",
+                width: "70%",
+              }}
+              onClick={handleDownload}
+              disabled={data.length !== 0 ? false : true}
+            >
+              Download Model Graph
+            </Button>
+          </Grid>
+          <Grid item xs={4}>
+            <Button
+              variant="contained"
+              sx={{
+                background: "linear-gradient(180deg, #005CB9 0%, #270097 100%)",
+                color: "white",
+                borderRadius: "11px",
+                textTransform: "none",
+                width: "70%",
+              }}
+              disabled={data.length !== 0 ? false : true}
+              onClick={() => {
+                if (time === "M") {
+                  window.downloadCSV(modelcsv, commo, "Predictions");
+                } else {
+                  window.downloadCSV(data, commo, "Predictions");
+                }
+              }}
+            >
+              Download Predictions CSV
+            </Button>
+          </Grid>
         </Grid>
       </Grid>
       {parameter && (
-        <Grid item container xs={12}>
-          <Grid item sx={{ mb: 3 }} xs={12}>
-            <Typography color="#00116A" fontSize={20}>
-              Global Parameters
-            </Typography>
-            <Divider />
-            <Grid
-              item
-              xs={12}
-              justifyContent="space-between"
-              alignItems="center"
-              container
+        <Grid item container xs={12} sx={{ my: 1 }}>
+          <Accordion
+            sx={{
+              width: "100%",
+              boxShadow: "none",
+              px: 0.5,
+              border: "1px solid grey",
+            }}
+          >
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1a-content"
+              id="panel1a-header"
             >
-              <Grid item xs={2.5}>
-                <TextField
-                  fullWidth
-                  type="date"
-                  variant="outlined"
-                  label="Estimate Start"
-                  value={warData.start_date}
-                  onChange={(e) => {
-                    setWarData((prev) => {
-                      return { ...prev, start_date: e.target.value };
-                    });
-                  }}
-                />
-              </Grid>
-              <Grid item xs={2.5}>
-                <TextField
-                  fullWidth
-                  type="date"
-                  variant="outlined"
-                  value={warData.end_date}
-                  onChange={(e) => {
-                    setWarData((prev) => {
-                      return { ...prev, end_date: e.target.value };
-                    });
-                  }}
-                  label="Estimate End"
-                />
-              </Grid>
-              <Grid item xs={3} container justifyContent="center">
-                <Typography fontSize={20} sx={{ opacity: "0.5" }}>
-                  Intensity
-                </Typography>
-                <IOSSlider
-                  onChange={(e) => {
-                    let val = 0;
-                    switch (e.target.value) {
-                      case 1:
-                        val = 1.1238;
-                        break;
-                      case 2:
-                        val = 1.2476;
-                        break;
-                      case 3:
-                        val = 1.3714;
-                        break;
-                      case 4:
-                        val = 1.4952;
-                        break;
-                      case 5:
-                        val = 1.6192;
-                        break;
-                      default:
-                        val = 0;
-                        break;
-                    }
-                    setWarIntensity(val);
-                  }}
-                  track={false}
-                  marks={[
-                    { label: "very low", value: 1 },
-                    { label: "low", value: 2 },
-                    { label: "moderate", value: 3 },
-                    { label: "high", value: 4 },
-                    { label: "very high", value: 5 },
-                  ]}
-                  min={1}
-                  max={5}
-                  step={1}
-                />
-              </Grid>
-              <Grid item xs={3}>
-                <Box sx={{ display: "flex" }}>
-                  <Button
-                    variant="contained"
-                    sx={{
-                      background:
-                        "linear-gradient(180deg, #005CB9 0%, #270097 100%)",
-                      color: "white",
-                      borderRadius: "11px",
-                      textTransform: "none",
-                      width: "70%",
-                    }}
-                    onClick={(e) => {
-                      setCheck((prev) => {
-                        return { ...prev, war: !prev.war };
+              <Typography color="#00116A" fontSize={20}>
+                User Input for sentiment
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Grid
+                item
+                xs={12}
+                justifyContent="space-between"
+                alignItems="center"
+                container
+              >
+                <Grid item xs={2.5}>
+                  <TextField
+                    fullWidth
+                    type="date"
+                    variant="outlined"
+                    label="Estimate Start"
+                    value={warData.start_date}
+                    onChange={(e) => {
+                      setWarData((prev) => {
+                        return { ...prev, start_date: e.target.value };
                       });
                     }}
-                  >
-                    {check.war ? "Remove" : "Add"} War Sentiment
-                  </Button>
-                </Box>
-              </Grid>
-            </Grid>
-            <Divider />
-            <Grid
-              item
-              xs={12}
-              justifyContent="space-between"
-              sx={{ pt: 1, pb: 2 }}
-              alignItems="center"
-              container
-            >
-              <Grid item xs={2.5}>
-                <TextField
-                  type="date"
-                  fullWidth
-                  value={recessionData.start_date}
-                  variant="outlined"
-                  label="Estimate Start"
-                  onChange={(e) => {
-                    setRecessionData((prev) => {
-                      return { ...prev, start_date: e.target.value };
-                    });
-                  }}
-                />
-              </Grid>
-              <Grid item xs={2.5}>
-                <TextField
-                  type="date"
-                  fullWidth
-                  variant="outlined"
-                  label="Estimate End"
-                  value={recessionData.end_date}
-                  onChange={(e) => {
-                    setRecessionData((prev) => {
-                      return { ...prev, end_date: e.target.value };
-                    });
-                  }}
-                />
-              </Grid>
-              <Grid item xs={3} container justifyContent="center">
-                <Typography fontSize={20} sx={{ opacity: "0.5" }}>
-                  Intensity
-                </Typography>
-                <IOSSlider
-                  onChange={(e) => {
-                    let val = 0;
-                    switch (e.target.value) {
-                      case 1:
-                        val = 1.11664;
-                        break;
-                      case 2:
-                        val = 1.3328;
-                        break;
-                      case 3:
-                        val = 1.4992;
-                        break;
-                      case 4:
-                        val = 1.6656;
-                        break;
-                      case 5:
-                        val = 1.8302;
-                        break;
-                      default:
-                        val = 0;
-                        break;
-                    }
-                    setRecessionIntensity(val);
-                  }}
-                  track={false}
-                  marks={[
-                    { label: "very low", value: 1 },
-                    { label: "low", value: 2 },
-                    { label: "moderate", value: 3 },
-                    { label: "high", value: 4 },
-                    { label: "very high", value: 5 },
-                  ]}
-                  min={1}
-                  max={5}
-                  step={1}
-                />
-              </Grid>
-              <Grid item xs={3}>
-                <Box sx={{ display: "flex" }}>
-                  <Button
-                    variant="contained"
-                    sx={{
-                      background:
-                        "linear-gradient(169.84deg, #FFE53B -30.77%, #FF2525 119.39%)",
-                      color: "white",
-                      borderRadius: "11px",
-                      textTransform: "none",
-                      width: "70%",
-                    }}
-                    onClick={(e) => {
-                      setCheck((prev) => {
-                        return {
-                          ...prev,
-                          recession: !prev.recession,
-                        };
+                  />
+                </Grid>
+                <Grid item xs={2.5}>
+                  <TextField
+                    fullWidth
+                    type="date"
+                    variant="outlined"
+                    value={warData.end_date}
+                    onChange={(e) => {
+                      setWarData((prev) => {
+                        return { ...prev, end_date: e.target.value };
                       });
                     }}
-                  >
-                    {check.recession ? "Remove" : "Add"} Recession Sentiment
-                  </Button>
-                </Box>
-              </Grid>
-            </Grid>
-            <Divider />
-            <Grid
-              item
-              xs={12}
-              justifyContent="space-between"
-              alignItems="center"
-              container
-            >
-              <Grid item xs={2.5}>
-                <TextField
-                  fullWidth
-                  type="date"
-                  variant="outlined"
-                  label="Estimate Start"
-                  value={pandemicData.start_date}
-                  onChange={(e) => {
-                    setpandemicData((prev) => {
-                      return { ...prev, start_date: e.target.value };
-                    });
-                  }}
-                />
-              </Grid>
-              <Grid item xs={2.5}>
-                <TextField
-                  fullWidth
-                  type="date"
-                  variant="outlined"
-                  value={pandemicData.end_date}
-                  onChange={(e) => {
-                    setpandemicData((prev) => {
-                      return { ...prev, end_date: e.target.value };
-                    });
-                  }}
-                  label="Estimate End"
-                />
-              </Grid>
-              <Grid item xs={3} container justifyContent="center">
-                <Typography fontSize={20} sx={{ opacity: "0.5" }}>
-                  Intensity
-                </Typography>
-                <IOSSlider
-                  onChange={(e) => {
-                    let val = 0;
-                    switch (e.target.value) {
-                      case 1:
-                        val = 1;
-                        break;
-                      case 2:
-                        val = 0.97;
-                        break;
-                      case 3:
-                        val = 0.94;
-                        break;
-                      case 4:
-                        val = 0.91;
-                        break;
-                      case 5:
-                        val = 0.85;
-                        break;
-                      default:
-                        val = 1;
-                        break;
-                    }
-                    setPandemicIntensity(val);
-                  }}
-                  track={false}
-                  marks={[
-                    { label: "very low", value: 1 },
-                    { label: "low", value: 2 },
-                    { label: "moderate", value: 3 },
-                    { label: "high", value: 4 },
-                    { label: "very high", value: 5 },
-                  ]}
-                  min={1}
-                  max={5}
-                  step={1}
-                />
-              </Grid>
-              <Grid item xs={3}>
-                <Box sx={{ display: "flex" }}>
-                  <Button
-                    variant="contained"
-                    onClick={() => {
-                      setCheck((state) => ({
-                        ...state,
-                        pandemic: !state.pandemic,
-                      }));
+                    label="Estimate End"
+                  />
+                </Grid>
+                <Grid item xs={3} container justifyContent="center">
+                  <Typography fontSize={20} sx={{ opacity: "0.5" }}>
+                    Intensity
+                  </Typography>
+                  <IOSSlider
+                    onChange={(e) => {
+                      let val = 0;
+                      switch (e.target.value) {
+                        case 1:
+                          val = 1.1238;
+                          break;
+                        case 2:
+                          val = 1.2476;
+                          break;
+                        case 3:
+                          val = 1.3714;
+                          break;
+                        case 4:
+                          val = 1.4952;
+                          break;
+                        case 5:
+                          val = 1.6192;
+                          break;
+                        default:
+                          val = 0;
+                          break;
+                      }
+                      setWarIntensity(val);
                     }}
-                    sx={{
-                      background:
-                        "linear-gradient(180deg, #005CB9 0%, #270097 100%)",
-                      color: "white",
-                      borderRadius: "11px",
-                      textTransform: "none",
-                      width: "70%",
-                    }}
-                  >
-                    {check.pandemic ? "Remove" : "Add"} Pandemic Sentiment
-                  </Button>
-                </Box>
+                    track={false}
+                    marks={[
+                      { label: "very low", value: 1 },
+                      { label: "low", value: 2 },
+                      { label: "moderate", value: 3 },
+                      { label: "high", value: 4 },
+                      { label: "very high", value: 5 },
+                    ]}
+                    min={1}
+                    max={5}
+                    step={1}
+                  />
+                </Grid>
+                <Grid item xs={3}>
+                  <Box sx={{ display: "flex" }}>
+                    <Button
+                      variant="contained"
+                      sx={{
+                        background:
+                          "linear-gradient(180deg, #005CB9 0%, #270097 100%)",
+                        color: "white",
+                        borderRadius: "11px",
+                        textTransform: "none",
+                        width: "70%",
+                      }}
+                      onClick={(e) => {
+                        setCheck((prev) => {
+                          return { ...prev, war: !prev.war };
+                        });
+                      }}
+                    >
+                      {check.war ? "Remove" : "Add"} War Sentiment
+                    </Button>
+                  </Box>
+                </Grid>
               </Grid>
-            </Grid>
-            <Divider />
-          </Grid>
+              <Divider />
+              <Grid
+                item
+                xs={12}
+                justifyContent="space-between"
+                sx={{ pt: 1, pb: 2 }}
+                alignItems="center"
+                container
+              >
+                <Grid item xs={2.5}>
+                  <TextField
+                    type="date"
+                    fullWidth
+                    value={recessionData.start_date}
+                    variant="outlined"
+                    label="Estimate Start"
+                    onChange={(e) => {
+                      setRecessionData((prev) => {
+                        return { ...prev, start_date: e.target.value };
+                      });
+                    }}
+                  />
+                </Grid>
+                <Grid item xs={2.5}>
+                  <TextField
+                    type="date"
+                    fullWidth
+                    variant="outlined"
+                    label="Estimate End"
+                    value={recessionData.end_date}
+                    onChange={(e) => {
+                      setRecessionData((prev) => {
+                        return { ...prev, end_date: e.target.value };
+                      });
+                    }}
+                  />
+                </Grid>
+                <Grid item xs={3} container justifyContent="center">
+                  <Typography fontSize={20} sx={{ opacity: "0.5" }}>
+                    Intensity
+                  </Typography>
+                  <IOSSlider
+                    onChange={(e) => {
+                      let val = 0;
+                      switch (e.target.value) {
+                        case 1:
+                          val = 1.11664;
+                          break;
+                        case 2:
+                          val = 1.3328;
+                          break;
+                        case 3:
+                          val = 1.4992;
+                          break;
+                        case 4:
+                          val = 1.6656;
+                          break;
+                        case 5:
+                          val = 1.8302;
+                          break;
+                        default:
+                          val = 0;
+                          break;
+                      }
+                      setRecessionIntensity(val);
+                    }}
+                    track={false}
+                    marks={[
+                      { label: "very low", value: 1 },
+                      { label: "low", value: 2 },
+                      { label: "moderate", value: 3 },
+                      { label: "high", value: 4 },
+                      { label: "very high", value: 5 },
+                    ]}
+                    min={1}
+                    max={5}
+                    step={1}
+                  />
+                </Grid>
+                <Grid item xs={3}>
+                  <Box sx={{ display: "flex" }}>
+                    <Button
+                      variant="contained"
+                      sx={{
+                        background:
+                          "linear-gradient(169.84deg, #FFE53B -30.77%, #FF2525 119.39%)",
+                        color: "white",
+                        borderRadius: "11px",
+                        textTransform: "none",
+                        width: "70%",
+                      }}
+                      onClick={(e) => {
+                        setCheck((prev) => {
+                          return {
+                            ...prev,
+                            recession: !prev.recession,
+                          };
+                        });
+                      }}
+                    >
+                      {check.recession ? "Remove" : "Add"} Recession Sentiment
+                    </Button>
+                  </Box>
+                </Grid>
+              </Grid>
+              <Divider />
+              <Grid
+                item
+                xs={12}
+                justifyContent="space-between"
+                alignItems="center"
+                container
+              >
+                <Grid item xs={2.5}>
+                  <TextField
+                    fullWidth
+                    type="date"
+                    variant="outlined"
+                    label="Estimate Start"
+                    value={pandemicData.start_date}
+                    onChange={(e) => {
+                      setpandemicData((prev) => {
+                        return { ...prev, start_date: e.target.value };
+                      });
+                    }}
+                  />
+                </Grid>
+                <Grid item xs={2.5}>
+                  <TextField
+                    fullWidth
+                    type="date"
+                    variant="outlined"
+                    value={pandemicData.end_date}
+                    onChange={(e) => {
+                      setpandemicData((prev) => {
+                        return { ...prev, end_date: e.target.value };
+                      });
+                    }}
+                    label="Estimate End"
+                  />
+                </Grid>
+                <Grid item xs={3} container justifyContent="center">
+                  <Typography fontSize={20} sx={{ opacity: "0.5" }}>
+                    Intensity
+                  </Typography>
+                  <IOSSlider
+                    onChange={(e) => {
+                      let val = 0;
+                      switch (e.target.value) {
+                        case 1:
+                          val = 1;
+                          break;
+                        case 2:
+                          val = 0.97;
+                          break;
+                        case 3:
+                          val = 0.94;
+                          break;
+                        case 4:
+                          val = 0.91;
+                          break;
+                        case 5:
+                          val = 0.85;
+                          break;
+                        default:
+                          val = 1;
+                          break;
+                      }
+                      setPandemicIntensity(val);
+                    }}
+                    track={false}
+                    marks={[
+                      { label: "very low", value: 1 },
+                      { label: "low", value: 2 },
+                      { label: "moderate", value: 3 },
+                      { label: "high", value: 4 },
+                      { label: "very high", value: 5 },
+                    ]}
+                    min={1}
+                    max={5}
+                    step={1}
+                  />
+                </Grid>
+                <Grid item xs={3}>
+                  <Box sx={{ display: "flex" }}>
+                    <Button
+                      variant="contained"
+                      onClick={() => {
+                        setCheck((state) => ({
+                          ...state,
+                          pandemic: !state.pandemic,
+                        }));
+                      }}
+                      sx={{
+                        background:
+                          "linear-gradient(180deg, #005CB9 0%, #270097 100%)",
+                        color: "white",
+                        borderRadius: "11px",
+                        textTransform: "none",
+                        width: "70%",
+                      }}
+                    >
+                      {check.pandemic ? "Remove" : "Add"} Pandemic Sentiment
+                    </Button>
+                  </Box>
+                </Grid>
+              </Grid>
+            </AccordionDetails>
+          </Accordion>
         </Grid>
       )}
       {data.length !== 0 && (
         <>
           <Grid item justify="center" xs={12} md={12} lg={12} align="center">
             <FormControl sx={{ m: 1, width: "100%" }}>
-              <InputLabel id="demo-multiple-chip-label">Chip</InputLabel>
+              <InputLabel id="demo-multiple-chip-label">
+                Model Selector
+              </InputLabel>
               <Select
                 labelId="demo-multiple-chip-label"
                 id="demo-multiple-chip"
                 multiple
                 value={commo}
                 onChange={handleChange}
+                helperText="Select the models from this dropdown"
                 input={
                   <OutlinedInput
                     id="select-multiple-chip"

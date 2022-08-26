@@ -13,25 +13,25 @@ const links = [
   //   href: "/",
   // },
   {
-    name: "Predictions",
+    name: "Forecasts",
     href: "/",
   },
   {
     name: "Analytics",
     href: "/analytics/global",
   },
-  // {
-  //   name: "News",
-  //   href: "/news",
-  // },
+  {
+    name: "News",
+    href: "/news",
+  },
   {
     name: "Rationale",
     href: "/about",
   },
-  // {
-  //   name: "Team",
-  //   href: "/team",
-  // },
+  {
+    name: "Team",
+    href: "/team",
+  },
 ];
 
 const isActiveLink = (href, currentPathname) => {
@@ -103,6 +103,7 @@ const Header = () => {
           position: "fixed",
           zIndex: 1000,
           top: 0,
+          width: "100%",
           backdropFilter: "blur(25px)",
           backgroundColor: `rgba(247, 248, 242,${small ? 1 : 0.7})`,
           boxShadow: "inset 0px -1px 1px #e7ebf0",

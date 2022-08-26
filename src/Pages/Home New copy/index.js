@@ -26,61 +26,6 @@ import GammelTheme from "fusioncharts/themes/fusioncharts.theme.gammel";
 import { getStockData2 } from "../../actions/predictions";
 import { Helmet } from "react-helmet";
 ReactFC.fcRoot(FusionCharts, TimeSeries, GammelTheme);
-
-const OutlinedButton = styled(Button)({
-  border: "1px solid #FF5C00",
-  color: "#FF5C00",
-  backgroundColor: "white",
-  borderRadius: "10px",
-  "&:hover": {
-    border: "1px solid #FF5C00",
-    color: "#FF5C00",
-    backgroundColor: "white",
-    borderRadius: "10px",
-  },
-});
-
-const commodity = [
-  { str: "Natural gas", val: "Natural gas" },
-  { str: "Anthracite", val: "Anthracite" },
-  { str: "Lignite", val: "Lignite" },
-  { str: "Crude oil", val: "Crude oil" },
-];
-
-const commodityprice = [
-  {
-    str: "Natural gas - Yahoo Finance",
-    val: "NG=F",
-    type: "yahoofinance",
-    text: "Natural gas prices from Yahoo Finance (NG=F)",
-  },
-  {
-    str: "Natural gas - Trading Economics",
-    val: "ng1:com",
-    type: "Tradingeconomics",
-    text: "Natural gas prices from Trading Economics",
-  },
-
-  {
-    str: "Crude oil - Trading Economics",
-    val: "cl1:com",
-    type: "Tradingeconomics",
-    text: "Crude oil prices from Trading Economics",
-  },
-  {
-    str: "Crude oil - Yahoo Finance",
-    val: "CL=F",
-    type: "yahoofinance",
-    text: "Crude oil prices from Yahoo Finance (CL=F)",
-  },
-  {
-    str: "Coal - Trading economics",
-    val: "xal1:com",
-    type: "Tradingeconomics",
-    text: "Coal prices from Trading Economics",
-  },
-];
-
 const marqueedata = [
   {
     commodity: "Methanol\n\nCNY/T",
@@ -222,6 +167,25 @@ const marqueedata = [
     "YoY change": "16.73%",
     date: "Aug/17",
   },
+];
+const OutlinedButton = styled(Button)({
+  border: "1px solid #FF5C00",
+  color: "#FF5C00",
+  backgroundColor: "white",
+  borderRadius: "10px",
+  "&:hover": {
+    border: "1px solid #FF5C00",
+    color: "#FF5C00",
+    backgroundColor: "white",
+    borderRadius: "10px",
+  },
+});
+
+const commodity = [
+  { str: "Natural gas", val: "Natural gas" },
+  { str: "Anthracite", val: "Anthracite" },
+  { str: "Lignite", val: "Lignite" },
+  { str: "Crude oil", val: "Crude oil" },
 ];
 
 const NewsCard = ({ data }) => {
@@ -427,91 +391,91 @@ const Home = () => {
   const globeElement = useRef();
   const [tabledata, settabledata] = useState(null);
   const [selectedCountryonGlobe, setSelectedCountryonGlobe] = useState(null);
-  // const [timeseriesDs, settimeseriesDs] = useState();
+  const [timeseriesDs, settimeseriesDs] = useState();
 
-  // useEffect(() => {
-  //   const getData = async () => {
-  //     const data = await getStockData2(filtercommodityprice);
-  //     const dataSource = {
-  //       chart: {
-  //         exportenabled: 1,
-  //         multicanvas: false,
-  //         theme: "gammel",
-  //       },
-  //       caption: {
-  //         text: filtercommodityprice.text,
-  //       },
-  //       subcaption: {
-  //         text: "Stock prices based on available data",
-  //       },
-  //       yaxis: [
-  //         {
-  //           plot: {
-  //             value: {
-  //               open: "Open",
-  //               high: "High",
-  //               low: "Low",
-  //               close: "Close",
-  //             },
-  //             type: "candlestick",
-  //           },
-  //           format: {
-  //             prefix: "$",
-  //           },
-  //           title: "Stock Value",
-  //         },
-  //       ],
-  //     };
-  //     var schema = [
-  //       {
-  //         name: "Date",
-  //         type: "date",
-  //         format: "%d-%m-%Y",
-  //       },
-  //       {
-  //         name: "Low",
-  //         type: "number",
-  //       },
-  //       {
-  //         name: "Open",
-  //         type: "number",
-  //       },
-  //       {
-  //         name: "Close",
-  //         type: "number",
-  //       },
-  //       {
-  //         name: "High",
-  //         type: "number",
-  //       },
-  //     ];
-  //     const fusionTable = new FusionCharts.DataStore().createDataTable(
-  //       data,
-  //       schema
-  //     );
-  //     var timeseriesDsTemp = Object.assign(
-  //       {},
-  //       {
-  //         type: "timeseries",
-  //         renderAt: "container",
-  //         width: window.innerWidth / 1.2,
-  //         height: "600",
-  //         dataSource,
-  //       }
-  //     );
-  //     timeseriesDsTemp.dataSource.data = fusionTable;
-  //     settimeseriesDs(timeseriesDsTemp);
-  //   };
-  //   getData();
-  // }, [filtercommodityprice]);
+  useEffect(() => {
+    const getData = async () => {
+      const data = await getStockData2(filtercommodityprice);
+      const dataSource = {
+        chart: {
+          exportenabled: 1,
+          multicanvas: false,
+          theme: "gammel",
+        },
+        caption: {
+          text: filtercommodityprice.text,
+        },
+        subcaption: {
+          text: "Stock prices based on available data",
+        },
+        yaxis: [
+          {
+            plot: {
+              value: {
+                open: "Open",
+                high: "High",
+                low: "Low",
+                close: "Close",
+              },
+              type: "candlestick",
+            },
+            format: {
+              prefix: "$",
+            },
+            title: "Stock Value",
+          },
+        ],
+      };
+      var schema = [
+        {
+          name: "Date",
+          type: "date",
+          format: "%d-%m-%Y",
+        },
+        {
+          name: "Low",
+          type: "number",
+        },
+        {
+          name: "Open",
+          type: "number",
+        },
+        {
+          name: "Close",
+          type: "number",
+        },
+        {
+          name: "High",
+          type: "number",
+        },
+      ];
+      const fusionTable = new FusionCharts.DataStore().createDataTable(
+        data,
+        schema
+      );
+      var timeseriesDsTemp = Object.assign(
+        {},
+        {
+          type: "timeseries",
+          renderAt: "container",
+          width: window.innerWidth / 1.2,
+          height: "600",
+          dataSource,
+        }
+      );
+      timeseriesDsTemp.dataSource.data = fusionTable;
+      settimeseriesDs(timeseriesDsTemp);
+    };
+    getData();
+  }, [filtercommodityprice]);
 
-  // useEffect(() => {
-  //   const getData = async () => {
-  //     const data = await getNews("natural gas");
-  //     setNews(data);
-  //   };
-  //   getData();
-  // }, []);
+  useEffect(() => {
+    const getData = async () => {
+      const data = await getNews("natural gas");
+      setNews(data);
+    };
+    getData();
+  }, []);
 
   useEffect(() => {
     var countrydata = data.features.find(
@@ -584,47 +548,7 @@ const Home = () => {
     };
   }, [filters]);
   return (
-    <Box sx={{ py: 16, px: { xs: 2, md: 8 } }}>
-      <Helmet>
-        <title>PEGASUS | Dashboard</title>
-        <meta name="description" content="Analytics page for PEGASUS" />
-        <link rel="icon" href="/favicon.ico" />
-      </Helmet>
-      <Grid
-        item
-        xs={12}
-        container
-        justifyContent="space-between"
-        alignItems="center"
-      >
-        <Grid item xs={4}>
-          <Typography color="#00116A" fontSize="40px">
-            Global Statistics
-          </Typography>
-        </Grid>
-        <Grid item lg={2}></Grid>
-        <Grid item lg={3}>
-          <Button
-            component={Link}
-            to="/analytics/global"
-            variant="contained"
-            sx={{
-              background:
-                "linear-gradient(169.84deg, #FFE53B -30.77%, #FF2525 119.39%)",
-              color: "white",
-              borderRadius: "11px",
-              textTransform: "none",
-            }}
-          >
-            View More Analytics
-          </Button>
-        </Grid>
-        <Grid item lg={3}>
-          <OutlinedButton component={Link} to="/predictions">
-            View Detailed Predictions
-          </OutlinedButton>
-        </Grid>
-      </Grid>
+    <Box sx={{ py: 4, px: { xs: 2, md: 8 } }}>
       <Grid
         container
         spacing={4}
@@ -709,238 +633,6 @@ const Home = () => {
           </Grid>
         </Grid>
       </Grid>
-      <Box sx={{ py: 8 }}>
-        <Typography color="#00116A" fontSize="35px">
-          Energy Prices
-        </Typography>
-      </Box>
-      <Marquee>
-        {marqueedata.map((item, index) => {
-          return (
-            <React.Fragment key={index}>
-              {item["24hrpercentchange"][0] === "-" ? (
-                <Box
-                  xs={4}
-                  sx={{
-                    border: "1px solid #EC82B5",
-                    px: 1,
-                    py: 1,
-                    width: "90%",
-                    borderRadius: "2em",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "flex-start",
-                    margin: "0 0.5em",
-                    minHeight: "7vh",
-                  }}
-                >
-                  <object
-                    type="image/svg+xml"
-                    data={down}
-                    style={{
-                      height: "1.5em",
-                      width: "1.5em",
-                    }}
-                  >
-                    <img src={down} alt="Fall Symbol" />
-                  </object>
-                  <Typography variant="h1" fontSize={20} sx={{ ml: 2, mr: 1 }}>
-                    {item.commodity} {item.price}
-                  </Typography>
-                </Box>
-              ) : (
-                <Box
-                  sx={{
-                    border: "1px solid #1FA724 ",
-                    px: 1,
-                    py: 1,
-                    width: "90%",
-                    borderRadius: "2em",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "flex-start",
-                    marginLeft: "2em",
-                    marginRight: "2em",
-                    minHeight: "7vh",
-                  }}
-                >
-                  <object
-                    type="image/svg+xml"
-                    data={up}
-                    style={{
-                      height: "1.5em",
-                      width: "1.5em",
-                    }}
-                  >
-                    <img src={up} alt="Fall Symbol" />
-                  </object>
-                  <Typography variant="h1" fontSize={20} sx={{ ml: 2, mr: 1 }}>
-                    {item.commodity} {item.price}
-                  </Typography>
-                </Box>
-              )}
-            </React.Fragment>
-          );
-        })}
-      </Marquee>
-      <Divider style={{ marginTop: "3em" }} />
-      {/* <Box sx={{ py: 8 }}>
-        <Grid justifyContent="space-between" spacing={1} item container xs={12}>
-          <Grid item xs={12} md={6}>
-            <Typography color="#00116A" fontSize="35px">
-              Spot and Future prices of commodities
-            </Typography>
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <Autocomplete
-              style={{ width: "100%", height: "80%", borderRadius: "3em" }}
-              id="combo-box-demo"
-              options={commodityprice}
-              value={commodityprice.find((item) => {
-                console.log(commodityprice);
-                return item.val === filtercommodityprice.commodityprice;
-              })}
-              getOptionLabel={(option) => option.str}
-              onChange={(e, value) => {
-                console.log(value);
-                setFiltercommodityprice((prev) => {
-                  return {
-                    ...prev,
-                    commodityprice:
-                      value === null
-                        ? "Natural gas - Yahoo Finance"
-                        : value.val,
-                    type: value === null ? "yahoofinance" : value.type,
-                    text:
-                      value === null
-                        ? "Natural gas prices from Yahoo Finance"
-                        : value.text,
-                  };
-                });
-              }}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  variant="outlined"
-                  label="Commodity"
-                  placeholder="Commodity"
-                  type="text"
-                />
-              )}
-            />
-          </Grid>
-        </Grid>
-        {timeseriesDs && <ReactFC {...timeseriesDs} />}
-      </Box> */}
-      <Divider style={{ marginTop: "3em" }} />
-      {/* <Grid item xs={12} sx={{ mt: 2 }} container>
-        <Typography color="#00116A" fontSize="35px">
-          Energy Gas Predictions
-        </Typography>
-        <Grid
-          item
-          container
-          xs={12}
-          sx={{ my: 3 }}
-          spacing={3}
-          justifyContent="center"
-        >
-          <Grid
-            item
-            xs={4}
-            justifyContent="flex-start"
-            alignItems="flex-start"
-            sx={{ border: "1px solid #00116A", borderRadius: "45px" }}
-          >
-            <Typography color="#00116A" fontSize="25px">
-              August Estimated Predictions{" "}
-            </Typography>
-            <Box
-              sx={{
-                mt: 2,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "flex-start",
-              }}
-            >
-              <object
-                type="image/svg+xml"
-                data={up}
-                style={{
-                  height: "5em",
-                  width: "5em",
-                }}
-              >
-                <img src={up} alt="Fall Symbol" />
-              </object>
-
-              <Typography color="#309A30" fontSize={30}>
-                ₹270
-              </Typography>
-            </Box>
-          </Grid>
-          <Grid
-            item
-            xs={4}
-            justifyContent="flex-start"
-            alignItems="flex-start"
-            sx={{ border: "1px solid #00116A", borderRadius: "45px", ml: 3 }}
-          >
-            <Typography color="#00116A" fontSize="25px">
-              Yearly Estimated Predictions{" "}
-            </Typography>
-            <Box
-              sx={{
-                mt: 2,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "flex-start",
-              }}
-            >
-              <object
-                type="image/svg+xml"
-                data={up}
-                style={{
-                  height: "5em",
-                  width: "5em",
-                }}
-              >
-                <img src={up} alt="Fall Symbol" />
-              </object>
-              <Typography color="#309A30" fontSize={30}>
-                ₹270
-              </Typography>
-            </Box>
-          </Grid>
-        </Grid>
-      </Grid> 
-      <Divider />*/}
-      {/* <Grid
-        item
-        xs={12}
-        spacing={3}
-        alignItems="center"
-        sx={{ mt: 2 }}
-        container
-      >
-        <Grid item xs={12}>
-          <Typography color="#00116A" fontSize="35px">
-            Trending News
-          </Typography>
-        </Grid>
-
-        {news?.map((obj, index) => {
-          if (index < 2) {
-            return (
-              <Grid item key={index * 12} xs={6}>
-                <NewsCard data={obj} />
-              </Grid>
-            );
-          } else {
-            return <React.Fragment key={index}></React.Fragment>;
-          }
-        })}
-      </Grid> */}
     </Box>
   );
 };

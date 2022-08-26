@@ -916,7 +916,7 @@ const Home = () => {
         </Grid>
       </Grid> 
       <Divider />*/}
-      {/* <Grid
+      <Grid
         item
         xs={12}
         spacing={3}
@@ -941,7 +941,7 @@ const Home = () => {
             return <React.Fragment key={index}></React.Fragment>;
           }
         })}
-      </Grid> */}
+      </Grid>
     </Box>
   );
 };

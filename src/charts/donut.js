@@ -77,7 +77,7 @@ export default function Donut({ g_width, g_height, data, unit = "" }) {
   );
 
   return (
-    <PieChart width={g_width} height={g_height}>
+    <PieChart width={400} height={400}>
       <Pie
         activeIndex={activeIndex}
         activeShape={renderActiveShape}
@@ -85,7 +85,7 @@ export default function Donut({ g_width, g_height, data, unit = "" }) {
         cx={200}
         cy={200}
         innerRadius={120}
-        outerRadius={200}
+        outerRadius={150}
         fill="#8884d8"
         dataKey="value"
         onMouseEnter={onPieEnter}

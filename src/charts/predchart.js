@@ -10,23 +10,18 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-const COLORS = [
-  "rgb(30, 119, 180)",
-  "rgb(152, 223, 138)",
-  "rgb(140, 86, 75)",
-  "rgb(199, 199, 199)",
-  "rgb(174, 199, 232)",
-  "rgb(214, 39, 40)",
-  "rgb(196, 156, 148)",
-  "rgb(188, 189, 34)",
-  "rgb(255, 127, 120)",
-  "rgb(148, 103, 189)",
-  "rgb(247, 182, 210)",
-  "rgb(23, 190, 207)",
-  "rgb(197, 176, 213)",
-  "rgb(127, 127, 127)",
-  "rgb(158, 218, 219)",
+let COLORS = [
+  "#003f5c",
+  "#2f4b7c",
+  "#665191",
+  "#a05195",
+  "#d45087",
+  "#f95d6a",
+  "#ff7c43",
+  "#ffa600",
 ];
+
+COLORS = COLORS.reverse();
 
 export default function DataLineChart({
   width,

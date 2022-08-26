@@ -16,7 +16,7 @@ const links = [
     href: "/global",
   },
   {
-    name: "Country wise",
+    name: "Nation wise",
     href: "/continental",
   },
   {

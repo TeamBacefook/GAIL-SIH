@@ -74,7 +74,7 @@
   border-radius: 5px;
 }
 
-.file-input > .button {
+/* .file-input > .button {
   display: inline-block;
   cursor: pointer;
   background: linear-gradient(169.84deg, #ffe53b -30.77%, #ff2525 119.39%);
@@ -101,4 +101,4 @@
 
 .file-input.-chosen > .label {
   opacity: 1;
-}
+} */
