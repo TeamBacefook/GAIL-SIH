@@ -83,28 +83,7 @@ const Predictions = () => {
         setBarData={(data2) => getData2(data2)}
         unit={"$"}
       />
-      <Divider style={{ marginTop: "1em", marginBottom: "2em" }} />
-      <ComboChart
-        name="Weekly"
-        getPredictionsFunction={getPredictions}
-        parameter={false}
-        ticker={"NG=F"}
-        time={"W"}
-        withcsvfilter={["LSTM - Derivate based Predictions"]}
-        filter={["LSTM - Derivate based Predictions", "Actual Price"]}
-        unit={"$"}
-      />
-      <Divider style={{ marginTop: "1em", marginBottom: "2em" }} />
-      <ComboChart
-        name="Daywise"
-        getPredictionsFunction={getPredictions}
-        parameter={false}
-        ticker={"NG=F"}
-        time={"D"}
-        withcsvfilter={["LSTM - Price based Predictions"]}
-        filter={["LSTM - Price based Predictions", "Actual Price"]}
-        unit={"$"}
-      />
+
       <Divider style={{ marginTop: "1em", marginBottom: "2em" }} />
       <Grid item sx={{ mt: 3, pr: 4 }} container xs={12}>
         <Grid item xs={12} md={6}>
@@ -145,7 +124,7 @@ const Predictions = () => {
                   bg1="#ACB6E5"
                   orientation={0}
                   bg2="#74ebd5"
-                  g_width={window.innerWidth * 0.97}
+                  g_width={window.innerWidth}
                   g_height={window.innerHeight * 0.3}
                   c_id={2}
                   unit={""}
@@ -154,6 +133,28 @@ const Predictions = () => {
             )}
           </Grid>
         </Grid>
+        <Divider style={{ marginTop: "1em", marginBottom: "2em" }} />
+        <ComboChart
+          name="Weekly"
+          getPredictionsFunction={getPredictions}
+          parameter={false}
+          ticker={"NG=F"}
+          time={"W"}
+          withcsvfilter={["LSTM - Derivate based Predictions"]}
+          filter={["LSTM - Derivate based Predictions", "Actual Price"]}
+          unit={"$"}
+        />
+        <Divider style={{ marginTop: "1em", marginBottom: "2em" }} />
+        <ComboChart
+          name="Daywise"
+          getPredictionsFunction={getPredictions}
+          parameter={false}
+          ticker={"NG=F"}
+          time={"D"}
+          withcsvfilter={["LSTM - Price based Predictions"]}
+          filter={["LSTM - Price based Predictions", "Actual Price"]}
+          unit={"$"}
+        />
       </Grid>
     </Box>
   );

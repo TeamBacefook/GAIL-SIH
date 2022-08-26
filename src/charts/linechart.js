@@ -42,7 +42,8 @@ export default function DataLineChart({ width, height, data, unit }) {
         <Tooltip
           formatter={(value) => {
             console.log(value);
-            return unit + value;
+            if (unit === "$") return unit + value;
+            return value + " " + unit;
           }}
         />
         <Legend />

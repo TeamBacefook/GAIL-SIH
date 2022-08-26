@@ -27,7 +27,6 @@ const marks = [
   { label: 2010, value: 2010 },
   { label: 2015, value: 2015 },
   { label: 2020, value: 2020 },
-  { label: 2025, value: 2025 },
 ];
 
 const countries = [
@@ -183,8 +182,8 @@ const countries = [
 //UNIT = "TERAJOULES"
 const Analytics = () => {
   const [data, setData] = useState({
-    start_year: 2000,
-    end_year: 2010,
+    start_year: 2010,
+    end_year: 2020,
     country: "India",
     data: [],
     parameter: "Natural gas",
@@ -194,8 +193,8 @@ const Analytics = () => {
     country1: "India",
     country2: "Russia",
     parameter: "Natural gas",
-    start_year: "2000",
-    end_year: "2010",
+    start_year: "2010",
+    end_year: "2020",
     data1: [],
     data2: [],
   });
@@ -206,16 +205,16 @@ const Analytics = () => {
   useEffect(() => {
     const getData = async () => {
       const data = await getGlobalData({
-        start_year: "2000",
-        end_year: "2010",
+        start_year: "2010",
+        end_year: "2020",
         country: "India",
         parameter: "Natural gas",
       });
       // const result = await getGlobalTrends();
       // setTrends(result);
       const data2 = await getGlobalData({
-        start_year: "2000",
-        end_year: "2010",
+        start_year: "2010",
+        end_year: "2020",
         country: "Russia",
         parameter: "Natural gas",
       });
@@ -418,7 +417,7 @@ const Analytics = () => {
                 marks={marks}
                 value={[data.start_year, data.end_year]}
                 min={1990}
-                max={2025}
+                max={2020}
                 onChange={(e) => {
                   setData((prev) => {
                     return {
@@ -543,7 +542,7 @@ const Analytics = () => {
               marks={marks}
               value={[compare.start_year, compare.end_year]}
               min={1990}
-              max={2025}
+              max={2020}
               onChange={(e) => {
                 setCompare((prev) => {
                   return {

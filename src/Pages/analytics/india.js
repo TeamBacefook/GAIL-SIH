@@ -481,7 +481,12 @@ const Analytics = () => {
             md={6}
             style={{ display: "flex", alignItems: "center", height: "40vh" }}
           >
-            <LineChart width="100%" height="100%" data={lineChart} unit={"$"} />
+            <LineChart
+              width="100%"
+              height="100%"
+              data={lineChart}
+              unit={"MMSCM"}
+            />
           </Grid>
         )}
       </Grid>
@@ -496,7 +501,7 @@ const Analytics = () => {
         <Grid item xs={12} md={5}>
           <Grid sx={{ my: 2 }} item container spacing={2} xs={12}>
             <Typography fontSize={30} color="#0A2540">
-              Monthwise Price Trend Of Crude Oil
+              Monthwise Price Trend of Crude Oil
             </Typography>
           </Grid>
           <Grid sx={{ my: 2 }} item container spacing={2} xs={12}>

@@ -1,4 +1,4 @@
-import { BarChart, Bar, XAxis, YAxis, Tooltip } from "recharts";
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ReferenceLine } from "recharts";
 import React from "react";
 
 const BarCharts = ({
@@ -55,6 +55,7 @@ const BarCharts = ({
             return value + " " + unit;
           }}
         />
+        <ReferenceLine y={0} stroke="#B3B3B3" />
         <Bar dataKey="value" fill={`url(#${c_id})`} label="label"></Bar>
       </BarChart>
     </>
