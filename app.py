@@ -277,6 +277,12 @@ def predictions(ticker, period):
                 out = out.drop('Actual Price', axis=1)
                 out[war['start_date'] : war['end_date']] = out[war['start_date'] : war['end_date']] * data['warIntensity']
                 out = pd.concat([actual, out], axis=1)
+            else: 
+                # Current War data based on Russa Ukraine War
+                actual = out['Actual Price']
+                out = out.drop('Actual Price', axis=1)
+                out['02/2022' : '07/2024'] = out['02/2022' : '07/2024'] * 1.5852 # Intensity of war in numeric value
+                out = pd.concat([actual, out], axis=1)
 
             if 'recessionData' in data.keys():
                 recession = data['recessionData']
@@ -284,6 +290,12 @@ def predictions(ticker, period):
                 out = out.drop('Actual Price', axis=1)
                 out[recession['start_date'] : recession['end_date']] = out[recession['start_date'] : recession['end_date']] * data['recessionIntensity']
                 out = pd.concat([actual, out], axis=1).iloc[1:]
+            else: 
+                # Current Recession data based on US GDP according to BEA as of 28th July 2022
+                actual = out['Actual Price']
+                out = out.drop('Actual Price', axis=1)
+                out['07/2022' : '01/2024'] = out['07/2022' : '01/2024'] * 1.4992 # Intensity of war in numeric value
+                out = pd.concat([actual, out], axis=1)
                 
             if 'pandemicData' in data.keys():
                 pandemic = data['pandemicData']
