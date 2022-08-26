@@ -144,8 +144,8 @@ def blended_models(dataset, start=None, end=None, models=[]):
       past_pred = pd.DataFrame(ARIMA(dataset.close[:end], order=(10, 1, 8)).fit().predict(dynamic=False)[-48:])
     else: 
       pred = data_pred_lstm(dataset, start, end, attrs, model)
-      past_pred = data_pred_lstm(dataset, rest.index[-72], rest.index[-49], attrs, model)[:23]
-      past_pred = pd.concat([past_pred, data_pred_lstm(dataset, rest.index[-49], rest.index[-26], attrs, model)[:23]], axis=0)
+      past_pred = data_pred_lstm(dataset, rest.index[-71], rest.index[-48], attrs, model)[:23]
+      past_pred = pd.concat([past_pred, data_pred_lstm(dataset, rest.index[-48], rest.index[-25], attrs, model)[:23]], axis=0)
     pred.columns = pd.Index([name + ' Predictions'])
     pred.index = pred.index.strftime('%m/%Y')
     
@@ -190,78 +190,3 @@ def get_model_evals(df):
     ])
   evals.index=pd.Index(['RMSE', 'MAPE', 'AIC'])
   return evals
-  
-def daily_pred(model, data):
-  index = pd.date_range(start=data.index[-1], freq='D', periods=8)[1:]
-  data = np.array(data[-21:].values)
-  scaler = StandardScaler().fit(data)
-  closed_scaler = StandardScaler().fit(data[:,0].reshape(-1,1))
-  scaled_data = scaler.transform(data)
-  frame = [scaled_data[i:i+14] for i in range(len(scaled_data)-14)]
-  pred = [model.predict(np.array([ip]))[0][0] for ip in frame]
-  pred = closed_scaler.inverse_transform(np.array(pred).reshape(-1,1))
-  return pd.DataFrame(pred, index=index, columns=['Predicted Price'])
-
-def weekly_pred(model, data, ips):
-  index = pd.date_range(start=data.index[-1], freq='W', periods=5)[1:]
-  data = np.array(data[-8:][ips].values)
-  scaler = StandardScaler().fit(data)
-  closed_scaler = StandardScaler().fit(data[:,0].reshape(-1,1))
-  scaled_data = scaler.transform(data)
-  frame = scaled_data.reshape(1,8,7)
-  pred = model.predict(frame)
-  pred = closed_scaler.inverse_transform(np.array(pred).reshape(-1,1))
-  return pd.DataFrame(pred, index=index, columns=['Predicted Price'])
-
-def daily_multi_models(dataset, start=None, end=None, models=[]):
-  merged_out = None
-  weighted_df = pd.DataFrame()
-  if not end: end = dataset.index[-1]
-  if not start: start = dataset[:end].index[-8]
-  for name, model, attrs, weight in models:
-    pred=''
-    if name == 'ARIMA':
-      pred = pd.DataFrame(ARIMA(dataset.close[:end], order=(10, 1, 8)).fit().forecast(steps=72))
-    else: 
-      pred = daily_pred(model, dataset[attrs][:end])
-    pred.columns = pd.Index([name + ' Predictions'])
-    pred.index = pred.index.strftime('%d/%m/%Y')
-    if not type(merged_out) == pd.DataFrame:
-      merged_out = pred
-      weighted_df = pred * weight
-    else:
-      merged_out = pd.concat([merged_out, pred], axis=1)
-      weighted_df = pd.concat([weighted_df, pred * weight], axis=1)
-  merged_out['Ensemble Predictions'] = weighted_df.sum(axis=1)
-  temp_date = pd.date_range(start = end, freq='D', periods=8)[1:]
-  og = dataset['close'][temp_date].rename('Actual Price')
-  og.index = pd.DatetimeIndex(og.index).strftime('%d/%m/%Y')
-  merged_out = pd.concat([og, merged_out], axis=1)
-  return merged_out
-
-def weekly_multi_models(dataset, start=None, end=None, models=[]):
-  merged_out = None
-  weighted_df = pd.DataFrame()
-  if not end: end = dataset.index[-1]
-  if not start: start = dataset[:end].index[-24]
-  for name, model, attrs, weight in models:
-    pred=''
-    if name == 'ARIMA':
-      pred = pd.DataFrame(ARIMA(dataset.close[:end], order=(10, 1, 8)).fit().forecast(steps=72))
-    else: 
-      pred = weekly_pred(model, dataset[attrs][:end], ips=attrs)
-    pred.columns = pd.Index([name + ' Predictions'])
-    pred.index = pred.index.strftime('%d/%m/%Y')
-    if not type(merged_out) == pd.DataFrame:
-      merged_out = pred
-      weighted_df = pred * weight
-    else:
-      merged_out = pd.concat([merged_out, pred], axis=1)
-      weighted_df = pd.concat([weighted_df, pred * weight], axis=1)
-  merged_out['Ensemble Predictions'] = weighted_df.sum(axis=1)
-  temp_date = pd.date_range(start = end, freq='7D', periods=2)[1]
-  og = dataset['close'][temp_date:].rename('Actual Price')
-  og.index = pd.DatetimeIndex(og.index).strftime('%d/%m/%Y')
-  merged_out = pd.concat([og, merged_out], axis=1)
-  return merged_out
-
