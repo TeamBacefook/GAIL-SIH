@@ -307,17 +307,21 @@ def predictions(ticker, period):
             evals = get_model_evals(out.drop([ "Past Ensemble Predictions",
                 "Past LSTM - Derivative based Predictions",
                 "Past LSTM - Double derivative and MA based Predictions",
-                "Past LSTM - MA Based Predictions",
+                "Past LSTM - MA Based Predictions", 'Past ARIMA Predictions',
                 "Past Price"], axis=1))
             
             return {
-                'predictions': json.loads(out.to_json(orient='table')), 
+                'predictions': json.loads(out.drop(
+                    ['Actual Price', 'Past Price', 'Past Ensemble Predictions', 
+                     'Past LSTM - Derivative based Predictions', 'Past LSTM - Double derivative and MA based Predictions', 
+                     'Past LSTM - MA Based Predictions', 'Past ARIMA Predictions',
+                     ], axis=1).dropna().to_json(orient='table')), 
                 'evals': json.loads(evals.to_json(orient='table')), 
                 'model_csv': json.loads(out.drop(
                     ['Actual Price', 'Past Price', 'Past Ensemble Predictions', 
                      'Past LSTM - Derivative based Predictions', 'Past LSTM - Double derivative and MA based Predictions', 
-                     'Past LSTM - MA Based Predictions'
-                     ], axis=1).iloc[-72:].to_json(orient='table'))
+                     'Past LSTM - MA Based Predictions', 'Past ARIMA Predictions',
+                     ], axis=1).dropna().iloc[-72:].to_json(orient='table'))
                 }
 
 
