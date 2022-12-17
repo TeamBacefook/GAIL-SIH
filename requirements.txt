@@ -6,8 +6,10 @@ pandas
 gnews
 tensorflow
 keras
-sklearn
 yahoo_fin
 numpy
 statsmodels
 xgboost
+scikit-learn
+selenium-wire
+selenium

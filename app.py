@@ -1,16 +1,20 @@
 from flask_cors import CORS
-from datetime import date, timedelta
 from bs4 import BeautifulSoup as soup
 from urllib.request import urlopen
 import datetime
 import pandas as pd
-from flask import Flask, request ,jsonify, current_app, Response
+from flask import Flask, request ,current_app
 import json
 from gnews import GNews
 from tensorflow import keras as k
 import requests
 from modelfuncs import  get_model_evals, get_models, blended_models, data_fetch
 from yahoo_fin import stock_info as si
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
+from seleniumwire import webdriver
+from urllib.parse import urlparse, parse_qs
+
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}} , support_credentials=True)
@@ -43,14 +47,24 @@ def getYahooFinancePrice(ticker):
     resampled_df['index'] = resampled_df['index'].dt.strftime('%d-%m-%Y')
     return resampled_df.to_json(orient="split")
 
+
+global AUTH
+AUTH = ""
+
+
 def getTradingEconomicsPrice(ticker):
-    das = pd.DataFrame(requests.get(f"https://markets.tradingeconomics.com/chart?s={ticker}&span=max&securify=new&url=/commodity/natural-gas&AUTH=%2FED5k4JFCCAdewD37EDXoDhFFUvym9bi2LxltsAUgiJ%2BxDDNqD92SppyWVoIUkx3&ohlc=1").json()["series"][0]['data'])
-    das['date'] = pd.to_datetime(das.date)
-    das['date'] = das['date'].dt.strftime('%d-%m-%Y')
-    das = das.drop(columns=["y", "x", "percentChange","change"])
-    das = das.rename(columns={"date": "index"})
-    das = das[["index","low","open","close","high"]]
-    return das.to_json(orient="split")
+    response = requests.get(f"https://markets.tradingeconomics.com/chart?s={ticker}&span=max&securify=new&url=/commodity/natural-gas&AUTH={AUTH}&ohlc=1")
+    if str(response.json()) == "{'Message': 'Invalid authorization'}":
+        updateauthvaluefortradingeconomics()
+        response = requests.get(f"https://markets.tradingeconomics.com/chart?s={ticker}&span=max&securify=new&url=/commodity/natural-gas&AUTH={AUTH}&ohlc=1")
+    if response.status_code == 200:
+        das = pd.DataFrame(response.json()["series"][0]['data'])
+        das['date'] = pd.to_datetime(das.date)
+        das['date'] = das['date'].dt.strftime('%d-%m-%Y')
+        das = das.drop(columns=["y", "x", "percentChange","change"])
+        das = das.rename(columns={"date": "index"})
+        das = das[["index","low","open","close","high"]]
+        return das.to_json(orient="split")
 
 @app.route('/getstockdata1',methods=['GET'])
 def getStockData():
@@ -87,7 +101,7 @@ def getcontinentdata():
 
 @app.route("/price/naturalgas", methods=["GET"])
 def getprices():
-    data = pd.DataFrame(requests.get("https://markets.tradingeconomics.com/chart?s=ng1:com&span=max&securify=new&url=/commodity/natural-gas&AUTH=mg%2BA7q8RtkF0IlLRsyMZ2p2BBbIa9CDGSNqxsIgEydUS1HU8YyMsQGkKCCWBhVUq&ohlc=1").json()["series"][0]['data'])
+    data = pd.DataFrame(requests.get("https://markets.tradingeconomics.com/chart?s=ng1:com&span=max&securify=new&url=/commodity/natural-gas&AUTH={AUTH}&ohlc=1").json()["series"][0]['data'])
     return data.to_json(orient="records")
 
 @app.route("/data/getTrend", methods=["GET"])
@@ -325,6 +339,29 @@ def predictions(ticker, period):
                 }
 
 
+def updateauthvaluefortradingeconomics():
+    global AUTH
+
+    URL = "https://tradingeconomics.com/commodity/natural-gas"
+    # Set path Selenium
+    CHROMEDRIVER_PATH = '/usr/local/bin/chromedriver'
+    s = Service(CHROMEDRIVER_PATH)
+    WINDOW_SIZE = "1920,1080"
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--window-size=%s" % WINDOW_SIZE)
+    chrome_options.add_argument('--no-sandbox')
+    driver = webdriver.Chrome(service=s, options=chrome_options)
+    driver.get(URL)
+    driver.close()
+    for request in driver.requests:  
+        if request.response and request.url.startswith("https://markets.tradingeconomics"):  
+            parse_result = urlparse(request.url)
+            dict_result = parse_qs(parse_result.query)
+            AUTH = dict_result['AUTH'][0]
+            return ""
+    return ""
+
 if __name__ == "__main__":  
     with app.app_context():
         current_app.dataframe = data_fetch()
@@ -342,8 +379,8 @@ if __name__ == "__main__":
             ('LSTM - Derivative based', current_app.model_babbage_1, ['close', '180ma', '60ma', '30ma', 'close_min', 'close_max', 'gradient'], 1),
             ('LSTM - Double derivative and MA based', current_app.model_bell_1, ['close', '180ma', '60ma', '30ma', 'close_min', 'close_max', 'gradient', 'd_gradient'], -0.38),
         ]
-
         current_app.saved_data = blended_models(current_app.dataframe, models=current_app.ng_models_month, end='12/2020')
-
-    app.run(host='0.0.0.0', port=5000)
+        
+        
+    app.run(host='0.0.0.0',debug=True, port=5000)
     #app.run(debug=True)
