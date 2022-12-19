@@ -13,8 +13,7 @@ from yahoo_fin import stock_info as si
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from seleniumwire import webdriver
-from urllib.parse import urlparse, parse_qs
-
+from urllib.parse import urlparse, parse_qs, quote_plus
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}} , support_credentials=True)
@@ -358,7 +357,7 @@ def updateauthvaluefortradingeconomics():
         if request.response and request.url.startswith("https://markets.tradingeconomics"):  
             parse_result = urlparse(request.url)
             dict_result = parse_qs(parse_result.query)
-            AUTH = dict_result['AUTH'][0]
+            AUTH = quote_plus(dict_result['AUTH'][0])
             return ""
     return ""
 
