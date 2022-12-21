@@ -381,5 +381,5 @@ if __name__ == "__main__":
         current_app.saved_data = blended_models(current_app.dataframe, models=current_app.ng_models_month, end='12/2020')
         
         
-    app.run(host='0.0.0.0',debug=True, port=5000)
+    app.run(host='0.0.0.0', port=5000)
     #app.run(debug=True)
