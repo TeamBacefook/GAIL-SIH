@@ -171,7 +171,6 @@ def blended_models(dataset, start=None, end=None, models=[]):
   return merged_out
 
 def get_model_evals(df):
-  print(df)
   data = df.dropna()
   if len(data) == 0:
     return pd.DataFrame()

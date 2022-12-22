@@ -317,24 +317,12 @@ def predictions(ticker, period):
                 out[pandemic['start_date'] : pandemic['end_date']] = out[pandemic['start_date'] : pandemic['end_date']] * data['pandemicIntensity']
                 out = pd.concat([actual, out], axis=1).iloc[1:]
                 
-            evals = get_model_evals(out.drop([ "Past Ensemble Predictions",
-                "Past LSTM - Derivative based Predictions",
-                "Past LSTM - Double derivative and MA based Predictions",
-                "Past LSTM - MA Based Predictions", 'Past ARIMA Predictions',
-                "Past Price"], axis=1))
+            evals = get_model_evals(out)
             
             return {
-                'predictions': json.loads(out.drop(
-                    ['Past Price', 'Past Ensemble Predictions', 
-                     'Past LSTM - Derivative based Predictions', 'Past LSTM - Double derivative and MA based Predictions', 
-                     'Past LSTM - MA Based Predictions', 'Past ARIMA Predictions',
-                     ], axis=1).dropna().to_json(orient='table')), 
+                'predictions': json.loads(out.to_json(orient='table')), 
                 'evals': json.loads(evals.to_json(orient='table')), 
-                'model_csv': json.loads(out.drop(
-                    ['Past Price', 'Past Ensemble Predictions', 
-                     'Past LSTM - Derivative based Predictions', 'Past LSTM - Double derivative and MA based Predictions', 
-                     'Past LSTM - MA Based Predictions', 'Past ARIMA Predictions',
-                     ], axis=1).dropna().iloc[-72:].to_json(orient='table'))
+                'model_csv': json.loads(out.iloc[-72:].to_json(orient='table'))
                 }
 
 
@@ -366,18 +354,21 @@ if __name__ == "__main__":
         current_app.dataframe = data_fetch()
              
         # NG Monthly Models
-        current_app.model_xgb = get_models(f'./models/NG Monthly/XGB-Babbage-4.36err-(1,168)ip-(1,24)op.ubj', 0) # futures
+        # current_app.model_xgb = get_models(f'./models/NG Monthly/XGB-Babbage-4.36err-(1,168)ip-(1,24)op.ubj', 0) # futures
         current_app.model_boole = get_models(f'./models/NG Monthly/Model_V20_Boole.h5', 0.0012) # futures
         current_app.model_babbage_1 = get_models(f'./models/NG Monthly/Model[Babbage]_v3.h5', 0.0027) # futures
         current_app.model_bell_1 = get_models(f'./models/NG Monthly/Model_V22_Bell.h5', 0.009) # yahoo futures
+        current_app.model_boost = get_models(f'./models/NG Monthly/Model_V23_Bell.h5', 0.09)
       
         current_app.ng_models_month = [
             ('ARIMA', None, [], 0),
+            ('ADABoost LSTM', current_app.model_boost, ['close', '180ma', '60ma', '30ma', 'close_min', 'close_max', 'gradient', 'd_gradient'], 0.0),
             # ("XGBoost", current_app.model_xgb, ['close', '30ma', '60ma', '180ma', 'close_min', 'close_max', 'gradient'], 0.9),
-            ('LSTM - MA Based', current_app.model_boole, ['close', '30ma', '60ma', '180ma', 'close_min', 'close_max'], 0.22),
-            ('LSTM - Derivative based', current_app.model_babbage_1, ['close', '180ma', '60ma', '30ma', 'close_min', 'close_max', 'gradient'], 1),
-            ('LSTM - Double derivative and MA based', current_app.model_bell_1, ['close', '180ma', '60ma', '30ma', 'close_min', 'close_max', 'gradient', 'd_gradient'], -0.38),
+            ('LSTM - MA Based', current_app.model_boole, ['close', '30ma', '60ma', '180ma', 'close_min', 'close_max'], 0.09),
+            ('LSTM - Derivative based', current_app.model_babbage_1, ['close', '180ma', '60ma', '30ma', 'close_min', 'close_max', 'gradient'], 0.72),
+            ('LSTM - Double derivative and MA based', current_app.model_bell_1, ['close', '180ma', '60ma', '30ma', 'close_min', 'close_max', 'gradient', 'd_gradient'], 0.0),
         ]
+
         current_app.saved_data = blended_models(current_app.dataframe, models=current_app.ng_models_month, end='12/2020')
         
         
