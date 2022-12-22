@@ -1,16 +1,19 @@
 from flask_cors import CORS
-from datetime import date, timedelta
 from bs4 import BeautifulSoup as soup
 from urllib.request import urlopen
 import datetime
 import pandas as pd
-from flask import Flask, request ,jsonify, current_app, Response
+from flask import Flask, request ,current_app
 import json
 from gnews import GNews
 from tensorflow import keras as k
 import requests
 from modelfuncs import  get_model_evals, get_models, blended_models, data_fetch
 from yahoo_fin import stock_info as si
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
+from seleniumwire import webdriver
+from urllib.parse import urlparse, parse_qs, quote_plus
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}} , support_credentials=True)
@@ -43,14 +46,24 @@ def getYahooFinancePrice(ticker):
     resampled_df['index'] = resampled_df['index'].dt.strftime('%d-%m-%Y')
     return resampled_df.to_json(orient="split")
 
+
+global AUTH
+AUTH = ""
+
+
 def getTradingEconomicsPrice(ticker):
-    das = pd.DataFrame(requests.get(f"https://markets.tradingeconomics.com/chart?s={ticker}&span=max&securify=new&url=/commodity/natural-gas&AUTH=%2FED5k4JFCCAdewD37EDXoDhFFUvym9bi2LxltsAUgiJ%2BxDDNqD92SppyWVoIUkx3&ohlc=1").json()["series"][0]['data'])
-    das['date'] = pd.to_datetime(das.date)
-    das['date'] = das['date'].dt.strftime('%d-%m-%Y')
-    das = das.drop(columns=["y", "x", "percentChange","change"])
-    das = das.rename(columns={"date": "index"})
-    das = das[["index","low","open","close","high"]]
-    return das.to_json(orient="split")
+    response = requests.get(f"https://markets.tradingeconomics.com/chart?s={ticker}&span=max&securify=new&url=/commodity/natural-gas&AUTH={AUTH}&ohlc=1")
+    if str(response.json()) == "{'Message': 'Invalid authorization'}":
+        updateauthvaluefortradingeconomics()
+        response = requests.get(f"https://markets.tradingeconomics.com/chart?s={ticker}&span=max&securify=new&url=/commodity/natural-gas&AUTH={AUTH}&ohlc=1")
+    if response.status_code == 200:
+        das = pd.DataFrame(response.json()["series"][0]['data'])
+        das['date'] = pd.to_datetime(das.date)
+        das['date'] = das['date'].dt.strftime('%d-%m-%Y')
+        das = das.drop(columns=["y", "x", "percentChange","change"])
+        das = das.rename(columns={"date": "index"})
+        das = das[["index","low","open","close","high"]]
+        return das.to_json(orient="split")
 
 @app.route('/getstockdata1',methods=['GET'])
 def getStockData():
@@ -87,7 +100,7 @@ def getcontinentdata():
 
 @app.route("/price/naturalgas", methods=["GET"])
 def getprices():
-    data = pd.DataFrame(requests.get("https://markets.tradingeconomics.com/chart?s=ng1:com&interval=1month&span=max&securify=new&url=/commodity/natural-gas&AUTH=olsvRSZYieESXUwbuU85bZIl7USTIKZPNdOf7yhdzAUWXSzW5JtJVFKEvErLAzZd&ohlc=1").json()["series"][0]['data'])
+    data = pd.DataFrame(requests.get("https://markets.tradingeconomics.com/chart?s=ng1:com&span=max&securify=new&url=/commodity/natural-gas&AUTH={AUTH}&ohlc=1").json()["series"][0]['data'])
     return data.to_json(orient="records")
 
 @app.route("/data/getTrend", methods=["GET"])
@@ -236,13 +249,12 @@ def getlocalpetroleumdata12():
     petroleum = petroleum[["name", "value"]]
     return petroleum.to_json(orient="records")
 
-# def getsentiment(startdate, enddate, col):
-#     df = pd.read_csv('colatedsentiment.csv', index_col='Index')
-#     df = df.fillna(1)
-#     df = df.replace([0], 1)
-#     df.index = pd.DatetimeIndex(df.index).strftime('%m/%Y')
-#     df = df.loc[startdate: enddate]
-#     return df 
+# @app.route("/testenddaye",methods=["GET"])
+def getsentiment(enddate):
+    data = request.args
+    df = pd.read_csv('./colateddata.csv')
+    df = df[df.Index.between(f'1990-1-1', f'{"enddate"}')]
+    return df
 
 @app.route('/predictions/<ticker>/<period>', methods=['POST'])
 def predictions(ticker, period):
@@ -278,9 +290,12 @@ def predictions(ticker, period):
                 out = out.drop('Actual Price', axis=1)
                 out[war['start_date'] : war['end_date']] = out[war['start_date'] : war['end_date']] * data['warIntensity']
                 out = pd.concat([actual, out], axis=1)
-            # else: 
-            #     sentiment = getsentiment(out.index[0], out.index[-2], 'military_score')
-            #     out = out.multiply(sentiment.military_score, axis='rows')
+            else: 
+                # Current War data based on Russa Ukraine War
+                actual = out['Actual Price']
+                out = out.drop('Actual Price', axis=1)
+                out['02/2022' : '07/2024'] = out['02/2022' : '07/2024'] * 1.5852 # Intensity of war in numeric value
+                out = pd.concat([actual, out], axis=1)
 
             if 'recessionData' in data.keys():
                 recession = data['recessionData']
@@ -288,9 +303,12 @@ def predictions(ticker, period):
                 out = out.drop('Actual Price', axis=1)
                 out[recession['start_date'] : recession['end_date']] = out[recession['start_date'] : recession['end_date']] * data['recessionIntensity']
                 out = pd.concat([actual, out], axis=1).iloc[1:]
-            # else: 
-            #     sentiment = getsentiment(out.index[0], out.index[-2], 'recession_score')
-            #     out = out.multiply(sentiment.recession_score, axis='rows')
+            else: 
+                # Current Recession data based on US GDP according to BEA as of 28th July 2022
+                actual = out['Actual Price']
+                out = out.drop('Actual Price', axis=1)
+                out['07/2022' : '01/2024'] = out['07/2022' : '01/2024'] * 1.4992 # Intensity of war in numeric value
+                out = pd.concat([actual, out], axis=1)
                 
             if 'pandemicData' in data.keys():
                 pandemic = data['pandemicData']
@@ -298,46 +316,70 @@ def predictions(ticker, period):
                 out = out.drop('Actual Price', axis=1)
                 out[pandemic['start_date'] : pandemic['end_date']] = out[pandemic['start_date'] : pandemic['end_date']] * data['pandemicIntensity']
                 out = pd.concat([actual, out], axis=1).iloc[1:]
-            # else: 
-            #     sentiment = getsentiment(out.index[0], out.index[-2], 'pandemic_score')   
-            #     out = out.multiply(sentiment.pandemic_score, axis='rows')
-                   
-            evals = get_model_evals(out)
-            
-            actual = out['Actual Price']
-            out = out.drop('Actual Price', axis=1)
-            out['02/2022' : '07/2024'] = out['02/2022' : '07/2024'] * 1.6
-            out['07/2022' : '01/2024'] = out['07/2022' : '01/2024'] * 1.4
-            out = pd.concat([actual, out], axis=1).iloc[1:]
+                
+            evals = get_model_evals(out.drop([ "Past Ensemble Predictions",
+                "Past LSTM - Derivative based Predictions",
+                "Past LSTM - Double derivative and MA based Predictions",
+                "Past LSTM - MA Based Predictions", 'Past ARIMA Predictions',
+                "Past Price"], axis=1))
             
             return {
-                'predictions': json.loads(out.to_json(orient='table')), 
+                'predictions': json.loads(out.drop(
+                    ['Past Price', 'Past Ensemble Predictions', 
+                     'Past LSTM - Derivative based Predictions', 'Past LSTM - Double derivative and MA based Predictions', 
+                     'Past LSTM - MA Based Predictions', 'Past ARIMA Predictions',
+                     ], axis=1).dropna().to_json(orient='table')), 
                 'evals': json.loads(evals.to_json(orient='table')), 
-                'model_csv': json.loads(out.iloc[-72:].to_json(orient='table'))
+                'model_csv': json.loads(out.drop(
+                    ['Past Price', 'Past Ensemble Predictions', 
+                     'Past LSTM - Derivative based Predictions', 'Past LSTM - Double derivative and MA based Predictions', 
+                     'Past LSTM - MA Based Predictions', 'Past ARIMA Predictions',
+                     ], axis=1).dropna().iloc[-72:].to_json(orient='table'))
                 }
 
+
+def updateauthvaluefortradingeconomics():
+    global AUTH
+
+    URL = "https://tradingeconomics.com/commodity/natural-gas"
+    # Set path Selenium
+    CHROMEDRIVER_PATH = '/usr/local/bin/chromedriver'
+    s = Service(CHROMEDRIVER_PATH)
+    WINDOW_SIZE = "1920,1080"
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--window-size=%s" % WINDOW_SIZE)
+    chrome_options.add_argument('--no-sandbox')
+    driver = webdriver.Chrome(service=s, options=chrome_options)
+    driver.get(URL)
+    driver.close()
+    for request in driver.requests:  
+        if request.response and request.url.startswith("https://markets.tradingeconomics"):  
+            parse_result = urlparse(request.url)
+            dict_result = parse_qs(parse_result.query)
+            AUTH = quote_plus(dict_result['AUTH'][0])
+            return ""
+    return ""
 
 if __name__ == "__main__":  
     with app.app_context():
         current_app.dataframe = data_fetch()
              
         # NG Monthly Models
-        # current_app.model_xgb = get_models(f'./models/NG Monthly/XGB-Babbage-4.36err-(1,168)ip-(1,24)op.ubj', 0) # futures
+        current_app.model_xgb = get_models(f'./models/NG Monthly/XGB-Babbage-4.36err-(1,168)ip-(1,24)op.ubj', 0) # futures
         current_app.model_boole = get_models(f'./models/NG Monthly/Model_V20_Boole.h5', 0.0012) # futures
         current_app.model_babbage_1 = get_models(f'./models/NG Monthly/Model[Babbage]_v3.h5', 0.0027) # futures
         current_app.model_bell_1 = get_models(f'./models/NG Monthly/Model_V22_Bell.h5', 0.009) # yahoo futures
-        current_app.model_boost = get_models(f'./models/NG Monthly/Model_V23_Bell.h5', 0.09)
       
         current_app.ng_models_month = [
             ('ARIMA', None, [], 0),
-            ('ADABoost LSTM', current_app.model_boost, ['close', '180ma', '60ma', '30ma', 'close_min', 'close_max', 'gradient', 'd_gradient'], 0.0),
             # ("XGBoost", current_app.model_xgb, ['close', '30ma', '60ma', '180ma', 'close_min', 'close_max', 'gradient'], 0.9),
-            ('LSTM - MA Based', current_app.model_boole, ['close', '30ma', '60ma', '180ma', 'close_min', 'close_max'], 0.09),
-            ('LSTM - Derivative based', current_app.model_babbage_1, ['close', '180ma', '60ma', '30ma', 'close_min', 'close_max', 'gradient'], 0.72),
-            ('LSTM - Double derivative and MA based', current_app.model_bell_1, ['close', '180ma', '60ma', '30ma', 'close_min', 'close_max', 'gradient', 'd_gradient'], 0.0),
+            ('LSTM - MA Based', current_app.model_boole, ['close', '30ma', '60ma', '180ma', 'close_min', 'close_max'], 0.22),
+            ('LSTM - Derivative based', current_app.model_babbage_1, ['close', '180ma', '60ma', '30ma', 'close_min', 'close_max', 'gradient'], 1),
+            ('LSTM - Double derivative and MA based', current_app.model_bell_1, ['close', '180ma', '60ma', '30ma', 'close_min', 'close_max', 'gradient', 'd_gradient'], -0.38),
         ]
-
         current_app.saved_data = blended_models(current_app.dataframe, models=current_app.ng_models_month, end='12/2020')
-
-    # app.run(host='0.0.0.0', port=5000)
-    app.run(debug=True)
+        
+        
+    app.run(host='0.0.0.0', port=5000)
+    #app.run(debug=True)
